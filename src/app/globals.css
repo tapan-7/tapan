@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../*.{js,ts,jsx,tsx,mdx}';
 
@@ -16,7 +16,7 @@
 }
 
 @theme {
-  --font-header: 'JetBrains Mono', monospace;
+  --font-header: "JetBrains Mono", monospace;
   --font-body: Inter, sans-serif;
 
   --color-border: hsl(var(--border));
@@ -200,7 +200,8 @@ html {
 
 .hover-lift:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Custom scrollbar */
@@ -252,7 +253,8 @@ html {
   animation: gradient 15s ease infinite;
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }

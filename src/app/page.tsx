@@ -2,7 +2,6 @@
 
 import { useScroll, useTransform } from "framer-motion";
 import { InteractiveHero } from "@/components/interactive-hero";
-import { ThemeDebug } from "@/components/theme-debug";
 import Navbar from "@/components/navbar";
 import About from "@/components/about";
 import Projects from "@/components/projects";
@@ -40,9 +39,6 @@ export default function Portfolio() {
 
       {/* Footer */}
       <Footer />
-
-      {/* theme */}
-      <ThemeDebug />
     </div>
   );
 }
