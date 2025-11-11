@@ -101,14 +101,16 @@ export function InteractiveHero() {
               View My Work
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-6 rounded-lg transition-all duration-300 font-medium group"
-            >
-              <Download className="w-5 h-5 mr-2 transition-transform group-hover:-translate-y-1" />
-              Download Resume
-            </Button>
+            <a href="/resume.pdf" download>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-6 rounded-lg transition-all duration-300 font-medium group"
+              >
+                <Download className="w-5 h-5 mr-2 transition-transform group-hover:-translate-y-1" />
+                Download Resume
+              </Button>
+            </a>
           </motion.div>
         </motion.div>
 
@@ -135,7 +137,7 @@ export function InteractiveHero() {
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <code className="text-slate-500 dark:text-slate-400 font-mono text-sm">
-                  const developer = new SoftwareEngineer("Luffy");
+                  const developer = new SoftwareEngineer("Tapan");
                 </code>
               </div>
             </motion.div>
