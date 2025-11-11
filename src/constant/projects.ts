@@ -7,7 +7,7 @@ export const projects = [
     tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
     github: "#",
     live: "#",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/600x400.png",
   },
   {
     title: "Task Management System",
@@ -16,7 +16,7 @@ export const projects = [
     tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
     github: "#",
     live: "#",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/600x400.png",
   },
   {
     title: "Analytics Dashboard",
@@ -25,7 +25,7 @@ export const projects = [
     tech: ["React", "Chart.js", "Express.js", "MySQL", "Redis"],
     github: "#",
     live: "#",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/600x400.png",
   },
   {
     title: "API Gateway Service",
@@ -34,6 +34,6 @@ export const projects = [
     tech: ["Node.js", "Express", "Docker", "AWS", "Redis"],
     github: "#",
     live: "#",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "https://placehold.co/600x400.png",
   },
 ];
