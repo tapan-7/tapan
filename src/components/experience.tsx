@@ -77,7 +77,7 @@ const Experience = () => {
                           key={i}
                           className="flex items-start gap-3 text-slate-600 dark:text-slate-300"
                         >
-                          <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full mt-2 shrink-0"></div>
                           {achievement}
                         </li>
                       ))}

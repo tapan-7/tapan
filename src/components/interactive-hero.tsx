@@ -44,7 +44,7 @@ export function InteractiveHero() {
         <div className="absolute w-60 h-60 rounded-full border border-blue-200 dark:border-blue-900/30 -left-20 top-[20%] opacity-60 dark:opacity-20" />
         <div className="absolute w-80 h-80 rounded-full border border-blue-200 dark:border-blue-900/30 -right-20 top-[10%] opacity-60 dark:opacity-20" />
         <motion.div
-          className="absolute w-96 h-96 rounded-full bg-gradient-to-tr from-blue-100 to-transparent dark:from-blue-900/20 dark:to-transparent top-[5%] left-[30%] opacity-40 dark:opacity-20"
+          className="absolute w-96 h-96 rounded-full bg-linear-to-tr from-blue-100 to-transparent dark:from-blue-900/20 dark:to-transparent top-[5%] left-[30%] opacity-40 dark:opacity-20"
           animate={{
             scale: [1, 1.05, 1],
             x: [0, 10, 0],
@@ -122,7 +122,7 @@ export function InteractiveHero() {
           initial="hidden"
           animate={controls}
         >
-          <div className="w-full h-20 bg-gradient-to-b from-blue-50 to-transparent dark:from-blue-950/30 dark:to-transparent rounded-lg relative">
+          <div className="w-full h-20 bg-linear-to-b from-blue-50 to-transparent dark:from-blue-950/30 dark:to-transparent rounded-lg relative">
             <motion.div
               className="absolute inset-0 border border-blue-200 dark:border-blue-800 rounded-lg"
               animate={{

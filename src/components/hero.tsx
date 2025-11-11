@@ -92,10 +92,10 @@ export default function Hero() {
                   whileTap={{ scale: 0.95 }}
                   className="relative group cursor-hover"
                 >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-xl blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                  <div className="absolute -inset-1 bg-linear-to-r from-blue-500 via-purple-500 to-blue-600 rounded-xl blur-sm opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                   <Button
                     size="lg"
-                    className="relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 px-8 py-6 text-lg font-semibold shadow-2xl"
+                    className="relative bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 px-8 py-6 text-lg font-semibold shadow-2xl"
                   >
                     <Eye size={20} className="mr-2" />
                     View My Work
@@ -111,7 +111,7 @@ export default function Hero() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="relative border-2 border-primary/50 hover:border-primary bg-background/50 hover:bg-primary/10 px-8 py-6 text-lg font-semibold backdrop-blur-sm group overflow-hidden"
+                    className="relative border-2 border-primary/50 hover:border-primary bg-background/50 hover:bg-primary/10 px-8 py-6 text-lg font-semibold backdrop-blur-xs group overflow-hidden"
                   >
                     <Download
                       size={20}
@@ -119,7 +119,7 @@ export default function Hero() {
                     />
                     Download CV
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"
+                      className="absolute inset-0 bg-linear-to-r from-primary/20 to-transparent"
                       initial={{ x: "-100%" }}
                       whileHover={{ x: "100%" }}
                       transition={{ duration: 0.6 }}

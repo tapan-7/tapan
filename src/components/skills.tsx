@@ -46,7 +46,7 @@ const Skills = () => {
                   whileInView={{ width: `${skill.level}%` }}
                   transition={{ duration: 1.2, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-500 dark:to-blue-400 h-2 rounded-full"
+                  className="bg-linear-to-r from-blue-500 to-blue-600 dark:from-blue-500 dark:to-blue-400 h-2 rounded-full"
                 />
               </div>
             </motion.div>
