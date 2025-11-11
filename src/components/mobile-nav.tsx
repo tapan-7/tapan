@@ -77,7 +77,7 @@ export function MobileNav() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-40 w-full h-full bg-white dark:bg-slate-900 flex flex-col items-center justify-center"
+            className="fixed inset-0 z-40 w-screen h-screen bg-white dark:bg-slate-900 flex flex-col items-center justify-center"
           >
             <nav className="flex flex-col items-center space-y-8">
               {navItems.map((item, i) => (
