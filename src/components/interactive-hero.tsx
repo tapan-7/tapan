@@ -36,8 +36,8 @@ export function InteractiveHero() {
   return (
     <motion.section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ opacity }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Animated background elements */}
       <div className="absolute inset-0 z-0">
@@ -83,10 +83,11 @@ export function InteractiveHero() {
           <motion.p
             custom={2}
             variants={itemVariants}
-            className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg line-clamp-4 md:text-2xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed"
           >
-            Building scalable web applications with clean code and innovative
-            solutions. 2+ years of experience in full-stack development.
+            Crafting beautiful, high-performance web and mobile applications
+            with React and Next.js. Currently expanding my skills into backend
+            development.
           </motion.p>
 
           <motion.div
@@ -119,12 +120,11 @@ export function InteractiveHero() {
           custom={4}
           variants={itemVariants}
           className="mt-20 relative w-full max-w-xl mx-auto perspective"
-          initial="hidden"
           animate={controls}
         >
           <div className="w-full h-20 bg-linear-to-b from-blue-50 to-transparent dark:from-blue-950/30 dark:to-transparent rounded-lg relative">
             <motion.div
-              className="absolute inset-0 border border-blue-200 dark:border-blue-800 rounded-lg"
+              className="absolute inset-0 border border-blue-200 dark:border-blue-800 rounded-lg z-40"
               animate={{
                 rotateX: [0, 2, 0, -2, 0],
                 rotateY: [0, -2, 0, 2, 0],
@@ -143,32 +143,6 @@ export function InteractiveHero() {
             </motion.div>
           </div>
         </motion.div>
-      </motion.div>
-
-      {/* Mouse scroll indicator */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-        animate={{
-          y: [0, 10, 0],
-          opacity: [0.8, 0.4, 0.8],
-        }}
-        transition={{
-          duration: 2,
-          ease: "easeInOut",
-          repeat: Number.POSITIVE_INFINITY,
-        }}
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-slate-400 dark:border-slate-600 flex justify-center pt-1">
-          <motion.div
-            className="w-1 h-2 bg-slate-400 dark:bg-slate-600 rounded-full"
-            animate={{ y: [0, 4, 0] }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Number.POSITIVE_INFINITY,
-            }}
-          />
-        </div>
       </motion.div>
     </motion.section>
   );

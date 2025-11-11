@@ -38,9 +38,10 @@ const Contact = () => {
               <ArrowRight className="w-5 h-5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
             </motion.a>
             <motion.a
+              download
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              href="#"
+              href="resume.pdf"
               className="flex items-center gap-3 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 px-8 py-4 rounded-lg transition-all duration-300 font-medium"
             >
               <Download className="w-5 h-5" />
