@@ -1,30 +1,42 @@
 export const experience = [
   {
-    title: "Software Development Engineer I",
-    company: "TechCorp Solutions",
-    period: "2022 - Present",
-    location: "San Francisco, CA",
+    title: "Software Development Engineer - I",
+    company: "Hyscaler Nettantra Technologies (India) Private Limited",
+    period: "Jan 2025 – Present",
+    location: "Bhubaneswar, India",
     description:
-      "Developing and maintaining scalable web applications using modern JavaScript frameworks. Collaborating with cross-functional teams to deliver high-quality software solutions.",
+      "Leading frontend development for Drishti, an infrastructure management system designed to streamline district-level educational projects.",
     achievements: [
-      "Improved application performance by 40% through code optimization and caching strategies",
-      "Led development of 3 major features serving 10,000+ active users daily",
-      "Mentored 2 junior developers and established code review best practices",
-      "Implemented automated testing reducing production bugs by 35%",
+      "Built interactive dashboards and dynamic forms to manage surveys, reports, and infrastructure tasks for schools.",
+      "Collaborated with backend and data teams to ensure seamless integration across modules like survey management, issue tracking, and task completion.",
+      "Enhanced performance and reusability by optimizing React components and implementing modular UI architecture.",
     ],
   },
   {
-    title: "Junior Software Developer",
-    company: "StartupXYZ",
-    period: "2021 - 2022",
-    location: "Remote",
+    title: "Junior Technical Programmer",
+    company: "Hyscaler Nettantra Technologies (India) Private Limited",
+    period: "Jan 2024 – Dec 2024",
+    location: "Bhubaneswar, India",
     description:
-      "Built responsive web applications and RESTful APIs. Worked closely with designers and product managers to implement user-friendly interfaces.",
+      "Contributed to multiple healthcare and medical technology projects, focusing on mobile and web app development using React Native and related frameworks.",
     achievements: [
-      "Developed 5+ full-stack applications from conception to deployment",
-      "Reduced bug reports by 30% through comprehensive unit and integration testing",
-      "Implemented CI/CD pipelines improving deployment efficiency by 50%",
-      "Collaborated with design team to improve user experience metrics by 25%",
+      "Developed and maintained mobile app features for Doctegrity, a healthcare platform enabling video consultations and appointment booking with doctors.",
+      "Implemented dynamic and responsive UI flows in React Native for seamless performance on both Android and iOS devices.",
+      "Contributed to CareNuance, an advanced medical app with real-time vitals tracking (blood pressure, planned glucose monitoring) and doctor video call features.",
+      "Participated in sprint planning, integrating frontend features with secure APIs and third-party SDKs for real-time communication.",
+    ],
+  },
+  {
+    title: "Software Developer Trainee",
+    company: "Hyscaler Nettantra Technologies (India) Private Limited",
+    period: "Jun 2023 – Dec 2023",
+    location: "Bhubaneswar, India",
+    description:
+      "Completed hands-on training in full-stack web development with a focus on the MERN stack and modern development workflows.",
+    achievements: [
+      "Developed a Blog Post Application using the MERN stack as a training project.",
+      "Designed responsive UI components and implemented CRUD operations with MongoDB.",
+      "Gained foundational experience with version control (Git), REST API integration, and deployment workflows.",
     ],
   },
 ];
