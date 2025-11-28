@@ -1,36 +1,28 @@
+"use client";
 import React from "react";
-import { motion } from "framer-motion";
 import { MobileNav } from "./mobile-nav";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300"
-    >
+    <nav className="fixed top-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className="text-2xl font-bold text-blue-600 dark:text-white"
-        >
-          {/* &lt; tapan &gt; */}
-          &lt; tapan &gt;
-        </motion.div>
+        <div className="text-2xl font-bold text-blue-600 dark:text-white">
+          <Link href="/">&lt; tapan &gt;</Link>
+        </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8 items-center">
           {["About", "Projects", "Skills", "Experience", "Contact"].map(
             (item) => (
-              <motion.a
+              <Link
                 key={item}
-                href={`#${item.toLowerCase()}`}
-                whileHover={{ y: -2 }}
+                href={`/${item.toLowerCase()}`}
                 className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium"
               >
                 {item}
-              </motion.a>
+              </Link>
             )
           )}
           <AnimatedThemeToggler />
@@ -42,7 +34,7 @@ const Navbar = () => {
           <MobileNav />
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface NavItem {
   name: string;
@@ -11,11 +12,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Projects", href: "/projects" },
+  { name: "Skills", href: "/skills" },
+  { name: "Experience", href: "/experience" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function MobileNav() {
@@ -81,16 +83,19 @@ export function MobileNav() {
           >
             <nav className="flex flex-col items-center space-y-8">
               {navItems.map((item, i) => (
-                <motion.a
+                <motion.div
                   key={item.name}
-                  href={item.href}
                   custom={i}
                   variants={itemVariants}
-                  onClick={toggleMenu}
-                  className="text-2xl font-medium text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
-                  {item.name}
-                </motion.a>
+                  <Link
+                    href={item.href}
+                    onClick={toggleMenu}
+                    className="text-2xl font-medium text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
           </motion.div>
