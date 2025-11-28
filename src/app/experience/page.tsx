@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { experience } from "@/constant/experience";
 import {
   Card,
@@ -7,38 +6,30 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Badge } from "./ui/badge";
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
 
-const Experience = () => {
+const ExperiencePage = () => {
   return (
     <section
       id="experience"
-      className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300"
+      className="py-24 transition-colors duration-300"
     >
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+        <div
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Professional Experience
           </h2>
           <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-        </motion.div>
+        </div>
 
         <div className="max-w-4xl mx-auto">
           {experience.map((exp, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
               className="mb-12 last:mb-0"
             >
               <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -85,7 +76,7 @@ const Experience = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -93,4 +84,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default ExperiencePage;

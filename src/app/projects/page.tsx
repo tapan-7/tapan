@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { projects } from "@/constant/projects";
 import {
   Card,
@@ -7,24 +6,20 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "@/components/ui/card";
 import Image from "next/image";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { ExternalLink, Github, Star, Bookmark } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ExternalLink, Github } from "lucide-react";
 
-const Projects = () => {
+const ProjectsPage = () => {
   return (
     <section
       id="projects"
-      className="py-24 bg-slate-50 dark:bg-slate-900 transition-colors duration-300"
+      className="py-24 transition-colors duration-300"
     >
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+        <div
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
@@ -35,17 +30,12 @@ const Projects = () => {
             Here are some of the projects I've worked on that demonstrate my
             technical skills and problem-solving abilities.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8 }}
               className="group"
             >
               <Card className="bg-white dark:bg-slate-800 border-0 overflow-hidden h-full hover:shadow-2xl transition-all duration-300 rounded-3xl">
@@ -117,7 +107,7 @@ const Projects = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -125,4 +115,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectsPage;

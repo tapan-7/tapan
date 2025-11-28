@@ -1,26 +1,16 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
 import { Calendar, Github, Mail, MapPin } from "lucide-react";
-import { Button } from "./ui/button";
-import { PixelImage } from "./ui/pixel-image";
+import { Button } from "@/components/ui/button";
+import { PixelImage } from "@/components/ui/pixel-image";
 
-const About = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
+const AboutPage = () => {
   return (
     <section
       id="about"
-      ref={ref}
-      className="py-24 bg-white dark:bg-slate-950 transition-colors duration-300"
+      className="py-24 transition-colors duration-300"
     >
       <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+        <div
           className="max-w-6xl mx-auto"
         >
           {/* Heading */}
@@ -34,14 +24,14 @@ const About = () => {
           {/* Content */}
           <div className="grid md:grid-cols-2 gap-16 items-center">
             {/* Profile Image */}
-            <motion.div className="mx-auto">
+            <div className="mx-auto">
               <PixelImage
                 src="/profile.jpeg"
                 customGrid={{ rows: 8, cols: 8 }}
                 grayscaleAnimation
-                animate={isInView}
+                animate={true}
               />
-            </motion.div>
+            </div>
 
             {/* Bio */}
             <div>
@@ -120,10 +110,10 @@ const About = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default About;
+export default AboutPage;
