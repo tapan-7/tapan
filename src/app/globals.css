@@ -258,3 +258,29 @@ html {
   animation: none;
   mix-blend-mode: normal;
 }
+
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+.dark .floating {
+  background-color: hsla(240, 100%, 80%, 0.15); /* A light blue with 15% opacity */
+}
+
+/* Second floating element with a different color in dark mode */
+.dark .floating:nth-of-type(2) {
+  background-color: hsla(280, 100%, 80%, 0.15); /* A light purple with 15% opacity */
+}
