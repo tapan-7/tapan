@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 
-export default function HomePage() { // Renamed from InteractiveHero
+export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -51,7 +52,7 @@ export default function HomePage() { // Renamed from InteractiveHero
             y: [0, -30, 0],
             x: [0, 15, 0],
             scale: [1, 1.02, 1],
-            rotate: [0, -5, 0]
+            rotate: [0, -5, 0],
           }}
           transition={{
             duration: 30,
@@ -65,14 +66,14 @@ export default function HomePage() { // Renamed from InteractiveHero
           animate={{
             y: [0, 20, 0],
             x: [0, -20, 0],
-            scale: [1, 1.05, 1]
+            scale: [1, 1.05, 1],
           }}
           transition={{
             duration: 40,
             ease: "easeInOut",
             repeat: Infinity,
             repeatType: "mirror",
-            delay: 5
+            delay: 5,
           }}
         />
         <motion.div
@@ -87,7 +88,7 @@ export default function HomePage() { // Renamed from InteractiveHero
             ease: "easeInOut",
             repeat: Infinity,
             repeatType: "mirror",
-            delay: 10
+            delay: 10,
           }}
         />
       </div>
@@ -100,9 +101,20 @@ export default function HomePage() { // Renamed from InteractiveHero
           <motion.p
             custom={0}
             variants={itemVariants}
-            className="text-blue-600 dark:text-blue-400 font-medium tracking-wide uppercase text-sm bg-blue-50 dark:bg-blue-900/30 py-2 px-4 rounded-full inline-block"
+            className="text-blue-600 dark:text-blue-400 font-medium tracking-wide uppercase text-sm bg-blue-50 dark:bg-blue-900/30 px-8 rounded-full inline-block"
           >
-            Software Development Engineer
+            <TypingAnimation
+              words={[
+                "Software Development Engineer",
+                "Web Developer",
+                "Mobile Developer",
+                "Tech Enthusiast",
+                "Open Source Contributor",
+                "Lifelong Learner",
+              ]}
+              cursorStyle="underscore"
+              loop
+            />
           </motion.p>
 
           <motion.h1
