@@ -142,8 +142,9 @@ export default function HomePage() {
             className="flex flex-wrap justify-center gap-4"
           >
             <Button
+              variant={"default"}
               size="lg"
-              className="bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-8 py-6 rounded-lg font-medium group"
+              className=" cursor-pointer px-8 py-6 rounded-lg font-medium group"
             >
               View My Work
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -152,7 +153,7 @@ export default function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-6 rounded-lg transition-all duration-300 font-medium group"
+                className=" cursor-pointer px-8 py-6 transition-all duration-300 group"
               >
                 <Download className="w-5 h-5 mr-2 transition-transform group-hover:-translate-y-1" />
                 Download Resume

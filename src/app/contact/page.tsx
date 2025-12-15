@@ -42,13 +42,13 @@ const ContactPage = () => {
 
           <div className="flex justify-center gap-6">
             <a
-              href="#"
+              href="https://github.com/tapan-7"
               className="p-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors duration-300"
             >
               <Github className="w-6 h-6 text-slate-700 dark:text-slate-300" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/tapan-kumar-swain-b4b231318/"
               className="p-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors duration-300"
             >
               <Linkedin className="w-6 h-6 text-slate-700 dark:text-slate-300" />
