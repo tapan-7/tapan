@@ -1,0 +1,163 @@
+{
+    "profile": {
+        "name": "Tapan Kumar Swain",
+        "title": "Software Development Engineer",
+        "email": "contact@example.com",
+        "website": "https://example.com",
+        "github": "https://github.com/tapankumarswain",
+        "linkedin": "https://linkedin.com/in/tapankumarswain",
+        "twitter": "https://twitter.com/tapankumarswain",
+        "summary": "Motivated and detail-oriented Frontend Developer with 2 years of professional experience in designing and developing responsive web and mobile applications. Skilled in React, React Native, and Next.js with strong attention to UI/UX and performance optimization. Passionate about translating complex product requirements into smooth, user-centered interfaces while collaborating effectively with cross-functional teams."
+    },
+    "experience": [
+        {
+            "title": "Software Development Engineer - I",
+            "company": "Hyscaler Nettantra Technologies",
+            "period": "Jan 2025 – Present",
+            "location": "Bhubaneswar, India",
+            "description": "Led frontend development in Next.js and React Native for a district-level education infrastructure system.",
+            "achievements": [
+                "Built dashboards and dynamic forms for surveys, reports, and task workflows.",
+                "Collaborated with backend/data teams to ensure smooth module integration.",
+                "Improved error handling and solved complex UI issues, reducing bugs by ~20%.",
+                "Optimized reusable components and performance, cutting development time for new features by ~25%."
+            ]
+        },
+        {
+            "title": "Junior Technical Programmer",
+            "company": "Hyscaler Nettantra Technologies",
+            "period": "Jan 2024 – Dec 2024",
+            "location": "Bhubaneswar, India",
+            "description": "Developed and maintained mobile app features for a healthcare platform providing video consultations and appointment booking.",
+            "achievements": [
+                "Implemented dynamic, responsive UI flows in React Native across Android and iOS.",
+                "Built features for a real-time vitals monitoring system, including blood pressure tracking and secure doctor video calls.",
+                "Integrated VideoSDK for high-quality video/voice call services and implemented AWS S3 storage for recording sessions.",
+                "Integrated frontend modules with secure APIs and third-party SDKs, improving the reliability of real-time communication by ~20%.",
+                "Collaborated in sprint planning and optimized mobile performance for a smoother user experience."
+            ]
+        },
+        {
+            "title": "Software Developer Trainee",
+            "company": "Hyscaler Nettantra Technologies",
+            "period": "Jun 2023 – Dec 2023",
+            "location": "Bhubaneswar, India",
+            "description": "Completed hands-on training in full-stack web development with a focus on the MERN stack and modern development workflows.",
+            "achievements": [
+                "Built and optimized a MERN-based full-stack application, improving component rendering efficiency and overall UI responsiveness.",
+                "Designed responsive UI components and implemented CRUD operations with MongoDB.",
+                "Gained foundational experience with version control, REST API integration, and deployment workflows."
+            ]
+        }
+    ],
+    "education": [
+        {
+            "degree": "Master of Computer Application (MCA)",
+            "institution": "College of IT & Management Education",
+            "period": "2020 - 2022",
+            "description": "",
+            "gpa": ""
+        },
+        {
+            "degree": "B.Sc in ITM",
+            "institution": "Bhadrak Autonomous college",
+            "period": "2017 - 2020",
+            "description": "",
+            "gpa": ""
+        },
+        {
+            "degree": "+2 Science",
+            "institution": "Indigo college of science and commerce",
+            "period": "2014 - 2016",
+            "description": "",
+            "gpa": ""
+        }
+    ],
+    "skills": {
+        "Languages": [
+            "JavaScript",
+            "TypeScript",
+            "HTML",
+            "CSS"
+        ],
+        "Frameworks & Libraries": [
+            "React",
+            "Next.js",
+            "React Native",
+            "Tailwind CSS",
+            "shadcn/ui",
+            "Bootstrap"
+        ],
+        "Databases": [
+            "MongoDB",
+            "MySQL"
+        ],
+        "Tools & Platforms": [
+            "Git",
+            "GitHub",
+            "GitLab",
+            "Docker",
+            "Linux",
+            "GraphQL",
+            "AWS"
+        ]
+    },
+    "projects": [
+        {
+            "title": "E-Commerce Platform",
+            "description": "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
+            "tech": [
+                "React",
+                "Node.js",
+                "MongoDB",
+                "Stripe",
+                "JWT"
+            ],
+            "github": "#",
+            "live": "#",
+            "image": "https://placehold.co/1200x800.png"
+        },
+        {
+            "title": "Task Management System",
+            "description": "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+            "tech": [
+                "Next.js",
+                "TypeScript",
+                "Prisma",
+                "PostgreSQL",
+                "Socket.io"
+            ],
+            "github": "#",
+            "live": "#",
+            "image": "https://placehold.co/1200x800.png"
+        },
+        {
+            "title": "Analytics Dashboard",
+            "description": "Interactive analytics dashboard with data visualization, real-time metrics, and automated reporting capabilities.",
+            "tech": [
+                "React",
+                "Chart.js",
+                "Express.js",
+                "MySQL",
+                "Redis"
+            ],
+            "github": "#",
+            "live": "#",
+            "image": "https://placehold.co/1200x800.png"
+        },
+        {
+            "title": "API Gateway Service",
+            "description": "Microservices API gateway with rate limiting, authentication, and request routing for scalable applications.",
+            "tech": [
+                "Node.js",
+                "Express",
+                "Docker",
+                "AWS",
+                "Redis"
+            ],
+            "github": "#",
+            "live": "#",
+            "image": "https://placehold.co/1200x800.png"
+        }
+    ]
+}

@@ -7,14 +7,14 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="container max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold text-blue-600 dark:text-white">
           <Link href="/">&lt; tapan &gt;</Link>
         </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-8 items-center">
-          {["About", "Projects", "Skills", "Experience", "Contact"].map(
+          {["About", "Projects", "Resume", "Contact"].map(
             (item) => (
               <Link
                 key={item}
