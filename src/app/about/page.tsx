@@ -66,7 +66,7 @@ const AboutPage = () => {
     if (s.includes("tailwind")) return "tailwindcss";
     if (s.includes("shadcn")) return "shadcnui";
     if (s.includes("bootstrap")) return "bootstrap";
-    if (s.includes("aws")) return "amazonaws";
+    if (s.includes("aws")) return "aws";
     if (s.includes("php")) return "php";
     if (s.includes("postgres")) return "postgresql";
     return "";
@@ -82,7 +82,6 @@ const AboutPage = () => {
     if (s.includes("next")) return "bg-[#000000] text-white";
     if (s.includes("node")) return "bg-[#339933] text-white";
     if (s.includes("mongo")) return "bg-[#47A248] text-white";
-    if (s.includes("git")) return "bg-[#F05032] text-white";
     if (s.includes("docker")) return "bg-[#2496ED] text-white";
     if (s.includes("python")) return "bg-[#3776AB] text-white";
     if (s.includes("mysql")) return "bg-[#4479A1] text-white";
@@ -91,10 +90,12 @@ const AboutPage = () => {
     if (s.includes("tailwind")) return "bg-[#06B6D4] text-white";
     if (s.includes("shadcn")) return "bg-[#000000] text-white";
     if (s.includes("gitlab")) return "bg-[#FC6D26] text-white";
+    if (s.includes("github")) return "bg-[#181717] text-white";
     if (s.includes("aws")) return "bg-[#FF9900] text-black";
     if (s.includes("php")) return "bg-[#777BB4] text-white";
     if (s.includes("bootstrap")) return "bg-[#810ffa] text-white";
     if (s.includes("postgres")) return "bg-[#336791] text-white";
+    if (s.includes("git")) return "bg-[#F05032] text-white";
     return "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300";
   };
 
@@ -204,10 +205,9 @@ const AboutPage = () => {
                   {(items as string[]).map((skill) => {
                     const slug = getIconSlug(skill);
                     const colorClasses = getSkillColor(skill);
-                    // Determine if we need a dark icon or light icon based on background brightness
-                    // Rough heuristic: yellow/cyan/white backgrounds need black text/icons
                     const isDarkText = colorClasses.includes("text-black") || colorClasses.includes("text-slate-900");
                     const iconColor = isDarkText ? "000000" : "FFFFFF";
+                    if (slug.toLowerCase() === "aws") console.log("https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000")
 
                     return (
                       <span
@@ -219,7 +219,7 @@ const AboutPage = () => {
                       >
                         {slug && (
                           <img
-                            src={`https://cdn.simpleicons.org/${slug}/${iconColor}`}
+                            src={slug.toLowerCase() === "aws" ? "https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000" : `https://cdn.simpleicons.org/${slug}/${iconColor}`}
                             alt=""
                             className="w-4 h-4"
                             width={16}
@@ -253,8 +253,8 @@ const AboutPage = () => {
                 key={idx}
                 className={cn(
                   "flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 group",
-                  "bg-white dark:bg-slate-900 border",
-                  "border-slate-100 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl"
+                  "border",
+                  "border-slate-300 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl"
                 )}
               >
                 <div className="mb-6 text-blue-600 dark:text-blue-400 transform group-hover:scale-110 transition-transform duration-300">
