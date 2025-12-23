@@ -44,7 +44,7 @@ const ResumePage = () => {
           </p>
 
           {/* Socials & Download Row */}
-          <div className="flex flex-wrap items-center gap-6 mb-8">
+          <div className="flex flex-col md:flex-row gap-6 mb-8">
             <Link
               href={profile.github}
               target="_blank"
@@ -67,7 +67,7 @@ const ResumePage = () => {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors shadow-sm ml-auto sm:ml-0"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-md transition-colors shadow-sm self-baseline sm:ml-0"
             >
               <Download className="w-4 h-4" />
               Download Resume
@@ -187,7 +187,7 @@ const ResumePage = () => {
 
           <div className="space-y-10">
             {education.map((edu, idx) => (
-              <div key={idx} className="relative pl-6 sm:pl-0">
+              <div key={idx} className="relative">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                     {edu.institution}
