@@ -1,16 +1,47 @@
+"use client";
+
 import React from "react";
+import { ExternalLink } from "lucide-react";
 import { projects } from "@/constant/projects";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
+
+interface BadgeProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const Badge = ({ children, className = "" }: BadgeProps) => (
+  <span className={`inline-block px-3 py-1.5 text-sm rounded-full ${className}`}>
+    {children}
+  </span>
+);
+
+interface ButtonProps {
+  children: React.ReactNode;
+  href?: string;
+  className?: string;
+  variant?: "default" | "primary" | "outline";
+}
+
+const Button = ({ children, href, className = "", variant = "default" }: ButtonProps) => {
+  let buttonClasses = "inline-flex items-center justify-center gap-2";
+
+  if (variant === "primary") {
+    buttonClasses += " bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg";
+  } else if (variant === "outline") {
+    buttonClasses += " border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium py-3 px-8 rounded-lg transition-all duration-300";
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${buttonClasses} ${className}`}
+    >
+      {children}
+    </a>
+  );
+};
 
 const ProjectsPage = () => {
   return (
@@ -19,94 +50,99 @@ const ProjectsPage = () => {
       className="py-24 transition-colors duration-300"
     >
       <div className="container mx-auto px-6">
-        <div
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Featured Projects
           </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full mb-6"></div>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Here are some of the projects I've worked on that demonstrate my
             technical skills and problem-solving abilities.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {projects.map((project, index) => (
+        <div className="max-w-6xl mx-auto flex flex-col gap-24">
+          {projects?.map((project, index) => (
             <div
               key={index}
-              className="group"
+              className="group grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
             >
-              <Card className="bg-white dark:bg-slate-800 border-0 overflow-hidden h-full hover:shadow-2xl transition-all duration-300 rounded-3xl">
-                <CardHeader className="p-0 relative">
-                  {/* Image Container */}
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={project.image || "https://placehold.co/600x400"}
-                      alt={project.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
-
-                    {/* Project Info Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <CardTitle className="text-2xl mb-2 font-bold">
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-slate-200 leading-relaxed text-sm mb-3">
-                        {project.description}
-                      </CardDescription>
+              {/* Left Section: Image Showcase - Overlapping desktop and mobile views */}
+              <div className="relative w-full aspect-[4/3] flex items-center justify-center">
+                {!project.image ? (
+                  <div className="text-4xl font-bold text-slate-400 dark:text-slate-600">
+                    {project.title.split(" ")[0]}
+                  </div>
+                ) : (
+                  <div className="relative w-full h-full">
+                    {/* Desktop Image - positioned on the left with tilt and its own border */}
+                    <div className="absolute top-[20%] left-0 w-[85%] aspect-[16/10] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] -rotate-2 group-hover:-rotate-3 group-hover:scale-105 z-10">
+                      <div className="w-full h-full bg-slate-800 dark:bg-slate-900 rounded-xl p-3 shadow-2xl border-1 border-blue-700 dark:border-slate-600">
+                        <div className="w-full h-full rounded-lg overflow-hidden">
+                          <img
+                            src={project.image}
+                            alt={`${project.title} desktop view`}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
+                    {/* Mobile Image - positioned overlapping on the right with tilt and its own border */}
+                    <div className="absolute right-12 top-[35%] translate-x-4 w-[25%] aspect-[6/10] transition-all rotate-6 duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-7 group-hover:scale-105 z-20">
+                      <div className="w-full h-full bg-slate-800 dark:bg-slate-900 rounded-xl p-3 shadow-2xl border-1 border-blue-700 dark:border-slate-600">
+                        <div className="w-full h-full rounded-lg overflow-hidden">
+                          <img
+                            src={project.mobileImage}
+                            alt={`${project.title} mobile view`}
+                            className="object-cover w-full h-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
 
-                <CardContent className="p-6">
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.slice(0, 4).map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="secondary"
-                        className="bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-0 px-3 py-1 text-xs font-medium"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
                   </div>
+                )}
+              </div>
 
-                  {/* Action Button */}
+              {/* Right Section: Project Info */}
+              <div className="flex flex-col gap-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  {project.title}
+                </h3>
+                <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech, i) => (
+                    <Badge
+                      key={i}
+                      className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="flex gap-4 mt-2">
                   <Button
-                    className="w-full bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold py-6 rounded-2xl transition-all duration-300 group-hover:shadow-lg"
-                    size="lg"
+                    href={project.link}
+                    variant="primary"
+                    className="hover:scale-105 transition-transform"
                   >
-                    View Project
-                    <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    Visit Project
+                    <ExternalLink className="w-4 h-4" />
                   </Button>
-
-                  {/* Secondary Actions */}
-                  <div className="flex gap-3 mt-3">
+                  {project.github && (
                     <Button
+                      href={project.github}
                       variant="outline"
-                      size="sm"
-                      className="flex-1 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl"
+                      className="hover:scale-105 transition-transform"
                     >
-                      <Github className="w-4 h-4 mr-1" />
-                      Code
+                      GitHub
+                      <ExternalLink className="w-4 h-4" />
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-1" />
-                      Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
