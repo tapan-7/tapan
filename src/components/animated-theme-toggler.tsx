@@ -75,7 +75,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       aria-label="Toggle theme"
       ref={buttonRef}
       className={cn(
-        "rounded-full transition-all duration-300 active:scale-95 text-black dark:text-white",
+        "rounded-full transition-all duration-300 active:scale-95 text-black dark:text-white ml-3 p-2 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800",
         className
       )}
       onClick={changeTheme}

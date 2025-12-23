@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface NavItem {
   name: string;
@@ -20,6 +21,7 @@ const navItems: NavItem[] = [
 ];
 
 export function MobileNav() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -81,21 +83,27 @@ export function MobileNav() {
             className="fixed inset-0 z-40 w-screen h-screen bg-white dark:bg-slate-900 flex flex-col items-center justify-center"
           >
             <nav className="flex flex-col items-center space-y-8">
-              {navItems.map((item, i) => (
-                <motion.div
-                  key={item.name}
-                  custom={i}
-                  variants={itemVariants}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={toggleMenu}
-                    className="text-2xl font-medium text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              {navItems.map((item, i) => {
+                const isActive = pathname === item.href;
+                return (
+                  <motion.div
+                    key={item.name}
+                    custom={i}
+                    variants={itemVariants}
                   >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
+                    <Link
+                      href={item.href}
+                      onClick={toggleMenu}
+                      className={`text-2xl font-medium transition-colors ${isActive
+                        ? "text-blue-600 dark:text-blue-400"
+                        : "text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                        }`}
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </nav>
           </motion.div>
         )}
