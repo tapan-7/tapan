@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { PageWrapper } from "@/components/page-wrapper";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
             <Footer />
           </PageWrapper>
         </ThemeProvider>
+        <SmoothCursor />
       </body>
     </html>
   );
