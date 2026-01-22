@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { Music, Gamepad2, Plane, Book, Utensils, HeartHandshake } from "lucide-react";
+import {
+  Music,
+  Gamepad2,
+  Plane,
+  Book,
+  Utensils,
+  HeartHandshake,
+} from "lucide-react";
 import { PixelImage } from "@/components/ui/pixel-image";
 import portfolioData from "@/constant/portfolio-data.json";
 import { cn } from "@/lib/utils";
@@ -15,32 +22,32 @@ const AboutPage = () => {
     {
       name: "Gaming Enthusiast",
       icon: Gamepad2,
-      desc: "Die-hard fan of story-driven RPGs and competitive FPS games. Never misses a gaming weekend."
+      desc: "Die-hard fan of story-driven RPGs and competitive FPS games. Never misses a gaming weekend.",
     },
     {
       name: "Travel & Exploration",
       icon: Plane,
-      desc: "Love discovering new places, cultures, and creating unforgettable memories."
+      desc: "Love discovering new places, cultures, and creating unforgettable memories.",
     },
     {
       name: "Culinary Explorer",
       icon: Utensils,
-      desc: "Food lover with special appreciation for Indian home-style cooking and street food."
+      desc: "Food lover with special appreciation for Indian home-style cooking and street food.",
     },
     {
       name: "Community Helper",
       icon: HeartHandshake,
-      desc: "Believe in giving back to society by helping those in need whenever possible."
+      desc: "Believe in giving back to society by helping those in need whenever possible.",
     },
     {
       name: "Teaching & Mentoring",
       icon: Book,
-      desc: "Passionate about teaching underprivileged kids and sharing knowledge."
+      desc: "Passionate about teaching underprivileged kids and sharing knowledge.",
     },
     {
       name: "Music Lover",
       icon: Music,
-      desc: "Finding focus and inspiration through Lo-fi beats and instrumental tracks."
+      desc: "Finding focus and inspiration through Lo-fi beats and instrumental tracks.",
     },
   ];
 
@@ -104,7 +111,6 @@ const AboutPage = () => {
   return (
     <section id="about" className="py-24 transition-colors duration-300">
       <div className="container mx-auto px-6 max-w-6xl">
-
         {/* Header */}
         <AnimatedSection className="text-center mb-20" delay={0.1}>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white font-header">
@@ -114,7 +120,11 @@ const AboutPage = () => {
         </AnimatedSection>
 
         {/* 1. My Story Section */}
-        <AnimatedSection className="grid md:grid-cols-2 gap-16 items-center mb-32" delay={0.2} direction="up">
+        <AnimatedSection
+          className="grid md:grid-cols-2 gap-16 items-center mb-32"
+          delay={0.2}
+          direction="up"
+        >
           {/* Text Content */}
           <div className="order-2 md:order-1 space-y-6">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white font-header mb-4">
@@ -122,14 +132,27 @@ const AboutPage = () => {
             </h2>
             <div className="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 font-body leading-relaxed text-lg">
               <p>
-                Hello! I'm <span className="font-semibold text-blue-600 dark:text-blue-400">{profile.name}</span>.
-                I am currently working as a <span className="font-medium">{profile.title}</span> at <span className="font-medium text-slate-900 dark:text-white">{experience[0].company}</span>.
+                Hello! I'm{" "}
+                <span className="font-semibold text-blue-600 dark:text-blue-400">
+                  {profile.name}
+                </span>
+                . I am currently working as a{" "}
+                <span className="font-medium">{profile.title}</span> at{" "}
+                <span className="font-medium text-slate-900 dark:text-white">
+                  {experience[0].company}
+                </span>
+                .
               </p>
               <p>
-                My focus is on building scalable frontend architectures and seamless user experiences using modern web technologies. I enjoy solving complex problems and collaborating with cross-functional teams to deliver high-quality software solutions.
+                My focus is on building scalable frontend architectures and
+                seamless user experiences using modern web technologies. I enjoy
+                solving complex problems and collaborating with cross-functional
+                teams to deliver high-quality software solutions.
               </p>
               <p>
-                When I'm not pushing code, I'm usually exploring new tools, optimizing performance, or mentoring junior developers to help them grow in their careers.
+                When I'm not pushing code, I'm usually exploring new tools,
+                optimizing performance, or mentoring junior developers to help
+                them grow in their careers.
               </p>
             </div>
           </div>
@@ -155,13 +178,20 @@ const AboutPage = () => {
 
           <div className="space-y-12">
             {experience.map((job, idx) => (
-              <div key={idx} className="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700">
+              <div
+                key={idx}
+                className="relative pl-8 border-l-2 border-slate-200 dark:border-slate-700"
+              >
                 <div className="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-blue-600 border-4 border-white dark:border-slate-900"></div>
 
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">{job.title}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                    {job.title}
+                  </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-slate-500 dark:text-slate-400 mt-1">
-                    <span className="font-medium text-blue-600 dark:text-blue-400">{job.company}</span>
+                    <span className="font-medium text-blue-600 dark:text-blue-400">
+                      {job.company}
+                    </span>
                     <span className="hidden sm:inline">•</span>
                     <span>{job.period}</span>
                     <span className="hidden sm:inline">•</span>
@@ -175,7 +205,10 @@ const AboutPage = () => {
 
                 <ul className="space-y-2">
                   {job.achievements.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400"
+                    >
                       <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 shrink-0"></span>
                       {item}
                     </li>
@@ -193,7 +226,8 @@ const AboutPage = () => {
               Skills & Expertise
             </h2>
             <p className="text-slate-600 dark:text-slate-400 font-body">
-              A collection of technologies I'm proficient with, from languages to frameworks and tools.
+              A collection of technologies I'm proficient with, from languages
+              to frameworks and tools.
             </p>
           </div>
 
@@ -207,30 +241,37 @@ const AboutPage = () => {
                   {(items as string[]).map((skill) => {
                     const slug = getIconSlug(skill);
                     const colorClasses = getSkillColor(skill);
-                    const isDarkText = colorClasses.includes("text-black") || colorClasses.includes("text-slate-900");
+                    const isDarkText =
+                      colorClasses.includes("text-black") ||
+                      colorClasses.includes("text-slate-900");
                     const iconColor = isDarkText ? "000000" : "FFFFFF";
-                    if (slug.toLowerCase() === "aws") console.log("https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000")
+                    if (slug.toLowerCase() === "aws")
+                      console.log(
+                        "https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000",
+                      );
 
                     return (
-                      <Floating key={skill} yRange={4} delay={0.1}>
-                        <span
-                          className={cn(
-                            "px-3 py-1.5 rounded-lg text-sm font-semibold font-body flex items-center gap-2 shadow-sm transition-transform hover:scale-105 cursor-default",
-                            colorClasses
-                          )}
-                        >
-                          {slug && (
-                            <img
-                              src={slug.toLowerCase() === "aws" ? "https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000" : `https://cdn.simpleicons.org/${slug}/${iconColor}`}
-                              alt=""
-                              className="w-4 h-4"
-                              width={16}
-                              height={16}
-                            />
-                          )}
-                          {skill}
-                        </span>
-                      </Floating>
+                      <span
+                        className={cn(
+                          "px-3 py-1.5 rounded-lg text-sm font-semibold font-body flex items-center gap-2 shadow-sm transition-transform hover:scale-105 cursor-default",
+                          colorClasses,
+                        )}
+                      >
+                        {slug && (
+                          <img
+                            src={
+                              slug.toLowerCase() === "aws"
+                                ? "https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000"
+                                : `https://cdn.simpleicons.org/${slug}/${iconColor}`
+                            }
+                            alt=""
+                            className="w-4 h-4"
+                            width={16}
+                            height={16}
+                          />
+                        )}
+                        {skill}
+                      </span>
                     );
                   })}
                 </div>
@@ -246,35 +287,34 @@ const AboutPage = () => {
               When I'm Not Coding
             </h2>
             <p className="text-slate-600 dark:text-slate-400 font-body max-w-2xl mx-auto">
-              Here's what keeps me passionate and engaged with life outside of technology.
+              Here's what keeps me passionate and engaged with life outside of
+              technology.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {hobbies.map((hobby, idx) => (
-              <Floating key={idx} yRange={6} delay={0.2 * idx}>
-                <div
-                  className={cn(
-                    "flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 group",
-                    "border",
-                    "border-slate-300 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl"
-                  )}
-                >
-                  <div className="mb-6 text-blue-600 dark:text-blue-400 transform group-hover:scale-110 transition-transform duration-300">
-                    <hobby.icon className="w-10 h-10" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 font-header">
-                    {hobby.name}
-                  </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-body leading-relaxed">
-                    {hobby.desc}
-                  </p>
+              <div
+                key={idx}
+                className={cn(
+                  "flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 group",
+                  "border",
+                  "border-slate-300 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl",
+                )}
+              >
+                <div className="mb-6 text-blue-600 dark:text-blue-400 transform group-hover:scale-110 transition-transform duration-300">
+                  <hobby.icon className="w-10 h-10" strokeWidth={1.5} />
                 </div>
-              </Floating>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 font-header">
+                  {hobby.name}
+                </h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 font-body leading-relaxed">
+                  {hobby.desc}
+                </p>
+              </div>
             ))}
           </div>
         </AnimatedSection>
-
       </div>
     </section>
   );
