@@ -3,6 +3,8 @@
 import React from "react";
 import { ExternalLink } from "lucide-react";
 import { projects } from "@/constant/projects";
+import { AnimatedSection } from "@/components/ui/animated-section";
+import { Floating } from "@/components/ui/floating";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -50,7 +52,7 @@ const ProjectsPage = () => {
       className="py-24 transition-colors duration-300"
     >
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <AnimatedSection className="text-center mb-16" delay={0.1}>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
             Featured Projects
           </h2>
@@ -59,13 +61,15 @@ const ProjectsPage = () => {
             Here are some of the projects I've worked on that demonstrate my
             technical skills and problem-solving abilities.
           </p>
-        </div>
+        </AnimatedSection>
 
         <div className="max-w-6xl mx-auto flex flex-col gap-24">
           {projects?.map((project, index) => (
-            <div
+            <AnimatedSection
               key={index}
               className="group grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+              delay={0.1 * index}
+              direction="up"
             >
               {/* Left Section: Image Showcase - Overlapping desktop and mobile views */}
               <div className="relative w-full aspect-[4/3] flex items-center justify-center">
@@ -114,12 +118,13 @@ const ProjectsPage = () => {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, i) => (
-                    <Badge
-                      key={i}
-                      className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium"
-                    >
-                      {tech}
-                    </Badge>
+                    <Floating key={i} yRange={3} delay={0.2 * i}>
+                      <Badge
+                        className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium"
+                      >
+                        {tech}
+                      </Badge>
+                    </Floating>
                   ))}
                 </div>
                 <div className="flex gap-4 mt-2">
@@ -143,7 +148,7 @@ const ProjectsPage = () => {
                   )}
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>

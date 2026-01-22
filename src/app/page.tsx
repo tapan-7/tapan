@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
 import { TypingAnimation } from "@/components/ui/typing-animation";
+import { StaggeredText } from "@/components/ui/staggered-text";
 
 export default function HomePage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -122,8 +123,12 @@ export default function HomePage() {
             variants={itemVariants}
             className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight"
           >
-            <span className="text-blue-600 dark:text-blue-400">Tapan </span>
-            Kumar Swain
+            <StaggeredText
+              text="Tapan Kumar Swain"
+              className="block"
+              delayPerChar={0.05}
+              staggerDelay={0.1}
+            />
           </motion.h1>
 
           <motion.p

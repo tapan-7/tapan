@@ -1,10 +1,12 @@
 "use client";
 
 import React from "react";
-import { Briefcase, Music, Gamepad2, Plane, Book, Utensils, HeartHandshake } from "lucide-react";
+import { Music, Gamepad2, Plane, Book, Utensils, HeartHandshake } from "lucide-react";
 import { PixelImage } from "@/components/ui/pixel-image";
 import portfolioData from "@/constant/portfolio-data.json";
 import { cn } from "@/lib/utils";
+import { AnimatedSection } from "@/components/ui/animated-section";
+import { Floating } from "@/components/ui/floating";
 
 const AboutPage = () => {
   const { profile, experience, skills } = portfolioData;
@@ -104,15 +106,15 @@ const AboutPage = () => {
       <div className="container mx-auto px-6 max-w-6xl">
 
         {/* Header */}
-        <div className="text-center mb-20">
+        <AnimatedSection className="text-center mb-20" delay={0.1}>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white font-header">
             About Me
           </h1>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
-        </div>
+        </AnimatedSection>
 
         {/* 1. My Story Section */}
-        <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
+        <AnimatedSection className="grid md:grid-cols-2 gap-16 items-center mb-32" delay={0.2} direction="up">
           {/* Text Content */}
           <div className="order-2 md:order-1 space-y-6">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white font-header mb-4">
@@ -141,10 +143,10 @@ const AboutPage = () => {
               animate={true}
             />
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* 2. Experience Section */}
-        <div className="mb-32">
+        <AnimatedSection className="mb-32" delay={0.3} direction="up">
           <div className="flex items-center gap-4 mb-12">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white font-header">
               Experience
@@ -182,10 +184,10 @@ const AboutPage = () => {
               </div>
             ))}
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* 3. Skills & Expertise Section */}
-        <div className="mb-32">
+        <AnimatedSection className="mb-32" delay={0.4} direction="up">
           <div className="mb-10">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white font-header mb-4">
               Skills & Expertise
@@ -210,34 +212,35 @@ const AboutPage = () => {
                     if (slug.toLowerCase() === "aws") console.log("https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000")
 
                     return (
-                      <span
-                        key={skill}
-                        className={cn(
-                          "px-3 py-1.5 rounded-lg text-sm font-semibold font-body flex items-center gap-2 shadow-sm transition-transform hover:scale-105 cursor-default",
-                          colorClasses
-                        )}
-                      >
-                        {slug && (
-                          <img
-                            src={slug.toLowerCase() === "aws" ? "https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000" : `https://cdn.simpleicons.org/${slug}/${iconColor}`}
-                            alt=""
-                            className="w-4 h-4"
-                            width={16}
-                            height={16}
-                          />
-                        )}
-                        {skill}
-                      </span>
+                      <Floating key={skill} yRange={4} delay={0.1}>
+                        <span
+                          className={cn(
+                            "px-3 py-1.5 rounded-lg text-sm font-semibold font-body flex items-center gap-2 shadow-sm transition-transform hover:scale-105 cursor-default",
+                            colorClasses
+                          )}
+                        >
+                          {slug && (
+                            <img
+                              src={slug.toLowerCase() === "aws" ? "https://img.icons8.com/?size=100&id=G0CnLqqcRBXl&format=png&color=000000" : `https://cdn.simpleicons.org/${slug}/${iconColor}`}
+                              alt=""
+                              className="w-4 h-4"
+                              width={16}
+                              height={16}
+                            />
+                          )}
+                          {skill}
+                        </span>
+                      </Floating>
                     );
                   })}
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* 4. When I'm Not Coding */}
-        <div className="mb-20">
+        <AnimatedSection className="mb-20" delay={0.5} direction="up">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 dark:text-white font-header mb-4">
               When I'm Not Coding
@@ -249,27 +252,28 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {hobbies.map((hobby, idx) => (
-              <div
-                key={idx}
-                className={cn(
-                  "flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 group",
-                  "border",
-                  "border-slate-300 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl"
-                )}
-              >
-                <div className="mb-6 text-blue-600 dark:text-blue-400 transform group-hover:scale-110 transition-transform duration-300">
-                  <hobby.icon className="w-10 h-10" strokeWidth={1.5} />
+              <Floating key={idx} yRange={6} delay={0.2 * idx}>
+                <div
+                  className={cn(
+                    "flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 group",
+                    "border",
+                    "border-slate-300 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 hover:shadow-xl"
+                  )}
+                >
+                  <div className="mb-6 text-blue-600 dark:text-blue-400 transform group-hover:scale-110 transition-transform duration-300">
+                    <hobby.icon className="w-10 h-10" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 font-header">
+                    {hobby.name}
+                  </h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 font-body leading-relaxed">
+                    {hobby.desc}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-3 font-header">
-                  {hobby.name}
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400 font-body leading-relaxed">
-                  {hobby.desc}
-                </p>
-              </div>
+              </Floating>
             ))}
           </div>
-        </div>
+        </AnimatedSection>
 
       </div>
     </section>
