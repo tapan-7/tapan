@@ -13,7 +13,6 @@ import { PixelImage } from "@/components/ui/pixel-image";
 import portfolioData from "@/constant/portfolio-data.json";
 import { cn } from "@/lib/utils";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Floating } from "@/components/ui/floating";
 
 const AboutPage = () => {
   const { profile, experience, skills } = portfolioData;

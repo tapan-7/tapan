@@ -4,7 +4,6 @@ import React from "react";
 import { ExternalLink } from "lucide-react";
 import { projects } from "@/constant/projects";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Floating } from "@/components/ui/floating";
 
 interface BadgeProps {
   children: React.ReactNode;
@@ -118,13 +117,12 @@ const ProjectsPage = () => {
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((tech, i) => (
-                    <Floating key={i} yRange={3} delay={0.2 * i}>
-                      <Badge
-                        className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium"
-                      >
-                        {tech}
-                      </Badge>
-                    </Floating>
+                    <Badge
+                      key={i}
+                      className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium"
+                    >
+                      {tech}
+                    </Badge>
                   ))}
                 </div>
                 <div className="flex gap-4 mt-2">
