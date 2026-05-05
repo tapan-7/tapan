@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface FloatingProps {
   children: React.ReactNode;
@@ -19,7 +20,7 @@ export const Floating = ({
 }: FloatingProps) => {
   return (
     <motion.div
-      className={className}
+      className={cn('floating flex items-center justify-center', className)}
       animate={{
         y: [0, -yRange, 0],
       }}

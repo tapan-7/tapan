@@ -1,7 +1,6 @@
 import React from "react";
 import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Floating } from "@/components/ui/floating";
 
 const ContactPage = () => {
   return (
@@ -43,31 +42,25 @@ const ContactPage = () => {
             </a>
           </div>
 
-          <div className="flex justify-center gap-6">
-            <Floating delay={0.2}>
-              <a
-                href="https://github.com/tapan-7"
-                className="p-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors duration-300"
-              >
-                <Github className="w-6 h-6 text-slate-700 dark:text-slate-300" />
-              </a>
-            </Floating>
-            <Floating delay={0.4}>
-              <a
-                href="https://www.linkedin.com/in/tapan-kumar-swain-b4b231318/"
-                className="p-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors duration-300"
-              >
-                <Linkedin className="w-6 h-6 text-slate-700 dark:text-slate-300" />
-              </a>
-            </Floating>
-            <Floating delay={0.6}>
-              <a
-                href="mailto:luffy@example.com"
-                className="p-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors duration-300"
-              >
-                <Mail className="w-6 h-6 text-slate-700 dark:text-slate-300" />
-              </a>
-            </Floating>
+          <div className="flex justify-center items-center gap-6">
+            <a
+              href="https://github.com/tapan-7"
+              className="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors duration-300"
+            >
+              <Github className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/tapan-kumar-swain-b4b231318/"
+              className="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors duration-300"
+            >
+              <Linkedin className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+            </a>
+            <a
+              href="mailto:luffy@example.com"
+              className="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors duration-300"
+            >
+              <Mail className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+            </a>
           </div>
         </AnimatedSection>
       </div>
