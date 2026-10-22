@@ -44,14 +44,15 @@ export function Hero() {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
-      className="relative min-h-[92vh] flex flex-col justify-center items-center pt-28 pb-16 px-6 overflow-hidden"
+      className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-20 pb-16 px-6 overflow-hidden"
     >
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <motion.div
         style={{ scale: heroScale }}
-        className="container max-w-5xl mx-auto flex flex-col items-center text-center"
+        className="container max-w-5xl mx-auto flex flex-col items-center text-center my-auto"
       >
         <ParticleText
           line1="Engineering digital"
@@ -66,7 +67,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-          className="space-y-3 mb-10 max-w-2xl"
+          className="space-y-3 mb-8 max-w-2xl"
         >
           <p className="text-lg md:text-xl font-medium text-foreground">
             I&apos;m <span className="text-primary">Tapan Kumar Swain</span>, a
@@ -83,7 +84,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-3.5 mb-14"
+          className="flex flex-wrap items-center justify-center gap-3.5 mb-10"
         >
           <a
             href="#projects"
