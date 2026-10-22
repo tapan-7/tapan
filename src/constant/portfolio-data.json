@@ -159,5 +159,28 @@
             "live": "#",
             "image": "https://placehold.co/1200x800.png"
         }
+    ],
+    "blogs": [
+        {
+            "title": "Google Drive Integration: From OAuth Setup to Background Sync",
+            "readTime": "4 min read",
+            "category": "Integration",
+            "image": "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkwxy1dnx5wiy8521hs9u.png",
+            "url": "https://dev.to/tapan-7/google-drive-integration-from-oauth-setup-to-background-sync-251d"
+        },
+        {
+            "title": "How to Store VideoSDK Cloud Recordings Securely on AWS S3",
+            "readTime": "2 min read",
+            "category": "Cloud Storage",
+            "image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F5pucpeol052cclynfeik.png",
+            "url": "https://dev.to/tapan-7/how-to-store-videosdk-cloud-recordings-securely-on-aws-s3-g5"
+        },
+        {
+            "title": "Integrating Health Connect in Android + React Native Apps",
+            "readTime": "3 min read",
+            "category": "Mobile",
+            "image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fg3biexv7pt8weik2xug4.png",
+            "url": "https://dev.to/tapan-7/integrating-health-connect-in-android-react-native-apps-2cj4"
+        }
     ]
 }
