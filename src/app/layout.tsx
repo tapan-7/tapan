@@ -7,6 +7,7 @@ import { PageWrapper } from "@/components/page-wrapper";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -39,11 +40,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="dark">
       <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <Navbar />
-          <PageWrapper>
-            <main className="flex-grow">{children}</main>
-            <Footer />
-          </PageWrapper>
+          <SmoothScrollProvider>
+            <Navbar />
+            <PageWrapper>
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </PageWrapper>
+          </SmoothScrollProvider>
         </ThemeProvider>
         <SmoothCursor />
       </body>
