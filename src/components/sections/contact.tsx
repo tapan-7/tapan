@@ -1,81 +1,110 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { ArrowUpRight, Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
-import { ArrowUpRight, Download, Github, Linkedin, Mail, MessageSquare } from "lucide-react";
+import portfolioData from "@/constant/portfolio-data.json";
 
 export function Contact() {
+  const { profile } = portfolioData;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
-    <section id="contact" className="py-32 px-6 border-t border-border/60 relative overflow-hidden">
+    <section id="contact" className="py-32 md:py-44 px-6 border-t border-border/40 relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="container max-w-4xl mx-auto text-center">
-        <AnimatedContent distance={20} direction="vertical" delay={0.1}>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-card border border-border text-xs font-mono text-primary mb-6">
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>06 // Connect</span>
+        <AnimatedContent distance={15} direction="vertical" delay={0.05}>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary border border-border/70 text-xs font-mono text-primary mb-8">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span>06 // INITIATE COLLABORATION</span>
           </div>
         </AnimatedContent>
 
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
+        <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-foreground mb-8 leading-[1.08]">
           <BlurText text="Let's build something" animateBy="words" delay={0.06} />
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-foreground via-primary/80 to-primary">
-            <BlurText text="exceptional together." animateBy="words" delay={0.08} />
+          <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-primary">
+            exceptional together.
           </span>
         </h2>
 
-        <AnimatedContent distance={20} direction="vertical" delay={0.3}>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-            I&apos;m currently open to frontend engineering opportunities, mobile client architectures, and ambitious collaborative ventures.
+        <AnimatedContent distance={20} direction="vertical" delay={0.25}>
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-12 font-light leading-relaxed">
+            Currently open to software engineering opportunities, frontend architecture roles, and high-impact product teams.
           </p>
         </AnimatedContent>
 
-        <AnimatedContent distance={25} direction="vertical" delay={0.4}>
+        <AnimatedContent distance={25} direction="vertical" delay={0.35}>
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
             <a
-              href="mailto:contact@example.com"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-lg"
+              href={`mailto:${profile.email}`}
+              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-200 shadow-xl shadow-primary/20 hover:scale-105 active:scale-95"
             >
               <Mail className="w-4 h-4" />
-              <span>Send an Email</span>
+              <span>{profile.email}</span>
             </a>
+
+            <button
+              onClick={handleCopyEmail}
+              type="button"
+              aria-label="Copy email address"
+              className="inline-flex items-center gap-2 px-5 py-4 rounded-full bg-secondary border border-border/70 text-foreground hover:border-primary/50 text-sm font-mono transition-all duration-200 active:scale-95"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-primary" />
+                  <span className="text-xs text-primary">Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4 text-muted-foreground" />
+                  <span className="text-xs text-muted-foreground">Copy</span>
+                </>
+              )}
+            </button>
 
             <a
               href="/resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-card text-foreground border border-border font-medium text-sm hover:border-primary/50 hover:bg-secondary transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card text-foreground border border-border/70 font-medium text-sm hover:border-primary/50 hover:bg-secondary transition-all duration-200"
             >
               <Download className="w-4 h-4" />
-              <span>Download Resume</span>
+              <span>Resume</span>
             </a>
           </div>
         </AnimatedContent>
 
-        <AnimatedContent distance={20} direction="vertical" delay={0.5}>
-          <div className="pt-10 border-t border-border/80 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+        <AnimatedContent distance={20} direction="vertical" delay={0.45}>
+          <div className="pt-12 border-t border-border/40 flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
             <a
-              href="https://github.com/tapankumarswain"
+              href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-foreground transition-colors"
+              className="flex items-center gap-2 hover:text-foreground transition-colors group"
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-4 h-4 text-primary" />
               <span>GitHub</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
             <span className="w-1 h-1 rounded-full bg-border" />
 
             <a
-              href="https://linkedin.com/in/tapankumarswain"
+              href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-foreground transition-colors"
+              className="flex items-center gap-2 hover:text-foreground transition-colors group"
             >
-              <Linkedin className="w-4 h-4" />
+              <Linkedin className="w-4 h-4 text-primary" />
               <span>LinkedIn</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
 
             <span className="w-1 h-1 rounded-full bg-border" />
@@ -84,10 +113,10 @@ export function Contact() {
               href="https://dev.to/tapan-7"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-foreground transition-colors font-mono text-xs"
+              className="flex items-center gap-2 hover:text-foreground transition-colors font-mono text-xs group"
             >
               <span>DEV.TO</span>
-              <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </AnimatedContent>
