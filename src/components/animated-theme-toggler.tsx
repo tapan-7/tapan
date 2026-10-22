@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useId } from "react";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
@@ -14,7 +14,8 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const clipPathId = useRef(`theme-toggle-clip-${Math.random().toString(36).substring(2, 9)}`);
+  const rawId = useId();
+  const clipPathId = `theme-toggle-clip-${rawId.replace(/:/g, "")}`;
 
   useEffect(() => {
     setMounted(true);
@@ -86,14 +87,14 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
         width="18"
         height="18"
       >
-        <clipPath id={clipPathId.current}>
+        <clipPath id={clipPathId}>
           <motion.path
             animate={{ y: isDark ? 10 : 0, x: isDark ? -12 : 0 }}
             transition={{ ease: "easeInOut", duration: 0.3 }}
             d="M0-5h30a1 1 0 0 0 9 13v24H0Z"
           />
         </clipPath>
-        <g clipPath={`url(#${clipPathId.current})`}>
+        <g clipPath={`url(#${clipPathId})`}>
           <motion.circle
             animate={{ r: isDark ? 10 : 8 }}
             transition={{ ease: "easeInOut", duration: 0.3 }}
