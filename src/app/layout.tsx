@@ -37,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-[#09090b] text-[#f4f4f5] selection:bg-purple-500/20 selection:text-white`}>
+      <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           <PageWrapper>

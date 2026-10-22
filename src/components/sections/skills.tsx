@@ -34,18 +34,18 @@ export function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-28 px-6 border-t border-[#27272a]/60 relative">
+    <section id="skills" className="py-28 px-6 border-t border-border/60 relative">
       <div className="container max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
           <div>
-            <div className="text-xs font-mono tracking-widest text-[#a78bfa] uppercase mb-3">
+            <div className="text-xs font-mono tracking-widest text-primary uppercase mb-3">
               04 // Capabilities
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#f4f4f5]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
               <BlurText text="Technical competencies" animateBy="words" delay={0.06} />
             </h2>
           </div>
-          <p className="text-sm md:text-base text-[#a1a1aa] max-w-md">
+          <p className="text-sm md:text-base text-muted-foreground max-w-md">
             Production-tested toolkit applied across web architectures, mobile apps, and distributed systems.
           </p>
         </div>
@@ -63,18 +63,18 @@ export function Skills() {
               >
                 <SpotlightCard className="h-full flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#27272a]">
-                      <div className="w-10 h-10 rounded-xl bg-[#1e1e24] border border-[#27272a] flex items-center justify-center text-[#a78bfa]">
+                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
+                      <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-primary">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <h3 className="text-lg font-bold text-[#f4f4f5]">{category.title}</h3>
+                      <h3 className="text-lg font-bold text-foreground">{category.title}</h3>
                     </div>
 
                     <div className="flex flex-wrap gap-2.5">
                       {category.items.map((skill) => (
                         <span
                           key={skill}
-                          className="px-3.5 py-1.5 rounded-lg bg-[#18181b] border border-[#27272a] text-xs font-mono text-[#f4f4f5] hover:border-[#a78bfa] hover:text-[#a78bfa] transition-all cursor-default"
+                          className="px-3.5 py-1.5 rounded-lg bg-secondary border border-border text-xs font-mono text-foreground hover:border-primary hover:text-primary transition-all cursor-default"
                         >
                           {skill}
                         </span>
@@ -82,9 +82,9 @@ export function Skills() {
                     </div>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-[#27272a]/40 flex items-center justify-between text-xs font-mono text-[#a1a1aa]">
+                  <div className="pt-6 mt-6 border-t border-border/40 flex items-center justify-between text-xs font-mono text-muted-foreground">
                     <span>{category.items.length} tools</span>
-                    <span className="text-[#a78bfa]">Ready for production</span>
+                    <span className="text-primary">Ready for production</span>
                   </div>
                 </SpotlightCard>
               </AnimatedContent>

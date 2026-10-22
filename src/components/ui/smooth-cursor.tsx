@@ -1,12 +1,7 @@
 "use client";
 
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { motion, useSpring } from "framer-motion";
-
-interface Position {
-  x: number;
-  y: number;
-}
 
 export interface SmoothCursorProps {
   cursor?: React.ReactNode;
@@ -26,10 +21,10 @@ const DefaultCursorSVG: FC = () => {
       height={28}
       viewBox="0 0 24 24"
       fill="none"
-      className="pointer-events-none drop-shadow-[0_0_10px_rgba(167,139,250,0.5)]"
+      className="pointer-events-none drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)] text-primary"
     >
-      <circle cx="12" cy="12" r="5" fill="#a78bfa" />
-      <circle cx="12" cy="12" r="10" stroke="#a78bfa" strokeWidth="1" strokeOpacity="0.4" />
+      <circle cx="12" cy="12" r="5" fill="currentColor" />
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
     </svg>
   );
 };

@@ -63,20 +63,20 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#09090b]/80 backdrop-blur-md border-b border-[#27272a]/80 py-3 shadow-lg shadow-black/20"
+          ? "bg-background/80 backdrop-blur-md border-b border-border/80 py-3 shadow-lg shadow-black/20"
           : "bg-transparent border-b border-transparent py-5"
       }`}
     >
       <div className="container max-w-6xl mx-auto px-6 flex items-center justify-between">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-[#f4f4f5] hover:text-[#a78bfa] transition-colors flex items-center gap-1 group"
+          className="text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group"
         >
-          <span className="text-[#a78bfa] font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
+          <span className="text-primary font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
             &lt;
           </span>
           <span>tapan</span>
-          <span className="text-[#a78bfa] font-mono text-sm group-hover:translate-x-0.5 transition-transform">
+          <span className="text-primary font-mono text-sm group-hover:translate-x-0.5 transition-transform">
             /&gt;
           </span>
         </Link>
@@ -91,14 +91,14 @@ export default function Navbar() {
                 onClick={(e) => handleScrollTo(e, link.href)}
                 className={`relative px-3.5 py-1.5 text-sm font-medium transition-colors rounded-full ${
                   isActive
-                    ? "text-[#f4f4f5]"
-                    : "text-[#a1a1aa] hover:text-[#f4f4f5]"
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="navbar-indicator"
-                    className="absolute inset-0 bg-[#18181b] border border-[#27272a] rounded-full -z-10 shadow-inner"
+                    className="absolute inset-0 bg-secondary border border-border rounded-full -z-10 shadow-inner"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
                 )}
@@ -109,7 +109,7 @@ export default function Navbar() {
 
           <Link
             href="/resume"
-            className="flex items-center gap-1 px-3.5 py-1.5 text-sm font-medium text-[#a1a1aa] hover:text-[#f4f4f5] transition-colors"
+            className="flex items-center gap-1 px-3.5 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             <span>Resume</span>
             <ArrowUpRight className="w-3.5 h-3.5 opacity-60" />
@@ -120,7 +120,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={(e) => handleScrollTo(e, "#contact")}
-            className="hidden sm:inline-flex items-center justify-center px-4 py-1.5 text-xs font-semibold rounded-full bg-[#18181b] text-[#f4f4f5] border border-[#27272a] hover:border-[#a78bfa]/60 hover:text-[#a78bfa] transition-all duration-200"
+            className="hidden sm:inline-flex items-center justify-center px-4 py-1.5 text-xs font-semibold rounded-full bg-secondary text-foreground border border-border hover:border-primary/60 hover:text-primary transition-all duration-200"
           >
             Contact
           </a>
@@ -130,7 +130,7 @@ export default function Navbar() {
       </div>
 
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#a78bfa] to-transparent origin-left"
+        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-primary to-transparent origin-left"
         style={{ scaleX }}
       />
     </header>

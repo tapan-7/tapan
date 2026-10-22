@@ -64,7 +64,7 @@ export function MobileNav() {
       <button
         onClick={toggleMenu}
         aria-label="Toggle navigation menu"
-        className="p-2 text-[#a1a1aa] hover:text-[#f4f4f5] rounded-lg border border-[#27272a] bg-[#141418]"
+        className="p-2 text-muted-foreground hover:text-foreground rounded-lg border border-border bg-card"
       >
         {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
@@ -76,7 +76,7 @@ export function MobileNav() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-x-0 top-[65px] bg-[#09090b]/95 backdrop-blur-xl border-b border-[#27272a] p-6 shadow-2xl z-50"
+            className="fixed inset-x-0 top-[65px] bg-background/95 backdrop-blur-xl border-b border-border p-6 shadow-2xl z-50"
           >
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
@@ -91,7 +91,7 @@ export function MobileNav() {
                         setIsOpen(false);
                       }
                     }}
-                    className="flex items-center justify-between py-2 text-lg font-medium text-[#a1a1aa] hover:text-[#a78bfa] transition-colors border-b border-[#27272a]/40"
+                    className="flex items-center justify-between py-2 text-lg font-medium text-muted-foreground hover:text-primary transition-colors border-b border-border/40"
                   >
                     <span>{item.name}</span>
                     {item.href.startsWith("/") && (
@@ -107,7 +107,7 @@ export function MobileNav() {
                     e.preventDefault();
                     handleLinkClick("#contact");
                   }}
-                  className="block w-full text-center py-3 rounded-lg font-medium bg-[#a78bfa] text-[#09090b] hover:bg-[#c4b5fd] transition-colors"
+                  className="block w-full text-center py-3 rounded-lg font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
                 >
                   Get in Touch
                 </a>

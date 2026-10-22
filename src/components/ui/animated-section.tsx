@@ -40,7 +40,6 @@ export const AnimatedSection = ({
     return { x: 0, y: 0 };
   };
 
-  // Define initial and animate variants separately to satisfy TypeScript
   const initialVariant = { opacity: 0, ...getInitialTranslateValues() };
   const animateVariant = {
     opacity: 1,
