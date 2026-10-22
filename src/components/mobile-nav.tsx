@@ -3,21 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-
-interface NavItem {
-  name: string;
-  href: string;
-}
-
-const navItems: NavItem[] = [
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Writing", href: "#writing" },
-  { name: "Contact", href: "#contact" },
-  { name: "Resume", href: "/resume" },
-];
+import { MOBILE_NAV_LINKS } from "@/constant/navigation";
 
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +65,7 @@ export function MobileNav() {
             className="fixed inset-x-0 top-[65px] bg-background/95 backdrop-blur-xl border-b border-border p-6 shadow-2xl z-50"
           >
             <nav className="flex flex-col space-y-4">
-              {navItems.map((item) => (
+              {MOBILE_NAV_LINKS.map((item) => (
                 <motion.div key={item.name} variants={itemVariants}>
                   <a
                     href={item.href}

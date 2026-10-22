@@ -1,42 +1,10 @@
 "use client";
 
 import React from "react";
-import { Layers, Server, ShieldCheck, Zap } from "lucide-react";
+import { Layers } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
-
-const secondaryProjects = [
-  {
-    num: "01",
-    title: "District Education Infrastructure (Drishti)",
-    category: "Enterprise System & Dynamic Forms",
-    description:
-      "Frontend architecture powering dynamic survey collection, school infrastructure asset management, and offline-resilient task workflows across statewide administrative modules.",
-    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Zod", "REST APIs"],
-    icon: Server,
-    metric: "20% bug reduction • 25% faster feature delivery",
-  },
-  {
-    num: "02",
-    title: "Real-Time Telemedicine & Telemetry Client",
-    category: "WebRTC & Mobile Infrastructure",
-    description:
-      "Cross-platform mobile application featuring encrypted physician video consultations via VideoSDK, real-time vitals telemetry, and automated cloud recording pipelines to AWS S3.",
-    tech: ["React Native", "VideoSDK", "AWS S3", "Health Connect", "WebRTC"],
-    icon: Zap,
-    metric: "20% higher call reliability • Secure AWS S3 recording",
-  },
-  {
-    num: "03",
-    title: "Microservices Gateway & Edge Rate Limiter",
-    category: "Cloud & Distributed Systems",
-    description:
-      "Scalable API gateway featuring sliding-window rate limiting, token authentication, dynamic reverse-proxy request routing, and resilient distributed error logging.",
-    tech: ["Node.js", "Express", "Docker", "Redis", "AWS"],
-    icon: ShieldCheck,
-    metric: "Sliding-window throttling • High-throughput reverse proxy",
-  },
-];
+import { secondaryProjects } from "@/constant/projects";
 
 export function StackedProjects() {
   return (

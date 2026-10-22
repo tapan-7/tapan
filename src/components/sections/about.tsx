@@ -7,37 +7,11 @@ import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
 import { CountUp } from "@/components/react-bits/count-up";
 import portfolioData from "@/constant/portfolio-data.json";
+import { aboutPillars } from "@/constant/about";
 
 export function About() {
   const { profile } = portfolioData;
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
-
-  const pillars = [
-    {
-      num: "01",
-      title: "Frontend Engineering",
-      tagline: "Architecture & Scalability",
-      desc: "Architecting modular, type-safe web systems using React 18, Next.js App Router, and modern CSS with strict performance benchmarks.",
-    },
-    {
-      num: "02",
-      title: "Mobile Applications",
-      tagline: "Native Fluidity & Real-Time",
-      desc: "Building native-grade iOS & Android applications in React Native with real-time VideoSDK, Health Connect, and telemetry.",
-    },
-    {
-      num: "03",
-      title: "State & Architecture",
-      tagline: "Predictable Data Flow",
-      desc: "Structuring clean, testable state flows, robust API layers, and reusable component libraries that scale effortlessly.",
-    },
-    {
-      num: "04",
-      title: "Interaction Ergonomics",
-      tagline: "Precision & Micro-Interactions",
-      desc: "Obsessing over smooth frame rates, tactile feedback, responsive ergonomics, and uncompromising accessibility standards.",
-    },
-  ];
 
   return (
     <section id="about" className="py-28 md:py-36 px-6 relative overflow-hidden">
@@ -196,7 +170,7 @@ export function About() {
           </AnimatedContent>
 
           <div className="divide-y divide-border/40">
-            {pillars.map((pillar, index) => {
+            {aboutPillars.map((pillar, index) => {
               const isHovered = hoveredPillar === index;
               return (
                 <AnimatedContent

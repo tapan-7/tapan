@@ -11,8 +11,10 @@ import {
   Mail,
 } from "lucide-react";
 import { ParticleText } from "@/components/react-bits/particle-text";
+import portfolioData from "@/constant/portfolio-data.json";
 
 export function Hero() {
+  const { profile } = portfolioData;
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -70,8 +72,8 @@ export function Hero() {
           className="space-y-3 mb-8 max-w-2xl"
         >
           <p className="text-lg md:text-xl font-medium text-foreground">
-            I&apos;m <span className="text-primary">Tapan Kumar Swain</span>, a
-            Software Development Engineer.
+            I&apos;m <span className="text-primary">{profile.name}</span>, a{" "}
+            {profile.title}.
           </p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
             Specializing in high-performance web applications and fluid mobile
@@ -120,7 +122,7 @@ export function Hero() {
           className="flex items-center gap-5 text-muted-foreground"
         >
           <a
-            href="https://github.com/tapankumarswain"
+            href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile"
@@ -129,7 +131,7 @@ export function Hero() {
             <Github className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com/in/tapankumarswain"
+            href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile"
@@ -138,7 +140,7 @@ export function Hero() {
             <Linkedin className="w-5 h-5" />
           </a>
           <a
-            href="mailto:contact@example.com"
+            href={`mailto:${profile.email}`}
             aria-label="Send Email"
             className="p-2.5 rounded-full hover:bg-card hover:text-foreground border border-transparent hover:border-border transition-all"
           >

@@ -2,8 +2,12 @@
 
 import React from "react";
 import { ArrowUp } from "lucide-react";
+import portfolioData from "@/constant/portfolio-data.json";
+import { NAV_LINKS } from "@/constant/navigation";
 
 export default function Footer() {
+  const { profile } = portfolioData;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -12,32 +16,23 @@ export default function Footer() {
     <footer className="py-12 px-6 border-t border-border/40 bg-background text-muted-foreground text-xs font-mono">
       <div className="container max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="flex flex-col sm:flex-row items-center gap-3">
-          <span className="font-semibold text-foreground font-sans">Tapan Kumar Swain</span>
+          <span className="font-semibold text-foreground font-sans">{profile.name}</span>
           <span className="hidden sm:inline text-border">•</span>
-          <span>Software Development Engineer</span>
+          <span>{profile.title}</span>
           <span className="hidden sm:inline text-border">•</span>
           <span>© {new Date().getFullYear()}</span>
         </div>
 
-        <div className="flex items-center gap-6">
-          <a href="#about" className="hover:text-primary transition-colors">
-            About
-          </a>
-          <a href="#experience" className="hover:text-primary transition-colors">
-            Experience
-          </a>
-          <a href="#projects" className="hover:text-primary transition-colors">
-            Projects
-          </a>
-          <a href="#skills" className="hover:text-primary transition-colors">
-            Skills
-          </a>
-          <a href="#writing" className="hover:text-primary transition-colors">
-            Writing
-          </a>
-          <a href="#contact" className="hover:text-primary transition-colors">
-            Contact
-          </a>
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="hover:text-primary transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
 
           <button
             onClick={scrollToTop}

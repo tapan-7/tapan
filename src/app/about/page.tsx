@@ -2,52 +2,12 @@
 
 import React from "react";
 import Image from "next/image";
-import {
-  Music,
-  Gamepad2,
-  Plane,
-  Book,
-  Utensils,
-  HeartHandshake,
-} from "lucide-react";
 import portfolioData from "@/constant/portfolio-data.json";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { aboutHobbies } from "@/constant/about";
 
 const AboutPage = () => {
   const { profile, experience, skills } = portfolioData;
-
-  const hobbies = [
-    {
-      name: "Gaming Enthusiast",
-      icon: Gamepad2,
-      desc: "Die-hard fan of story-driven RPGs and competitive FPS games. Never misses a gaming weekend.",
-    },
-    {
-      name: "Travel & Exploration",
-      icon: Plane,
-      desc: "Love discovering new places, cultures, and creating unforgettable memories.",
-    },
-    {
-      name: "Culinary Explorer",
-      icon: Utensils,
-      desc: "Food lover with special appreciation for Indian home-style cooking and street food.",
-    },
-    {
-      name: "Community Helper",
-      icon: HeartHandshake,
-      desc: "Believe in giving back to society by helping those in need whenever possible.",
-    },
-    {
-      name: "Teaching & Mentoring",
-      icon: Book,
-      desc: "Passionate about teaching underprivileged kids and sharing knowledge.",
-    },
-    {
-      name: "Music Lover",
-      icon: Music,
-      desc: "Finding focus and inspiration through Lo-fi beats and instrumental tracks.",
-    },
-  ];
 
   return (
     <section id="about" className="py-24 transition-colors duration-300 min-h-screen bg-background text-foreground">
@@ -201,7 +161,7 @@ const AboutPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {hobbies.map((hobby, idx) => (
+            {aboutHobbies.map((hobby, idx) => (
               <div
                 key={idx}
                 className="flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 bg-card border border-border hover:border-primary/50 hover:shadow-xl group"

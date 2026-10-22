@@ -1,5 +1,26 @@
-// Projects data
-export const projects = [
+import { LucideIcon, Server, ShieldCheck, Zap } from "lucide-react";
+
+export interface Project {
+  title: string;
+  description: string;
+  tech: string[];
+  github: string;
+  link: string;
+  image: string;
+  mobileImage?: string;
+}
+
+export interface SecondaryProject {
+  num: string;
+  title: string;
+  category: string;
+  description: string;
+  tech: string[];
+  icon: LucideIcon;
+  metric: string;
+}
+
+export const projects: Project[] = [
   {
     title: "Memory Match",
     description:
@@ -59,5 +80,38 @@ export const projects = [
     link: "#",
     image: "https://placehold.co/1200x800.png",
     mobileImage: "https://placehold.co/400x800.png",
+  },
+];
+
+export const secondaryProjects: SecondaryProject[] = [
+  {
+    num: "01",
+    title: "District Education Infrastructure (Drishti)",
+    category: "Enterprise System & Dynamic Forms",
+    description:
+      "Frontend architecture powering dynamic survey collection, school infrastructure asset management, and offline-resilient task workflows across statewide administrative modules.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Zod", "REST APIs"],
+    icon: Server,
+    metric: "20% bug reduction • 25% faster feature delivery",
+  },
+  {
+    num: "02",
+    title: "Real-Time Telemedicine & Telemetry Client",
+    category: "WebRTC & Mobile Infrastructure",
+    description:
+      "Cross-platform mobile application featuring encrypted physician video consultations via VideoSDK, real-time vitals telemetry, and automated cloud recording pipelines to AWS S3.",
+    tech: ["React Native", "VideoSDK", "AWS S3", "Health Connect", "WebRTC"],
+    icon: Zap,
+    metric: "20% higher call reliability • Secure AWS S3 recording",
+  },
+  {
+    num: "03",
+    title: "Microservices Gateway & Edge Rate Limiter",
+    category: "Cloud & Distributed Systems",
+    description:
+      "Scalable API gateway featuring sliding-window rate limiting, token authentication, dynamic reverse-proxy request routing, and resilient distributed error logging.",
+    tech: ["Node.js", "Express", "Docker", "Redis", "AWS"],
+    icon: ShieldCheck,
+    metric: "Sliding-window throttling • High-throughput reverse proxy",
   },
 ];

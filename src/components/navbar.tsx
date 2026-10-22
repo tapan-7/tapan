@@ -6,14 +6,9 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { MobileNav } from "./mobile-nav";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
 import { ArrowUpRight } from "lucide-react";
+import { NAV_LINKS } from "@/constant/navigation";
 
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Writing", href: "#writing" },
-];
+const desktopNavLinks = NAV_LINKS.filter((item) => item.name !== "Contact");
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState("");
@@ -82,7 +77,7 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-          {navLinks.map((link) => {
+          {desktopNavLinks.map((link) => {
             const isActive = activeSection === link.href.substring(1);
             return (
               <a
