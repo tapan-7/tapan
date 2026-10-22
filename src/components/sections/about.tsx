@@ -1,137 +1,246 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
-import { Code2, Smartphone, Layers, Sparkles } from "lucide-react";
+import { CountUp } from "@/components/react-bits/count-up";
 import portfolioData from "@/constant/portfolio-data.json";
 
 export function About() {
   const { profile } = portfolioData;
+  const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
 
-  const keyFocus = [
+  const pillars = [
     {
-      icon: Code2,
+      num: "01",
       title: "Frontend Engineering",
-      desc: "Architecting modular, type-safe web systems using React 18, Next.js App Router, and Tailwind CSS.",
+      tagline: "Architecture & Scalability",
+      desc: "Architecting modular, type-safe web systems using React 18, Next.js App Router, and modern CSS with strict performance benchmarks.",
     },
     {
-      icon: Smartphone,
+      num: "02",
       title: "Mobile Applications",
-      desc: "Building native-grade iOS & Android applications in React Native with real-time video and device telemetry.",
+      tagline: "Native Fluidity & Real-Time",
+      desc: "Building native-grade iOS & Android applications in React Native with real-time VideoSDK, Health Connect, and telemetry.",
     },
     {
-      icon: Layers,
+      num: "03",
       title: "State & Architecture",
-      desc: "Structuring clean, testable state flows, robust API layers, and reusable UI library ecosystems.",
+      tagline: "Predictable Data Flow",
+      desc: "Structuring clean, testable state flows, robust API layers, and reusable component libraries that scale effortlessly.",
     },
     {
-      icon: Sparkles,
-      title: "User Experience",
-      desc: "Obsessing over frame rates, subtle micro-interactions, responsive ergonomics, and strict accessibility standards.",
+      num: "04",
+      title: "Interaction Ergonomics",
+      tagline: "Precision & Micro-Interactions",
+      desc: "Obsessing over smooth frame rates, tactile feedback, responsive ergonomics, and uncompromising accessibility standards.",
     },
   ];
 
   return (
-    <section id="about" className="py-28 px-6 border-t border-border/60 relative">
+    <section id="about" className="py-28 md:py-36 px-6 relative overflow-hidden">
       <div className="container max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
-          <div>
-            <div className="text-xs font-mono tracking-widest text-primary uppercase mb-3">
-              01 // Background
+        <div className="mb-24 lg:mb-32">
+          <AnimatedContent distance={15} direction="vertical" delay={0.05}>
+            <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span>01 // THE PERSON BEHIND THE CODE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-              <BlurText text="Crafting modern interfaces" animateBy="words" delay={0.06} />
-            </h2>
-          </div>
-          <p className="text-sm md:text-base text-muted-foreground max-w-md">
-            Bridging technical precision with human-centered product aesthetics.
-          </p>
+          </AnimatedContent>
+
+          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] max-w-5xl mb-8">
+            <BlurText
+              text="More than just code."
+              className="block"
+              animateBy="words"
+              delay={0.06}
+            />
+            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-primary/80">
+              I build digital experiences where engineering meets thoughtful design.
+            </span>
+          </h2>
+
+          <AnimatedContent distance={20} direction="vertical" delay={0.25}>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl font-light leading-relaxed">
+              From frontend architecture to mobile experiences, I enjoy turning
+              complex problems into interfaces that feel simple and intuitive.
+            </p>
+          </AnimatedContent>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
-          <div className="lg:col-span-5 flex justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-24 lg:mb-32">
+          <div className="lg:col-span-5">
             <AnimatedContent distance={30} direction="vertical" delay={0.1}>
-              <div className="relative group">
-                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-accent to-primary opacity-25 blur-lg group-hover:opacity-40 transition-opacity duration-500" />
-                <div className="relative w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden border border-border bg-card">
+              <div className="relative group max-w-md mx-auto lg:max-w-none">
+                <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-muted">
                   <Image
                     src="/profile.jpeg"
                     alt={profile.name}
                     fill
-                    sizes="(max-width: 768px) 256px, 288px"
-                    className="object-cover grayscale contrast-105 group-hover:grayscale-0 transition-all duration-700 ease-out"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 420px"
+                    className="object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
-                  <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-background/80 backdrop-blur-md border border-border/60 text-xs">
-                    <p className="font-semibold text-foreground">{profile.name}</p>
-                    <p className="text-muted-foreground">{profile.title}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity duration-500" />
+                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                    <div>
+                      <p className="text-xs font-mono uppercase tracking-widest text-primary mb-1">
+                        Software Development Engineer
+                      </p>
+                      <p className="text-lg font-bold text-foreground">
+                        {profile.name}
+                      </p>
+                    </div>
+                    <span className="text-xs font-mono text-muted-foreground">
+                      IND
+                    </span>
                   </div>
                 </div>
               </div>
             </AnimatedContent>
           </div>
 
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-8 lg:pt-4">
             <AnimatedContent distance={20} direction="vertical" delay={0.2}>
-              <h3 className="text-2xl font-bold text-foreground">
-                Frontend Engineer dedicated to building polished, scalable products.
-              </h3>
+              <div>
+                <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-2">
+                  TAPAN KUMAR SWAIN
+                </span>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                  Engineer by craft. <br className="hidden sm:inline" />
+                  <span className="text-muted-foreground">
+                    Designer by curiosity.
+                  </span>
+                </h3>
+              </div>
             </AnimatedContent>
 
             <AnimatedContent distance={20} direction="vertical" delay={0.3}>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                Over the past two years, I&apos;ve contributed to large-scale web and mobile systems across public education and digital healthcare at <span className="text-foreground font-medium">Hyscaler Nettantra Technologies</span>.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                Over the past two years, I&apos;ve contributed to large-scale web
+                and mobile systems across public education and digital
+                healthcare at{" "}
+                <span className="text-foreground font-semibold">
+                  Hyscaler Nettantra Technologies
+                </span>
+                .
               </p>
             </AnimatedContent>
 
             <AnimatedContent distance={20} direction="vertical" delay={0.4}>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                My approach combines architectural discipline with design sensitivity. From building interactive dashboards and custom dynamic form builders to integrating real-time telemetry like VideoSDK and Health Connect, I strive to make software feel swift, intuitive, and resilient.
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                My approach combines architectural discipline with design
+                sensitivity. From building interactive dashboards and custom
+                dynamic form builders to integrating real-time telemetry like
+                VideoSDK and Health Connect, I strive to make software feel swift,
+                intuitive, and resilient.
               </p>
-            </AnimatedContent>
-
-            <AnimatedContent distance={20} direction="vertical" delay={0.5}>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-border">
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-primary font-mono">2+</div>
-                  <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Years Experience</div>
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-foreground font-mono">3+</div>
-                  <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Production Apps</div>
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-foreground font-mono">100%</div>
-                  <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wider">Commitment</div>
-                </div>
-              </div>
             </AnimatedContent>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {keyFocus.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <AnimatedContent
-                key={item.title}
-                distance={20}
-                direction="vertical"
-                delay={0.1 * index}
-              >
-                <div className="p-6 rounded-2xl bg-card border border-border hover:border-primary/40 transition-all duration-300 h-full flex flex-col">
-                  <div className="w-10 h-10 rounded-xl bg-muted border border-border flex items-center justify-center text-primary mb-4">
-                    <Icon className="w-5 h-5" />
+        <AnimatedContent distance={25} direction="vertical" delay={0.15}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 mb-28 border-y border-border/50">
+            <div>
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-primary tracking-tight">
+                <CountUp to={2} padZero duration={1.8} suffix="+" />
+              </div>
+              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
+                Years Experience
+              </div>
+            </div>
+            <div>
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-foreground tracking-tight">
+                Web
+              </div>
+              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
+                Frontend Architecture
+              </div>
+            </div>
+            <div>
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-foreground tracking-tight">
+                Mobile
+              </div>
+              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
+                Cross-Platform Apps
+              </div>
+            </div>
+            <div>
+              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-foreground tracking-tight">
+                <CountUp to={100} duration={2} suffix="%" />
+              </div>
+              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
+                Quality & Delivery
+              </div>
+            </div>
+          </div>
+        </AnimatedContent>
+
+        <div className="pt-4">
+          <AnimatedContent distance={20} direction="vertical" delay={0.1}>
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-border/50 gap-4">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary block mb-2">
+                  WHAT I CARE ABOUT
+                </span>
+                <h3 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+                  Performance. Precision. People.
+                </h3>
+              </div>
+              <p className="text-sm md:text-base text-muted-foreground max-w-md">
+                The technical and human details that make software feel effortless.
+              </p>
+            </div>
+          </AnimatedContent>
+
+          <div className="divide-y divide-border/40">
+            {pillars.map((pillar, index) => {
+              const isHovered = hoveredPillar === index;
+              return (
+                <AnimatedContent
+                  key={pillar.num}
+                  distance={15}
+                  direction="vertical"
+                  delay={0.08 * index}
+                >
+                  <div
+                    onMouseEnter={() => setHoveredPillar(index)}
+                    onMouseLeave={() => setHoveredPillar(null)}
+                    className="group py-8 sm:py-10 transition-colors duration-300 flex flex-col md:flex-row md:items-baseline justify-between gap-4 cursor-default"
+                  >
+                    <div className="flex items-baseline gap-6 md:gap-10 md:w-1/2">
+                      <span className="text-sm font-mono text-muted-foreground group-hover:text-primary transition-colors duration-300 w-8">
+                        {pillar.num}
+                      </span>
+                      <div>
+                        <h4 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground group-hover:text-primary group-hover:translate-x-1.5 transition-all duration-300">
+                          {pillar.title}
+                        </h4>
+                        <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider mt-1 block">
+                          {pillar.tagline}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between md:justify-end gap-6 md:w-1/2 pl-14 md:pl-0">
+                      <p className="text-sm text-muted-foreground leading-relaxed max-w-lg">
+                        {pillar.desc}
+                      </p>
+                      <ArrowUpRight
+                        className={`w-5 h-5 text-muted-foreground transition-all duration-300 flex-shrink-0 ${
+                          isHovered
+                            ? "text-primary translate-x-1 -translate-y-1 rotate-45"
+                            : "opacity-40"
+                        }`}
+                      />
+                    </div>
                   </div>
-                  <h4 className="text-base font-semibold text-foreground mb-2">{item.title}</h4>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
-                </div>
-              </AnimatedContent>
-            );
-          })}
+                </AnimatedContent>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
