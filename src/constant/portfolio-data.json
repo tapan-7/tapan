@@ -88,6 +88,10 @@
             "shadcn/ui",
             "Bootstrap"
         ],
+        "Backend": [
+            "Node.js",
+            "NestJS"
+        ],
         "Databases": [
             "MongoDB",
             "MySQL"

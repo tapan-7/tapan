@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from "framer-motion";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
+import portfolioData from "@/constant/portfolio-data.json";
 
 interface SkillItem {
   name: string;
@@ -16,6 +17,13 @@ interface CategoryData {
   num: string;
   title: string;
   skills: SkillItem[];
+}
+
+interface StageRange {
+  enterStart: number;
+  enterEnd: number;
+  exitStart: number;
+  exitEnd: number;
 }
 
 const JavaScriptIcon = () => (
@@ -116,6 +124,16 @@ const NodejsIcon = () => (
   </svg>
 );
 
+const NestjsIcon = () => (
+  <svg className="w-8 h-8 shrink-0" viewBox="0 0 24 24" fill="none">
+    <rect width="24" height="24" rx="4" fill="#E0234E" />
+    <path
+      d="M17.8 7.2c-.3-.5-.9-.8-1.5-.7l-3.2.4c-.4.1-.8.3-1 .7l-2.2 3c-.3.4-.3.9-.1 1.3l.8 2.8-2.8-3.4c-.4-.5-.9-.8-1.5-.7l-2.6.4c-.6.1-1.1.6-1.2 1.2-.1.6.2 1.2.7 1.6l6.8 5.6c.4.3.9.4 1.4.2l3.8-2.2 1.2 3.6c.2.5.6.8 1.1.9.5.1 1.1-.1 1.4-.5l2.4-4.6c.3-.6.4-1.3.2-2l-1.5-6.5c-.1-.5-.5-.9-1-.1z"
+      fill="#fff"
+    />
+  </svg>
+);
+
 const MongodbIcon = () => (
   <svg className="w-8 h-8 shrink-0" viewBox="0 0 24 24" fill="none">
     <path
@@ -188,50 +206,114 @@ const GitIcon = () => (
   </svg>
 );
 
-const categories: CategoryData[] = [
-  {
-    num: "01",
-    title: "Core Languages",
-    skills: [
-      { name: "JavaScript", icon: JavaScriptIcon, base: { x: -380, y: -90 }, entry: { x: -550, y: -200 } },
-      { name: "TypeScript", icon: TypeScriptIcon, base: { x: 200, y: -95 }, entry: { x: 450, y: -220 } },
-      { name: "HTML5", icon: Html5Icon, base: { x: -350, y: 95 }, entry: { x: -520, y: 220 } },
-      { name: "CSS3", icon: Css3Icon, base: { x: 220, y: 90 }, entry: { x: 460, y: 210 } },
-    ],
-  },
-  {
-    num: "02",
-    title: "Frontend Engineering",
-    skills: [
-      { name: "React", icon: ReactIcon, base: { x: -390, y: -110 }, entry: { x: -550, y: -220 } },
-      { name: "Next.js", icon: NextjsIcon, base: { x: 190, y: -115 }, entry: { x: 400, y: -230 } },
-      { name: "React Native", icon: ReactNativeIcon, base: { x: 290, y: 5 }, entry: { x: 500, y: 20 } },
-      { name: "Tailwind CSS", icon: TailwindIcon, base: { x: -380, y: 95 }, entry: { x: -540, y: 210 } },
-      { name: "shadcn/ui", icon: ShadcnIcon, base: { x: -60, y: 130 }, entry: { x: -60, y: 260 } },
-      { name: "Bootstrap", icon: BootstrapIcon, base: { x: 230, y: 110 }, entry: { x: 440, y: 230 } },
-    ],
-  },
-  {
-    num: "03",
-    title: "Backend & Infrastructure",
-    skills: [
-      { name: "Node.js", icon: NodejsIcon, base: { x: -400, y: -115 }, entry: { x: -560, y: -230 } },
-      { name: "MongoDB", icon: MongodbIcon, base: { x: -80, y: -135 }, entry: { x: -80, y: -260 } },
-      { name: "MySQL", icon: MysqlIcon, base: { x: 240, y: -115 }, entry: { x: 440, y: -230 } },
-      { name: "Docker", icon: DockerIcon, base: { x: -430, y: 5 }, entry: { x: -600, y: 10 } },
-      { name: "AWS", icon: AwsIcon, base: { x: 320, y: 5 }, entry: { x: 520, y: 10 } },
-      { name: "Linux", icon: LinuxIcon, base: { x: -390, y: 115 }, entry: { x: -550, y: 230 } },
-      { name: "GraphQL", icon: GraphqlIcon, base: { x: -70, y: 135 }, entry: { x: -70, y: 260 } },
-      { name: "Git & GitHub", icon: GitIcon, base: { x: 240, y: 115 }, entry: { x: 440, y: 230 } },
-    ],
-  },
-];
+const GithubIcon = () => (
+  <svg className="w-8 h-8 shrink-0 text-foreground" viewBox="0 0 24 24" fill="currentColor">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+    />
+  </svg>
+);
 
-const stageRanges = [
-  { enterStart: 0.0, enterEnd: 0.08, exitStart: 0.24, exitEnd: 0.33 },
-  { enterStart: 0.33, enterEnd: 0.42, exitStart: 0.58, exitEnd: 0.67 },
-  { enterStart: 0.67, enterEnd: 0.76, exitStart: 0.93, exitEnd: 1.0 },
-];
+const GitlabIcon = () => (
+  <svg className="w-8 h-8 shrink-0" viewBox="0 0 24 24" fill="none">
+    <path d="M22.65 14.39L20.6 8.08a.78.78 0 0 0-.29-.4.81.81 0 0 0-.5 0 .8.8 0 0 0-.39.29L17.7 13.1H6.3L4.58 7.97a.8.8 0 0 0-.39-.29.81.81 0 0 0-.5 0 .78.78 0 0 0-.29.4l-2.05 6.31a.84.84 0 0 0 .31.95l10.08 7.33a.57.57 0 0 0 .68 0L22.34 15.34a.84.84 0 0 0 .31-.95z" fill="#E24329" />
+    <path d="M12 22.67l5.7-9.57H6.3l5.7 9.57z" fill="#E24329" />
+    <path d="M12 22.67L17.7 13.1H22.65l-10.65 9.57z" fill="#FC6D26" />
+    <path d="M22.65 14.39l-2.05-6.31a.8.8 0 0 0-1.18-.11L17.7 13.1h4.95a.84.84 0 0 1 .31.95l-.31.34z" fill="#FCA326" />
+    <path d="M1.35 14.39l2.05-6.31a.8.8 0 0 1 1.18-.11L6.3 13.1H1.35a.84.84 0 0 0-.31.95l.31.34z" fill="#FCA326" />
+    <path d="M12 22.67L6.3 13.1H1.35l10.65 9.57z" fill="#FC6D26" />
+  </svg>
+);
+
+const FallbackIcon = () => (
+  <svg className="w-8 h-8 shrink-0 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const skillMeta: Record<
+  string,
+  {
+    icon: React.ComponentType;
+    base: { x: number; y: number };
+    entry: { x: number; y: number };
+  }
+> = {
+  JavaScript: { icon: JavaScriptIcon, base: { x: -360, y: -90 }, entry: { x: -500, y: -180 } },
+  TypeScript: { icon: TypeScriptIcon, base: { x: 220, y: -95 }, entry: { x: 440, y: -200 } },
+  HTML: { icon: Html5Icon, base: { x: -340, y: 95 }, entry: { x: -480, y: 190 } },
+  HTML5: { icon: Html5Icon, base: { x: -340, y: 95 }, entry: { x: -480, y: 190 } },
+  CSS: { icon: Css3Icon, base: { x: 230, y: 90 }, entry: { x: 450, y: 180 } },
+  CSS3: { icon: Css3Icon, base: { x: 230, y: 90 }, entry: { x: 450, y: 180 } },
+
+  React: { icon: ReactIcon, base: { x: -380, y: -110 }, entry: { x: -520, y: -200 } },
+  "Next.js": { icon: NextjsIcon, base: { x: 200, y: -115 }, entry: { x: 420, y: -210 } },
+  "React Native": { icon: ReactNativeIcon, base: { x: 310, y: 5 }, entry: { x: 500, y: 20 } },
+  "Tailwind CSS": { icon: TailwindIcon, base: { x: -370, y: 95 }, entry: { x: -500, y: 190 } },
+  "shadcn/ui": { icon: ShadcnIcon, base: { x: -60, y: 135 }, entry: { x: -60, y: 250 } },
+  Bootstrap: { icon: BootstrapIcon, base: { x: 230, y: 110 }, entry: { x: 440, y: 210 } },
+
+  "Node.js": { icon: NodejsIcon, base: { x: -280, y: -30 }, entry: { x: -480, y: -60 } },
+  NestJS: { icon: NestjsIcon, base: { x: 280, y: 30 }, entry: { x: 480, y: 60 } },
+
+  MongoDB: { icon: MongodbIcon, base: { x: -270, y: -30 }, entry: { x: -460, y: -60 } },
+  MySQL: { icon: MysqlIcon, base: { x: 270, y: 30 }, entry: { x: 460, y: 60 } },
+
+  Docker: { icon: DockerIcon, base: { x: -400, y: -110 }, entry: { x: -550, y: -200 } },
+  AWS: { icon: AwsIcon, base: { x: 240, y: -110 }, entry: { x: 440, y: -200 } },
+  Linux: { icon: LinuxIcon, base: { x: -420, y: 10 }, entry: { x: -580, y: 10 } },
+  GraphQL: { icon: GraphqlIcon, base: { x: 320, y: 10 }, entry: { x: 500, y: 10 } },
+  Git: { icon: GitIcon, base: { x: -350, y: 115 }, entry: { x: -500, y: 220 } },
+  GitHub: { icon: GithubIcon, base: { x: -40, y: 140 }, entry: { x: -40, y: 260 } },
+  GitLab: { icon: GitlabIcon, base: { x: 240, y: 115 }, entry: { x: 440, y: 220 } },
+};
+
+function resolveSkillItem(name: string, index: number, total: number): SkillItem {
+  if (skillMeta[name]) {
+    return { name, ...skillMeta[name] };
+  }
+  const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
+  const radiusX = 320;
+  const radiusY = 130;
+  return {
+    name,
+    icon: FallbackIcon,
+    base: {
+      x: Math.round(Math.cos(angle) * radiusX),
+      y: Math.round(Math.sin(angle) * radiusY),
+    },
+    entry: {
+      x: Math.round(Math.cos(angle) * (radiusX + 180)),
+      y: Math.round(Math.sin(angle) * (radiusY + 120)),
+    },
+  };
+}
+
+const categories: CategoryData[] = Object.entries(portfolioData.skills).map(
+  ([categoryTitle, skillNames], idx) => ({
+    num: `0${idx + 1}`,
+    title: categoryTitle,
+    skills: (skillNames as string[]).map((name, sIdx) =>
+      resolveSkillItem(name, sIdx, skillNames.length)
+    ),
+  })
+);
+
+function getStageRanges(count: number): StageRange[] {
+  const slice = 1 / count;
+  const ramp = Math.min(0.05, slice * 0.25);
+  return Array.from({ length: count }, (_, i) => ({
+    enterStart: i * slice,
+    enterEnd: i * slice + ramp,
+    exitStart: (i + 1) * slice - ramp,
+    exitEnd: (i + 1) * slice,
+  }));
+}
+
+const dynamicStageRanges = getStageRanges(categories.length);
 
 function CategoryStage({
   category,
@@ -244,7 +326,7 @@ function CategoryStage({
   scrollProgress: MotionValue<number>;
   shouldReduceMotion: boolean | null;
 }) {
-  const r = stageRanges[index];
+  const r = dynamicStageRanges[index];
   const progressRange = [r.enterStart, r.enterEnd, r.exitStart, r.exitEnd];
 
   const headerOpacity = useTransform(scrollProgress, progressRange, [0, 1, 1, 0]);
@@ -262,7 +344,7 @@ function CategoryStage({
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-auto z-10 w-full max-w-xl will-change-transform"
       >
         <span className="text-xs font-mono text-primary uppercase tracking-[0.25em] block mb-2">
-          0{index + 1}
+          {category.num}
         </span>
         <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.05]">
           {category.title}.
@@ -334,7 +416,7 @@ export function Skills() {
   useEffect(() => {
     const updateDimensions = () => {
       const vh = window.innerHeight;
-      setContainerHeight(Math.max(2600, vh * 3.6));
+      setContainerHeight(Math.max(3000, vh * 4.2));
     };
 
     updateDimensions();
@@ -347,7 +429,7 @@ export function Skills() {
       <div className="hidden md:block">
         <div
           ref={containerRef}
-          style={{ height: containerHeight ? `${containerHeight}px` : "360vh" }}
+          style={{ height: containerHeight ? `${containerHeight}px` : "420vh" }}
           className="relative"
         >
           <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8">
