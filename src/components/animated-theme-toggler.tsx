@@ -24,22 +24,17 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
   const changeTheme = async () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
 
-    if (!buttonRef.current || typeof document === "undefined" || !("startViewTransition" in document)) {
+    if (
+      !buttonRef.current ||
+      typeof document === "undefined" ||
+      !("startViewTransition" in document) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       setTheme(nextTheme);
       return;
     }
 
     try {
-      const doc = document as Document & {
-        startViewTransition: (callback: () => void) => { ready: Promise<void> };
-      };
-
-      await doc.startViewTransition(() => {
-        flushSync(() => {
-          setTheme(nextTheme);
-        });
-      }).ready;
-
       const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
       const y = top + height / 2;
       const x = left + width / 2;
@@ -47,7 +42,22 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       const bottom = window.innerHeight - top;
       const maxRad = Math.hypot(Math.max(left, right), Math.max(top, bottom));
 
-      document.documentElement.animate(
+      const doc = document as Document & {
+        startViewTransition: (callback: () => void) => {
+          ready: Promise<void>;
+          finished: Promise<void>;
+        };
+      };
+
+      const transition = doc.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme);
+        });
+      });
+
+      await transition.ready;
+
+      const animation = document.documentElement.animate(
         {
           clipPath: [
             `circle(0px at ${x}px ${y}px)`,
@@ -55,11 +65,13 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
           ],
         },
         {
-          duration: 600,
+          duration: 650,
           easing: "ease-in-out",
           pseudoElement: "::view-transition-new(root)",
         }
       );
+
+      await animation.finished;
     } catch {
       setTheme(nextTheme);
     }
