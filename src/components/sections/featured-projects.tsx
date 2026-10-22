@@ -12,9 +12,11 @@ export function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const headerContentRef = useRef<HTMLDivElement>(null);
 
   const [travelDistance, setTravelDistance] = useState(0);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [containerLeft, setContainerLeft] = useState(24);
   const shouldReduceMotion = useReducedMotion();
 
   const featured = projects.slice(0, 4);
@@ -40,6 +42,15 @@ export function FeaturedProjects() {
     const calculateDimensions = () => {
       if (!trackRef.current || !viewportRef.current) return;
 
+      let leftOffset = 24;
+      if (headerContentRef.current) {
+        const rect = headerContentRef.current.getBoundingClientRect();
+        if (rect.left > 0) {
+          leftOffset = Math.round(rect.left);
+        }
+      }
+      setContainerLeft(leftOffset);
+
       const trackWidth = trackRef.current.scrollWidth;
       const viewportWidth = viewportRef.current.clientWidth;
       const viewportHeight = window.innerHeight;
@@ -59,6 +70,7 @@ export function FeaturedProjects() {
 
     if (trackRef.current) resizeObserver.observe(trackRef.current);
     if (viewportRef.current) resizeObserver.observe(viewportRef.current);
+    if (headerContentRef.current) resizeObserver.observe(headerContentRef.current);
 
     window.addEventListener("resize", calculateDimensions);
 
@@ -85,7 +97,7 @@ export function FeaturedProjects() {
             className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8"
           >
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
-              <div className="flex items-end justify-between gap-4">
+              <div ref={headerContentRef} className="flex items-end justify-between gap-4">
                 <div>
                   <AnimatedContent distance={15} direction="vertical" delay={0.05}>
                     <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-2">
@@ -106,8 +118,18 @@ export function FeaturedProjects() {
             <div className="w-full my-auto py-2">
               <motion.div
                 ref={trackRef}
-                style={{ x }}
-                className="flex gap-8 pl-6 sm:pl-12 lg:pl-16 pr-16 lg:pr-24 w-max will-change-transform"
+                style={{
+                  x,
+                  paddingLeft:
+                    containerLeft > 24
+                      ? `${containerLeft}px`
+                      : "max(1.5rem, calc((100vw - 72rem) / 2 + 1.5rem))",
+                  paddingRight:
+                    containerLeft > 24
+                      ? `${containerLeft}px`
+                      : "max(1.5rem, calc((100vw - 72rem) / 2 + 1.5rem))",
+                }}
+                className="flex gap-8 w-max will-change-transform"
               >
                 {featured.map((project, index) => {
                   const isExternalLink = project.link && project.link !== "#";
