@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { MotionValue } from "framer-motion";
+import { useTheme } from "next-themes";
 
 interface ParticleTextProps {
   line1: string;
@@ -32,6 +33,7 @@ export function ParticleText({
 }: ParticleTextProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -43,12 +45,46 @@ export function ParticleText({
     let particles: Particle[] = [];
     const mouse = { x: -1000, y: -1000, radius: 45 };
 
-    const colors = [
-      "hsl(240, 5%, 98%)",
-      "hsl(255, 92%, 78%)",
-      "hsl(263, 75%, 68%)",
-      "hsl(180, 85%, 65%)",
-    ];
+    const checkIsLight = () => {
+      if (typeof document === "undefined") return false;
+      return (
+        document.documentElement.classList.contains("light") ||
+        (!document.documentElement.classList.contains("dark") &&
+          resolvedTheme === "light")
+      );
+    };
+
+    const getPalettes = (isLight: boolean) => {
+      if (isLight) {
+        return {
+          line1: ["hsl(240, 10%, 4%)", "hsl(240, 10%, 15%)"],
+          line2: [
+            "hsl(263, 75%, 45%)",
+            "hsl(255, 80%, 50%)",
+            "hsl(190, 90%, 35%)",
+          ],
+        };
+      }
+      return {
+        line1: ["hsl(240, 5%, 98%)", "hsl(240, 5%, 90%)"],
+        line2: [
+          "hsl(255, 92%, 78%)",
+          "hsl(263, 75%, 68%)",
+          "hsl(180, 85%, 65%)",
+        ],
+      };
+    };
+
+    const updateColors = (isLight: boolean) => {
+      const palettes = getPalettes(isLight);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.color =
+          p.lineIndex === 0
+            ? palettes.line1[Math.floor(Math.random() * palettes.line1.length)]
+            : palettes.line2[Math.floor(Math.random() * palettes.line2.length)];
+      }
+    };
 
     const initParticles = () => {
       const container = containerRef.current;
@@ -92,6 +128,9 @@ export function ParticleText({
       const imgData = offCtx.getImageData(0, 0, width, height);
       const data = imgData.data;
 
+      const isLight = checkIsLight();
+      const palettes = getPalettes(isLight);
+
       particles = [];
       const step = 3;
 
@@ -105,8 +144,12 @@ export function ParticleText({
             const lineIndex = y < centerY ? 0 : 1;
             const color =
               lineIndex === 0
-                ? colors[Math.floor(Math.random() * 2)]
-                : colors[1 + Math.floor(Math.random() * 3)];
+                ? palettes.line1[
+                    Math.floor(Math.random() * palettes.line1.length)
+                  ]
+                : palettes.line2[
+                    Math.floor(Math.random() * palettes.line2.length)
+                  ];
 
             particles.push({
               x: x + (Math.random() - 0.5) * 20,
@@ -125,6 +168,15 @@ export function ParticleText({
     };
 
     initParticles();
+
+    const observer = new MutationObserver(() => {
+      updateColors(checkIsLight());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
     const handleResize = () => {
       initParticles();
@@ -204,11 +256,12 @@ export function ParticleText({
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [line1, line2, xLeft, xRight, opacity]);
+  }, [line1, line2, xLeft, xRight, opacity, resolvedTheme]);
 
   return (
     <div ref={containerRef} className="relative w-full max-w-5xl mx-auto my-2">
