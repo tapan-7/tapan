@@ -58,7 +58,8 @@ export function ParticleText({
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
       const width = Math.floor(rect.width);
-      const height = Math.floor(Math.min(Math.max(width * 0.42, 210), 320));
+      const fontSize = Math.min(Math.max(Math.floor(width / 11), 34), 84);
+      const height = Math.floor(fontSize * 2.5);
 
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
@@ -67,7 +68,6 @@ export function ParticleText({
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const fontSize = Math.min(Math.max(Math.floor(width / 11), 34), 84);
       const font = `900 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
 
       const offscreen = document.createElement("canvas");
@@ -80,8 +80,9 @@ export function ParticleText({
       offCtx.textAlign = "center";
       offCtx.textBaseline = "middle";
 
-      const y1 = Math.floor(height * 0.30);
-      const y2 = Math.floor(height * 0.72);
+      const centerY = Math.floor(height / 2);
+      const y1 = Math.floor(centerY - fontSize * 0.55);
+      const y2 = Math.floor(centerY + fontSize * 0.55);
       const centerX = Math.floor(width / 2);
 
       offCtx.fillStyle = "#ffffff";
@@ -101,7 +102,7 @@ export function ParticleText({
           const alpha = data[index + 3];
 
           if (alpha > 120) {
-            const lineIndex = y < height * 0.52 ? 0 : 1;
+            const lineIndex = y < centerY ? 0 : 1;
             const color =
               lineIndex === 0
                 ? colors[Math.floor(Math.random() * 2)]
@@ -148,9 +149,9 @@ export function ParticleText({
     let time = 0;
 
     const render = () => {
-      const rect = containerRef.current?.getBoundingClientRect();
-      const width = rect ? Math.floor(rect.width) : Math.floor(canvas.width / (window.devicePixelRatio || 1));
-      const height = Math.floor(Math.min(Math.max(width * 0.42, 210), 320));
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = Math.floor(canvas.width / dpr);
+      const height = Math.floor(canvas.height / dpr);
 
       ctx.clearRect(0, 0, width, height);
 

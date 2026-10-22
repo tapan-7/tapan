@@ -2,7 +2,14 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 import { ParticleText } from "@/components/react-bits/particle-text";
 
 export function Hero() {
@@ -24,7 +31,10 @@ export function Hero() {
   const heroOpacity = useTransform(smoothProgress, [0, 0.75], [1, 0.25]);
   const heroScale = useTransform(smoothProgress, [0, 0.8], [1, 0.94]);
 
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+  const handleScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    target: string,
+  ) => {
     e.preventDefault();
     const el = document.querySelector(target);
     if (el) {
@@ -43,7 +53,6 @@ export function Hero() {
         style={{ scale: heroScale }}
         className="container max-w-5xl mx-auto flex flex-col items-center text-center"
       >
-
         <ParticleText
           line1="Engineering digital"
           line2="products with precision."
@@ -60,10 +69,13 @@ export function Hero() {
           className="space-y-3 mb-10 max-w-2xl"
         >
           <p className="text-lg md:text-xl font-medium text-foreground">
-            I&apos;m <span className="text-primary">Tapan Kumar Swain</span>, a Software Development Engineer.
+            I&apos;m <span className="text-primary">Tapan Kumar Swain</span>, a
+            Software Development Engineer.
           </p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            Specializing in high-performance web applications and fluid mobile architectures using React, Next.js, and React Native. Focused on clean frontend systems, UI/UX refinement, and scalable delivery.
+            Specializing in high-performance web applications and fluid mobile
+            architectures using React, Next.js, and React Native. Focused on
+            clean frontend systems, UI/UX refinement, and scalable delivery.
           </p>
         </motion.div>
 
@@ -142,20 +154,6 @@ export function Hero() {
             <ArrowUpRight className="w-3 h-3" />
           </a>
         </motion.div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.6 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="mt-16 flex flex-col items-center gap-2 text-muted-foreground text-xs font-mono tracking-widest uppercase"
-      >
-        <span>Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="w-1 h-3 rounded-full bg-primary"
-        />
       </motion.div>
     </section>
   );
