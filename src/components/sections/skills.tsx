@@ -227,6 +227,12 @@ const categories: CategoryData[] = [
   },
 ];
 
+const stageRanges = [
+  { enterStart: 0.0, enterEnd: 0.08, exitStart: 0.24, exitEnd: 0.33 },
+  { enterStart: 0.33, enterEnd: 0.42, exitStart: 0.58, exitEnd: 0.67 },
+  { enterStart: 0.67, enterEnd: 0.76, exitStart: 0.93, exitEnd: 1.0 },
+];
+
 function CategoryStage({
   category,
   index,
@@ -238,50 +244,12 @@ function CategoryStage({
   scrollProgress: MotionValue<number>;
   shouldReduceMotion: boolean | null;
 }) {
-  const isFirst = index === 0;
-  const isSecond = index === 1;
+  const r = stageRanges[index];
+  const progressRange = [r.enterStart, r.enterEnd, r.exitStart, r.exitEnd];
 
-  const headerOpacity = useTransform(
-    scrollProgress,
-    isFirst
-      ? [0.0, 0.05, 0.22, 0.3]
-      : isSecond
-      ? [0.26, 0.33, 0.55, 0.63]
-      : [0.59, 0.67, 0.92, 1.0],
-    isFirst
-      ? [0.3, 1, 1, 0]
-      : isSecond
-      ? [0, 1, 1, 0]
-      : [0, 1, 1, 1]
-  );
-
-  const headerY = useTransform(
-    scrollProgress,
-    isFirst
-      ? [0.0, 0.06, 0.22, 0.3]
-      : isSecond
-      ? [0.26, 0.34, 0.55, 0.63]
-      : [0.59, 0.67, 0.92, 1.0],
-    isFirst
-      ? [24, 0, 0, -24]
-      : isSecond
-      ? [28, 0, 0, -24]
-      : [28, 0, 0, 0]
-  );
-
-  const headerScale = useTransform(
-    scrollProgress,
-    isFirst
-      ? [0.0, 0.06, 0.22, 0.3]
-      : isSecond
-      ? [0.26, 0.34, 0.55, 0.63]
-      : [0.59, 0.67, 0.92, 1.0],
-    isFirst
-      ? [0.88, 1, 1, 0.92]
-      : isSecond
-      ? [0.88, 1, 1, 0.92]
-      : [0.88, 1, 1, 1]
-  );
+  const headerOpacity = useTransform(scrollProgress, progressRange, [0, 1, 1, 0]);
+  const headerY = useTransform(scrollProgress, progressRange, [60, 0, 0, -45]);
+  const headerScale = useTransform(scrollProgress, progressRange, [0.85, 1, 1, 0.9]);
 
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -304,64 +272,25 @@ function CategoryStage({
       <div className="absolute inset-0 pointer-events-auto">
         {category.skills.map((skill, sIdx) => {
           const Icon = skill.icon;
-          const driftX = -30 + (sIdx % 3) * 15;
-          const driftY = -10 + (sIdx % 2) * 20;
+          const driftX = -25 + (sIdx % 3) * 15;
+          const driftY = -12 + (sIdx % 2) * 24;
 
-          const skillOpacity = useTransform(
-            scrollProgress,
-            isFirst
-              ? [0.0, 0.05, 0.22, 0.3]
-              : isSecond
-              ? [0.26, 0.32, 0.55, 0.63]
-              : [0.59, 0.65, 0.92, 1.0],
-            isFirst
-              ? [0.3, 1, 1, 0]
-              : isSecond
-              ? [0, 1, 1, 0]
-              : [0, 1, 1, 1]
-          );
+          const skillOpacity = useTransform(scrollProgress, progressRange, [0, 1, 1, 0]);
+          const skillScale = useTransform(scrollProgress, progressRange, [0.55, 1, 1, 0.8]);
 
-          const skillScale = useTransform(
-            scrollProgress,
-            isFirst
-              ? [0.0, 0.06, 0.22, 0.3]
-              : isSecond
-              ? [0.26, 0.34, 0.55, 0.63]
-              : [0.59, 0.67, 0.92, 1.0],
-            isFirst
-              ? [0.75, 1, 1, 0.85]
-              : isSecond
-              ? [0.65, 1, 1, 0.85]
-              : [0.65, 1, 1, 1]
-          );
+          const skillX = useTransform(scrollProgress, progressRange, [
+            skill.base.x + skill.entry.x * 0.7,
+            skill.base.x,
+            skill.base.x + driftX,
+            skill.base.x + driftX * 2.2 + (skill.entry.x > 0 ? 80 : -80),
+          ]);
 
-          const skillX = useTransform(
-            scrollProgress,
-            isFirst
-              ? [0.0, 0.06, 0.22, 0.3]
-              : isSecond
-              ? [0.26, 0.34, 0.55, 0.63]
-              : [0.59, 0.67, 0.92, 1.0],
-            isFirst
-              ? [skill.base.x + skill.entry.x * 0.4, skill.base.x, skill.base.x + driftX, skill.base.x + driftX * 2.5]
-              : isSecond
-              ? [skill.base.x + skill.entry.x, skill.base.x, skill.base.x + driftX, skill.base.x + driftX * 2.5]
-              : [skill.base.x + skill.entry.x, skill.base.x, skill.base.x + driftX, skill.base.x + driftX]
-          );
-
-          const skillY = useTransform(
-            scrollProgress,
-            isFirst
-              ? [0.0, 0.06, 0.22, 0.3]
-              : isSecond
-              ? [0.26, 0.34, 0.55, 0.63]
-              : [0.59, 0.67, 0.92, 1.0],
-            isFirst
-              ? [skill.base.y + skill.entry.y * 0.4, skill.base.y, skill.base.y + driftY, skill.base.y + driftY * 2.5]
-              : isSecond
-              ? [skill.base.y + skill.entry.y, skill.base.y, skill.base.y + driftY, skill.base.y + driftY * 2.5]
-              : [skill.base.y + skill.entry.y, skill.base.y, skill.base.y + driftY, skill.base.y + driftY]
-          );
+          const skillY = useTransform(scrollProgress, progressRange, [
+            skill.base.y + skill.entry.y * 0.7,
+            skill.base.y,
+            skill.base.y + driftY,
+            skill.base.y + driftY * 2.2 - 40,
+          ]);
 
           return (
             <motion.div
@@ -405,7 +334,7 @@ export function Skills() {
   useEffect(() => {
     const updateDimensions = () => {
       const vh = window.innerHeight;
-      setContainerHeight(Math.max(2400, vh * 3.4));
+      setContainerHeight(Math.max(2600, vh * 3.6));
     };
 
     updateDimensions();
@@ -418,7 +347,7 @@ export function Skills() {
       <div className="hidden md:block">
         <div
           ref={containerRef}
-          style={{ height: containerHeight ? `${containerHeight}px` : "340vh" }}
+          style={{ height: containerHeight ? `${containerHeight}px` : "360vh" }}
           className="relative"
         >
           <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8">
@@ -434,40 +363,6 @@ export function Skills() {
                   <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
                     <BlurText text="Technical competencies." animateBy="words" delay={0.06} />
                   </h2>
-                </div>
-
-                <div className="flex items-center gap-2 text-xs font-mono">
-                  {categories.map((c, i) => {
-                    const isFirst = i === 0;
-                    const isSecond = i === 1;
-
-                    const activeOpacity = useTransform(
-                      scrollYProgress,
-                      isFirst
-                        ? [0.0, 0.05, 0.22, 0.3]
-                        : isSecond
-                        ? [0.26, 0.33, 0.55, 0.63]
-                        : [0.59, 0.67, 0.92, 1.0],
-                      isFirst
-                        ? [0.5, 1, 1, 0.4]
-                        : isSecond
-                        ? [0.4, 1, 1, 0.4]
-                        : [0.4, 1, 1, 1]
-                    );
-
-                    return (
-                      <div key={c.title} className="flex items-center gap-2">
-                        <motion.div
-                          style={{ opacity: activeOpacity }}
-                          className="px-3 py-1 rounded-full border border-border/60 bg-secondary/60 flex items-center gap-1.5"
-                        >
-                          <span className="text-primary font-bold">0{i + 1}</span>
-                          <span className="text-foreground">{c.title}</span>
-                        </motion.div>
-                        {i < 2 && <span className="text-border">/</span>}
-                      </div>
-                    );
-                  })}
                 </div>
               </div>
             </div>
