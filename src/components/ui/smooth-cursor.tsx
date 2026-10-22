@@ -17,14 +17,14 @@ const DefaultCursorSVG: FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={28}
-      height={28}
+      width={14}
+      height={14}
       viewBox="0 0 24 24"
       fill="none"
-      className="pointer-events-none drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)] text-primary"
+      className="pointer-events-none drop-shadow-[0_0_8px_hsl(var(--primary)/0.6)] text-primary"
     >
-      <circle cx="12" cy="12" r="5" fill="currentColor" />
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+      <circle cx="12" cy="12" r="3" fill="currentColor" />
+      <circle cx="12" cy="12" r="7" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.45" />
     </svg>
   );
 };
