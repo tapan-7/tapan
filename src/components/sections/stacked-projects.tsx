@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowUpRight, Cpu, Layers, Server, ShieldCheck, Zap } from "lucide-react";
+import { Layers, Server, ShieldCheck, Zap } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
 

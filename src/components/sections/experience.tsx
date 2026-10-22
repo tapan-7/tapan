@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowUpRight, Briefcase, MapPin } from "lucide-react";
+import { Briefcase, MapPin } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
 import portfolioData from "@/constant/portfolio-data.json";
