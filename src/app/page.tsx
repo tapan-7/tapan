@@ -9,7 +9,7 @@ import { Contact } from "@/components/sections/contact";
 
 export default function HomePage() {
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-x-clip">
       <Hero />
       <About />
       <Experience />

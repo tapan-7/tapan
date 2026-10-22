@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { BlurText } from "@/components/react-bits/blur-text";
@@ -10,6 +10,13 @@ import { projects } from "@/constant/projects";
 
 export function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const [travelDistance, setTravelDistance] = useState(0);
+  const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
   const featured = projects.slice(0, 4);
 
   const { scrollYProgress } = useScroll({
@@ -17,141 +24,227 @@ export function FeaturedProjects() {
     offset: ["start start", "end end"],
   });
 
-  const x = useTransform(
+  const buffer = 200;
+  const totalScroll = travelDistance > 0 ? travelDistance + buffer : 0;
+  const endProgressRatio = totalScroll > 0 ? travelDistance / totalScroll : 1;
+
+  const normalX = useTransform(
     scrollYProgress,
-    [0, 1],
-    ["0%", `-${(featured.length - 1) * 78}%`]
+    [0, endProgressRatio, 1],
+    [0, -travelDistance, -travelDistance]
   );
+
+  const x = shouldReduceMotion ? 0 : normalX;
+
+  useEffect(() => {
+    const calculateDimensions = () => {
+      if (!trackRef.current || !viewportRef.current) return;
+
+      const trackWidth = trackRef.current.scrollWidth;
+      const viewportWidth = viewportRef.current.clientWidth;
+      const viewportHeight = window.innerHeight;
+
+      const distance = Math.max(0, trackWidth - viewportWidth);
+      const total = distance > 0 ? distance + buffer : 0;
+
+      setTravelDistance(distance);
+      setContainerHeight(total > 0 ? viewportHeight + total : null);
+    };
+
+    calculateDimensions();
+
+    const resizeObserver = new ResizeObserver(() => {
+      calculateDimensions();
+    });
+
+    if (trackRef.current) resizeObserver.observe(trackRef.current);
+    if (viewportRef.current) resizeObserver.observe(viewportRef.current);
+
+    window.addEventListener("resize", calculateDimensions);
+
+    if (typeof document !== "undefined" && document.fonts) {
+      document.fonts.ready.then(calculateDimensions).catch(() => {});
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", calculateDimensions);
+    };
+  }, [featured.length, buffer]);
 
   return (
     <section id="projects" className="relative border-t border-border/40">
-      <div className="pt-28 pb-10 px-6 container max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-              <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-4">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                <span>03 // SHOWCASE & CREATIONS</span>
-              </div>
-            </AnimatedContent>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
-              <BlurText text="Featured work." animateBy="words" delay={0.06} />
-            </h2>
-          </div>
-          <p className="text-sm md:text-base text-muted-foreground max-w-md font-light leading-relaxed">
-            Interactive applications and mobile architectures built for real-world reliability and impact.
-          </p>
-        </div>
-      </div>
-
       <div className="hidden md:block">
-        <div ref={containerRef} className="h-[280vh] relative">
-          <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
-            <motion.div style={{ x }} className="flex gap-8 pl-10 pr-24 w-max">
-              {featured.map((project, index) => {
-                const isExternalLink = project.link && project.link !== "#";
-                const isGithub = project.github && project.github !== "#";
-
-                return (
-                  <div
-                    key={project.title}
-                    className="w-[74vw] max-w-[960px] h-[70vh] max-h-[580px] rounded-3xl bg-card border border-border/70 p-8 lg:p-10 flex flex-col justify-between shrink-0 shadow-2xl relative overflow-hidden group hover:border-primary/50 transition-colors duration-300"
-                  >
-                    <div className="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-0" />
-
-                    <div className="relative z-10 flex items-center justify-between border-b border-border/60 pb-5">
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs text-primary bg-secondary px-2.5 py-1 rounded-md border border-border">
-                          0{index + 1}
-                        </span>
-                        <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
-                          Featured Project
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        {isGithub && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all"
-                            aria-label={`GitHub source for ${project.title}`}
-                          >
-                            <Github className="w-4 h-4" />
-                          </a>
-                        )}
-                        {isExternalLink && (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity shadow-md"
-                          >
-                            <span>Live Demo</span>
-                            <ArrowUpRight className="w-3.5 h-3.5" />
-                          </a>
-                        )}
-                      </div>
+        <div
+          ref={containerRef}
+          style={{ height: containerHeight ? `${containerHeight}px` : "280vh" }}
+          className="relative"
+        >
+          <div
+            ref={viewportRef}
+            className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8"
+          >
+            <div className="container max-w-6xl mx-auto px-6 shrink-0">
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <AnimatedContent distance={15} direction="vertical" delay={0.05}>
+                    <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-2">
+                      <span className="w-2 h-2 rounded-full bg-primary" />
+                      <span>03 &bull; SHOWCASE &amp; CREATIONS</span>
                     </div>
+                  </AnimatedContent>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
+                    <BlurText text="Featured work." animateBy="words" delay={0.06} />
+                  </h2>
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground max-w-md font-light leading-relaxed hidden lg:block">
+                  Interactive applications and mobile architectures built for real-world reliability and impact.
+                </p>
+              </div>
+            </div>
 
-                    <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto items-center">
-                      <div className="lg:col-span-5 space-y-4">
-                        <h3 className="text-2xl sm:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed font-light">
-                          {project.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2 pt-2">
-                          {project.tech.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-2.5 py-1 rounded-md bg-secondary border border-border/60 text-xs font-mono text-muted-foreground"
+            <div className="w-full my-auto py-2">
+              <motion.div
+                ref={trackRef}
+                style={{ x }}
+                className="flex gap-8 pl-6 sm:pl-12 lg:pl-16 pr-16 lg:pr-24 w-max will-change-transform"
+              >
+                {featured.map((project, index) => {
+                  const isExternalLink = project.link && project.link !== "#";
+                  const isGithub = project.github && project.github !== "#";
+
+                  return (
+                    <div
+                      key={project.title}
+                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 shadow-2xl relative overflow-hidden group hover:border-primary/50 transition-colors duration-300"
+                    >
+                      <div className="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-0" />
+
+                      <div className="relative z-10 flex items-center justify-between border-b border-border/60 pb-3 sm:pb-4">
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-xs text-primary bg-secondary px-2.5 py-1 rounded-md border border-border">
+                            0{index + 1}
+                          </span>
+                          <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+                            Featured Project
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          {isGithub && (
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all"
+                              aria-label={`GitHub source for ${project.title}`}
                             >
-                              {tag}
-                            </span>
-                          ))}
+                              <Github className="w-4 h-4" />
+                            </a>
+                          )}
+                          {isExternalLink && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity shadow-md"
+                            >
+                              <span>Live Demo</span>
+                              <ArrowUpRight className="w-3.5 h-3.5" />
+                            </a>
+                          )}
                         </div>
                       </div>
 
-                      <div className="lg:col-span-7 h-[260px] sm:h-[300px] rounded-2xl bg-background border border-border/60 overflow-hidden relative group/img">
-                        {project.image.startsWith("/") ? (
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            sizes="(max-width: 1200px) 50vw, 600px"
-                            className="object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-secondary/50 to-background p-6 text-center">
-                            <span className="text-2xl sm:text-3xl font-bold text-foreground/40 font-mono mb-2">
-                              {project.title}
-                            </span>
-                            <span className="text-xs text-muted-foreground font-mono">
-                              Interactive Platform Preview
-                            </span>
+                      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto items-center">
+                        <div className="lg:col-span-5 space-y-3">
+                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light line-clamp-3 sm:line-clamp-4">
+                            {project.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1">
+                            {project.tech.map((tag) => (
+                              <span
+                                key={tag}
+                                className="px-2.5 py-0.5 sm:py-1 rounded-md bg-secondary border border-border/60 text-[11px] sm:text-xs font-mono text-muted-foreground"
+                              >
+                                {tag}
+                              </span>
+                            ))}
                           </div>
-                        )}
+                        </div>
+
+                        <div className="lg:col-span-7 h-[190px] sm:h-[220px] lg:h-[250px] rounded-2xl bg-background border border-border/60 overflow-hidden relative group/img">
+                          {project.image.startsWith("/") ? (
+                            <Image
+                              src={project.image}
+                              alt={project.title}
+                              fill
+                              sizes="(max-width: 1200px) 50vw, 600px"
+                              className="object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-secondary/50 to-background p-6 text-center">
+                              <span className="text-xl sm:text-2xl font-bold text-foreground/40 font-mono mb-2">
+                                {project.title}
+                              </span>
+                              <span className="text-xs text-muted-foreground font-mono">
+                                Interactive Platform Preview
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="relative z-10 pt-3 flex items-center justify-between text-xs text-muted-foreground font-mono border-t border-border/60">
+                        <span className="text-[11px] text-muted-foreground/80">
+                          Engineering &bull; Production
+                        </span>
+                        <span>
+                          0{index + 1} / 0{featured.length}
+                        </span>
                       </div>
                     </div>
+                  );
+                })}
+              </motion.div>
+            </div>
 
-                    <div className="relative z-10 pt-4 flex items-center justify-between text-xs text-muted-foreground font-mono border-t border-border/60">
-                      <span>Scroll to navigate &rarr;</span>
-                      <span>
-                        0{index + 1} / 0{featured.length}
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </motion.div>
+            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-between text-xs font-mono text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <span className="text-primary font-semibold">&lt;&gt;</span>
+                <span>Scroll vertically to traverse projects &rarr;</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <span>Showcase Progress</span>
+                <div className="w-32 h-1.5 bg-secondary rounded-full overflow-hidden border border-border/60">
+                  <motion.div
+                    style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
+                    className="h-full bg-primary rounded-full"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="block md:hidden px-6 pb-20 space-y-8">
+      <div className="block md:hidden px-6 pt-20 pb-16 space-y-8">
+        <div>
+          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-3">
+            <span className="w-2 h-2 rounded-full bg-primary" />
+            <span>03 &bull; SHOWCASE &amp; CREATIONS</span>
+          </div>
+          <h2 className="text-3xl font-extrabold tracking-tight text-foreground mb-3">
+            Featured work.
+          </h2>
+          <p className="text-xs text-muted-foreground font-light leading-relaxed">
+            Interactive applications and mobile architectures built for real-world reliability and impact.
+          </p>
+        </div>
+
         {featured.map((project, index) => {
           const isExternalLink = project.link && project.link !== "#";
           const isGithub = project.github && project.github !== "#";

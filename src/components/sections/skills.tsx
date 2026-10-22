@@ -66,7 +66,7 @@ export function Skills() {
               <div className="py-10 sm:py-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group">
                 <div className="lg:col-span-4 space-y-1.5">
                   <span className="text-xs font-mono text-primary uppercase tracking-widest block">
-                    {category.num} // CATEGORY
+                    {category.num} &bull; CATEGORY
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
                     {category.title}
