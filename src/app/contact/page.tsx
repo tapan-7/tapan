@@ -1,65 +1,65 @@
 import React from "react";
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import { Download, Github, Linkedin, Mail } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
 
 const ContactPage = () => {
   return (
-    <section
-      id="contact"
-      className="py-24 transition-colors duration-300"
-    >
+    <section id="contact" className="py-24 transition-colors duration-300 min-h-screen bg-[#09090b] text-[#f4f4f5] flex items-center">
       <div className="container mx-auto px-6">
-        <AnimatedSection
-          className="text-center max-w-2xl mx-auto"
-          delay={0.1}
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
-            Let's Work Together
-          </h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
-          <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 leading-relaxed">
-            I'm always interested in discussing new opportunities and
-            challenging projects. Let's connect and build something great
+        <AnimatedSection className="text-center max-w-2xl mx-auto" delay={0.1}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#f4f4f5]">
+            Let&apos;s Work Together
+          </h1>
+          <div className="w-20 h-1 bg-[#a78bfa] mx-auto mb-8 rounded-full"></div>
+          <p className="text-base sm:text-lg text-[#a1a1aa] mb-12 leading-relaxed">
+            I&apos;m always interested in discussing new opportunities and
+            challenging projects. Let&apos;s connect and build something great
             together.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <a
-              href="mailto:luffy@example.com"
-              className="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-8 py-4 rounded-lg transition-all duration-300 font-medium group"
+              href="mailto:contact@example.com"
+              className="flex items-center gap-2.5 bg-[#a78bfa] hover:bg-[#c4b5fd] text-[#09090b] px-7 py-3.5 rounded-full transition-all duration-200 font-semibold text-sm shadow-md"
             >
-              <Mail className="w-5 h-5" />
-              Send Message
-              <ArrowRight className="w-5 h-5 opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+              <Mail className="w-4 h-4" />
+              <span>Send Message</span>
             </a>
             <a
               download
-              href="resume.pdf"
-              className="flex items-center gap-3 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 px-8 py-4 rounded-lg transition-all duration-300 font-medium"
+              href="/resume.pdf"
+              className="flex items-center gap-2.5 border border-[#27272a] text-[#f4f4f5] hover:bg-[#18181b] px-7 py-3.5 rounded-full transition-all duration-200 font-medium text-sm bg-[#141418]"
             >
-              <Download className="w-5 h-5" />
-              Download Resume
+              <Download className="w-4 h-4" />
+              <span>Download Resume</span>
             </a>
           </div>
 
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex justify-center items-center gap-5">
             <a
-              href="https://github.com/tapan-7"
-              className="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors duration-300"
+              href="https://github.com/tapankumarswain"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex items-center justify-center w-11 h-11 bg-[#141418] border border-[#27272a] hover:border-[#a78bfa] text-[#a1a1aa] hover:text-[#f4f4f5] rounded-full transition-all duration-200"
             >
-              <Github className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+              <Github className="w-5 h-5" />
             </a>
             <a
-              href="https://www.linkedin.com/in/tapan-kumar-swain-b4b231318/"
-              className="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors duration-300"
+              href="https://linkedin.com/in/tapankumarswain"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="flex items-center justify-center w-11 h-11 bg-[#141418] border border-[#27272a] hover:border-[#a78bfa] text-[#a1a1aa] hover:text-[#f4f4f5] rounded-full transition-all duration-200"
             >
-              <Linkedin className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+              <Linkedin className="w-5 h-5" />
             </a>
             <a
-              href="mailto:luffy@example.com"
-              className="flex items-center justify-center w-12 h-12 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition-colors duration-300"
+              href="mailto:contact@example.com"
+              aria-label="Email"
+              className="flex items-center justify-center w-11 h-11 bg-[#141418] border border-[#27272a] hover:border-[#a78bfa] text-[#a1a1aa] hover:text-[#f4f4f5] rounded-full transition-all duration-200"
             >
-              <Mail className="w-6 h-6 text-slate-700 dark:text-slate-300" />
+              <Mail className="w-5 h-5" />
             </a>
           </div>
         </AnimatedSection>

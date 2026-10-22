@@ -19,9 +19,15 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Luffy - Software Development Engineer",
+  title: "Tapan Kumar Swain — Software Development Engineer",
   description:
-    "Professional portfolio of Monkey D. Luffy, Software Development Engineer with 2+ years experience.",
+    "Portfolio of Tapan Kumar Swain, Software Development Engineer specializing in high-performance web and mobile applications with React, Next.js, and React Native.",
+  openGraph: {
+    title: "Tapan Kumar Swain — Software Development Engineer",
+    description:
+      "Frontend-focused SDE building modern web and mobile apps with React, Next.js, and React Native.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -30,12 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${montserrat.variable} ${openSans.variable} font-sans`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-[#09090b] text-[#f4f4f5] selection:bg-purple-500/20 selection:text-white`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <Navbar />
           <PageWrapper>
-            <main className="pt-24 flex-grow">{children}</main>
+            <main className="flex-grow">{children}</main>
             <Footer />
           </PageWrapper>
         </ThemeProvider>

@@ -14,43 +14,54 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const clipPathId = useRef(`theme-toggle-clip-${Math.random().toString(36).substr(2, 9)}`);
+  const clipPathId = useRef(`theme-toggle-clip-${Math.random().toString(36).substring(2, 9)}`);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const changeTheme = async () => {
-    if (!buttonRef.current) return;
+    const nextTheme = theme === "dark" ? "light" : "dark";
 
-    await document.startViewTransition(() => {
-      flushSync(() => {
-        setTheme(theme === "dark" ? "light" : "dark");
-      });
-    }).ready;
+    if (!buttonRef.current || typeof document === "undefined" || !("startViewTransition" in document)) {
+      setTheme(nextTheme);
+      return;
+    }
 
-    const { top, left, width, height } =
-      buttonRef.current.getBoundingClientRect();
-    const y = top + height / 2;
-    const x = left + width / 2;
+    try {
+      const doc = document as Document & {
+        startViewTransition: (callback: () => void) => { ready: Promise<void> };
+      };
 
-    const right = window.innerWidth - left;
-    const bottom = window.innerHeight - top;
-    const maxRad = Math.hypot(Math.max(left, right), Math.max(top, bottom));
+      await doc.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme);
+        });
+      }).ready;
 
-    document.documentElement.animate(
-      {
-        clipPath: [
-          `circle(0px at ${x}px ${y}px)`,
-          `circle(${maxRad}px at ${x}px ${y}px)`,
-        ],
-      },
-      {
-        duration: 700,
-        easing: "ease-in-out",
-        pseudoElement: "::view-transition-new(root)",
-      }
-    );
+      const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
+      const y = top + height / 2;
+      const x = left + width / 2;
+      const right = window.innerWidth - left;
+      const bottom = window.innerHeight - top;
+      const maxRad = Math.hypot(Math.max(left, right), Math.max(top, bottom));
+
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${maxRad}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 600,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    } catch {
+      setTheme(nextTheme);
+    }
   };
 
   const isDark = mounted ? theme === "dark" : true;
@@ -61,7 +72,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       aria-label="Toggle theme"
       ref={buttonRef}
       className={cn(
-        "rounded-full transition-all duration-300 active:scale-95 text-black dark:text-white ml-3 p-2 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 w-9 h-9 flex items-center justify-center",
+        "rounded-full transition-all duration-200 active:scale-95 text-[#a1a1aa] hover:text-[#f4f4f5] p-2 hover:bg-[#18181b] w-9 h-9 flex items-center justify-center border border-transparent hover:border-[#27272a]",
         className
       )}
       onClick={changeTheme}
@@ -72,20 +83,20 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
         fill="currentColor"
         strokeLinecap="round"
         viewBox="0 0 32 32"
-        width="20"
-        height="20"
+        width="18"
+        height="18"
       >
         <clipPath id={clipPathId.current}>
           <motion.path
             animate={{ y: isDark ? 10 : 0, x: isDark ? -12 : 0 }}
-            transition={{ ease: "easeInOut", duration: 0.35 }}
+            transition={{ ease: "easeInOut", duration: 0.3 }}
             d="M0-5h30a1 1 0 0 0 9 13v24H0Z"
           />
         </clipPath>
         <g clipPath={`url(#${clipPathId.current})`}>
           <motion.circle
             animate={{ r: isDark ? 10 : 8 }}
-            transition={{ ease: "easeInOut", duration: 0.35 }}
+            transition={{ ease: "easeInOut", duration: 0.3 }}
             cx="16"
             cy="16"
           />
@@ -95,7 +106,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
               scale: isDark ? 0.5 : 1,
               opacity: isDark ? 0 : 1,
             }}
-            transition={{ ease: "easeInOut", duration: 0.35 }}
+            transition={{ ease: "easeInOut", duration: 0.3 }}
             stroke="currentColor"
             strokeWidth="1.5"
           >

@@ -6,10 +6,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({ baseDirectory: __dirname });
 
-// Use the compatibility utility to convert eslintrc configs to flat configs
-export default [
+const eslintConfig = [
+  {
+    ignores: ['.next/**', 'node_modules/**', 'dist/**'],
+  },
   ...compat.extends('next/core-web-vitals'),
   {
     files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
-  }
+  },
 ];
+
+export default eslintConfig;
