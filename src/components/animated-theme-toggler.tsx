@@ -85,55 +85,62 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       aria-label="Toggle theme"
       ref={buttonRef}
       className={cn(
-        "rounded-full transition-all duration-200 active:scale-95 text-muted-foreground hover:text-foreground p-2 hover:bg-secondary w-9 h-9 flex items-center justify-center border border-transparent hover:border-border",
+        "relative overflow-hidden w-12 h-12 rounded-full bg-secondary/80 border border-border/80 backdrop-blur-xl flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95",
         className
       )}
       onClick={changeTheme}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        fill="currentColor"
-        strokeLinecap="round"
-        viewBox="0 0 32 32"
-        width="18"
-        height="18"
-      >
-        <clipPath id={clipPathId}>
-          <motion.path
-            animate={{ y: isDark ? 10 : 0, x: isDark ? -12 : 0 }}
-            transition={{ ease: "easeInOut", duration: 0.3 }}
-            d="M0-5h30a1 1 0 0 0 9 13v24H0Z"
-          />
-        </clipPath>
-        <g clipPath={`url(#${clipPathId})`}>
-          <motion.circle
-            animate={{ r: isDark ? 10 : 8 }}
-            transition={{ ease: "easeInOut", duration: 0.3 }}
-            cx="16"
-            cy="16"
-          />
-          <motion.g
-            animate={{
-              rotate: isDark ? -100 : 0,
-              scale: isDark ? 0.5 : 1,
-              opacity: isDark ? 0 : 1,
-            }}
-            transition={{ ease: "easeInOut", duration: 0.3 }}
-            stroke="currentColor"
-            strokeWidth="1.5"
-          >
-            <path d="M16 5.5v-4" />
-            <path d="M16 30.5v-4" />
-            <path d="M1.5 16h4" />
-            <path d="M26.5 16h4" />
-            <path d="m23.4 8.6 2.8-2.8" />
-            <path d="m5.7 26.3 2.9-2.9" />
-            <path d="m5.8 5.8 2.8 2.8" />
-            <path d="m23.4 23.4 2.9 2.9" />
-          </motion.g>
-        </g>
-      </svg>
+      <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+        <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[42%] bg-primary/25 transition-all duration-700 ease-out group-hover:-top-1/2 group-hover:rotate-180" />
+        <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[40%] bg-foreground transition-all duration-500 ease-out delay-75 group-hover:-top-1/2 group-hover:rotate-[240deg]" />
+      </span>
+
+      <span className="relative z-10 flex items-center justify-center text-foreground group-hover:text-background transition-colors duration-300">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          fill="currentColor"
+          strokeLinecap="round"
+          viewBox="0 0 32 32"
+          width="20"
+          height="20"
+        >
+          <clipPath id={clipPathId}>
+            <motion.path
+              animate={{ y: isDark ? 10 : 0, x: isDark ? -12 : 0 }}
+              transition={{ ease: "easeInOut", duration: 0.3 }}
+              d="M0-5h30a1 1 0 0 0 9 13v24H0Z"
+            />
+          </clipPath>
+          <g clipPath={`url(#${clipPathId})`}>
+            <motion.circle
+              animate={{ r: isDark ? 10 : 8 }}
+              transition={{ ease: "easeInOut", duration: 0.3 }}
+              cx="16"
+              cy="16"
+            />
+            <motion.g
+              animate={{
+                rotate: isDark ? -100 : 0,
+                scale: isDark ? 0.5 : 1,
+                opacity: isDark ? 0 : 1,
+              }}
+              transition={{ ease: "easeInOut", duration: 0.3 }}
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="M16 5.5v-4" />
+              <path d="M16 30.5v-4" />
+              <path d="M1.5 16h4" />
+              <path d="M26.5 16h4" />
+              <path d="m23.4 8.6 2.8-2.8" />
+              <path d="m5.7 26.3 2.9-2.9" />
+              <path d="m5.8 5.8 2.8 2.8" />
+              <path d="m23.4 23.4 2.9 2.9" />
+            </motion.g>
+          </g>
+        </svg>
+      </span>
     </button>
   );
 };

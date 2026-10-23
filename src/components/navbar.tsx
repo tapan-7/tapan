@@ -182,7 +182,7 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group bg-background/80 hover:bg-background backdrop-blur-xl px-4 py-2 rounded-full border border-border/80"
+            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group bg-background/80 hover:bg-background backdrop-blur-xl px-4 py-2 rounded-full"
           >
             <span className="text-primary font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
               &lt;
@@ -200,23 +200,30 @@ export default function Navbar() {
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
               aria-controls={navDialogId}
-              className="nav-ham w-12 h-12 md:w-14 md:h-14 rounded-full bg-secondary/80 hover:bg-secondary border border-border/80 backdrop-blur-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 group hover:scale-105 active:scale-95 cursor-pointer"
+              className="nav-ham relative overflow-hidden w-12 h-12 rounded-full bg-secondary/80 border border-border/80 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-300 group hover:scale-105 active:scale-95 cursor-pointer hover:border-foreground/30"
             >
-              <motion.span
-                animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
-                className="w-5 h-[2px] bg-foreground group-hover:bg-primary transition-colors origin-center block rounded-full"
-              />
-              <motion.span
-                animate={isOpen ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }}
-                transition={{ duration: 0.15 }}
-                className="w-5 h-[2px] bg-foreground group-hover:bg-primary transition-colors origin-center block rounded-full"
-              />
-              <motion.span
-                animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
-                className="w-5 h-[2px] bg-foreground group-hover:bg-primary transition-colors origin-center block rounded-full"
-              />
+              <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
+                <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[42%] bg-primary/25 transition-all duration-700 ease-out group-hover:-top-1/2 group-hover:rotate-180" />
+                <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[40%] bg-foreground transition-all duration-500 ease-out delay-75 group-hover:-top-1/2 group-hover:rotate-[240deg]" />
+              </span>
+
+              <div className="relative z-10 flex flex-col items-center justify-center gap-1.5">
+                <motion.span
+                  animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
+                  className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
+                />
+                <motion.span
+                  animate={isOpen ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.15 }}
+                  className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
+                />
+                <motion.span
+                  animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
+                  className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
+                />
+              </div>
             </button>
           </div>
         </div>
