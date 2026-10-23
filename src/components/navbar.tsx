@@ -55,15 +55,7 @@ const MENU_ITEMS: NavPreviewItem[] = [
   },
 ];
 
-const SKILL_TRAIL = [
-  { name: "React", src: "/icons/react.svg" },
-  { name: "Next.js", src: "/icons/nextjs.svg", invertDark: true },
-  { name: "TypeScript", src: "/icons/typescript.svg" },
-  { name: "NestJS", src: "/icons/nestjs.svg" },
-  { name: "PostgreSQL", src: "/icons/postgresql.svg" },
-  { name: "Docker", src: "/icons/docker.svg" },
-  { name: "Redis", src: "/icons/redis.svg" },
-];
+
 
 function AboutCard() {
   return (
@@ -194,18 +186,7 @@ export default function Navbar() {
   const smoothRotateX = useSpring(cardRotateX, { stiffness: 200, damping: 25 });
   const smoothRotateY = useSpring(cardRotateY, { stiffness: 200, damping: 25 });
 
-  const skillsX = useMotionValue(0);
-  const skillsY = useMotionValue(0);
-  const smoothSkillsX = useSpring(skillsX, {
-    stiffness: 450,
-    damping: 30,
-    mass: 0.3,
-  });
-  const smoothSkillsY = useSpring(skillsY, {
-    stiffness: 450,
-    damping: 30,
-    mass: 0.3,
-  });
+
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -282,12 +263,7 @@ export default function Navbar() {
   ) => {
     if (typeof window === "undefined") return;
     const currentTarget = targetId || hoveredId;
-    if (currentTarget === "skills") {
-      skillsX.set(clientX + 24);
-      skillsY.set(clientY);
-      return;
-    }
-    if (currentTarget === "contact") {
+    if (currentTarget === "skills" || currentTarget === "contact") {
       return;
     }
     const padX = 180;
@@ -445,10 +421,11 @@ export default function Navbar() {
                         onClick={(e) => handleNavigate(e, item.href)}
                         onMouseEnter={(e) => {
                           handleMouseMove(e.clientX, e.clientY, item.id);
-                          if (item.id === "skills") {
-                            skillsX.jump(e.clientX + 24);
-                            skillsY.jump(e.clientY);
-                          } else if (item.id !== "contact" && !isHovering) {
+                          if (
+                            item.id !== "skills" &&
+                            item.id !== "contact" &&
+                            !isHovering
+                          ) {
                             const padX = 180;
                             const padY = 220;
                             const clampedX = Math.max(
@@ -470,10 +447,11 @@ export default function Navbar() {
                           const cx = rect.left + rect.width / 2;
                           const cy = rect.top + rect.height / 2;
                           handleMouseMove(cx, cy, item.id);
-                          if (item.id === "skills") {
-                            skillsX.jump(cx + 24);
-                            skillsY.jump(cy);
-                          } else if (item.id !== "contact" && !isHovering) {
+                          if (
+                            item.id !== "skills" &&
+                            item.id !== "contact" &&
+                            !isHovering
+                          ) {
                             const padX = 180;
                             const padY = 220;
                             const clampedX = Math.max(
@@ -545,10 +523,7 @@ export default function Navbar() {
 
             <div className="container max-w-4xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/40 text-xs font-mono text-muted-foreground">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-foreground font-medium">
-                  Available for SDE Roles
-                </span>
+                {" "}
                 <span className="text-border">•</span>
                 <a
                   href={`mailto:${portfolioData.profile.email}`}
@@ -595,49 +570,6 @@ export default function Navbar() {
             </div>
 
             <div className="fixed inset-0 pointer-events-none overflow-hidden z-[80] hidden md:block">
-              <AnimatePresence>
-                {isHovering && hoveredId === "skills" && (
-                  <motion.div
-                    style={{
-                      position: "absolute",
-                      left: smoothSkillsX,
-                      top: smoothSkillsY,
-                      transform: "translateY(-50%)",
-                    }}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="pointer-events-none flex items-center gap-3 z-[85]"
-                  >
-                    {SKILL_TRAIL.map((skill, idx) => (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, y: 6, scale: 0.7 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.7 }}
-                        transition={{
-                          duration: 0.2,
-                          delay: idx * 0.025,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                      >
-                        <Image
-                          src={skill.src}
-                          alt={skill.name}
-                          width={34}
-                          height={34}
-                          className={`w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.55)] ${
-                            skill.invertDark ? "dark:invert" : ""
-                          }`}
-                          unoptimized
-                        />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
               <motion.div
                 style={{
                   position: "absolute",
