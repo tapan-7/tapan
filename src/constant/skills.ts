@@ -41,11 +41,12 @@ const skillCoordinates: Record<
   "REST APIs": { base: { x: -280, y: 75 }, entry: { x: -460, y: 160 } },
   WebSockets: { base: { x: 270, y: 80 }, entry: { x: 470, y: 160 } },
 
-  PostgreSQL: { base: { x: -260, y: 0 }, entry: { x: -460, y: -20 } },
-  "Prisma ORM": { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
-  Prisma: { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
-  MongoDB: { base: { x: -260, y: 0 }, entry: { x: -460, y: -20 } },
-  MySQL: { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
+  PostgreSQL: { base: { x: -290, y: -70 }, entry: { x: -470, y: -150 } },
+  "Prisma ORM": { base: { x: 280, y: -70 }, entry: { x: 470, y: -150 } },
+  Prisma: { base: { x: 280, y: -70 }, entry: { x: 470, y: -150 } },
+  MongoDB: { base: { x: -280, y: 75 }, entry: { x: -460, y: 160 } },
+  "Mongo DB": { base: { x: -280, y: 75 }, entry: { x: -460, y: 160 } },
+  MySQL: { base: { x: 280, y: 75 }, entry: { x: 470, y: 160 } },
 
   Docker: { base: { x: -310, y: -70 }, entry: { x: -500, y: -150 } },
   "AWS S3": { base: { x: 270, y: -70 }, entry: { x: 470, y: -150 } },
@@ -58,8 +59,9 @@ const skillCoordinates: Record<
   Redis: { base: { x: -260, y: 0 }, entry: { x: -460, y: -20 } },
   BullMQ: { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
 
-  "Salesforce API": { base: { x: -280, y: 0 }, entry: { x: -480, y: -20 } },
-  "Google Drive API": { base: { x: 280, y: 0 }, entry: { x: 480, y: 20 } },
+  "Salesforce API": { base: { x: -300, y: -45 }, entry: { x: -480, y: -110 } },
+  "Google Drive API": { base: { x: 280, y: -45 }, entry: { x: 480, y: -110 } },
+  VideoSDK: { base: { x: 0, y: 105 }, entry: { x: 0, y: 210 } },
 
   Git: { base: { x: -300, y: -45 }, entry: { x: -480, y: -110 } },
   Postman: { base: { x: 280, y: -45 }, entry: { x: 480, y: -110 } },

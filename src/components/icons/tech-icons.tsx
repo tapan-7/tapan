@@ -31,6 +31,7 @@ export const TECH_ICON_CONFIGS: Record<string, IconConfig> = {
   "REST APIs": { src: "/icons/restapi.svg", alt: "REST APIs" },
   WebSockets: { src: "/icons/websocket.svg", alt: "WebSockets", invertDark: true },
   MongoDB: { src: "/icons/mongodb.svg", alt: "MongoDB" },
+  "Mongo DB": { src: "/icons/mongodb.svg", alt: "MongoDB" },
   MySQL: { src: "/icons/mysql.svg", alt: "MySQL" },
   PostgreSQL: { src: "/icons/postgresql.svg", alt: "PostgreSQL" },
   "Prisma ORM": { src: "/icons/prisma.svg", alt: "Prisma", invertDark: true },
@@ -45,6 +46,7 @@ export const TECH_ICON_CONFIGS: Record<string, IconConfig> = {
   BullMQ: { src: "/icons/bullmq.svg", alt: "BullMQ", invertDark: true },
   "Salesforce API": { src: "/icons/salesforce.svg", alt: "Salesforce" },
   "Google Drive API": { src: "/icons/googledrive.svg", alt: "Google Drive" },
+  VideoSDK: { src: "/icons/videosdk.svg", alt: "VideoSDK" },
   Git: { src: "/icons/git.svg", alt: "Git" },
   GitHub: { src: "/icons/github.svg", alt: "GitHub", invertDark: true },
   GitLab: { src: "/icons/gitlab.svg", alt: "GitLab" },
@@ -125,6 +127,7 @@ export const RedisIcon = createIconComponent("Redis");
 export const BullmqIcon = createIconComponent("BullMQ");
 export const SalesforceIcon = createIconComponent("Salesforce API");
 export const GoogleDriveIcon = createIconComponent("Google Drive API");
+export const VideosdkIcon = createIconComponent("VideoSDK");
 export const GitIcon = createIconComponent("Git");
 export const GithubIcon = createIconComponent("GitHub");
 export const GitlabIcon = createIconComponent("GitLab");
@@ -150,6 +153,7 @@ export const TECH_ICON_MAP: Record<string, React.FC<TechIconProps>> = {
   "REST APIs": RestApiIcon,
   WebSockets: WebSocketIcon,
   MongoDB: MongodbIcon,
+  "Mongo DB": MongodbIcon,
   MySQL: MysqlIcon,
   PostgreSQL: PostgresqlIcon,
   "Prisma ORM": PrismaIcon,
@@ -164,6 +168,7 @@ export const TECH_ICON_MAP: Record<string, React.FC<TechIconProps>> = {
   BullMQ: BullmqIcon,
   "Salesforce API": SalesforceIcon,
   "Google Drive API": GoogleDriveIcon,
+  VideoSDK: VideosdkIcon,
   Git: GitIcon,
   GitHub: GithubIcon,
   GitLab: GitlabIcon,
