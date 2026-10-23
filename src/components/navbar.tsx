@@ -14,150 +14,80 @@ import {
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import portfolioData from "@/constant/portfolio-data.json";
+import { NAV_LINKS } from "@/constant/navigation";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
 
-interface NavPreviewItem {
-  id: string;
-  name: string;
-  href: string;
+interface PreviewData {
+  image: string;
+  title: string;
+  subtitle?: string;
+  imageClass?: string;
 }
 
-const MENU_ITEMS: NavPreviewItem[] = [
-  {
-    id: "about",
-    name: "About",
-    href: "#about",
-  },
-  {
-    id: "experience",
-    name: "Experience",
-    href: "#experience",
-  },
-  {
-    id: "projects",
-    name: "Projects",
-    href: "#projects",
-  },
-  {
-    id: "skills",
-    name: "Skills",
-    href: "#skills",
-  },
-  {
-    id: "writing",
-    name: "Writing",
-    href: "#writing",
-  },
-  {
-    id: "contact",
-    name: "Contact",
-    href: "#contact",
-  },
-];
-
-
-
-function AboutCard() {
-  return (
-    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] select-none">
-      <Image
-        src="/profile.jpeg"
-        alt={portfolioData.profile.name}
-        fill
-        sizes="340px"
-        className="object-cover object-top"
-        priority
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-      <div className="absolute bottom-5 left-5 right-5 text-white">
-        <h3 className="text-2xl font-bold tracking-tight text-white leading-tight">
-          {portfolioData.profile.name}
-        </h3>
-        <p className="text-xs font-mono text-white/80 mt-1">
-          {portfolioData.profile.email}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function ExperienceCard() {
+function NavPreviewCard({ data }: { data: PreviewData }) {
   return (
     <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] select-none flex flex-col justify-end">
       <Image
-        src="/hyscaler-banner.webp"
-        alt="HyScaler"
+        src={data.image}
+        alt={data.title}
         fill
         sizes="340px"
-        className="object-cover"
+        className={`object-cover ${data.imageClass || ""}`}
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
       <div className="relative z-10 p-5 text-white">
         <h3 className="text-2xl font-bold tracking-tight text-white leading-tight">
-          HyScaler
+          {data.title}
         </h3>
-        <p className="text-xs font-mono text-white/80 mt-1">
-          Nettantra Technologies
-        </p>
+        {data.subtitle && (
+          <p className="text-xs font-mono text-white/80 mt-1">
+            {data.subtitle}
+          </p>
+        )}
       </div>
     </div>
   );
 }
 
-function ProjectsCard() {
-  return (
-    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] select-none flex flex-col justify-end">
-      <Image
-        src="/projects/bingebox.png"
-        alt="BingeBox"
-        fill
-        sizes="340px"
-        className="object-cover"
-        priority
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-
-      <div className="relative z-10 p-5 text-white">
-        <h3 className="text-2xl font-bold tracking-tight text-white leading-tight">
-          BingeBox
-        </h3>
-      </div>
-    </div>
-  );
-}
-
-function WritingCard() {
-  const blog = portfolioData.blogs[0];
-  return (
-    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] select-none flex flex-col justify-end">
-      <Image
-        src={blog.image}
-        alt={blog.title}
-        fill
-        sizes="340px"
-        className="object-cover"
-        priority
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-
-      <div className="relative z-10 p-5 text-white">
-        <h3 className="text-xl font-bold tracking-tight text-white leading-snug">
-          {blog.title}
-        </h3>
-      </div>
-    </div>
-  );
+function getPreviewData(id: string): PreviewData | null {
+  if (id === "about") {
+    return {
+      image: portfolioData.profile.avatar || "/profile.jpeg",
+      title: portfolioData.profile.name,
+      subtitle: portfolioData.profile.email,
+      imageClass: "object-top",
+    };
+  }
+  if (id === "experience") {
+    const exp = portfolioData.experience[0];
+    return {
+      image: exp.banner || "/hyscaler-banner.webp",
+      title: exp.shortCompany || exp.company,
+      subtitle: exp.subCompany,
+    };
+  }
+  if (id === "projects") {
+    const project = portfolioData.projects[0];
+    return {
+      image: project.image,
+      title: project.title,
+    };
+  }
+  if (id === "writing") {
+    const blog = portfolioData.blogs[0];
+    return {
+      image: blog.image,
+      title: blog.title,
+    };
+  }
+  return null;
 }
 
 function DynamicCardPreview({ hoveredId }: { hoveredId: string }) {
-  if (hoveredId === "experience") return <ExperienceCard />;
-  if (hoveredId === "projects") return <ProjectsCard />;
-  if (hoveredId === "writing") return <WritingCard />;
-  if (hoveredId === "about") return <AboutCard />;
-  return null;
+  const data = getPreviewData(hoveredId);
+  if (!data) return null;
+  return <NavPreviewCard data={data} />;
 }
 
 export default function Navbar() {
@@ -319,7 +249,7 @@ export default function Navbar() {
             <span className="text-primary font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
               &lt;
             </span>
-            <span>tapan</span>
+            <span>{portfolioData.profile.nickname}</span>
             <span className="text-primary font-mono text-sm group-hover:translate-x-0.5 transition-transform">
               /&gt;
             </span>
@@ -396,13 +326,14 @@ export default function Navbar() {
                 }}
                 className="w-full flex flex-col space-y-1.5 sm:space-y-2 select-none"
               >
-                {MENU_ITEMS.map((item, index) => {
-                  const isHovered = hoveredId === item.id;
-                  const isActive = activeSection === item.id;
+                {NAV_LINKS.map((item, index) => {
+                  const id = item.href.replace("#", "").toLowerCase();
+                  const isHovered = hoveredId === id;
+                  const isActive = activeSection === id;
 
                   return (
                     <motion.div
-                      key={item.id}
+                      key={id}
                       initial={
                         shouldReduceMotion
                           ? { opacity: 0 }
@@ -420,10 +351,10 @@ export default function Navbar() {
                         href={item.href}
                         onClick={(e) => handleNavigate(e, item.href)}
                         onMouseEnter={(e) => {
-                          handleMouseMove(e.clientX, e.clientY, item.id);
+                          handleMouseMove(e.clientX, e.clientY, id);
                           if (
-                            item.id !== "skills" &&
-                            item.id !== "contact" &&
+                            id !== "skills" &&
+                            id !== "contact" &&
                             !isHovering
                           ) {
                             const padX = 180;
@@ -440,16 +371,16 @@ export default function Navbar() {
                             cursorY.jump(clampedY);
                           }
                           setIsHovering(true);
-                          setHoveredId(item.id);
+                          setHoveredId(id);
                         }}
                         onFocus={(e) => {
                           const rect = e.currentTarget.getBoundingClientRect();
                           const cx = rect.left + rect.width / 2;
                           const cy = rect.top + rect.height / 2;
-                          handleMouseMove(cx, cy, item.id);
+                          handleMouseMove(cx, cy, id);
                           if (
-                            item.id !== "skills" &&
-                            item.id !== "contact" &&
+                            id !== "skills" &&
+                            id !== "contact" &&
                             !isHovering
                           ) {
                             const padX = 180;
@@ -466,7 +397,7 @@ export default function Navbar() {
                             cursorY.jump(clampedY);
                           }
                           setIsHovering(true);
-                          setHoveredId(item.id);
+                          setHoveredId(id);
                         }}
                         className={`group relative flex items-center justify-center w-full px-6 py-3.5 sm:py-5 rounded-2xl text-center transition-colors duration-150 ${
                           isHovered
@@ -497,7 +428,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.35,
-                    delay: shouldReduceMotion ? 0 : 0.04 * MENU_ITEMS.length,
+                    delay: shouldReduceMotion ? 0 : 0.04 * NAV_LINKS.length,
                   }}
                   className="pt-6 border-t border-border/40 mt-4 flex flex-wrap items-center justify-center gap-8 px-4"
                 >
@@ -523,8 +454,6 @@ export default function Navbar() {
 
             <div className="container max-w-4xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/40 text-xs font-mono text-muted-foreground">
               <div className="flex flex-wrap items-center gap-2">
-                {" "}
-                <span className="text-border">•</span>
                 <a
                   href={`mailto:${portfolioData.profile.email}`}
                   className="hover:text-primary transition-colors"
@@ -534,38 +463,24 @@ export default function Navbar() {
               </div>
 
               <div className="flex items-center gap-5">
-                <a
-                  href={portfolioData.profile.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  GitHub
-                </a>
-                <a
-                  href={portfolioData.profile.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://dev.to/tapan-7"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Dev.to
-                </a>
-                <a
-                  href={portfolioData.profile.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  Twitter
-                </a>
+                {[
+                  { label: "GitHub", href: portfolioData.profile.github },
+                  { label: "LinkedIn", href: portfolioData.profile.linkedin },
+                  { label: "Dev.to", href: portfolioData.profile.devto },
+                  { label: "Twitter", href: portfolioData.profile.twitter },
+                ]
+                  .filter((link) => Boolean(link.href))
+                  .map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-foreground transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
               </div>
             </div>
 

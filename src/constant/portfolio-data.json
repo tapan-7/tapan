@@ -1,6 +1,8 @@
 {
   "profile": {
     "name": "Tapan Kumar Swain",
+    "nickname": "tapan",
+    "avatar": "/profile.jpeg",
     "title": "Software Development Engineer",
     "email": "tapankumarswain353@gmail.com",
     "mobile": "+91-8144639448",
@@ -8,12 +10,16 @@
     "github": "https://github.com/tapan-7",
     "linkedin": "https://linkedin.com/in/tapankumarswain",
     "twitter": "https://twitter.com/tapankumarswain",
+    "devto": "https://dev.to/tapan-7",
     "summary": "Software Development Engineer with 3 years of experience building web and mobile applications using React, React Native, Next.js, and TypeScript. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud-based architectures."
   },
   "experience": [
     {
       "title": "Software Development Engineer - I",
       "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
+      "shortCompany": "HyScaler",
+      "subCompany": "Nettantra Technologies",
+      "banner": "/hyscaler-banner.webp",
       "period": "Jan 2025 – Present",
       "location": "Bhubaneswar",
       "description": "Contributed to the development of an enterprise legal-tech platform used for drafting, reviewing, and managing financial services contracts through AI-assisted workflows.",
@@ -93,12 +99,12 @@
   },
   "projects": [
     {
-      "title": "E-Commerce Platform",
-      "description": "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
-      "tech": ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
-      "github": "#",
-      "live": "#",
-      "image": "https://placehold.co/1200x800.png"
+      "title": "BingeBox",
+      "description": "A movie website where users can browse movies and watch trailers for specific films. Features a clean interface with responsive design.",
+      "tech": ["React", "Next.js", "TypeScript", "Movie API"],
+      "github": "https://github.com/tapan-7/bingebox",
+      "live": "https://bingebox-new.vercel.app/#",
+      "image": "/projects/bingebox.png"
     },
     {
       "title": "Task Management System",
