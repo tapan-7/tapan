@@ -2,7 +2,12 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import { projects } from "@/constant/projects";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -32,7 +37,7 @@ export function FeaturedProjects() {
   const normalX = useTransform(
     scrollYProgress,
     [0, endProgressRatio, 1],
-    [0, -travelDistance, -travelDistance]
+    [0, -travelDistance, -travelDistance],
   );
 
   const x = shouldReduceMotion ? 0 : normalX;
@@ -69,7 +74,8 @@ export function FeaturedProjects() {
 
     if (trackRef.current) resizeObserver.observe(trackRef.current);
     if (viewportRef.current) resizeObserver.observe(viewportRef.current);
-    if (headerContentRef.current) resizeObserver.observe(headerContentRef.current);
+    if (headerContentRef.current)
+      resizeObserver.observe(headerContentRef.current);
 
     window.addEventListener("resize", calculateDimensions);
 
@@ -224,13 +230,8 @@ export function FeaturedProjects() {
               </motion.div>
             </div>
 
-            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-between text-xs font-mono text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <span className="text-primary font-semibold">&lt;&gt;</span>
-                <span>Scroll vertically to traverse projects &rarr;</span>
-              </div>
+            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-center text-xs font-mono text-muted-foreground">
               <div className="flex items-center gap-4">
-                <span>Showcase Progress</span>
                 <div className="w-32 h-1.5 bg-secondary rounded-full overflow-hidden border border-border/60">
                   <motion.div
                     style={{ scaleX: scrollYProgress, transformOrigin: "left" }}

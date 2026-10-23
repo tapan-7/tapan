@@ -1,9 +1,19 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  MotionValue,
+} from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { skillCategories, getStageRanges, CategoryData } from "@/constant/skills";
+import {
+  skillCategories,
+  getStageRanges,
+  CategoryData,
+} from "@/constant/skills";
 
 const dynamicStageRanges = getStageRanges(skillCategories.length);
 
@@ -21,9 +31,17 @@ function CategoryStage({
   const r = dynamicStageRanges[index];
   const progressRange = [r.enterStart, r.enterEnd, r.exitStart, r.exitEnd];
 
-  const headerOpacity = useTransform(scrollProgress, progressRange, [0, 1, 1, 0]);
+  const headerOpacity = useTransform(
+    scrollProgress,
+    progressRange,
+    [0, 1, 1, 0],
+  );
   const headerY = useTransform(scrollProgress, progressRange, [60, 0, 0, -45]);
-  const headerScale = useTransform(scrollProgress, progressRange, [0.85, 1, 1, 0.9]);
+  const headerScale = useTransform(
+    scrollProgress,
+    progressRange,
+    [0.85, 1, 1, 0.9],
+  );
 
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -49,8 +67,16 @@ function CategoryStage({
           const driftX = -25 + (sIdx % 3) * 15;
           const driftY = -12 + (sIdx % 2) * 24;
 
-          const skillOpacity = useTransform(scrollProgress, progressRange, [0, 1, 1, 0]);
-          const skillScale = useTransform(scrollProgress, progressRange, [0.55, 1, 1, 0.8]);
+          const skillOpacity = useTransform(
+            scrollProgress,
+            progressRange,
+            [0, 1, 1, 0],
+          );
+          const skillScale = useTransform(
+            scrollProgress,
+            progressRange,
+            [0.55, 1, 1, 0.8],
+          );
 
           const skillX = useTransform(scrollProgress, progressRange, [
             skill.base.x + skill.entry.x * 0.7,
@@ -126,11 +152,11 @@ export function Skills() {
         >
           <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8">
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
-              <div>
+              <div className="border-b border-border/40 pb-4">
                 <SectionHeading
                   eyebrow="04 // CAPABILITIES & TOOLKIT"
                   title="Technical competencies."
-                  description="Core technologies, frameworks, and architectural paradigms I work with daily."
+                  variant="compact"
                 />
               </div>
             </div>
@@ -149,19 +175,12 @@ export function Skills() {
               </div>
             </div>
 
-            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-between text-xs font-mono text-muted-foreground border-t border-border/40 pt-4">
-              <div className="flex items-center gap-2">
-                <span className="text-primary font-semibold">&lt;&gt;</span>
-                <span>Scroll vertically to traverse toolkit &rarr;</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <span>Swarm Progress</span>
-                <div className="w-36 h-1.5 bg-secondary rounded-full overflow-hidden border border-border/60">
-                  <motion.div
-                    style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
-                    className="h-full bg-primary rounded-full"
-                  />
-                </div>
+            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-center text-xs font-mono text-muted-foreground border-t border-border/40 pt-4">
+              <div className="w-36 h-1.5 bg-secondary rounded-full overflow-hidden border border-border/60 self-center">
+                <motion.div
+                  style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
+                  className="h-full bg-primary rounded-full"
+                />
               </div>
             </div>
           </div>
@@ -172,7 +191,6 @@ export function Skills() {
         <SectionHeading
           eyebrow="04 // CAPABILITIES & TOOLKIT"
           title="Technical competencies."
-          description="Core technologies, frameworks, and architectural paradigms I work with daily."
         />
 
         <div className="space-y-14">
