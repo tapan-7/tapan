@@ -134,7 +134,7 @@ export function FeaturedProjects() {
                   return (
                     <div
                       key={project.title}
-                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 shadow-2xl relative overflow-hidden group hover:border-primary/50 transition-colors duration-300"
+                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 relative overflow-hidden group hover:border-primary/50 transition-colors duration-300"
                     >
                       <div className="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-0" />
 
@@ -165,7 +165,7 @@ export function FeaturedProjects() {
                               href={project.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity shadow-md"
+                              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity"
                             >
                               <span>Live Demo</span>
                               <ArrowUpRight className="w-3.5 h-3.5" />

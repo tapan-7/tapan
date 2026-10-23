@@ -20,7 +20,7 @@ const ContactPage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <a
               href="mailto:contact@example.com"
-              className="flex items-center gap-2.5 bg-primary hover:opacity-90 text-primary-foreground px-7 py-3.5 rounded-full transition-all duration-200 font-semibold text-sm shadow-md"
+              className="flex items-center gap-2.5 bg-primary hover:opacity-90 text-primary-foreground px-7 py-3.5 rounded-full transition-all duration-200 font-semibold text-sm"
             >
               <Mail className="w-4 h-4" />
               <span>Send Message</span>

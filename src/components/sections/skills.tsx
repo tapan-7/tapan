@@ -106,7 +106,7 @@ function CategoryStage({
               className="absolute will-change-transform -translate-x-1/2 -translate-y-1/2"
             >
               <div className="flex items-center gap-3.5 group cursor-default select-none py-1.5 px-2">
-                <div className="w-8 h-8 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
+                <div className="w-8 h-8 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                   <Icon />
                 </div>
                 <span className="font-mono text-base sm:text-lg lg:text-xl font-bold text-foreground/90 group-hover:text-primary transition-colors duration-200 tracking-tight whitespace-nowrap">

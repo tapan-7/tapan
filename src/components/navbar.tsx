@@ -182,7 +182,7 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group bg-background/70 hover:bg-background/90 backdrop-blur-xl px-4 py-2 rounded-full border border-border/80 shadow-lg shadow-black/20"
+            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group bg-background/80 hover:bg-background backdrop-blur-xl px-4 py-2 rounded-full border border-border/80"
           >
             <span className="text-primary font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
               &lt;
@@ -200,7 +200,7 @@ export default function Navbar() {
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
               aria-controls={navDialogId}
-              className="nav-ham w-12 h-12 md:w-14 md:h-14 rounded-full bg-secondary/80 hover:bg-secondary border border-border/80 backdrop-blur-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 shadow-xl group hover:scale-105 active:scale-95 cursor-pointer"
+              className="nav-ham w-12 h-12 md:w-14 md:h-14 rounded-full bg-secondary/80 hover:bg-secondary border border-border/80 backdrop-blur-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 group hover:scale-105 active:scale-95 cursor-pointer"
             >
               <motion.span
                 animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
@@ -249,7 +249,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
                     transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
-                    className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-card border border-border/80 shadow-2xl flex flex-col justify-end p-8 group"
+                    className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-card border border-border/80 flex flex-col justify-end p-8 group"
                   >
                     <Image
                       src={currentPreview.image}

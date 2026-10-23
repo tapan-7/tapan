@@ -36,7 +36,7 @@ const ProjectsPage = () => {
                 <div className="relative w-full aspect-[4/3] flex items-center justify-center">
                   <div className="relative w-full h-full">
                     <div className="absolute top-[15%] left-0 w-[85%] aspect-[16/10] transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] -rotate-2 group-hover:-rotate-3 group-hover:scale-105 z-10">
-                      <div className="w-full h-full bg-card rounded-xl p-3 shadow-2xl border border-border group-hover:border-primary/50 transition-colors">
+                      <div className="w-full h-full bg-card rounded-xl p-3 border border-border group-hover:border-primary/50 transition-colors">
                         <div className="w-full h-full rounded-lg overflow-hidden relative bg-background">
                           {project.image.startsWith("/") ? (
                             <Image
@@ -57,7 +57,7 @@ const ProjectsPage = () => {
 
                     {project.mobileImage && project.mobileImage.startsWith("/") && (
                       <div className="absolute right-6 top-[30%] w-[28%] aspect-[6/11] transition-all rotate-6 duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-8 group-hover:scale-105 z-20">
-                        <div className="w-full h-full bg-card rounded-xl p-2 shadow-2xl border border-border">
+                        <div className="w-full h-full bg-card rounded-xl p-2 border border-border">
                           <div className="w-full h-full rounded-lg overflow-hidden relative bg-background">
                             <Image
                               src={project.mobileImage}
@@ -96,7 +96,7 @@ const ProjectsPage = () => {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-primary-foreground font-semibold text-xs py-2.5 px-6 rounded-lg transition-all shadow-md"
+                        className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-primary-foreground font-semibold text-xs py-2.5 px-6 rounded-lg transition-all"
                       >
                         Visit Project
                         <ExternalLink className="w-3.5 h-3.5" />

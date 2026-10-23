@@ -62,7 +62,7 @@ export function MobileNav() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-x-0 top-[65px] bg-background/95 backdrop-blur-xl border-b border-border p-6 shadow-2xl z-50"
+            className="fixed inset-x-0 top-[65px] bg-background/95 backdrop-blur-xl border-b border-border p-6 z-50"
           >
             <nav className="flex flex-col space-y-4">
               {MOBILE_NAV_LINKS.map((item) => (

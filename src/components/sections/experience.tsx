@@ -38,7 +38,7 @@ export function Experience() {
 
           <motion.div
             style={{ scaleY }}
-            className="absolute left-2 sm:left-4 md:left-36 top-2 bottom-2 w-[1.5px] bg-gradient-to-b from-primary via-accent to-primary origin-top shadow-[0_0_8px_hsl(var(--primary)/0.6)]"
+            className="absolute left-2 sm:left-4 md:left-36 top-2 bottom-2 w-[1.5px] bg-gradient-to-b from-primary via-accent to-primary origin-top"
           />
 
           <div className="space-y-20 md:space-y-28">
@@ -47,7 +47,7 @@ export function Experience() {
 
               return (
                 <div key={job.title + index} className="relative group">
-                  <div className="absolute -left-[21px] sm:-left-[29px] md:-left-[55px] top-1.5 w-3.5 h-3.5 rounded-full bg-background border-2 border-primary group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_hsl(var(--primary)/0.5)] z-10" />
+                  <div className="absolute -left-[21px] sm:-left-[29px] md:-left-[55px] top-1.5 w-3.5 h-3.5 rounded-full bg-background border-2 border-primary group-hover:scale-125 transition-transform duration-300 z-10" />
 
                   <div className="hidden md:block absolute -left-48 top-1 w-32 text-right">
                     <span className="font-mono text-xs text-muted-foreground group-hover:text-primary transition-colors block">

@@ -96,13 +96,13 @@ export function MaskedHeading({
       >
         <motion.div
           style={{ x: xLeft, opacity }}
-          className="block will-change-transform mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-foreground to-primary drop-shadow-[0_0_35px_hsl(var(--primary)/0.7)]"
+          className="block will-change-transform mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-foreground to-primary"
         >
           {line1}
         </motion.div>
         <motion.div
           style={{ x: xRight, opacity }}
-          className="block will-change-transform text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-cyan-300 drop-shadow-[0_0_40px_hsl(var(--primary)/0.8)]"
+          className="block will-change-transform text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-cyan-300"
         >
           {line2}
         </motion.div>

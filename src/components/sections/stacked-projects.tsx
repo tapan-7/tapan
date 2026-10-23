@@ -27,7 +27,7 @@ export function StackedProjects() {
               <div
                 key={item.title}
                 style={{ top: `${stickyTop}px` }}
-                className="sticky rounded-3xl bg-card border border-border/80 p-8 sm:p-10 shadow-2xl transition-all duration-300 hover:border-primary/50 group"
+                className="sticky rounded-3xl bg-card border border-border/80 p-8 sm:p-10 transition-all duration-300 hover:border-primary/50 group"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-border/60 pb-5">
                   <div className="flex items-center gap-4">

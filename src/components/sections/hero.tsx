@@ -91,7 +91,7 @@ export function Hero() {
           <a
             href="#projects"
             onClick={(e) => handleScrollTo(e, "#projects")}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-200 shadow-md"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-200"
           >
             <span>Explore Projects</span>
             <ArrowDown className="w-4 h-4" />

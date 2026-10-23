@@ -56,7 +56,7 @@ const AboutPage = () => {
           </div>
 
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-72 h-80 rounded-2xl overflow-hidden border border-border bg-card shadow-2xl">
+            <div className="relative w-72 h-80 rounded-2xl overflow-hidden border border-border bg-card">
               <Image
                 src="/profile.jpeg"
                 alt={profile.name}
@@ -164,7 +164,7 @@ const AboutPage = () => {
             {aboutHobbies.map((hobby, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 bg-card border border-border hover:border-primary/50 hover:shadow-xl group"
+                className="flex flex-col items-center text-center p-8 rounded-2xl transition-all duration-300 bg-card border border-border hover:border-primary/50 group"
               >
                 <div className="mb-6 text-primary transform group-hover:scale-110 transition-transform duration-300">
                   <hobby.icon className="w-10 h-10" strokeWidth={1.5} />

@@ -21,7 +21,7 @@ const DefaultCursorSVG: FC = () => {
       height={28}
       viewBox="0 0 24 24"
       fill="none"
-      className="pointer-events-none drop-shadow-[0_0_10px_hsl(var(--primary)/0.5)] text-primary"
+      className="pointer-events-none text-primary"
     >
       <circle cx="12" cy="12" r="5" fill="currentColor" />
       <circle
