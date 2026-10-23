@@ -160,27 +160,12 @@ function WritingCard() {
   );
 }
 
-function ContactCard() {
-  return (
-    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-gradient-to-br from-zinc-900 via-neutral-900 to-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] select-none flex flex-col justify-end p-6 text-white border border-white/10">
-      <div>
-        <h3 className="text-2xl font-bold tracking-tight text-white leading-tight">
-          Get In Touch
-        </h3>
-        <p className="text-sm font-mono text-emerald-300 mt-2 select-all break-all">
-          {portfolioData.profile.email}
-        </p>
-      </div>
-    </div>
-  );
-}
-
 function DynamicCardPreview({ hoveredId }: { hoveredId: string }) {
   if (hoveredId === "experience") return <ExperienceCard />;
   if (hoveredId === "projects") return <ProjectsCard />;
   if (hoveredId === "writing") return <WritingCard />;
-  if (hoveredId === "contact") return <ContactCard />;
-  return <AboutCard />;
+  if (hoveredId === "about") return <AboutCard />;
+  return null;
 }
 
 export default function Navbar() {
@@ -209,48 +194,18 @@ export default function Navbar() {
   const smoothRotateX = useSpring(cardRotateX, { stiffness: 200, damping: 25 });
   const smoothRotateY = useSpring(cardRotateY, { stiffness: 200, damping: 25 });
 
-  const trailOffsets = [-150, -100, -50, 0, 50, 100, 150];
-  const targetX0 = useTransform(mouseX, (x) => x + trailOffsets[0]);
-  const targetX1 = useTransform(mouseX, (x) => x + trailOffsets[1]);
-  const targetX2 = useTransform(mouseX, (x) => x + trailOffsets[2]);
-  const targetX3 = useTransform(mouseX, (x) => x + trailOffsets[3]);
-  const targetX4 = useTransform(mouseX, (x) => x + trailOffsets[4]);
-  const targetX5 = useTransform(mouseX, (x) => x + trailOffsets[5]);
-  const targetX6 = useTransform(mouseX, (x) => x + trailOffsets[6]);
-
-  const targetY0 = useTransform(mouseY, (y) => y - 36);
-  const targetY1 = useTransform(mouseY, (y) => y - 36);
-  const targetY2 = useTransform(mouseY, (y) => y - 36);
-  const targetY3 = useTransform(mouseY, (y) => y - 36);
-  const targetY4 = useTransform(mouseY, (y) => y - 36);
-  const targetY5 = useTransform(mouseY, (y) => y - 36);
-  const targetY6 = useTransform(mouseY, (y) => y - 36);
-
-  const springX0 = useSpring(targetX0, { stiffness: 450, damping: 28, mass: 0.4 });
-  const springX1 = useSpring(targetX1, { stiffness: 370, damping: 26, mass: 0.5 });
-  const springX2 = useSpring(targetX2, { stiffness: 300, damping: 24, mass: 0.6 });
-  const springX3 = useSpring(targetX3, { stiffness: 240, damping: 22, mass: 0.7 });
-  const springX4 = useSpring(targetX4, { stiffness: 180, damping: 20, mass: 0.8 });
-  const springX5 = useSpring(targetX5, { stiffness: 130, damping: 18, mass: 0.9 });
-  const springX6 = useSpring(targetX6, { stiffness: 90, damping: 16, mass: 1.0 });
-
-  const springY0 = useSpring(targetY0, { stiffness: 450, damping: 28, mass: 0.4 });
-  const springY1 = useSpring(targetY1, { stiffness: 370, damping: 26, mass: 0.5 });
-  const springY2 = useSpring(targetY2, { stiffness: 300, damping: 24, mass: 0.6 });
-  const springY3 = useSpring(targetY3, { stiffness: 240, damping: 22, mass: 0.7 });
-  const springY4 = useSpring(targetY4, { stiffness: 180, damping: 20, mass: 0.8 });
-  const springY5 = useSpring(targetY5, { stiffness: 130, damping: 18, mass: 0.9 });
-  const springY6 = useSpring(targetY6, { stiffness: 90, damping: 16, mass: 1.0 });
-
-  const trailSprings = [
-    { x: springX0, y: springY0 },
-    { x: springX1, y: springY1 },
-    { x: springX2, y: springY2 },
-    { x: springX3, y: springY3 },
-    { x: springX4, y: springY4 },
-    { x: springX5, y: springY5 },
-    { x: springX6, y: springY6 },
-  ];
+  const skillsX = useMotionValue(0);
+  const skillsY = useMotionValue(0);
+  const smoothSkillsX = useSpring(skillsX, {
+    stiffness: 450,
+    damping: 30,
+    mass: 0.3,
+  });
+  const smoothSkillsY = useSpring(skillsY, {
+    stiffness: 450,
+    damping: 30,
+    mass: 0.3,
+  });
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -320,12 +275,31 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  const handleMouseMove = (clientX: number, clientY: number) => {
+  const handleMouseMove = (
+    clientX: number,
+    clientY: number,
+    targetId?: string,
+  ) => {
     if (typeof window === "undefined") return;
+    const currentTarget = targetId || hoveredId;
+    if (currentTarget === "skills") {
+      skillsX.set(clientX + 24);
+      skillsY.set(clientY);
+      return;
+    }
+    if (currentTarget === "contact") {
+      return;
+    }
     const padX = 180;
     const padY = 220;
-    const clampedX = Math.max(padX, Math.min(window.innerWidth - padX, clientX));
-    const clampedY = Math.max(padY, Math.min(window.innerHeight - padY, clientY));
+    const clampedX = Math.max(
+      padX,
+      Math.min(window.innerWidth - padX, clientX),
+    );
+    const clampedY = Math.max(
+      padY,
+      Math.min(window.innerHeight - padY, clientY),
+    );
     mouseX.set(clampedX);
     mouseY.set(clampedY);
   };
@@ -470,13 +444,49 @@ export default function Navbar() {
                         href={item.href}
                         onClick={(e) => handleNavigate(e, item.href)}
                         onMouseEnter={(e) => {
-                          handleMouseMove(e.clientX, e.clientY);
+                          handleMouseMove(e.clientX, e.clientY, item.id);
+                          if (item.id === "skills") {
+                            skillsX.jump(e.clientX + 24);
+                            skillsY.jump(e.clientY);
+                          } else if (item.id !== "contact" && !isHovering) {
+                            const padX = 180;
+                            const padY = 220;
+                            const clampedX = Math.max(
+                              padX,
+                              Math.min(window.innerWidth - padX, e.clientX),
+                            );
+                            const clampedY = Math.max(
+                              padY,
+                              Math.min(window.innerHeight - padY, e.clientY),
+                            );
+                            cursorX.jump(clampedX);
+                            cursorY.jump(clampedY);
+                          }
                           setIsHovering(true);
                           setHoveredId(item.id);
                         }}
                         onFocus={(e) => {
                           const rect = e.currentTarget.getBoundingClientRect();
-                          handleMouseMove(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                          const cx = rect.left + rect.width / 2;
+                          const cy = rect.top + rect.height / 2;
+                          handleMouseMove(cx, cy, item.id);
+                          if (item.id === "skills") {
+                            skillsX.jump(cx + 24);
+                            skillsY.jump(cy);
+                          } else if (item.id !== "contact" && !isHovering) {
+                            const padX = 180;
+                            const padY = 220;
+                            const clampedX = Math.max(
+                              padX,
+                              Math.min(window.innerWidth - padX, cx),
+                            );
+                            const clampedY = Math.max(
+                              padY,
+                              Math.min(window.innerHeight - padY, cy),
+                            );
+                            cursorX.jump(clampedX);
+                            cursorY.jump(clampedY);
+                          }
                           setIsHovering(true);
                           setHoveredId(item.id);
                         }}
@@ -504,9 +514,7 @@ export default function Navbar() {
 
                 <motion.div
                   initial={
-                    shouldReduceMotion
-                      ? { opacity: 0 }
-                      : { opacity: 0, y: 15 }
+                    shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 }
                   }
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -589,35 +597,44 @@ export default function Navbar() {
             <div className="fixed inset-0 pointer-events-none overflow-hidden z-[80] hidden md:block">
               <AnimatePresence>
                 {isHovering && hoveredId === "skills" && (
-                  <div>
+                  <motion.div
+                    style={{
+                      position: "absolute",
+                      left: smoothSkillsX,
+                      top: smoothSkillsY,
+                      transform: "translateY(-50%)",
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="pointer-events-none flex items-center gap-3 z-[85]"
+                  >
                     {SKILL_TRAIL.map((skill, idx) => (
                       <motion.div
                         key={skill.name}
-                        style={{
-                          position: "absolute",
-                          left: trailSprings[idx].x,
-                          top: trailSprings[idx].y,
-                          transform: "translate(-50%, -50%)",
+                        initial={{ opacity: 0, y: 6, scale: 0.7 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.7 }}
+                        transition={{
+                          duration: 0.2,
+                          delay: idx * 0.025,
+                          ease: [0.22, 1, 0.36, 1],
                         }}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0 }}
-                        transition={{ duration: 0.18 }}
-                        className="pointer-events-none flex flex-col items-center"
                       >
-                        <div className="w-14 h-14 rounded-2xl bg-card/95 border border-border/80 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl flex items-center justify-center p-3">
-                          <Image
-                            src={skill.src}
-                            alt={skill.name}
-                            width={28}
-                            height={28}
-                            className={`w-7 h-7 object-contain ${skill.invertDark ? "dark:invert" : ""}`}
-                            unoptimized
-                          />
-                        </div>
+                        <Image
+                          src={skill.src}
+                          alt={skill.name}
+                          width={34}
+                          height={34}
+                          className={`w-8 h-8 sm:w-9 sm:h-9 object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.55)] ${
+                            skill.invertDark ? "dark:invert" : ""
+                          }`}
+                          unoptimized
+                        />
                       </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                 )}
               </AnimatePresence>
 
@@ -633,21 +650,24 @@ export default function Navbar() {
               >
                 <div className="-translate-x-1/2 -translate-y-1/2">
                   <AnimatePresence mode="wait">
-                    {isHovering && hoveredId && hoveredId !== "skills" && (
-                      <motion.div
-                        key={hoveredId}
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.85 }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 380,
-                          damping: 26,
-                        }}
-                      >
-                        <DynamicCardPreview hoveredId={hoveredId} />
-                      </motion.div>
-                    )}
+                    {isHovering &&
+                      hoveredId &&
+                      hoveredId !== "skills" &&
+                      hoveredId !== "contact" && (
+                        <motion.div
+                          key={hoveredId}
+                          initial={{ opacity: 0, scale: 0.85 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.85 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 26,
+                          }}
+                        >
+                          <DynamicCardPreview hoveredId={hoveredId} />
+                        </motion.div>
+                      )}
                   </AnimatePresence>
                 </div>
               </motion.div>
