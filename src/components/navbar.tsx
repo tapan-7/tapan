@@ -18,54 +18,40 @@ import { AnimatedThemeToggler } from "./animated-theme-toggler";
 
 interface NavPreviewItem {
   id: string;
-  num: string;
   name: string;
   href: string;
-  tag: string;
 }
 
 const MENU_ITEMS: NavPreviewItem[] = [
   {
     id: "about",
-    num: "01",
     name: "About",
     href: "#about",
-    tag: "Biography",
   },
   {
     id: "experience",
-    num: "02",
     name: "Experience",
     href: "#experience",
-    tag: "HyScaler",
   },
   {
     id: "projects",
-    num: "03",
     name: "Projects",
     href: "#projects",
-    tag: "BingeBox",
   },
   {
     id: "skills",
-    num: "04",
     name: "Skills",
     href: "#skills",
-    tag: "Full-Stack",
   },
   {
     id: "writing",
-    num: "05",
     name: "Writing",
     href: "#writing",
-    tag: "Dev.to",
   },
   {
     id: "contact",
-    num: "06",
     name: "Contact",
     href: "#contact",
-    tag: "Direct",
   },
 ];
 
@@ -334,6 +320,16 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
+  const handleMouseMove = (clientX: number, clientY: number) => {
+    if (typeof window === "undefined") return;
+    const padX = 180;
+    const padY = 220;
+    const clampedX = Math.max(padX, Math.min(window.innerWidth - padX, clientX));
+    const clampedY = Math.max(padY, Math.min(window.innerHeight - padY, clientY));
+    mouseX.set(clampedX);
+    mouseY.set(clampedY);
+  };
+
   const handleNavigate = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -433,19 +429,16 @@ export default function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Site Navigation"
-            onMouseMove={(e) => {
-              mouseX.set(e.clientX);
-              mouseY.set(e.clientY);
-            }}
+            onMouseMove={(e) => handleMouseMove(e.clientX, e.clientY)}
             initial={
               shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }
             }
             animate={{ opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.35, ease: [0.65, 0.05, 0, 1] }}
-            className="fixed inset-0 z-[65] bg-background/95 backdrop-blur-2xl overflow-y-auto flex flex-col justify-between p-6 sm:p-10 md:p-14 pt-24 sm:pt-28"
+            className="fixed inset-0 z-[65] bg-background/95 backdrop-blur-2xl overflow-hidden flex flex-col justify-between p-6 sm:p-10 md:p-14 pt-24 sm:pt-28"
           >
-            <div className="w-full max-w-4xl mx-auto my-auto flex flex-col items-center justify-center">
+            <div className="w-full max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center min-h-0">
               <nav
                 onMouseLeave={() => {
                   setIsHovering(false);
@@ -477,19 +470,17 @@ export default function Navbar() {
                         href={item.href}
                         onClick={(e) => handleNavigate(e, item.href)}
                         onMouseEnter={(e) => {
-                          mouseX.set(e.clientX);
-                          mouseY.set(e.clientY);
+                          handleMouseMove(e.clientX, e.clientY);
                           setIsHovering(true);
                           setHoveredId(item.id);
                         }}
                         onFocus={(e) => {
                           const rect = e.currentTarget.getBoundingClientRect();
-                          mouseX.set(rect.left + rect.width / 2);
-                          mouseY.set(rect.top + rect.height / 2);
+                          handleMouseMove(rect.left + rect.width / 2, rect.top + rect.height / 2);
                           setIsHovering(true);
                           setHoveredId(item.id);
                         }}
-                        className={`group relative flex items-center justify-between w-full px-5 sm:px-8 py-3.5 sm:py-5 rounded-2xl transition-colors duration-150 ${
+                        className={`group relative flex items-center justify-center w-full px-6 py-3.5 sm:py-5 rounded-2xl text-center transition-colors duration-150 ${
                           isHovered
                             ? "bg-secondary text-foreground"
                             : isActive
@@ -497,43 +488,15 @@ export default function Navbar() {
                               : "text-foreground/80 hover:bg-secondary/30 hover:text-foreground"
                         }`}
                       >
-                        <div className="flex items-center gap-4 sm:gap-8 min-w-0">
-                          <span
-                            className={`text-sm sm:text-base font-mono font-bold tracking-wider transition-colors ${
-                              isHovered || isActive ? "text-primary" : "text-muted-foreground"
-                            }`}
-                          >
-                            {item.num}
-                          </span>
-
-                          <span
-                            className={`text-2xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight transition-colors ${
-                              isHovered || isActive
-                                ? "text-foreground"
-                                : "text-foreground/80"
-                            }`}
-                          >
-                            {item.name}
-                          </span>
-                        </div>
-
-                        <div className="flex items-center gap-4">
-                          <span
-                            className={`hidden sm:inline-block text-xs font-mono tracking-wider transition-colors uppercase ${
-                              isHovered || isActive ? "text-primary font-semibold" : "text-muted-foreground"
-                            }`}
-                          >
-                            {item.tag}
-                          </span>
-
-                          <ArrowUpRight
-                            className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors ${
-                              isHovered
-                                ? "text-primary opacity-100"
-                                : "text-muted-foreground opacity-30"
-                            }`}
-                          />
-                        </div>
+                        <span
+                          className={`text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight transition-colors ${
+                            isHovered || isActive
+                              ? "text-foreground"
+                              : "text-foreground/80"
+                          }`}
+                        >
+                          {item.name}
+                        </span>
                       </a>
                     </motion.div>
                   );
@@ -550,7 +513,7 @@ export default function Navbar() {
                     duration: 0.35,
                     delay: shouldReduceMotion ? 0 : 0.04 * MENU_ITEMS.length,
                   }}
-                  className="pt-6 border-t border-border/40 mt-4 flex flex-wrap items-center justify-between gap-6 px-4"
+                  className="pt-6 border-t border-border/40 mt-4 flex flex-wrap items-center justify-center gap-8 px-4"
                 >
                   <Link
                     href="/resume"
@@ -623,70 +586,72 @@ export default function Navbar() {
               </div>
             </div>
 
-            <AnimatePresence>
-              {isHovering && hoveredId === "skills" && (
-                <div className="hidden md:block pointer-events-none">
-                  {SKILL_TRAIL.map((skill, idx) => (
-                    <motion.div
-                      key={skill.name}
-                      style={{
-                        position: "fixed",
-                        left: trailSprings[idx].x,
-                        top: trailSprings[idx].y,
-                        transform: "translate(-50%, -50%)",
-                      }}
-                      initial={{ opacity: 0, scale: 0, y: 15 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0, y: -15 }}
-                      transition={{ duration: 0.18 }}
-                      className="pointer-events-none z-[80] flex flex-col items-center"
-                    >
-                      <div className="w-14 h-14 rounded-2xl bg-card/95 border border-border/80 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl flex items-center justify-center p-3">
-                        <Image
-                          src={skill.src}
-                          alt={skill.name}
-                          width={28}
-                          height={28}
-                          className={`w-7 h-7 object-contain ${skill.invertDark ? "dark:invert" : ""}`}
-                          unoptimized
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-            </AnimatePresence>
+            <div className="fixed inset-0 pointer-events-none overflow-hidden z-[80] hidden md:block">
+              <AnimatePresence>
+                {isHovering && hoveredId === "skills" && (
+                  <div>
+                    {SKILL_TRAIL.map((skill, idx) => (
+                      <motion.div
+                        key={skill.name}
+                        style={{
+                          position: "absolute",
+                          left: trailSprings[idx].x,
+                          top: trailSprings[idx].y,
+                          transform: "translate(-50%, -50%)",
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        transition={{ duration: 0.18 }}
+                        className="pointer-events-none flex flex-col items-center"
+                      >
+                        <div className="w-14 h-14 rounded-2xl bg-card/95 border border-border/80 shadow-[0_12px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl flex items-center justify-center p-3">
+                          <Image
+                            src={skill.src}
+                            alt={skill.name}
+                            width={28}
+                            height={28}
+                            className={`w-7 h-7 object-contain ${skill.invertDark ? "dark:invert" : ""}`}
+                            unoptimized
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </AnimatePresence>
 
-            <motion.div
-              className="fixed pointer-events-none z-[80] hidden md:block"
-              style={{
-                left: cursorX,
-                top: cursorY,
-                rotateX: smoothRotateX,
-                rotateY: smoothRotateY,
-                perspective: 1000,
-              }}
-            >
-              <div className="-translate-x-1/2 -translate-y-1/2">
-                <AnimatePresence mode="wait">
-                  {isHovering && hoveredId && hoveredId !== "skills" && (
-                    <motion.div
-                      key={hoveredId}
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.85 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 26,
-                      }}
-                    >
-                      <DynamicCardPreview hoveredId={hoveredId} />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
+              <motion.div
+                style={{
+                  position: "absolute",
+                  left: cursorX,
+                  top: cursorY,
+                  rotateX: smoothRotateX,
+                  rotateY: smoothRotateY,
+                  perspective: 1000,
+                }}
+              >
+                <div className="-translate-x-1/2 -translate-y-1/2">
+                  <AnimatePresence mode="wait">
+                    {isHovering && hoveredId && hoveredId !== "skills" && (
+                      <motion.div
+                        key={hoveredId}
+                        initial={{ opacity: 0, scale: 0.85 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.85 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 380,
+                          damping: 26,
+                        }}
+                      >
+                        <DynamicCardPreview hoveredId={hoveredId} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
