@@ -90,6 +90,117 @@ function DynamicCardPreview({ hoveredId }: { hoveredId: string }) {
   return <NavPreviewCard data={data} />;
 }
 
+function NavMenuItem({
+  item,
+  index,
+  isHovered,
+  isActive,
+  shouldReduceMotion,
+  onNavigate,
+  onHoverStart,
+  onFocusStart,
+}: {
+  item: { name: string; href: string };
+  index: number;
+  isHovered: boolean;
+  isActive: boolean;
+  shouldReduceMotion: boolean | null;
+  onNavigate: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+  onHoverStart: (clientX: number, clientY: number, id: string) => void;
+  onFocusStart: (cx: number, cy: number, id: string) => void;
+}) {
+  const [touchPos, setTouchPos] = useState<{ x: number; y: number } | null>(
+    null,
+  );
+  const id = item.href.replace("#", "").toLowerCase();
+
+  return (
+    <motion.div
+      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.35,
+        delay: shouldReduceMotion ? 0 : 0.04 * index,
+        ease: [0.65, 0.05, 0, 1],
+      }}
+      className="relative w-full"
+    >
+      <a
+        href={item.href}
+        onClick={(e) => onNavigate(e, item.href)}
+        onMouseEnter={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          setTouchPos({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+          });
+          onHoverStart(e.clientX, e.clientY, id);
+        }}
+        onMouseMove={(e) => {
+          if (!touchPos) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            setTouchPos({
+              x: e.clientX - rect.left,
+              y: e.clientY - rect.top,
+            });
+          }
+        }}
+        onMouseLeave={() => {
+          setTouchPos(null);
+        }}
+        onFocus={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          setTouchPos({
+            x: rect.width / 2,
+            y: rect.height / 2,
+          });
+          onFocusStart(cx, cy, id);
+        }}
+        onBlur={() => {
+          setTouchPos(null);
+        }}
+        className="group relative flex items-center justify-center w-full px-6 py-3.5 sm:py-5 text-center overflow-hidden select-none"
+      >
+        <motion.span
+          aria-hidden="true"
+          className="absolute inset-0 bg-foreground pointer-events-none z-0"
+          initial={false}
+          animate={{
+            clipPath:
+              isHovered && touchPos
+                ? `circle(150% at ${touchPos.x}px ${touchPos.y}px)`
+                : `circle(0% at ${touchPos?.x ?? 50}% ${touchPos?.y ?? 50}%)`,
+            opacity: isHovered ? 1 : 0,
+          }}
+          transition={{
+            clipPath: {
+              duration: 0.5,
+              ease: [0.16, 1, 0.3, 1],
+            },
+            opacity: {
+              duration: isHovered ? 0.05 : 0.25,
+            },
+          }}
+        />
+
+        <span
+          className={`relative z-10 text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight transition-colors duration-200 ${
+            isHovered
+              ? "text-background"
+              : isActive
+                ? "text-foreground"
+                : "text-foreground/80"
+          }`}
+        >
+          {item.name}
+        </span>
+      </a>
+    </motion.div>
+  );
+}
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
@@ -115,8 +226,6 @@ export default function Navbar() {
   });
   const smoothRotateX = useSpring(cardRotateX, { stiffness: 200, damping: 25 });
   const smoothRotateY = useSpring(cardRotateY, { stiffness: 200, damping: 25 });
-
-
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -318,7 +427,7 @@ export default function Navbar() {
             transition={{ duration: 0.35, ease: [0.65, 0.05, 0, 1] }}
             className="fixed inset-0 z-[65] bg-background/95 backdrop-blur-2xl overflow-hidden flex flex-col justify-between p-6 sm:p-10 md:p-14 pt-24 sm:pt-28"
           >
-            <div className="w-full max-w-4xl mx-auto flex-1 flex flex-col items-center justify-center min-h-0">
+            <div className="w-full mx-auto flex-1 flex flex-col items-center justify-center min-h-0">
               <nav
                 onMouseLeave={() => {
                   setIsHovering(false);
@@ -332,92 +441,61 @@ export default function Navbar() {
                   const isActive = activeSection === id;
 
                   return (
-                    <motion.div
+                    <NavMenuItem
                       key={id}
-                      initial={
-                        shouldReduceMotion
-                          ? { opacity: 0 }
-                          : { opacity: 0, y: 15 }
-                      }
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.35,
-                        delay: shouldReduceMotion ? 0 : 0.04 * index,
-                        ease: [0.65, 0.05, 0, 1],
+                      item={item}
+                      index={index}
+                      isHovered={isHovered}
+                      isActive={isActive}
+                      shouldReduceMotion={shouldReduceMotion}
+                      onNavigate={handleNavigate}
+                      onHoverStart={(clientX, clientY, itemId) => {
+                        handleMouseMove(clientX, clientY, itemId);
+                        if (
+                          itemId !== "skills" &&
+                          itemId !== "contact" &&
+                          !isHovering
+                        ) {
+                          const padX = 180;
+                          const padY = 220;
+                          const clampedX = Math.max(
+                            padX,
+                            Math.min(window.innerWidth - padX, clientX),
+                          );
+                          const clampedY = Math.max(
+                            padY,
+                            Math.min(window.innerHeight - padY, clientY),
+                          );
+                          cursorX.jump(clampedX);
+                          cursorY.jump(clampedY);
+                        }
+                        setIsHovering(true);
+                        setHoveredId(itemId);
                       }}
-                      className="relative"
-                    >
-                      <a
-                        href={item.href}
-                        onClick={(e) => handleNavigate(e, item.href)}
-                        onMouseEnter={(e) => {
-                          handleMouseMove(e.clientX, e.clientY, id);
-                          if (
-                            id !== "skills" &&
-                            id !== "contact" &&
-                            !isHovering
-                          ) {
-                            const padX = 180;
-                            const padY = 220;
-                            const clampedX = Math.max(
-                              padX,
-                              Math.min(window.innerWidth - padX, e.clientX),
-                            );
-                            const clampedY = Math.max(
-                              padY,
-                              Math.min(window.innerHeight - padY, e.clientY),
-                            );
-                            cursorX.jump(clampedX);
-                            cursorY.jump(clampedY);
-                          }
-                          setIsHovering(true);
-                          setHoveredId(id);
-                        }}
-                        onFocus={(e) => {
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          const cx = rect.left + rect.width / 2;
-                          const cy = rect.top + rect.height / 2;
-                          handleMouseMove(cx, cy, id);
-                          if (
-                            id !== "skills" &&
-                            id !== "contact" &&
-                            !isHovering
-                          ) {
-                            const padX = 180;
-                            const padY = 220;
-                            const clampedX = Math.max(
-                              padX,
-                              Math.min(window.innerWidth - padX, cx),
-                            );
-                            const clampedY = Math.max(
-                              padY,
-                              Math.min(window.innerHeight - padY, cy),
-                            );
-                            cursorX.jump(clampedX);
-                            cursorY.jump(clampedY);
-                          }
-                          setIsHovering(true);
-                          setHoveredId(id);
-                        }}
-                        className={`group relative flex items-center justify-center w-full px-6 py-3.5 sm:py-5 rounded-2xl text-center transition-colors duration-150 ${
-                          isHovered
-                            ? "bg-secondary text-foreground"
-                            : isActive
-                              ? "bg-secondary/50 text-foreground"
-                              : "text-foreground/80 hover:bg-secondary/30 hover:text-foreground"
-                        }`}
-                      >
-                        <span
-                          className={`text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight transition-colors ${
-                            isHovered || isActive
-                              ? "text-foreground"
-                              : "text-foreground/80"
-                          }`}
-                        >
-                          {item.name}
-                        </span>
-                      </a>
-                    </motion.div>
+                      onFocusStart={(cx, cy, itemId) => {
+                        handleMouseMove(cx, cy, itemId);
+                        if (
+                          itemId !== "skills" &&
+                          itemId !== "contact" &&
+                          !isHovering
+                        ) {
+                          const padX = 180;
+                          const padY = 220;
+                          const clampedX = Math.max(
+                            padX,
+                            Math.min(window.innerWidth - padX, cx),
+                          );
+                          const clampedY = Math.max(
+                            padY,
+                            Math.min(window.innerHeight - padY, cy),
+                          );
+                          cursorX.jump(clampedX);
+                          cursorY.jump(clampedY);
+                        }
+                        setIsHovering(true);
+                        setHoveredId(itemId);
+                      }}
+                    />
                   );
                 })}
 
