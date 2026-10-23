@@ -2,8 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useReducedMotion, MotionValue } from "framer-motion";
-import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { skillCategories, getStageRanges, CategoryData } from "@/constant/skills";
 
 const dynamicStageRanges = getStageRanges(skillCategories.length);
@@ -127,18 +126,12 @@ export function Skills() {
         >
           <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8">
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
-              <div className="flex items-center justify-between border-b border-border/40 pb-4">
-                <div>
-                  <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-                    <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-1">
-                      <span className="w-2 h-2 rounded-full bg-primary" />
-                      <span>04 &bull; CAPABILITIES &amp; TOOLKIT</span>
-                    </div>
-                  </AnimatedContent>
-                  <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-                    <BlurText text="Technical competencies." animateBy="words" delay={0.06} />
-                  </h2>
-                </div>
+              <div>
+                <SectionHeading
+                  eyebrow="04 // CAPABILITIES & TOOLKIT"
+                  title="Technical competencies."
+                  description="Core technologies, frameworks, and architectural paradigms I work with daily."
+                />
               </div>
             </div>
 
@@ -176,15 +169,11 @@ export function Skills() {
       </div>
 
       <div className="block md:hidden px-6 pt-24 pb-20 space-y-16">
-        <div>
-          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-3">
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            <span>04 &bull; CAPABILITIES &amp; TOOLKIT</span>
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground">
-            Technical competencies.
-          </h2>
-        </div>
+        <SectionHeading
+          eyebrow="04 // CAPABILITIES & TOOLKIT"
+          title="Technical competencies."
+          description="Core technologies, frameworks, and architectural paradigms I work with daily."
+        />
 
         <div className="space-y-14">
           {skillCategories.map((category) => (

@@ -2,28 +2,21 @@
 
 import React from "react";
 import { Layers } from "lucide-react";
-import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
 import { secondaryProjects } from "@/constant/projects";
+import { SubHeading } from "@/components/ui/section-heading";
 
 export function StackedProjects() {
   return (
     <section className="py-28 md:py-36 px-6 border-t border-border/40 relative">
       <div className="container max-w-4xl mx-auto">
-        <div className="mb-20 text-center">
-          <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-            <div className="text-xs font-mono tracking-widest text-primary uppercase mb-4 flex items-center justify-center gap-2">
-              <Layers className="w-3.5 h-3.5" />
-              <span>SYSTEMS & INFRASTRUCTURE</span>
-            </div>
-          </AnimatedContent>
-          <h3 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-            <BlurText text="Architecture & scale." animateBy="words" delay={0.06} />
-          </h3>
-          <p className="text-sm md:text-base text-muted-foreground max-w-lg mx-auto mt-4 font-light">
-            Behind the UI: production-tested distributed systems, dynamic form engines, and real-time pipelines.
-          </p>
-        </div>
+        <SubHeading
+          eyebrow="SYSTEMS & INFRASTRUCTURE"
+          eyebrowIcon={<Layers className="w-3.5 h-3.5" />}
+          title="Architecture & scale."
+          description="Behind the UI: production-tested distributed systems, dynamic form engines, and real-time pipelines."
+          align="center"
+          className="mb-20"
+        />
 
         <div className="space-y-10 relative">
           {secondaryProjects.map((item, index) => {

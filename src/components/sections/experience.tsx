@@ -4,8 +4,8 @@ import React, { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Briefcase, MapPin } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
 import portfolioData from "@/constant/portfolio-data.json";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Experience() {
   const { experience } = portfolioData;
@@ -25,21 +25,12 @@ export function Experience() {
   return (
     <section id="experience" className="py-28 md:py-36 px-6 relative overflow-hidden">
       <div className="container max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 lg:mb-28 gap-4">
-          <div>
-            <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-              <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-4">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                <span>02 // TRAJECTORY & EXPERIENCE</span>
-              </div>
-            </AnimatedContent>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
-              <BlurText text="Building at scale." animateBy="words" delay={0.06} />
-            </h2>
-          </div>
-          <p className="text-sm md:text-base text-muted-foreground max-w-sm font-light leading-relaxed">
-            Proven track record delivering reliable frontend systems and high-impact mobile architectures.
-          </p>
+        <div className="mb-20 lg:mb-28">
+          <SectionHeading
+            eyebrow="02 // TRAJECTORY & EXPERIENCE"
+            title="Building at scale."
+            description="Proven track record delivering reliable frontend systems and high-impact mobile architectures."
+          />
         </div>
 
         <div ref={containerRef} className="relative pl-6 sm:pl-10 md:pl-48">

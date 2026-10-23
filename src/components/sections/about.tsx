@@ -8,6 +8,7 @@ import { BlurText } from "@/components/react-bits/blur-text";
 import { CountUp } from "@/components/react-bits/count-up";
 import portfolioData from "@/constant/portfolio-data.json";
 import { aboutPillars } from "@/constant/about";
+import { SectionHeading, SubHeading } from "@/components/ui/section-heading";
 
 export function About() {
   const { profile } = portfolioData;
@@ -17,31 +18,12 @@ export function About() {
     <section id="about" className="py-28 md:py-36 px-6 relative overflow-hidden">
       <div className="container max-w-6xl mx-auto">
         <div className="mb-24 lg:mb-32">
-          <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-            <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span>01 // THE PERSON BEHIND THE CODE</span>
-            </div>
-          </AnimatedContent>
-
-          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.08] max-w-5xl mb-8">
-            <BlurText
-              text="More than just code."
-              className="block"
-              animateBy="words"
-              delay={0.06}
-            />
-            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-primary/80">
-              I build digital experiences where engineering meets thoughtful design.
-            </span>
-          </h2>
-
-          <AnimatedContent distance={20} direction="vertical" delay={0.25}>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl font-light leading-relaxed">
-              From frontend architecture to mobile experiences, I enjoy turning
-              complex problems into interfaces that feel simple and intuitive.
-            </p>
-          </AnimatedContent>
+          <SectionHeading
+            eyebrow="01 // THE PERSON BEHIND THE CODE"
+            title="More than just code."
+            gradientText="I build digital experiences where engineering meets thoughtful design."
+            description="From frontend architecture to mobile experiences, I enjoy turning complex problems into interfaces that feel simple and intuitive."
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-24 lg:mb-32">
@@ -153,21 +135,12 @@ export function About() {
         </AnimatedContent>
 
         <div className="pt-4">
-          <AnimatedContent distance={20} direction="vertical" delay={0.1}>
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-border/50 gap-4">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary block mb-2">
-                  WHAT I CARE ABOUT
-                </span>
-                <h3 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
-                  Performance. Precision. People.
-                </h3>
-              </div>
-              <p className="text-sm md:text-base text-muted-foreground max-w-md">
-                The technical and human details that make software feel effortless.
-              </p>
-            </div>
-          </AnimatedContent>
+          <SubHeading
+            eyebrow="WHAT I CARE ABOUT"
+            title="Performance. Precision. People."
+            description="The technical and human details that make software feel effortless."
+            className="mb-12 pb-6 border-b border-border/50"
+          />
 
           <div className="divide-y divide-border/40">
             {aboutPillars.map((pillar, index) => {

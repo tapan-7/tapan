@@ -4,8 +4,8 @@ import React from "react";
 import Image from "next/image";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
 import portfolioData from "@/constant/portfolio-data.json";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Writing() {
   const { blogs } = portfolioData;
@@ -18,21 +18,12 @@ export function Writing() {
   return (
     <section id="writing" className="py-28 md:py-36 px-6 border-t border-border/40 relative">
       <div className="container max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 lg:mb-28 gap-4">
-          <div>
-            <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-              <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-4">
-                <span className="w-2 h-2 rounded-full bg-primary" />
-                <span>05 // WRITING & PUBLICATIONS</span>
-              </div>
-            </AnimatedContent>
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
-              <BlurText text="Technical writing." animateBy="words" delay={0.06} />
-            </h2>
-          </div>
-          <p className="text-sm md:text-base text-muted-foreground max-w-md font-light leading-relaxed">
-            Practical deep-dives into cloud storage pipelines, WebRTC video integrations, and Android telemetry.
-          </p>
+        <div className="mb-20 lg:mb-28">
+          <SectionHeading
+            eyebrow="05 // WRITING & PUBLICATIONS"
+            title="Technical writing."
+            description="Practical deep-dives into cloud storage pipelines, WebRTC video integrations, and Android telemetry."
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">

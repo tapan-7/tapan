@@ -4,9 +4,8 @@ import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
-import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
 import { projects } from "@/constant/projects";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 export function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -97,21 +96,12 @@ export function FeaturedProjects() {
             className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8"
           >
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
-              <div ref={headerContentRef} className="flex items-end justify-between gap-4">
-                <div>
-                  <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-                    <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-2">
-                      <span className="w-2 h-2 rounded-full bg-primary" />
-                      <span>03 &bull; SHOWCASE &amp; CREATIONS</span>
-                    </div>
-                  </AnimatedContent>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground">
-                    <BlurText text="Featured work." animateBy="words" delay={0.06} />
-                  </h2>
-                </div>
-                <p className="text-xs sm:text-sm text-muted-foreground max-w-md font-light leading-relaxed hidden lg:block">
-                  Interactive applications and mobile architectures built for real-world reliability and impact.
-                </p>
+              <div ref={headerContentRef}>
+                <SectionHeading
+                  eyebrow="03 // SHOWCASE & CREATIONS"
+                  title="Featured work."
+                  description="Interactive applications and mobile architectures built for real-world reliability and impact."
+                />
               </div>
             </div>
 
@@ -254,18 +244,11 @@ export function FeaturedProjects() {
       </div>
 
       <div className="block md:hidden px-6 pt-20 pb-16 space-y-8">
-        <div>
-          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary mb-3">
-            <span className="w-2 h-2 rounded-full bg-primary" />
-            <span>03 &bull; SHOWCASE &amp; CREATIONS</span>
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-foreground mb-3">
-            Featured work.
-          </h2>
-          <p className="text-xs text-muted-foreground font-light leading-relaxed">
-            Interactive applications and mobile architectures built for real-world reliability and impact.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="03 // SHOWCASE & CREATIONS"
+          title="Featured work."
+          description="Interactive applications and mobile architectures built for real-world reliability and impact."
+        />
 
         {featured.map((project, index) => {
           const isExternalLink = project.link && project.link !== "#";

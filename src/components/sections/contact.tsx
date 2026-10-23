@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { ArrowUpRight, Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
 import portfolioData from "@/constant/portfolio-data.json";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Contact() {
   const { profile } = portfolioData;
@@ -21,25 +21,15 @@ export function Contact() {
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="container max-w-4xl mx-auto text-center">
-        <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary border border-border/70 text-xs font-mono text-primary mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span>06 // INITIATE COLLABORATION</span>
-          </div>
-        </AnimatedContent>
-
-        <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-foreground mb-8 leading-[1.08]">
-          <BlurText text="Let's build something" animateBy="words" delay={0.06} />
-          <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-primary">
-            exceptional together.
-          </span>
-        </h2>
-
-        <AnimatedContent distance={20} direction="vertical" delay={0.25}>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-12 font-light leading-relaxed">
-            Currently open to software engineering opportunities, frontend architecture roles, and high-impact product teams.
-          </p>
-        </AnimatedContent>
+        <SectionHeading
+          eyebrow="06 // INITIATE COLLABORATION"
+          badge
+          align="center"
+          title="Let's build something"
+          gradientText="exceptional together."
+          description="Currently open to software engineering opportunities, frontend architecture roles, and high-impact product teams."
+          className="mb-12"
+        />
 
         <AnimatedContent distance={25} direction="vertical" delay={0.35}>
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
