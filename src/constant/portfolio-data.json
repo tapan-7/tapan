@@ -1,190 +1,198 @@
 {
-    "profile": {
-        "name": "Tapan Kumar Swain",
-        "title": "Software Development Engineer",
-        "email": "contact@example.com",
-        "website": "https://example.com",
-        "github": "https://github.com/tapankumarswain",
-        "linkedin": "https://linkedin.com/in/tapankumarswain",
-        "twitter": "https://twitter.com/tapankumarswain",
-        "summary": "Motivated and detail-oriented Frontend Developer with 2 years of professional experience in designing and developing responsive web and mobile applications. Skilled in React, React Native, and Next.js with strong attention to UI/UX and performance optimization. Passionate about translating complex product requirements into smooth, user-centered interfaces while collaborating effectively with cross-functional teams."
+  "profile": {
+    "name": "Tapan Kumar Swain",
+    "title": "Software Development Engineer",
+    "email": "tapankumarswain353@gmail.com",
+    "mobile": "+91-8144639448",
+    "website": "https://example.com",
+    "github": "https://github.com/tapan-7",
+    "linkedin": "https://linkedin.com/in/tapankumarswain",
+    "twitter": "https://twitter.com/tapankumarswain",
+    "summary": "Software Development Engineer with 3 years of experience building web and mobile applications using React, React Native, Next.js, and TypeScript. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud-based architectures."
+  },
+  "experience": [
+    {
+      "title": "Software Development Engineer - I",
+      "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
+      "period": "Jan 2025 – Present",
+      "location": "Bhubaneswar",
+      "description": "Contributed to the development of an enterprise legal-tech platform used for drafting, reviewing, and managing financial services contracts through AI-assisted workflows.",
+      "achievements": [
+        "Frontend Development: Developed responsive modules using Next.js, React, and TypeScript for contract workflows, knowledge base management, and real-time monitoring dashboards.",
+        "Salesforce Integration: Implemented Salesforce integrations to synchronize deal and contract-related information into internal systems.",
+        "Google Drive Integration: Built document synchronization workflows to fetch, process, and manage files from Google Drive within the organizational knowledge base.",
+        "Scheduled Processing: Implemented Cron-based incremental synchronization jobs to automate enterprise data ingestion and reduce manual operations.",
+        "Real-Time Synchronization: Collaborated on WebSocket-based progress tracking and status synchronization for asynchronous document-processing workflows.",
+        "System Stability: Resolved UI issues, synchronization edge cases, and race conditions, improving platform reliability and user experience."
+      ]
     },
-    "experience": [
-        {
-            "title": "Software Development Engineer - I",
-            "company": "Hyscaler Nettantra Technologies",
-            "period": "Jan 2025 – Present",
-            "location": "Bhubaneswar, India",
-            "description": "Led frontend development in Next.js and React Native for a district-level education infrastructure system.",
-            "achievements": [
-                "Built dashboards and dynamic forms for surveys, reports, and task workflows.",
-                "Collaborated with backend/data teams to ensure smooth module integration.",
-                "Improved error handling and solved complex UI issues, reducing bugs by ~20%.",
-                "Optimized reusable components and performance, cutting development time for new features by ~25%."
-            ]
-        },
-        {
-            "title": "Junior Technical Programmer",
-            "company": "Hyscaler Nettantra Technologies",
-            "period": "Jan 2024 – Dec 2024",
-            "location": "Bhubaneswar, India",
-            "description": "Developed and maintained mobile app features for a healthcare platform providing video consultations and appointment booking.",
-            "achievements": [
-                "Implemented dynamic, responsive UI flows in React Native across Android and iOS.",
-                "Built features for a real-time vitals monitoring system, including blood pressure tracking and secure doctor video calls.",
-                "Integrated VideoSDK for high-quality video/voice call services and implemented AWS S3 storage for recording sessions.",
-                "Integrated frontend modules with secure APIs and third-party SDKs, improving the reliability of real-time communication by ~20%.",
-                "Collaborated in sprint planning and optimized mobile performance for a smoother user experience."
-            ]
-        },
-        {
-            "title": "Software Developer Trainee",
-            "company": "Hyscaler Nettantra Technologies",
-            "period": "Jun 2023 – Dec 2023",
-            "location": "Bhubaneswar, India",
-            "description": "Completed hands-on training in full-stack web development with a focus on the MERN stack and modern development workflows.",
-            "achievements": [
-                "Built and optimized a MERN-based full-stack application, improving component rendering efficiency and overall UI responsiveness.",
-                "Designed responsive UI components and implemented CRUD operations with MongoDB.",
-                "Gained foundational experience with version control, REST API integration, and deployment workflows."
-            ]
-        }
-    ],
-    "education": [
-        {
-            "degree": "Master of Computer Application (MCA)",
-            "institution": "College of IT & Management Education",
-            "period": "2020 - 2022",
-            "description": "",
-            "gpa": ""
-        },
-        {
-            "degree": "B.Sc in ITM",
-            "institution": "Bhadrak Autonomous college",
-            "period": "2017 - 2020",
-            "description": "",
-            "gpa": ""
-        },
-        {
-            "degree": "+2 Science",
-            "institution": "Indigo college of science and commerce",
-            "period": "2014 - 2016",
-            "description": "",
-            "gpa": ""
-        }
-    ],
-    "skills": {
-        "Languages": [
-            "JavaScript",
-            "TypeScript",
-            "HTML",
-            "CSS"
-        ],
-        "Frameworks & Libraries": [
-            "React",
-            "Next.js",
-            "React Native",
-            "Tailwind CSS",
-            "shadcn/ui",
-            "Bootstrap"
-        ],
-        "Backend": [
-            "Node.js",
-            "NestJS"
-        ],
-        "Databases": [
-            "MongoDB",
-            "MySQL"
-        ],
-        "Tools & Platforms": [
-            "Git",
-            "GitHub",
-            "GitLab",
-            "Docker",
-            "Linux",
-            "GraphQL",
-            "AWS"
-        ]
+    {
+      "title": "Junior Technical Programmer",
+      "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
+      "period": "Jan 2024 – Dec 2024",
+      "location": "Bhubaneswar",
+      "description": "Developed cross-platform healthcare applications supporting doctor consultations, appointment booking, and patient engagement workflows.",
+      "achievements": [
+        "React Native Development: Built responsive Android and iOS applications using React Native and TypeScript.",
+        "Video Consultation: Integrated third-party Video SDKs for secure doctor-patient communication.",
+        "Notifications: Implemented Firebase push notifications and real-time engagement features.",
+        "API Integration: Integrated mobile applications with backend services and REST APIs for secure and reliable communication."
+      ]
     },
-    "projects": [
-        {
-            "title": "E-Commerce Platform",
-            "description": "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
-            "tech": [
-                "React",
-                "Node.js",
-                "MongoDB",
-                "Stripe",
-                "JWT"
-            ],
-            "github": "#",
-            "live": "#",
-            "image": "https://placehold.co/1200x800.png"
-        },
-        {
-            "title": "Task Management System",
-            "description": "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-            "tech": [
-                "Next.js",
-                "TypeScript",
-                "Prisma",
-                "PostgreSQL",
-                "Socket.io"
-            ],
-            "github": "#",
-            "live": "#",
-            "image": "https://placehold.co/1200x800.png"
-        },
-        {
-            "title": "Analytics Dashboard",
-            "description": "Interactive analytics dashboard with data visualization, real-time metrics, and automated reporting capabilities.",
-            "tech": [
-                "React",
-                "Chart.js",
-                "Express.js",
-                "MySQL",
-                "Redis"
-            ],
-            "github": "#",
-            "live": "#",
-            "image": "https://placehold.co/1200x800.png"
-        },
-        {
-            "title": "API Gateway Service",
-            "description": "Microservices API gateway with rate limiting, authentication, and request routing for scalable applications.",
-            "tech": [
-                "Node.js",
-                "Express",
-                "Docker",
-                "AWS",
-                "Redis"
-            ],
-            "github": "#",
-            "live": "#",
-            "image": "https://placehold.co/1200x800.png"
-        }
+    {
+      "title": "Software Developer Trainee",
+      "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
+      "period": "Jun 2023 – Dec 2023",
+      "location": "Bhubaneswar",
+      "description": "Completed hands-on training in full-stack web development with a focus on the MERN stack and modern development workflows.",
+      "achievements": [
+        "MERN Application Development: Developed and maintained application modules using MongoDB, Express.js, React, and Node.js.",
+        "Responsive UI Development: Designed reusable UI components and responsive user interfaces.",
+        "CRUD Operations: Implemented database operations and integrated REST APIs into application workflows.",
+        "Version Control: Worked with Git-based development workflows and collaborative coding practices."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Computer Applications (MCA)",
+      "institution": "College of IT & Management",
+      "period": "2020 – 2022",
+      "description": "Bhubaneswar",
+      "gpa": ""
+    },
+    {
+      "degree": "Bachelor of Science (ITM)",
+      "institution": "Bhadrak Autonomous College",
+      "period": "2017 – 2020",
+      "description": "Bhadrak",
+      "gpa": ""
+    },
+    {
+      "degree": "Higher Secondary (+2 Science)",
+      "institution": "Indigo College of Science & Commerce",
+      "period": "2014 – 2016",
+      "description": "Bhadrak",
+      "gpa": ""
+    }
+  ],
+  "skills": {
+    "Frontend": [
+      "React.js",
+      "Next.js",
+      "React Native",
+      "TypeScript",
+      "JavaScript"
     ],
-    "blogs": [
-        {
-            "title": "Google Drive Integration: From OAuth Setup to Background Sync",
-            "readTime": "4 min read",
-            "category": "Integration",
-            "image": "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkwxy1dnx5wiy8521hs9u.png",
-            "url": "https://dev.to/tapan-7/google-drive-integration-from-oauth-setup-to-background-sync-251d"
-        },
-        {
-            "title": "How to Store VideoSDK Cloud Recordings Securely on AWS S3",
-            "readTime": "2 min read",
-            "category": "Cloud Storage",
-            "image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F5pucpeol052cclynfeik.png",
-            "url": "https://dev.to/tapan-7/how-to-store-videosdk-cloud-recordings-securely-on-aws-s3-g5"
-        },
-        {
-            "title": "Integrating Health Connect in Android + React Native Apps",
-            "readTime": "3 min read",
-            "category": "Mobile",
-            "image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fg3biexv7pt8weik2xug4.png",
-            "url": "https://dev.to/tapan-7/integrating-health-connect-in-android-react-native-apps-2cj4"
-        }
+    "Backend": [
+      "NestJS",
+      "Node.js",
+      "REST APIs",
+      "WebSockets"
+    ],
+    "Database": [
+      "PostgreSQL",
+      "Prisma ORM"
+    ],
+    "Cloud & DevOps": [
+      "Docker",
+      "AWS S3",
+      "Vercel",
+      "GitHub"
+    ],
+    "Messaging": [
+      "Redis",
+      "BullMQ"
+    ],
+    "Integrations": [
+      "Salesforce API",
+      "Google Drive API"
+    ],
+    "Tools": [
+      "Git",
+      "Postman",
+      "VS Code"
     ]
+  },
+  "projects": [
+    {
+      "title": "E-Commerce Platform",
+      "description": "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
+      "tech": [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "Stripe",
+        "JWT"
+      ],
+      "github": "#",
+      "live": "#",
+      "image": "https://placehold.co/1200x800.png"
+    },
+    {
+      "title": "Task Management System",
+      "description": "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "Socket.io"
+      ],
+      "github": "#",
+      "live": "#",
+      "image": "https://placehold.co/1200x800.png"
+    },
+    {
+      "title": "Analytics Dashboard",
+      "description": "Interactive analytics dashboard with data visualization, real-time metrics, and automated reporting capabilities.",
+      "tech": [
+        "React",
+        "Chart.js",
+        "Express.js",
+        "MySQL",
+        "Redis"
+      ],
+      "github": "#",
+      "live": "#",
+      "image": "https://placehold.co/1200x800.png"
+    },
+    {
+      "title": "API Gateway Service",
+      "description": "Microservices API gateway with rate limiting, authentication, and request routing for scalable applications.",
+      "tech": [
+        "Node.js",
+        "Express",
+        "Docker",
+        "AWS",
+        "Redis"
+      ],
+      "github": "#",
+      "live": "#",
+      "image": "https://placehold.co/1200x800.png"
+    }
+  ],
+  "blogs": [
+    {
+      "title": "Google Drive Integration: From OAuth Setup to Background Sync",
+      "readTime": "4 min read",
+      "category": "Integration",
+      "image": "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkwxy1dnx5wiy8521hs9u.png",
+      "url": "https://dev.to/tapan-7/google-drive-integration-from-oauth-setup-to-background-sync-251d"
+    },
+    {
+      "title": "How to Store VideoSDK Cloud Recordings Securely on AWS S3",
+      "readTime": "2 min read",
+      "category": "Cloud Storage",
+      "image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F5pucpeol052cclynfeik.png",
+      "url": "https://dev.to/tapan-7/how-to-store-videosdk-cloud-recordings-securely-on-aws-s3-g5"
+    },
+    {
+      "title": "Integrating Health Connect in Android + React Native Apps",
+      "readTime": "3 min read",
+      "category": "Mobile",
+      "image": "https://media2.dev.to/dynamic/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fg3biexv7pt8weik2xug4.png",
+      "url": "https://dev.to/tapan-7/integrating-health-connect-in-android-react-native-apps-2cj4"
+    }
+  ]
 }

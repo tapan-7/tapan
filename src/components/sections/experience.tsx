@@ -94,19 +94,33 @@ export function Experience() {
                       </p>
 
                       <ul className="pt-3 space-y-2.5 max-w-3xl">
-                        {job.achievements.map((achievement, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed group/item"
-                          >
-                            <span className="text-primary font-mono select-none mt-0.5 text-xs">
-                              —
-                            </span>
-                            <span className="group-hover/item:text-foreground transition-colors">
-                              {achievement}
-                            </span>
-                          </li>
-                        ))}
+                        {job.achievements.map((achievement, i) => {
+                          const parts = achievement.split(":");
+                          const hasPrefix = parts.length > 1;
+                          const prefix = parts[0];
+                          const content = parts.slice(1).join(":");
+
+                          return (
+                            <li
+                              key={i}
+                              className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed group/item"
+                            >
+                              <span className="text-primary font-mono select-none mt-0.5 text-xs">
+                                —
+                              </span>
+                              <span className="group-hover/item:text-foreground transition-colors">
+                                {hasPrefix ? (
+                                  <>
+                                    <strong className="text-foreground font-semibold">{prefix}:</strong>
+                                    {content}
+                                  </>
+                                ) : (
+                                  achievement
+                                )}
+                              </span>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   </AnimatedContent>

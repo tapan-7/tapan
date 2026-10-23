@@ -75,11 +75,10 @@ export function About() {
 
             <AnimatedContent distance={20} direction="vertical" delay={0.3}>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                Over the past two years, I&apos;ve contributed to large-scale web
-                and mobile systems across public education and digital
-                healthcare at{" "}
+                Over the past three years, I&apos;ve contributed to enterprise legal-tech
+                platforms, public education systems, and digital healthcare at{" "}
                 <span className="text-foreground font-semibold">
-                  Hyscaler Nettantra Technologies
+                  HyScaler Nettantra Technologies Pvt. Ltd.
                 </span>
                 .
               </p>
@@ -101,7 +100,7 @@ export function About() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 mb-28 border-y border-border/50">
             <div>
               <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-primary tracking-tight">
-                <CountUp to={2} padZero duration={1.8} suffix="+" />
+                <CountUp to={3} padZero duration={1.8} suffix="+" />
               </div>
               <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
                 Years Experience

@@ -205,6 +205,88 @@ export const GitlabIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrin
   </svg>
 );
 
+export const PostgresqlIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="#336791">
+    <path d="M12.012 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10-4.477-10-10-10zm2.25 4.672c.445 0 .86.07 1.25.195.14.043.26.137.33.266.07.13.08.28.03.414-.09.274-.39.422-.67.332-.3-.098-.63-.148-.97-.148-.79 0-1.46.324-1.95.836l-.32.332 1.34 1.336c.2.2.2.516 0 .715-.1.098-.23.148-.36.148s-.26-.05-.36-.148l-1.33-1.336-.71.742c-.52.535-.82 1.254-.82 2.012 0 .762.3 1.48.82 2.016l3.41 3.422c.2.2.2.516 0 .715-.1.1-.23.148-.36.148s-.26-.05-.36-.148l-3.41-3.422c-.72-.723-1.12-1.7-1.12-2.73 0-1.028.4-2.008 1.12-2.735l.72-.738-1.02-1.027c-.2-.2-.2-.516 0-.715.2-.2.52-.2.72 0l1.02 1.027c.69-.707 1.63-1.145 2.66-1.145z" />
+  </svg>
+);
+
+export const PrismaIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-[#2D3748] dark:text-white" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.8 19.3L13.2 3.1c-.3-.8-1.4-.9-1.9-.3L3.5 14.5c-.5.7-.2 1.7.6 2l12.7 4.1c.9.3 1.7-.5 1.4-1.3l.6-.0zm-6.2-13l4.3 12.5-4.3-3.6V6.3z" />
+  </svg>
+);
+
+export const VercelIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-foreground" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 2L24 22H0L12 2Z" />
+  </svg>
+);
+
+export const RedisIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none">
+    <path d="M2 8l10-4 10 4-10 4-10-4z" fill="#DC382D" />
+    <path d="M2 12l10 4 10-4v2l-10 4-10-4v-2z" fill="#A8231B" />
+    <path d="M2 16l10 4 10-4v2l-10 4-10-4v-2z" fill="#7A1813" />
+  </svg>
+);
+
+export const BullmqIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-[#FF4500]" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="2" y="5" width="20" height="4" rx="1" />
+    <rect x="4" y="11" width="16" height="4" rx="1" />
+    <rect x="6" y="17" width="12" height="4" rx="1" />
+  </svg>
+);
+
+export const SalesforceIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="#00A1E0">
+    <path d="M9.8 6.5a4.2 4.2 0 0 1 4.4 0 5 5 0 0 1 5.3 4.2 4.5 4.5 0 0 1 2.5 4 4.5 4.5 0 0 1-4.5 4.3H6.5A4.5 4.5 0 0 1 2 14.7a4.5 4.5 0 0 1 2.5-4 5 5 0 0 1 5.3-4.2z" />
+  </svg>
+);
+
+export const GoogleDriveIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none">
+    <path d="M7.7 3.5L14 3.5 20.3 14.5 14 14.5z" fill="#FFC107" />
+    <path d="M3.7 14.5L10 3.5 16.3 14.5 10 21.5z" fill="#0066DA" opacity="0.85" />
+    <path d="M3.7 14.5L7.7 21.5 20.3 21.5 16.3 14.5z" fill="#00AC47" />
+  </svg>
+);
+
+export const PostmanIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="#FF6C37">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M8 12l8-5-3 5 3 5-8-5z" fill="#fff" />
+  </svg>
+);
+
+export const VscodeIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="#007ACC">
+    <path d="M17.5 2.5L7.2 10.3 3.4 7.4 2 8.3l3.2 3.7L2 15.7l1.4.9 3.8-2.9L17.5 21.5l4.5-2.2V4.7l-4.5-2.2zm1.5 13.8l-5.7-4.3 5.7-4.3v8.6z" />
+  </svg>
+);
+
+export const RestApiIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-primary" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <rect x="3" y="4" width="18" height="16" rx="3" />
+    <path d="M7 9h3M7 12h10M7 15h6" strokeLinecap="round" />
+  </svg>
+);
+
+export const WebSocketIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-[#FFD700]" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M13 2L3 14h8l-2 8 10-12h-8l2-8z" />
+  </svg>
+);
+
+export const AwsS3Icon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-[#E05243]" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3v12c0 1.7-3.6 3-8 3s-8-1.3-8-3V6z" />
+    <path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+    <path d="M4 6c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+  </svg>
+);
+
 export const FallbackTechIcon: React.FC<TechIconProps> = ({ className = "w-8 h-8 shrink-0 text-primary" }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <polyline points="16 18 22 12 16 6" />
@@ -220,6 +302,7 @@ export const TECH_ICON_MAP: Record<string, React.FC<TechIconProps>> = {
   CSS: Css3Icon,
   CSS3: Css3Icon,
   React: ReactIcon,
+  "React.js": ReactIcon,
   "Next.js": NextjsIcon,
   "React Native": ReactNativeIcon,
   "Tailwind CSS": TailwindIcon,
@@ -227,15 +310,28 @@ export const TECH_ICON_MAP: Record<string, React.FC<TechIconProps>> = {
   Bootstrap: BootstrapIcon,
   "Node.js": NodejsIcon,
   NestJS: NestjsIcon,
+  "REST APIs": RestApiIcon,
+  WebSockets: WebSocketIcon,
   MongoDB: MongodbIcon,
   MySQL: MysqlIcon,
+  PostgreSQL: PostgresqlIcon,
+  "Prisma ORM": PrismaIcon,
+  Prisma: PrismaIcon,
   Docker: DockerIcon,
   AWS: AwsIcon,
+  "AWS S3": AwsS3Icon,
+  Vercel: VercelIcon,
   Linux: LinuxIcon,
   GraphQL: GraphqlIcon,
+  Redis: RedisIcon,
+  BullMQ: BullmqIcon,
+  "Salesforce API": SalesforceIcon,
+  "Google Drive API": GoogleDriveIcon,
   Git: GitIcon,
   GitHub: GithubIcon,
   GitLab: GitlabIcon,
+  Postman: PostmanIcon,
+  "VS Code": VscodeIcon,
 };
 
 export function getTechIcon(name: string): React.FC<TechIconProps> {

@@ -29,33 +29,41 @@ const skillCoordinates: Record<
     entry: { x: number; y: number };
   }
 > = {
-  JavaScript: { base: { x: -360, y: -90 }, entry: { x: -500, y: -180 } },
-  TypeScript: { base: { x: 220, y: -95 }, entry: { x: 440, y: -200 } },
-  HTML: { base: { x: -340, y: 95 }, entry: { x: -480, y: 190 } },
-  HTML5: { base: { x: -340, y: 95 }, entry: { x: -480, y: 190 } },
-  CSS: { base: { x: 230, y: 90 }, entry: { x: 450, y: 180 } },
-  CSS3: { base: { x: 230, y: 90 }, entry: { x: 450, y: 180 } },
+  "React.js": { base: { x: -360, y: -90 }, entry: { x: -520, y: -190 } },
+  React: { base: { x: -360, y: -90 }, entry: { x: -520, y: -190 } },
+  "Next.js": { base: { x: 220, y: -100 }, entry: { x: 440, y: -210 } },
+  "React Native": { base: { x: 320, y: 15 }, entry: { x: 500, y: 30 } },
+  TypeScript: { base: { x: -280, y: 85 }, entry: { x: -440, y: 180 } },
+  JavaScript: { base: { x: 190, y: 95 }, entry: { x: 400, y: 190 } },
 
-  React: { base: { x: -380, y: -110 }, entry: { x: -520, y: -200 } },
-  "Next.js": { base: { x: 200, y: -115 }, entry: { x: 420, y: -210 } },
-  "React Native": { base: { x: 310, y: 5 }, entry: { x: 500, y: 20 } },
-  "Tailwind CSS": { base: { x: -370, y: 95 }, entry: { x: -500, y: 190 } },
-  "shadcn/ui": { base: { x: -60, y: 135 }, entry: { x: -60, y: 250 } },
-  Bootstrap: { base: { x: 230, y: 110 }, entry: { x: 440, y: 210 } },
+  NestJS: { base: { x: -300, y: -70 }, entry: { x: -480, y: -150 } },
+  "Node.js": { base: { x: 280, y: -70 }, entry: { x: 470, y: -150 } },
+  "REST APIs": { base: { x: -280, y: 75 }, entry: { x: -460, y: 160 } },
+  WebSockets: { base: { x: 270, y: 80 }, entry: { x: 470, y: 160 } },
 
-  "Node.js": { base: { x: -280, y: -30 }, entry: { x: -480, y: -60 } },
-  NestJS: { base: { x: 280, y: 30 }, entry: { x: 480, y: 60 } },
+  PostgreSQL: { base: { x: -260, y: 0 }, entry: { x: -460, y: -20 } },
+  "Prisma ORM": { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
+  Prisma: { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
+  MongoDB: { base: { x: -260, y: 0 }, entry: { x: -460, y: -20 } },
+  MySQL: { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
 
-  MongoDB: { base: { x: -270, y: -30 }, entry: { x: -460, y: -60 } },
-  MySQL: { base: { x: 270, y: 30 }, entry: { x: 460, y: 60 } },
+  Docker: { base: { x: -310, y: -70 }, entry: { x: -500, y: -150 } },
+  "AWS S3": { base: { x: 270, y: -70 }, entry: { x: 470, y: -150 } },
+  AWS: { base: { x: 270, y: -70 }, entry: { x: 470, y: -150 } },
+  Vercel: { base: { x: -280, y: 75 }, entry: { x: -470, y: 160 } },
+  GitHub: { base: { x: 280, y: 80 }, entry: { x: 470, y: 170 } },
+  GitLab: { base: { x: 280, y: 80 }, entry: { x: 470, y: 170 } },
+  Linux: { base: { x: -350, y: 0 }, entry: { x: -520, y: 0 } },
 
-  Docker: { base: { x: -400, y: -110 }, entry: { x: -550, y: -200 } },
-  AWS: { base: { x: 240, y: -110 }, entry: { x: 440, y: -200 } },
-  Linux: { base: { x: -420, y: 10 }, entry: { x: -580, y: 10 } },
-  GraphQL: { base: { x: 320, y: 10 }, entry: { x: 500, y: 10 } },
-  Git: { base: { x: -350, y: 115 }, entry: { x: -500, y: 220 } },
-  GitHub: { base: { x: -40, y: 140 }, entry: { x: -40, y: 260 } },
-  GitLab: { base: { x: 240, y: 115 }, entry: { x: 440, y: 220 } },
+  Redis: { base: { x: -260, y: 0 }, entry: { x: -460, y: -20 } },
+  BullMQ: { base: { x: 260, y: 0 }, entry: { x: 460, y: 20 } },
+
+  "Salesforce API": { base: { x: -280, y: 0 }, entry: { x: -480, y: -20 } },
+  "Google Drive API": { base: { x: 280, y: 0 }, entry: { x: 480, y: 20 } },
+
+  Git: { base: { x: -300, y: -45 }, entry: { x: -480, y: -110 } },
+  Postman: { base: { x: 280, y: -45 }, entry: { x: 480, y: -110 } },
+  "VS Code": { base: { x: 0, y: 110 }, entry: { x: 0, y: 220 } },
 };
 
 export function resolveSkillItem(name: string, index: number, total: number): SkillItem {
