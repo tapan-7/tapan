@@ -3,7 +3,13 @@
 import React, { useEffect, useState, useId } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, useScroll, useSpring, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import portfolioData from "@/constant/portfolio-data.json";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
@@ -28,7 +34,8 @@ const MENU_ITEMS: NavPreviewItem[] = [
     href: "#about",
     eyebrow: "THE PERSON BEHIND THE CODE",
     title: "More than just code.",
-    description: "Software Development Engineer combining architectural discipline with design sensitivity.",
+    description:
+      "Software Development Engineer combining architectural discipline with design sensitivity.",
     image: "/profile.jpeg",
     tag: "Biography",
   },
@@ -39,7 +46,8 @@ const MENU_ITEMS: NavPreviewItem[] = [
     href: "#experience",
     eyebrow: "CAREER TRAJECTORY",
     title: "Building at scale.",
-    description: "Enterprise legal-tech, Salesforce integrations, and real-time WebSocket telemetry at HyScaler.",
+    description:
+      "Enterprise legal-tech, Salesforce integrations, and real-time WebSocket telemetry at HyScaler.",
     image: "/profile.jpeg",
     tag: "Enterprise",
   },
@@ -50,7 +58,8 @@ const MENU_ITEMS: NavPreviewItem[] = [
     href: "#projects",
     eyebrow: "SHOWCASE & CREATIONS",
     title: "Featured work.",
-    description: "Production web and mobile applications built for real-world reliability and impact.",
+    description:
+      "Production web and mobile applications built for real-world reliability and impact.",
     image: "/projects/bingebox.png",
     tag: "Showcase",
   },
@@ -61,7 +70,8 @@ const MENU_ITEMS: NavPreviewItem[] = [
     href: "#skills",
     eyebrow: "CAPABILITIES & TOOLKIT",
     title: "Technical competencies.",
-    description: "Full-stack stack spanning Next.js, React Native, NestJS, PostgreSQL, Redis, and AWS S3.",
+    description:
+      "Full-stack stack spanning Next.js, React Native, NestJS, PostgreSQL, Redis, and AWS S3.",
     image: "/profile.jpeg",
     tag: "Toolkit",
   },
@@ -72,8 +82,10 @@ const MENU_ITEMS: NavPreviewItem[] = [
     href: "#writing",
     eyebrow: "PUBLICATIONS & GUIDES",
     title: "Technical writing.",
-    description: "Verified deep-dives into Google Drive OAuth, VideoSDK S3 pipelines, and Android Health Connect.",
-    image: "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkwxy1dnx5wiy8521hs9u.png",
+    description:
+      "Verified deep-dives into Google Drive OAuth, VideoSDK S3 pipelines, and Android Health Connect.",
+    image:
+      "https://media2.dev.to/dynamic/image/width=1200,height=627,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fkwxy1dnx5wiy8521hs9u.png",
     tag: "Dev.to",
   },
   {
@@ -83,7 +95,8 @@ const MENU_ITEMS: NavPreviewItem[] = [
     href: "#contact",
     eyebrow: "INITIATE COLLABORATION",
     title: "Let's build something exceptional.",
-    description: "Available for Software Development Engineer roles, frontend architecture, and engineering teams.",
+    description:
+      "Available for Software Development Engineer roles, frontend architecture, and engineering teams.",
     image: "/profile.jpeg",
     tag: "Collaboration",
   },
@@ -105,7 +118,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "skills", "writing", "contact"];
+      const sections = [
+        "about",
+        "experience",
+        "projects",
+        "skills",
+        "writing",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 260;
 
       for (const section of sections) {
@@ -153,7 +173,10 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  const handleNavigate = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavigate = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
     if (href.startsWith("#")) {
       e.preventDefault();
       setIsOpen(false);
@@ -173,7 +196,8 @@ export default function Navbar() {
     }
   };
 
-  const currentPreview = MENU_ITEMS.find((item) => item.id === hoveredId) || MENU_ITEMS[0];
+  const currentPreview =
+    MENU_ITEMS.find((item) => item.id === hoveredId) || MENU_ITEMS[0];
 
   return (
     <>
@@ -182,7 +206,7 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group bg-background/80 hover:bg-background backdrop-blur-xl px-4 py-2 rounded-full"
+            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group hover:bg-background px-4 py-2 rounded-full"
           >
             <span className="text-primary font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
               &lt;
@@ -197,10 +221,12 @@ export default function Navbar() {
             <AnimatedThemeToggler />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                isOpen ? "Close navigation menu" : "Open navigation menu"
+              }
               aria-expanded={isOpen}
               aria-controls={navDialogId}
-              className="nav-ham relative overflow-hidden w-12 h-12 rounded-full bg-secondary/80 border border-border/80 backdrop-blur-xl flex flex-col items-center justify-center transition-all duration-300 group hover:scale-105 active:scale-95 cursor-pointer hover:border-foreground/30"
+              className="nav-ham relative overflow-hidden w-12 h-12 rounded-full border border-border/80 flex flex-col items-center justify-center transition-all duration-300 group hover:scale-105 active:scale-95 cursor-pointer hover:border-foreground/30"
             >
               <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
                 <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[42%] bg-primary/25 transition-all duration-700 ease-out group-hover:-top-1/2 group-hover:rotate-180" />
@@ -214,12 +240,16 @@ export default function Navbar() {
                   className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
                 />
                 <motion.span
-                  animate={isOpen ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }}
+                  animate={
+                    isOpen ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }
+                  }
                   transition={{ duration: 0.15 }}
                   className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
                 />
                 <motion.span
-                  animate={isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+                  animate={
+                    isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }
+                  }
                   transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
                   className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
                 />
@@ -241,7 +271,9 @@ export default function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Site Navigation"
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }}
+            initial={
+              shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }
+            }
             animate={{ opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }}
             transition={{ duration: 0.35, ease: [0.65, 0.05, 0, 1] }}
@@ -252,9 +284,17 @@ export default function Navbar() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentPreview.id}
-                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                    initial={
+                      shouldReduceMotion
+                        ? { opacity: 0 }
+                        : { opacity: 0, scale: 0.96 }
+                    }
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
+                    exit={
+                      shouldReduceMotion
+                        ? { opacity: 0 }
+                        : { opacity: 0, scale: 0.96 }
+                    }
                     transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
                     className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-card border border-border/80 flex flex-col justify-end p-8 group"
                   >
@@ -295,7 +335,11 @@ export default function Navbar() {
                     return (
                       <motion.div
                         key={item.id}
-                        initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
+                        initial={
+                          shouldReduceMotion
+                            ? { opacity: 0 }
+                            : { opacity: 0, x: -20 }
+                        }
                         animate={{ opacity: 1, x: 0 }}
                         transition={{
                           duration: 0.35,
@@ -319,8 +363,8 @@ export default function Navbar() {
                               isHovered
                                 ? "text-primary translate-x-2"
                                 : isActive
-                                ? "text-foreground"
-                                : "text-foreground/80 group-hover:text-foreground"
+                                  ? "text-foreground"
+                                  : "text-foreground/80 group-hover:text-foreground"
                             }`}
                           >
                             {item.name}
@@ -335,7 +379,11 @@ export default function Navbar() {
                   })}
 
                   <motion.div
-                    initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -20 }}
+                    initial={
+                      shouldReduceMotion
+                        ? { opacity: 0 }
+                        : { opacity: 0, x: -20 }
+                    }
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
                       duration: 0.35,
@@ -367,7 +415,9 @@ export default function Navbar() {
             <div className="container max-w-6xl mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-border/40 text-xs font-mono text-muted-foreground">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-foreground font-medium">Available for SDE Roles</span>
+                <span className="text-foreground font-medium">
+                  Available for SDE Roles
+                </span>
                 <span className="text-border">•</span>
                 <a
                   href={`mailto:${portfolioData.profile.email}`}

@@ -35,7 +35,8 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
     }
 
     try {
-      const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
+      const { top, left, width, height } =
+        buttonRef.current.getBoundingClientRect();
       const y = top + height / 2;
       const x = left + width / 2;
       const right = window.innerWidth - left;
@@ -68,7 +69,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
           duration: 650,
           easing: "ease-in-out",
           pseudoElement: "::view-transition-new(root)",
-        }
+        },
       );
 
       await animation.finished;
@@ -85,8 +86,8 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       aria-label="Toggle theme"
       ref={buttonRef}
       className={cn(
-        "relative overflow-hidden w-12 h-12 rounded-full bg-secondary/80 border border-border/80 backdrop-blur-xl flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95",
-        className
+        "relative overflow-hidden w-12 h-12 rounded-full border border-border/80 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95",
+        className,
       )}
       onClick={changeTheme}
     >
