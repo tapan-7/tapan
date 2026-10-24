@@ -49,38 +49,28 @@ export function ParticleText({
 
     const mouse = { x: -1000, y: -1000, radius: 45 };
 
-    const checkIsLight = () => {
-      if (typeof document === "undefined") return false;
-      return (
-        document.documentElement.classList.contains("light") ||
-        (!document.documentElement.classList.contains("dark") &&
-          resolvedTheme === "light")
-      );
-    };
-
-    const getPalettes = (isLight: boolean) => {
-      if (isLight) {
+    const getPalettes = () => {
+      if (typeof window === "undefined") {
         return {
-          line1: ["hsl(240, 10%, 4%)", "hsl(240, 10%, 15%)"],
-          line2: [
-            "hsl(263, 75%, 45%)",
-            "hsl(255, 80%, 50%)",
-            "hsl(190, 90%, 35%)",
-          ],
+          line1: ["hsl(var(--foreground))"],
+          line2: ["hsl(var(--primary))"],
         };
       }
+      const styles = getComputedStyle(document.documentElement);
+      const fg = styles.getPropertyValue("--foreground").trim() || "240 5% 96%";
+      const primary = styles.getPropertyValue("--primary").trim() || "255 92% 76%";
+      const accent = styles.getPropertyValue("--accent").trim() || "263 70% 50%";
+      const glow = styles.getPropertyValue("--glow").trim() || "190 90% 70%";
+      const muted = styles.getPropertyValue("--muted-foreground").trim() || "240 5% 65%";
+
       return {
-        line1: ["hsl(240, 5%, 98%)", "hsl(240, 5%, 90%)"],
-        line2: [
-          "hsl(255, 92%, 78%)",
-          "hsl(263, 75%, 68%)",
-          "hsl(180, 85%, 65%)",
-        ],
+        line1: [`hsl(${fg})`, `hsl(${muted})`],
+        line2: [`hsl(${primary})`, `hsl(${accent})`, `hsl(${glow})`],
       };
     };
 
-    const updateColors = (isLight: boolean) => {
-      const palettes = getPalettes(isLight);
+    const updateColors = () => {
+      const palettes = getPalettes();
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.color =
@@ -173,8 +163,7 @@ export function ParticleText({
       const imgData = offCtx.getImageData(0, 0, width, height);
       const data = imgData.data;
 
-      const isLight = checkIsLight();
-      const palettes = getPalettes(isLight);
+      const palettes = getPalettes();
 
       particles = [];
       const step = isMobile ? 2.8 : 3;
@@ -241,7 +230,7 @@ export function ParticleText({
     resizeObserver.observe(container);
 
     const observer = new MutationObserver(() => {
-      updateColors(checkIsLight());
+      updateColors();
     });
 
     observer.observe(document.documentElement, {

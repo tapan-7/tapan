@@ -53,6 +53,14 @@
   --color-card: hsl(var(--card));
   --color-card-foreground: hsl(var(--card-foreground));
 
+  --color-scrim: hsl(var(--scrim));
+  --color-scrim-foreground: hsl(var(--scrim-foreground));
+  --color-scrim-muted: hsl(var(--scrim-muted));
+  --color-scrim-primary: hsl(var(--scrim-primary));
+
+  --color-highlight: hsl(var(--highlight));
+  --color-glow: hsl(var(--glow));
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -101,6 +109,12 @@
     --input: 240 5.9% 16.5%;
     --ring: 255 92% 76%;
     --radius: 0.75rem;
+    --scrim: 240 10% 3.9%;
+    --scrim-foreground: 240 5% 96%;
+    --scrim-muted: 240 5% 65%;
+    --scrim-primary: 255 92% 76%;
+    --highlight: 240 5% 98%;
+    --glow: 190 90% 70%;
   }
 
   .dark {
@@ -124,6 +138,12 @@
     --input: 240 5.9% 16.5%;
     --ring: 255 92% 76%;
     --radius: 0.75rem;
+    --scrim: 240 10% 3.9%;
+    --scrim-foreground: 240 5% 96%;
+    --scrim-muted: 240 5% 65%;
+    --scrim-primary: 255 92% 76%;
+    --highlight: 240 5% 98%;
+    --glow: 190 90% 70%;
   }
 
   .light {
@@ -147,6 +167,12 @@
     --input: 240 6% 90%;
     --ring: 263 70% 50%;
     --radius: 0.75rem;
+    --scrim: 240 10% 4%;
+    --scrim-foreground: 0 0% 100%;
+    --scrim-muted: 240 5% 80%;
+    --scrim-primary: 255 92% 76%;
+    --highlight: 240 10% 3.9%;
+    --glow: 263 70% 50%;
   }
 }
 

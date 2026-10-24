@@ -86,8 +86,8 @@ export function MaskedHeading({
 
       <div
         style={{
-          maskImage: `radial-gradient(380px circle at ${currentPos.x}px ${currentPos.y}px, black 35%, transparent 85%)`,
-          WebkitMaskImage: `radial-gradient(380px circle at ${currentPos.x}px ${currentPos.y}px, black 35%, transparent 85%)`,
+          maskImage: `radial-gradient(380px circle at ${currentPos.x}px ${currentPos.y}px, currentColor 35%, transparent 85%)`,
+          WebkitMaskImage: `radial-gradient(380px circle at ${currentPos.x}px ${currentPos.y}px, currentColor 35%, transparent 85%)`,
           opacity: isInside ? 1 : 0.75,
           transition: "opacity 0.3s ease",
         }}
@@ -96,13 +96,13 @@ export function MaskedHeading({
       >
         <motion.div
           style={{ x: xLeft, opacity }}
-          className="block will-change-transform mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white via-foreground to-primary"
+          className="block will-change-transform mb-2 text-transparent bg-clip-text bg-gradient-to-r from-highlight via-foreground to-primary"
         >
           {line1}
         </motion.div>
         <motion.div
           style={{ x: xRight, opacity }}
-          className="block will-change-transform text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-cyan-300"
+          className="block will-change-transform text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-glow"
         >
           {line2}
         </motion.div>

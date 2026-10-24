@@ -27,7 +27,7 @@ interface PreviewData {
 
 function NavPreviewCard({ data }: { data: PreviewData }) {
   return (
-    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] select-none flex flex-col justify-end">
+    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-scrim shadow-2xl select-none flex flex-col justify-end">
       <Image
         src={data.image}
         alt={data.title}
@@ -36,13 +36,13 @@ function NavPreviewCard({ data }: { data: PreviewData }) {
         className={`object-cover ${data.imageClass || ""}`}
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-      <div className="relative z-10 p-5 text-white">
-        <h3 className="text-2xl font-bold tracking-tight text-white leading-tight">
+      <div className="absolute inset-0 bg-gradient-to-t from-scrim/85 via-scrim/25 to-transparent" />
+      <div className="relative z-10 p-5 text-scrim-foreground">
+        <h3 className="text-2xl font-bold tracking-tight text-scrim-foreground leading-tight">
           {data.title}
         </h3>
         {data.subtitle && (
-          <p className="text-xs font-mono text-white/80 mt-1">
+          <p className="text-xs font-mono text-scrim-muted mt-1">
             {data.subtitle}
           </p>
         )}
