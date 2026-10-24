@@ -41,17 +41,17 @@ export function About() {
                     className="object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500 dark:from-background/90 dark:via-transparent dark:to-transparent dark:opacity-70 dark:group-hover:opacity-40" />
                   <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-widest text-primary mb-1">
+                      <p className="text-xs font-mono uppercase tracking-widest text-purple-300 dark:text-primary mb-1">
                         {about.bio.role || profile.title}
                       </p>
-                      <p className="text-lg font-bold text-foreground">
+                      <p className="text-lg font-bold text-white dark:text-foreground">
                         {profile.name}
                       </p>
                     </div>
-                    <span className="text-xs font-mono text-muted-foreground">
+                    <span className="text-xs font-mono text-white/75 dark:text-muted-foreground">
                       {about.bio.countryCode}
                     </span>
                   </div>
