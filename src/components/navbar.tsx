@@ -16,6 +16,7 @@ import { ArrowUpRight } from "lucide-react";
 import portfolioData from "@/constant/portfolio-data.json";
 import { NAV_LINKS } from "@/constant/navigation";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 interface PreviewData {
   image: string;
@@ -375,10 +376,7 @@ export default function Navbar() {
               aria-controls={navDialogId}
               className="nav-ham relative overflow-hidden w-12 h-12 rounded-full border border-border/80 flex flex-col items-center justify-center transition-all duration-300 group hover:scale-105 active:scale-95 cursor-pointer hover:border-foreground/30"
             >
-              <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
-                <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[42%] bg-primary/25 transition-all duration-700 ease-out group-hover:-top-1/2 group-hover:rotate-180" />
-                <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[40%] bg-foreground transition-all duration-500 ease-out delay-75 group-hover:-top-1/2 group-hover:rotate-[240deg]" />
-              </span>
+              <LiquidWave />
 
               <div className="relative z-10 flex flex-col items-center justify-center gap-1.5">
                 <motion.span

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ExternalLink, Github } from "lucide-react";
 import { projects } from "@/constant/projects";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 const ProjectsPage = () => {
   return (
@@ -96,10 +97,13 @@ const ProjectsPage = () => {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-primary hover:opacity-90 text-primary-foreground font-semibold text-xs py-2.5 px-6 rounded-lg transition-all"
+                        className="relative overflow-hidden inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold text-xs py-2.5 px-6 rounded-lg transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
                       >
-                        Visit Project
-                        <ExternalLink className="w-3.5 h-3.5" />
+                        <LiquidWave color="foreground" />
+                        <span className="relative z-10 flex items-center gap-2 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                          <span>Visit Project</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </span>
                       </a>
                     )}
                     {isGithub && (
@@ -107,10 +111,13 @@ const ProjectsPage = () => {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 border border-border text-muted-foreground hover:text-foreground hover:bg-secondary font-medium text-xs py-2.5 px-6 rounded-lg transition-all"
+                        className="relative overflow-hidden inline-flex items-center gap-2 bg-card border border-border text-muted-foreground font-medium text-xs py-2.5 px-6 rounded-lg transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
                       >
-                        GitHub
-                        <Github className="w-3.5 h-3.5" />
+                        <LiquidWave color="foreground" />
+                        <span className="relative z-10 flex items-center gap-2 text-muted-foreground group-hover:text-background transition-colors duration-300">
+                          <span>GitHub</span>
+                          <Github className="w-3.5 h-3.5" />
+                        </span>
                       </a>
                     )}
                   </div>

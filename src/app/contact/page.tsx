@@ -1,6 +1,7 @@
 import React from "react";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 const ContactPage = () => {
   return (
@@ -20,18 +21,24 @@ const ContactPage = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <a
               href="mailto:contact@example.com"
-              className="flex items-center gap-2.5 bg-primary hover:opacity-90 text-primary-foreground px-7 py-3.5 rounded-full transition-all duration-200 font-semibold text-sm"
+              className="relative overflow-hidden inline-flex items-center gap-2.5 bg-primary text-primary-foreground px-7 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
             >
-              <Mail className="w-4 h-4" />
-              <span>Send Message</span>
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center gap-2.5 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                <Mail className="w-4 h-4" />
+                <span>Send Message</span>
+              </span>
             </a>
             <a
               download
               href="/resume.pdf"
-              className="flex items-center gap-2.5 border border-border text-foreground hover:bg-secondary px-7 py-3.5 rounded-full transition-all duration-200 font-medium text-sm bg-card"
+              className="relative overflow-hidden inline-flex items-center gap-2.5 border border-border text-foreground px-7 py-3.5 rounded-full font-medium text-sm bg-card transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
-              <Download className="w-4 h-4" />
-              <span>Download Resume</span>
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center gap-2.5 text-foreground group-hover:text-background transition-colors duration-300">
+                <Download className="w-4 h-4" />
+                <span>Download Resume</span>
+              </span>
             </a>
           </div>
 
@@ -41,25 +48,34 @@ const ContactPage = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex items-center justify-center w-11 h-11 bg-card border border-border hover:border-primary text-muted-foreground hover:text-foreground rounded-full transition-all duration-200"
+              className="relative overflow-hidden flex items-center justify-center w-11 h-11 bg-card border border-border rounded-full transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
-              <Github className="w-5 h-5" />
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                <Github className="w-5 h-5" />
+              </span>
             </a>
             <a
               href="https://linkedin.com/in/tapankumarswain"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex items-center justify-center w-11 h-11 bg-card border border-border hover:border-primary text-muted-foreground hover:text-foreground rounded-full transition-all duration-200"
+              className="relative overflow-hidden flex items-center justify-center w-11 h-11 bg-card border border-border rounded-full transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
-              <Linkedin className="w-5 h-5" />
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                <Linkedin className="w-5 h-5" />
+              </span>
             </a>
             <a
               href="mailto:contact@example.com"
               aria-label="Email"
-              className="flex items-center justify-center w-11 h-11 bg-card border border-border hover:border-primary text-muted-foreground hover:text-foreground rounded-full transition-all duration-200"
+              className="relative overflow-hidden flex items-center justify-center w-11 h-11 bg-card border border-border rounded-full transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
-              <Mail className="w-5 h-5" />
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                <Mail className="w-5 h-5" />
+              </span>
             </a>
           </div>
         </AnimatedSection>

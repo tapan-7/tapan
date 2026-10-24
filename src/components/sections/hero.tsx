@@ -11,6 +11,7 @@ import {
   Mail,
 } from "lucide-react";
 import { ParticleText } from "@/components/react-bits/particle-text";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 import portfolioData from "@/constant/portfolio-data.json";
 
 export function Hero() {
@@ -89,27 +90,36 @@ export function Hero() {
           <a
             href="#projects"
             onClick={(e) => handleScrollTo(e, "#projects")}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+            className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
           >
-            <span>Explore Projects</span>
-            <ArrowDown className="w-4 h-4" />
+            <LiquidWave color="primary" />
+            <span className="relative z-10 flex items-center gap-2 text-background group-hover:text-primary-foreground transition-colors duration-300">
+              <span>Explore Projects</span>
+              <ArrowDown className="w-4 h-4" />
+            </span>
           </a>
 
           <a
             href="#contact"
             onClick={(e) => handleScrollTo(e, "#contact")}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card text-foreground border border-border font-medium text-sm hover:border-primary/50 hover:bg-secondary transition-all duration-200"
+            className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card text-foreground border border-border font-medium text-sm transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
-            <span>Contact Me</span>
+            <LiquidWave color="foreground" />
+            <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background transition-colors duration-300">
+              <span>Contact Me</span>
+            </span>
           </a>
 
           <a
             href="/resume.pdf"
             download
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-transparent text-muted-foreground hover:text-foreground text-sm font-medium transition-colors border border-transparent hover:border-border"
+            className="relative overflow-hidden inline-flex items-center gap-2 px-5 py-3 rounded-full bg-card/40 text-muted-foreground border border-border/70 text-sm font-medium transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
-            <Download className="w-4 h-4" />
-            <span>Resume</span>
+            <LiquidWave color="foreground" />
+            <span className="relative z-10 flex items-center gap-2 text-muted-foreground group-hover:text-background transition-colors duration-300">
+              <Download className="w-4 h-4" />
+              <span>Resume</span>
+            </span>
           </a>
         </motion.div>
 
@@ -124,25 +134,34 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub profile"
-            className="p-2.5 rounded-full hover:bg-card hover:text-foreground border border-transparent hover:border-border transition-all"
+            className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
-            <Github className="w-5 h-5" />
+            <LiquidWave color="foreground" />
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+              <Github className="w-5 h-5" />
+            </span>
           </a>
           <a
             href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn profile"
-            className="p-2.5 rounded-full hover:bg-card hover:text-foreground border border-transparent hover:border-border transition-all"
+            className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
-            <Linkedin className="w-5 h-5" />
+            <LiquidWave color="foreground" />
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+              <Linkedin className="w-5 h-5" />
+            </span>
           </a>
           <a
             href={`mailto:${profile.email}`}
             aria-label="Send Email"
-            className="p-2.5 rounded-full hover:bg-card hover:text-foreground border border-transparent hover:border-border transition-all"
+            className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
-            <Mail className="w-5 h-5" />
+            <LiquidWave color="foreground" />
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+              <Mail className="w-5 h-5" />
+            </span>
           </a>
           <span className="w-px h-4 bg-border" />
           <a

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ArrowUp } from "lucide-react";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 import portfolioData from "@/constant/portfolio-data.json";
 import { NAV_LINKS } from "@/constant/navigation";
 
@@ -38,9 +39,12 @@ export default function Footer() {
             onClick={scrollToTop}
             type="button"
             aria-label="Back to top"
-            className="w-8 h-8 rounded-full bg-secondary border border-border/60 flex items-center justify-center hover:border-primary/60 hover:text-primary transition-all ml-2 active:scale-95"
+            className="relative overflow-hidden w-8 h-8 rounded-full bg-secondary border border-border/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95 ml-2"
           >
-            <ArrowUp className="w-3.5 h-3.5" />
+            <LiquidWave color="foreground" />
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+              <ArrowUp className="w-3.5 h-3.5" />
+            </span>
           </button>
         </div>
       </div>

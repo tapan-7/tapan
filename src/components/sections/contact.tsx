@@ -11,6 +11,7 @@ import {
   Mail,
 } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 import portfolioData from "@/constant/portfolio-data.json";
 import { SectionHeading } from "@/components/ui/section-heading";
 
@@ -46,38 +47,47 @@ export function Contact() {
           <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
             <a
               href={`mailto:${profile.email}`}
-              className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-all duration-200 hover:scale-105 active:scale-95"
+              className="relative overflow-hidden inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-sm transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
             >
-              <Mail className="w-4 h-4" />
-              <span>{profile.email}</span>
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center gap-2.5 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                <Mail className="w-4 h-4" />
+                <span>{profile.email}</span>
+              </span>
             </a>
 
             <button
               onClick={handleCopyEmail}
               type="button"
               aria-label="Copy email address"
-              className="inline-flex items-center gap-2 px-5 py-4 rounded-full bg-secondary border border-border/70 text-foreground hover:border-primary/50 text-sm font-mono transition-all duration-200 active:scale-95"
+              className="relative overflow-hidden inline-flex items-center gap-2 px-5 py-4 rounded-full bg-secondary border border-border/70 text-foreground text-sm font-mono transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
-              {copied ? (
-                <>
-                  <Check className="w-4 h-4 text-primary" />
-                  <span className="text-xs text-primary">Copied</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">Copy</span>
-                </>
-              )}
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center gap-2 group-hover:text-background transition-colors duration-300">
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4 text-primary group-hover:text-background transition-colors duration-300" />
+                    <span className="text-xs text-primary group-hover:text-background transition-colors duration-300">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4 text-muted-foreground group-hover:text-background transition-colors duration-300" />
+                    <span className="text-xs text-muted-foreground group-hover:text-background transition-colors duration-300">Copy</span>
+                  </>
+                )}
+              </span>
             </button>
 
             <a
               href="/resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card text-foreground border border-border/70 font-medium text-sm hover:border-primary/50 hover:bg-secondary transition-all duration-200"
+              className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card text-foreground border border-border/70 font-medium text-sm transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
-              <Download className="w-4 h-4" />
-              <span>Resume</span>
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background transition-colors duration-300">
+                <Download className="w-4 h-4" />
+                <span>Resume</span>
+              </span>
             </a>
           </div>
         </AnimatedContent>

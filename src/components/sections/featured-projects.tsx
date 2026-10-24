@@ -12,6 +12,7 @@ import { ArrowUpRight, Github } from "lucide-react";
 import { projects } from "@/constant/projects";
 import portfolioData from "@/constant/portfolio-data.json";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 export function FeaturedProjects() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -135,7 +136,7 @@ export function FeaturedProjects() {
                   return (
                     <div
                       key={project.title}
-                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 relative overflow-hidden group hover:border-primary/50 transition-colors duration-300"
+                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 relative overflow-hidden group/card hover:border-primary/50 transition-colors duration-300"
                     >
                       <div className="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-0" />
 
@@ -155,10 +156,13 @@ export function FeaturedProjects() {
                               href={project.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-2 rounded-full bg-secondary border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 transition-all"
+                              className="relative overflow-hidden p-2 rounded-full bg-secondary border border-border flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
                               aria-label={`GitHub source for ${project.title}`}
                             >
-                              <Github className="w-4 h-4" />
+                              <LiquidWave color="foreground" />
+                              <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                                <Github className="w-4 h-4" />
+                              </span>
                             </a>
                           )}
                           {isExternalLink && (
@@ -166,10 +170,13 @@ export function FeaturedProjects() {
                               href={project.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs hover:opacity-90 transition-opacity"
+                              className="relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
                             >
-                              <span>Live Demo</span>
-                              <ArrowUpRight className="w-3.5 h-3.5" />
+                              <LiquidWave color="foreground" />
+                              <span className="relative z-10 flex items-center gap-1.5 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                                <span>Live Demo</span>
+                                <ArrowUpRight className="w-3.5 h-3.5" />
+                              </span>
                             </a>
                           )}
                         </div>
@@ -177,7 +184,7 @@ export function FeaturedProjects() {
 
                       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto items-center">
                         <div className="lg:col-span-5 space-y-3">
-                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground group-hover:text-primary transition-colors">
+                          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground group-hover/card:text-primary transition-colors">
                             {project.title}
                           </h3>
                           <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light line-clamp-3 sm:line-clamp-4">
@@ -271,10 +278,13 @@ export function FeaturedProjects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-full bg-secondary border border-border text-muted-foreground"
+                      className="relative overflow-hidden p-2 rounded-full bg-secondary border border-border flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
                       aria-label="GitHub"
                     >
-                      <Github className="w-4 h-4" />
+                      <LiquidWave color="foreground" />
+                      <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                        <Github className="w-4 h-4" />
+                      </span>
                     </a>
                   )}
                   {isExternalLink && (
@@ -282,10 +292,13 @@ export function FeaturedProjects() {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium text-xs"
+                      className="relative overflow-hidden inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium text-xs transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
                     >
-                      <span>Demo</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
+                      <LiquidWave color="foreground" />
+                      <span className="relative z-10 flex items-center gap-1 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                        <span>Demo</span>
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
                     </a>
                   )}
                 </div>

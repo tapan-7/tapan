@@ -5,6 +5,7 @@ import portfolioData from "@/constant/portfolio-data.json";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Download, ArrowUpRight } from "lucide-react";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 const ResumePage = () => {
   const { profile, experience, education, skills } = portfolioData;
@@ -39,10 +40,13 @@ const ResumePage = () => {
               target="_blank"
               rel="noopener noreferrer"
               download
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:opacity-90 text-primary-foreground text-xs font-semibold rounded-full transition-colors w-fit"
+              className="relative overflow-hidden inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground text-xs font-semibold rounded-full transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95 w-fit"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download PDF</span>
+              <LiquidWave color="foreground" />
+              <span className="relative z-10 flex items-center gap-2 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                <Download className="w-3.5 h-3.5" />
+                <span>Download PDF</span>
+              </span>
             </a>
           </div>
 

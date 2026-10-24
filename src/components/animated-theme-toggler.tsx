@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, useId } from "react";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 type Props = {
   className?: string;
@@ -91,10 +92,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       )}
       onClick={changeTheme}
     >
-      <span className="absolute inset-0 overflow-hidden rounded-full pointer-events-none">
-        <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[42%] bg-primary/25 transition-all duration-700 ease-out group-hover:-top-1/2 group-hover:rotate-180" />
-        <span className="absolute -left-1/2 top-full w-[200%] h-[200%] rounded-[40%] bg-foreground transition-all duration-500 ease-out delay-75 group-hover:-top-1/2 group-hover:rotate-[240deg]" />
-      </span>
+      <LiquidWave />
 
       <span className="relative z-10 flex items-center justify-center text-foreground group-hover:text-background transition-colors duration-300">
         <svg
