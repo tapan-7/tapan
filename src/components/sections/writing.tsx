@@ -16,7 +16,7 @@ export function Writing() {
   const otherPosts = blogs.slice(1);
 
   return (
-    <section id="writing" className="py-28 md:py-36 px-6 border-t border-border/40 relative">
+    <section id="writing" className="py-10 md:py-28 px-6 relative">
       <div className="container max-w-6xl mx-auto">
         <div className="mb-20 lg:mb-28">
           <SectionHeading
@@ -53,7 +53,9 @@ export function Writing() {
 
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
-                    <span className="text-primary">{featuredPost.category}</span>
+                    <span className="text-primary">
+                      {featuredPost.category}
+                    </span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />

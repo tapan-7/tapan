@@ -23,7 +23,10 @@ export function Experience() {
   });
 
   return (
-    <section id="experience" className="py-28 md:py-36 px-6 relative overflow-hidden">
+    <section
+      id="experience"
+      className="py-20 md:py-28 px-6 relative overflow-hidden"
+    >
       <div className="container max-w-5xl mx-auto">
         <div className="mb-20 lg:mb-28">
           <SectionHeading
@@ -111,7 +114,9 @@ export function Experience() {
                               <span className="group-hover/item:text-foreground transition-colors">
                                 {hasPrefix ? (
                                   <>
-                                    <strong className="text-foreground font-semibold">{prefix}:</strong>
+                                    <strong className="text-foreground font-semibold">
+                                      {prefix}:
+                                    </strong>
                                     {content}
                                   </>
                                 ) : (

@@ -90,7 +90,7 @@ export function FeaturedProjects() {
   }, [featured.length, buffer]);
 
   return (
-    <section id="projects" className="relative border-t border-border/40">
+    <section id="projects" className="relative">
       <div className="hidden md:block">
         <div
           ref={containerRef}

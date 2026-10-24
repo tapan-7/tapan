@@ -7,7 +7,7 @@ import { SubHeading } from "@/components/ui/section-heading";
 
 export function StackedProjects() {
   return (
-    <section className="py-28 md:py-36 px-6 border-t border-border/40 relative">
+    <section className="py-20 md:py-28 px-6 relative">
       <div className="container max-w-4xl mx-auto">
         <SubHeading
           eyebrow="SYSTEMS & INFRASTRUCTURE"

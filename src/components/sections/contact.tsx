@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUpRight, Check, Copy, Download, Github, Linkedin, Mail } from "lucide-react";
+import {
+  ArrowUpRight,
+  Check,
+  Copy,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import portfolioData from "@/constant/portfolio-data.json";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -17,7 +25,10 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-32 md:py-44 px-6 border-t border-border/40 relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-20 md:py-28 px-6 relative overflow-hidden"
+    >
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <div className="container max-w-4xl mx-auto text-center">

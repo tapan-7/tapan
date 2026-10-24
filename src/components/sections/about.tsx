@@ -15,7 +15,10 @@ export function About() {
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
 
   return (
-    <section id="about" className="py-28 md:py-36 px-6 relative overflow-hidden">
+    <section
+      id="about"
+      className="py-20 md:py-28 px-6 relative overflow-hidden"
+    >
       <div className="container max-w-6xl mx-auto">
         <div className="mb-24 lg:mb-32">
           <SectionHeading
@@ -75,8 +78,9 @@ export function About() {
 
             <AnimatedContent distance={20} direction="vertical" delay={0.3}>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                Over the past three years, I&apos;ve contributed to enterprise legal-tech
-                platforms, public education systems, and digital healthcare at{" "}
+                Over the past three years, I&apos;ve contributed to enterprise
+                legal-tech platforms, public education systems, and digital
+                healthcare at{" "}
                 <span className="text-foreground font-semibold">
                   HyScaler Nettantra Technologies Pvt. Ltd.
                 </span>
@@ -89,8 +93,8 @@ export function About() {
                 My approach combines architectural discipline with design
                 sensitivity. From building interactive dashboards and custom
                 dynamic form builders to integrating real-time telemetry like
-                VideoSDK and Health Connect, I strive to make software feel swift,
-                intuitive, and resilient.
+                VideoSDK and Health Connect, I strive to make software feel
+                swift, intuitive, and resilient.
               </p>
             </AnimatedContent>
           </div>
