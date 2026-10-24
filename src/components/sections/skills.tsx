@@ -3,180 +3,220 @@
 import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useReducedMotion,
+  useSpring,
   MotionValue,
 } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-import {
-  skillCategories,
-  getStageRanges,
-  CategoryData,
-} from "@/constant/skills";
+import { skillCategories, CategoryData } from "@/constant/skills";
 
-const dynamicStageRanges = getStageRanges(skillCategories.length);
-
-function CategoryStage({
-  category,
-  index,
-  scrollProgress,
-  shouldReduceMotion,
-}: {
+interface SkillListColumnProps {
   category: CategoryData;
   index: number;
-  scrollProgress: MotionValue<number>;
-  shouldReduceMotion: boolean | null;
-}) {
-  const r = dynamicStageRanges[index];
-  const progressRange = [r.enterStart, r.enterEnd, r.exitStart, r.exitEnd];
+  total: number;
+  smoothProgress: MotionValue<number>;
+  width: number;
+  marginRight: number;
+  onSelect: () => void;
+}
 
-  const headerOpacity = useTransform(
-    scrollProgress,
-    progressRange,
-    [0, 1, 1, 0],
+function SkillListColumn({
+  category,
+  index,
+  total,
+  smoothProgress,
+  width,
+  marginRight,
+  onSelect,
+}: SkillListColumnProps) {
+  const centerP = total > 1 ? index / (total - 1) : 0;
+  const step = total > 1 ? 1 / (total - 1) : 1;
+
+  const opacity = useTransform(
+    smoothProgress,
+    [
+      centerP - step * 1.5,
+      centerP - step,
+      centerP,
+      centerP + step,
+      centerP + step * 1.5,
+    ],
+    [0.2, 0.38, 1, 0.38, 0.2],
+    { clamp: true },
   );
-  const headerY = useTransform(scrollProgress, progressRange, [60, 0, 0, -45]);
-  const headerScale = useTransform(
-    scrollProgress,
-    progressRange,
-    [0.85, 1, 1, 0.9],
+
+  const scale = useTransform(
+    smoothProgress,
+    [centerP - step, centerP, centerP + step],
+    [0.96, 1, 0.96],
+    { clamp: true },
   );
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <motion.div
-        style={{
-          opacity: shouldReduceMotion ? 1 : headerOpacity,
-          y: shouldReduceMotion ? 0 : headerY,
-          scale: shouldReduceMotion ? 1 : headerScale,
-        }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-auto z-10 w-full max-w-xl will-change-transform"
-      >
-        <span className="text-xs font-mono text-primary uppercase tracking-[0.25em] block mb-2">
-          {category.num}
-        </span>
-        <h3 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.05]">
-          {category.title}.
-        </h3>
-      </motion.div>
-
-      <div className="absolute inset-0 pointer-events-auto">
+    <motion.div
+      style={{
+        width: `${width}px`,
+        marginRight: `${marginRight}px`,
+        opacity,
+        scale,
+      }}
+      onClick={onSelect}
+      className="shrink-0 select-none cursor-pointer will-change-transform"
+    >
+      <div className="flex flex-col w-full">
         {category.skills.map((skill, sIdx) => {
           const Icon = skill.icon;
-          const driftX = -25 + (sIdx % 3) * 15;
-          const driftY = -12 + (sIdx % 2) * 24;
-
-          const skillOpacity = useTransform(
-            scrollProgress,
-            progressRange,
-            [0, 1, 1, 0],
-          );
-          const skillScale = useTransform(
-            scrollProgress,
-            progressRange,
-            [0.55, 1, 1, 0.8],
-          );
-
-          const skillX = useTransform(scrollProgress, progressRange, [
-            skill.base.x + skill.entry.x * 0.7,
-            skill.base.x,
-            skill.base.x + driftX,
-            skill.base.x + driftX * 2.2 + (skill.entry.x > 0 ? 80 : -80),
-          ]);
-
-          const skillY = useTransform(scrollProgress, progressRange, [
-            skill.base.y + skill.entry.y * 0.7,
-            skill.base.y,
-            skill.base.y + driftY,
-            skill.base.y + driftY * 2.2 - 40,
-          ]);
-
           return (
-            <motion.div
+            <div
               key={skill.name}
-              style={{
-                left: "50%",
-                top: "50%",
-                x: shouldReduceMotion ? skill.base.x : skillX,
-                y: shouldReduceMotion ? skill.base.y : skillY,
-                scale: shouldReduceMotion ? 1 : skillScale,
-                opacity: shouldReduceMotion ? 1 : skillOpacity,
-              }}
-              className="absolute will-change-transform -translate-x-1/2 -translate-y-1/2"
+              className="group flex items-center justify-between py-4 sm:py-4.5 px-2 transition-all duration-200 hover:pl-3"
             >
-              <div className="flex items-center gap-3.5 group cursor-default select-none py-1.5 px-2">
-                <div className="w-8 h-8 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-200">
                   <Icon />
                 </div>
-                <span className="font-mono text-base sm:text-lg lg:text-xl font-bold text-foreground/90 group-hover:text-primary transition-colors duration-200 tracking-tight whitespace-nowrap">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-foreground group-hover:text-primary transition-colors">
                   {skill.name}
                 </span>
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 export function Skills() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
+  const [windowWidth, setWindowWidth] = useState(1200);
+  const [activeIndex, setActiveIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
+
+  const listWidth = Math.min(560, Math.max(320, windowWidth * 0.44));
+  const gap = Math.min(72, Math.max(40, windowWidth * 0.05));
+  const step = listWidth + gap;
+  const totalTravel = (skillCategories.length - 1) * step;
+  const initialOffset = Math.max(24, (windowWidth - listWidth) / 2);
+
+  const containerHeight = Math.max(1700, totalTravel + 800);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  useEffect(() => {
-    const updateDimensions = () => {
-      const vh = window.innerHeight;
-      setContainerHeight(Math.max(3000, vh * 4.2));
-    };
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 280,
+    damping: 32,
+    mass: 0.2,
+  });
 
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+  const rawX = useTransform(smoothProgress, [0, 1], [0, -totalTravel]);
+  const trackX = shouldReduceMotion ? 0 : rawX;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = smoothProgress.on("change", (v) => {
+      const idx = Math.min(
+        skillCategories.length - 1,
+        Math.max(0, Math.round(v * (skillCategories.length - 1))),
+      );
+      setActiveIndex(idx);
+    });
+    return () => unsubscribe();
+  }, [smoothProgress]);
+
+  const scrollToCategory = (targetIdx: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const containerTop = rect.top + scrollTop;
+    const scrollDistance = containerHeight - window.innerHeight;
+    const targetScroll =
+      containerTop +
+      (targetIdx / (skillCategories.length - 1)) * scrollDistance;
+    window.scrollTo({ top: targetScroll, behavior: "smooth" });
+  };
+
+  const activeCategory = skillCategories[activeIndex] || skillCategories[0];
+
   return (
-    <section id="skills" className="relative border-t border-border/40">
+    <section id="skills" className="relative">
       <div className="hidden md:block">
         <div
           ref={containerRef}
-          style={{ height: containerHeight ? `${containerHeight}px` : "420vh" }}
+          style={{ height: `${containerHeight}px` }}
           className="relative"
         >
-          <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between pt-20 pb-8">
+          <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-10 sm:py-12">
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
-              <div className="border-b border-border/40 pb-4">
+              <div className="border-b border-border/40 pb-6">
                 <SectionHeading
                   eyebrow="04 // CAPABILITIES & TOOLKIT"
                   title="Technical competencies."
-                  variant="compact"
+                  description="A comprehensive inventory of frameworks, databases, cloud architecture, and development tooling."
                 />
               </div>
             </div>
 
-            <div className="container max-w-6xl mx-auto px-6 my-auto relative h-[420px] lg:h-[460px] w-full">
-              <div className="w-full h-full relative scale-[0.82] md:scale-[0.88] lg:scale-[0.95] xl:scale-100 origin-center">
-                {skillCategories.map((cat, idx) => (
-                  <CategoryStage
-                    key={cat.title}
-                    category={cat}
-                    index={idx}
-                    scrollProgress={scrollYProgress}
-                    shouldReduceMotion={shouldReduceMotion}
-                  />
-                ))}
+            <div className="w-full flex flex-col items-center justify-center shrink-0 my-auto">
+              <div className="relative w-full max-w-2xl h-24 flex items-center justify-center text-center px-4 mb-8">
+                <AnimatePresence>
+                  <motion.div
+                    key={activeCategory.title}
+                    initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -8, filter: "blur(4px)" }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                    className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                  >
+                    <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-foreground">
+                      {activeCategory.title}
+                    </h3>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              <div className="w-full overflow-visible relative">
+                <motion.div
+                  style={{
+                    x: trackX,
+                    paddingLeft: `${initialOffset}px`,
+                  }}
+                  className="flex items-center will-change-transform"
+                >
+                  {skillCategories.map((cat, idx) => (
+                    <SkillListColumn
+                      key={cat.title}
+                      category={cat}
+                      index={idx}
+                      total={skillCategories.length}
+                      smoothProgress={smoothProgress}
+                      width={listWidth}
+                      marginRight={gap}
+                      onSelect={() => scrollToCategory(idx)}
+                    />
+                  ))}
+                </motion.div>
               </div>
             </div>
 
-            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-center text-xs font-mono text-muted-foreground border-t border-border/40 pt-4">
-              <div className="w-36 h-1.5 bg-secondary rounded-full overflow-hidden border border-border/60 self-center">
+            <div className="container max-w-6xl mx-auto px-6 shrink-0 flex items-center justify-center text-xs font-mono text-muted-foreground pt-4">
+              <div className="w-36 h-1.5 bg-secondary rounded-full overflow-hidden self-center">
                 <motion.div
                   style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
                   className="h-full bg-primary rounded-full"
@@ -187,37 +227,74 @@ export function Skills() {
         </div>
       </div>
 
-      <div className="block md:hidden px-6 pt-24 pb-20 space-y-16">
-        <SectionHeading
-          eyebrow="04 // CAPABILITIES & TOOLKIT"
-          title="Technical competencies."
-        />
+      <div className="block md:hidden px-6 pt-20 pb-20 space-y-8">
+        <div className="border-b border-border/40 pb-6">
+          <SectionHeading
+            eyebrow="04 // CAPABILITIES & TOOLKIT"
+            title="Technical competencies."
+            description="A comprehensive inventory of frameworks, databases, cloud architecture, and development tooling."
+          />
+        </div>
 
-        <div className="space-y-14">
-          {skillCategories.map((category) => (
-            <div key={category.title} className="space-y-6">
-              <div className="flex items-center gap-2 text-xs font-mono text-primary uppercase tracking-widest">
-                <span>{category.num}</span>
-                <span>&bull;</span>
-                <h3 className="text-2xl font-bold text-foreground">
-                  {category.title}
-                </h3>
-              </div>
+        <div className="relative min-h-[4.5rem] flex flex-col items-center justify-center text-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory.title}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="text-center"
+            >
+              <span className="text-xs font-mono text-primary uppercase tracking-widest block mb-1">
+                {activeCategory.num} / 0{skillCategories.length}
+              </span>
+              <h3 className="text-3xl font-extrabold text-foreground tracking-tight">
+                {activeCategory.title}
+              </h3>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-              <div className="flex flex-wrap gap-x-8 gap-y-5">
-                {category.skills.map((skill) => {
+        <div
+          ref={mobileScrollRef}
+          onScroll={(e) => {
+            const el = e.currentTarget;
+            const scrollLeft = el.scrollLeft;
+            const itemWidth = el.clientWidth * 0.82 + 24;
+            const idx = Math.min(
+              skillCategories.length - 1,
+              Math.max(0, Math.round(scrollLeft / itemWidth)),
+            );
+            setActiveIndex(idx);
+          }}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 pt-2 -mx-6 px-6 no-scrollbar"
+        >
+          {skillCategories.map((cat, idx) => (
+            <div
+              key={cat.title}
+              className={`w-[82vw] shrink-0 snap-center transition-all duration-300 ${
+                idx === activeIndex
+                  ? "opacity-100 scale-100"
+                  : "opacity-35 scale-[0.96]"
+              }`}
+            >
+              <div className="flex flex-col divide-y divide-border/30 w-full">
+                {cat.skills.map((skill, sIdx) => {
                   const Icon = skill.icon;
                   return (
                     <div
                       key={skill.name}
-                      className="flex items-center gap-3 group"
+                      className="flex items-center justify-between py-3.5 px-1"
                     >
-                      <div className="w-7 h-7 shrink-0 flex items-center justify-center">
-                        <Icon />
+                      <div className="flex items-center gap-3.5">
+                        <div className="w-7 h-7 flex items-center justify-center shrink-0">
+                          <Icon />
+                        </div>
+                        <span className="font-mono text-base font-bold text-foreground">
+                          {skill.name}
+                        </span>
                       </div>
-                      <span className="text-base font-bold text-foreground font-mono">
-                        {skill.name}
-                      </span>
                     </div>
                   );
                 })}
