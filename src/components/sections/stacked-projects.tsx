@@ -2,18 +2,21 @@
 
 import React from "react";
 import { Layers } from "lucide-react";
+import portfolioData from "@/constant/portfolio-data.json";
 import { secondaryProjects } from "@/constant/projects";
 import { SubHeading } from "@/components/ui/section-heading";
 
 export function StackedProjects() {
+  const sectionData = portfolioData.sections.stackedProjects;
+
   return (
     <section className="py-20 md:py-28 px-6 relative">
       <div className="container max-w-4xl mx-auto">
         <SubHeading
-          eyebrow="SYSTEMS & INFRASTRUCTURE"
+          eyebrow={sectionData.eyebrow}
           eyebrowIcon={<Layers className="w-3.5 h-3.5" />}
-          title="Architecture & scale."
-          description="Behind the UI: production-tested distributed systems, dynamic form engines, and real-time pipelines."
+          title={sectionData.title}
+          description={sectionData.description}
           align="center"
           className="mb-20"
         />

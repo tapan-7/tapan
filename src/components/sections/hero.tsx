@@ -14,7 +14,7 @@ import { ParticleText } from "@/components/react-bits/particle-text";
 import portfolioData from "@/constant/portfolio-data.json";
 
 export function Hero() {
-  const { profile } = portfolioData;
+  const { profile, hero } = portfolioData;
   const containerRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -57,8 +57,8 @@ export function Hero() {
         className="w-full max-w-6xl mx-auto flex flex-col items-center text-center my-auto px-1 sm:px-4"
       >
         <ParticleText
-          line1="Engineering digital"
-          line2="products with precision."
+          line1={hero?.headline?.line1 || "Engineering digital"}
+          line2={hero?.headline?.line2 || "products with precision."}
           xLeft={xLeft}
           xRight={xRight}
           opacity={heroOpacity}
@@ -76,9 +76,7 @@ export function Hero() {
             {profile.title}.
           </p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            Specializing in high-performance web applications and fluid mobile
-            architectures using React, Next.js, and React Native. Focused on
-            clean frontend systems, UI/UX refinement, and scalable delivery.
+            {hero?.tagline || profile.summary}
           </p>
         </motion.div>
 

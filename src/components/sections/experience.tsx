@@ -27,12 +27,12 @@ export function Experience() {
       id="experience"
       className="py-20 md:py-28 px-6 relative overflow-hidden"
     >
-      <div className="container max-w-5xl mx-auto">
+      <div className="container max-w-6xl mx-auto">
         <div className="mb-20 lg:mb-28">
           <SectionHeading
-            eyebrow="02 // TRAJECTORY & EXPERIENCE"
-            title="Building at scale."
-            description="Proven track record delivering reliable frontend systems and high-impact mobile architectures."
+            eyebrow={portfolioData.sections.experience.eyebrow}
+            title={portfolioData.sections.experience.title}
+            description={portfolioData.sections.experience.description}
           />
         </div>
 

@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import { projects } from "@/constant/projects";
+import portfolioData from "@/constant/portfolio-data.json";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function FeaturedProjects() {
@@ -104,9 +105,9 @@ export function FeaturedProjects() {
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
               <div ref={headerContentRef}>
                 <SectionHeading
-                  eyebrow="03 // SHOWCASE & CREATIONS"
-                  title="Featured work."
-                  description="Interactive applications and mobile architectures built for real-world reliability and impact."
+                  eyebrow={portfolioData.sections.featuredProjects.eyebrow}
+                  title={portfolioData.sections.featuredProjects.title}
+                  description={portfolioData.sections.featuredProjects.description}
                 />
               </div>
             </div>
@@ -246,9 +247,9 @@ export function FeaturedProjects() {
 
       <div className="block md:hidden px-6 pt-20 pb-16 space-y-8">
         <SectionHeading
-          eyebrow="03 // SHOWCASE & CREATIONS"
-          title="Featured work."
-          description="Interactive applications and mobile architectures built for real-world reliability and impact."
+          eyebrow={portfolioData.sections.featuredProjects.eyebrow}
+          title={portfolioData.sections.featuredProjects.title}
+          description={portfolioData.sections.featuredProjects.description}
         />
 
         {featured.map((project, index) => {

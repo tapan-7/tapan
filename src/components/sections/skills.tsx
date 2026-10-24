@@ -12,6 +12,7 @@ import {
 } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
+import portfolioData from "@/constant/portfolio-data.json";
 import { skillCategories, CategoryData } from "@/constant/skills";
 
 interface SkillListColumnProps {
@@ -166,9 +167,9 @@ export function Skills() {
             <div className="container max-w-6xl mx-auto px-6 shrink-0">
               <div className="border-b border-border/40 pb-6">
                 <SectionHeading
-                  eyebrow="04 // CAPABILITIES & TOOLKIT"
-                  title="Technical competencies."
-                  description="A comprehensive inventory of frameworks, databases, cloud architecture, and development tooling."
+                  eyebrow={portfolioData.sections.skills.eyebrow}
+                  title={portfolioData.sections.skills.title}
+                  description={portfolioData.sections.skills.description}
                 />
               </div>
             </div>
@@ -230,9 +231,9 @@ export function Skills() {
       <div className="block md:hidden px-6 pt-20 pb-20 space-y-8">
         <div className="border-b border-border/40 pb-6">
           <SectionHeading
-            eyebrow="04 // CAPABILITIES & TOOLKIT"
-            title="Technical competencies."
-            description="A comprehensive inventory of frameworks, databases, cloud architecture, and development tooling."
+            eyebrow={portfolioData.sections.skills.eyebrow}
+            title={portfolioData.sections.skills.title}
+            description={portfolioData.sections.skills.description}
           />
         </div>
 

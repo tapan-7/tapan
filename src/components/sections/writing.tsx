@@ -20,9 +20,9 @@ export function Writing() {
       <div className="container max-w-6xl mx-auto">
         <div className="mb-20 lg:mb-28">
           <SectionHeading
-            eyebrow="05 // WRITING & PUBLICATIONS"
-            title="Technical writing."
-            description="Practical deep-dives into cloud storage pipelines, WebRTC video integrations, and Android telemetry."
+            eyebrow={portfolioData.sections.writing.eyebrow}
+            title={portfolioData.sections.writing.title}
+            description={portfolioData.sections.writing.description}
           />
         </div>
 

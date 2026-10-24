@@ -33,12 +33,12 @@ export function Contact() {
 
       <div className="container max-w-4xl mx-auto text-center">
         <SectionHeading
-          eyebrow="06 // INITIATE COLLABORATION"
+          eyebrow={portfolioData.sections.contact.eyebrow}
           badge
           align="center"
-          title="Let's build something"
-          gradientText="exceptional together."
-          description="Currently open to software engineering opportunities, frontend architecture roles, and high-impact product teams."
+          title={portfolioData.sections.contact.title}
+          gradientText={portfolioData.sections.contact.gradientText}
+          description={portfolioData.sections.contact.description}
           className="mb-12"
         />
 

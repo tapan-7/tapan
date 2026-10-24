@@ -4,14 +4,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
-import { BlurText } from "@/components/react-bits/blur-text";
 import { CountUp } from "@/components/react-bits/count-up";
 import portfolioData from "@/constant/portfolio-data.json";
-import { aboutPillars } from "@/constant/about";
 import { SectionHeading, SubHeading } from "@/components/ui/section-heading";
+import { cn } from "@/lib/utils";
 
 export function About() {
-  const { profile } = portfolioData;
+  const { profile, about } = portfolioData;
   const [hoveredPillar, setHoveredPillar] = useState<number | null>(null);
 
   return (
@@ -22,10 +21,10 @@ export function About() {
       <div className="container max-w-6xl mx-auto">
         <div className="mb-24 lg:mb-32">
           <SectionHeading
-            eyebrow="01 // THE PERSON BEHIND THE CODE"
-            title="More than just code."
-            gradientText="I build digital experiences where engineering meets thoughtful design."
-            description="From frontend architecture to mobile experiences, I enjoy turning complex problems into interfaces that feel simple and intuitive."
+            eyebrow={about.heading.eyebrow}
+            title={about.heading.title}
+            gradientText={about.heading.gradientText}
+            description={about.heading.description}
           />
         </div>
 
@@ -35,7 +34,7 @@ export function About() {
               <div className="relative group max-w-md mx-auto lg:max-w-none">
                 <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-muted">
                   <Image
-                    src="/profile.jpeg"
+                    src={profile.avatar || "/profile.jpeg"}
                     alt={profile.name}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 420px"
@@ -46,14 +45,14 @@ export function About() {
                   <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                     <div>
                       <p className="text-xs font-mono uppercase tracking-widest text-primary mb-1">
-                        Software Development Engineer
+                        {about.bio.role || profile.title}
                       </p>
                       <p className="text-lg font-bold text-foreground">
                         {profile.name}
                       </p>
                     </div>
                     <span className="text-xs font-mono text-muted-foreground">
-                      IND
+                      {about.bio.countryCode}
                     </span>
                   </div>
                 </div>
@@ -65,88 +64,71 @@ export function About() {
             <AnimatedContent distance={20} direction="vertical" delay={0.2}>
               <div>
                 <span className="text-xs font-mono uppercase tracking-widest text-primary block mb-2">
-                  TAPAN KUMAR SWAIN
+                  {about.bio.nameLabel}
                 </span>
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                  Engineer by craft. <br className="hidden sm:inline" />
+                  {about.bio.title} <br className="hidden sm:inline" />
                   <span className="text-muted-foreground">
-                    Designer by curiosity.
+                    {about.bio.subtitle}
                   </span>
                 </h3>
               </div>
             </AnimatedContent>
 
-            <AnimatedContent distance={20} direction="vertical" delay={0.3}>
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                Over the past three years, I&apos;ve contributed to enterprise
-                legal-tech platforms, public education systems, and digital
-                healthcare at{" "}
-                <span className="text-foreground font-semibold">
-                  HyScaler Nettantra Technologies Pvt. Ltd.
-                </span>
-                .
-              </p>
-            </AnimatedContent>
-
-            <AnimatedContent distance={20} direction="vertical" delay={0.4}>
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                My approach combines architectural discipline with design
-                sensitivity. From building interactive dashboards and custom
-                dynamic form builders to integrating real-time telemetry like
-                VideoSDK and Health Connect, I strive to make software feel
-                swift, intuitive, and resilient.
-              </p>
-            </AnimatedContent>
+            {about.bio.paragraphs.map((paragraph, idx) => (
+              <AnimatedContent
+                key={idx}
+                distance={20}
+                direction="vertical"
+                delay={0.3 + idx * 0.1}
+              >
+                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+                  {paragraph}
+                </p>
+              </AnimatedContent>
+            ))}
           </div>
         </div>
 
         <AnimatedContent distance={25} direction="vertical" delay={0.15}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 mb-28 border-y border-border/50">
-            <div>
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-primary tracking-tight">
-                <CountUp to={3} padZero duration={1.8} suffix="+" />
+            {about.stats.map((stat, idx) => (
+              <div key={stat.label}>
+                <div
+                  className={cn(
+                    "text-4xl sm:text-5xl lg:text-6xl font-black font-mono tracking-tight",
+                    idx === 0 ? "text-primary" : "text-foreground"
+                  )}
+                >
+                  {stat.isCountUp ? (
+                    <CountUp
+                      to={Number(stat.value)}
+                      padZero={Boolean(stat.padZero)}
+                      duration={stat.duration || 2}
+                      suffix={stat.suffix || ""}
+                    />
+                  ) : (
+                    stat.value
+                  )}
+                </div>
+                <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
+                  {stat.label}
+                </div>
               </div>
-              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
-                Years Experience
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-foreground tracking-tight">
-                Web
-              </div>
-              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
-                Frontend Architecture
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-foreground tracking-tight">
-                Mobile
-              </div>
-              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
-                Cross-Platform Apps
-              </div>
-            </div>
-            <div>
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-black font-mono text-foreground tracking-tight">
-                <CountUp to={100} duration={2} suffix="%" />
-              </div>
-              <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground mt-2">
-                Quality & Delivery
-              </div>
-            </div>
+            ))}
           </div>
         </AnimatedContent>
 
         <div className="pt-4">
           <SubHeading
-            eyebrow="WHAT I CARE ABOUT"
-            title="Performance. Precision. People."
-            description="The technical and human details that make software feel effortless."
+            eyebrow={about.pillarsHeading.eyebrow}
+            title={about.pillarsHeading.title}
+            description={about.pillarsHeading.description}
             className="mb-12 pb-6 border-b border-border/50"
           />
 
           <div className="divide-y divide-border/40">
-            {aboutPillars.map((pillar, index) => {
+            {about.pillars.map((pillar, index) => {
               const isHovered = hoveredPillar === index;
               return (
                 <AnimatedContent

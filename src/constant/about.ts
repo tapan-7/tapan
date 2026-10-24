@@ -8,6 +8,8 @@ import {
   LucideIcon,
 } from "lucide-react";
 
+import portfolioData from "@/constant/portfolio-data.json";
+
 export interface Pillar {
   num: string;
   title: string;
@@ -21,32 +23,7 @@ export interface Hobby {
   desc: string;
 }
 
-export const aboutPillars: Pillar[] = [
-  {
-    num: "01",
-    title: "Frontend Engineering",
-    tagline: "Architecture & Scalability",
-    desc: "Architecting modular, type-safe web systems using React 18, Next.js App Router, and modern CSS with strict performance benchmarks.",
-  },
-  {
-    num: "02",
-    title: "Mobile Applications",
-    tagline: "Native Fluidity & Real-Time",
-    desc: "Building native-grade iOS & Android applications in React Native with real-time VideoSDK, Health Connect, and telemetry.",
-  },
-  {
-    num: "03",
-    title: "State & Architecture",
-    tagline: "Predictable Data Flow",
-    desc: "Structuring clean, testable state flows, robust API layers, and reusable component libraries that scale effortlessly.",
-  },
-  {
-    num: "04",
-    title: "Interaction Ergonomics",
-    tagline: "Precision & Micro-Interactions",
-    desc: "Obsessing over smooth frame rates, tactile feedback, responsive ergonomics, and uncompromising accessibility standards.",
-  },
-];
+export const aboutPillars: Pillar[] = portfolioData.about.pillars;
 
 export const aboutHobbies: Hobby[] = [
   {

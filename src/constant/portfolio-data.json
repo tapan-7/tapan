@@ -13,6 +13,153 @@
     "devto": "https://dev.to/tapan-7",
     "summary": "Software Development Engineer with 3 years of experience building web and mobile applications using React, React Native, Next.js, and TypeScript. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud-based architectures."
   },
+  "hero": {
+    "headline": {
+      "line1": "Engineering digital",
+      "line2": "products with precision."
+    },
+    "tagline": "Specializing in high-performance web applications and fluid mobile architectures using React, Next.js, and React Native. Focused on clean frontend systems, UI/UX refinement, and scalable delivery."
+  },
+  "about": {
+    "heading": {
+      "eyebrow": "01 // THE PERSON BEHIND THE CODE",
+      "title": "More than just code.",
+      "gradientText": "I build digital experiences where engineering meets thoughtful design.",
+      "description": "From frontend architecture to mobile experiences, I enjoy turning complex problems into interfaces that feel simple and intuitive."
+    },
+    "bio": {
+      "nameLabel": "TAPAN KUMAR SWAIN",
+      "title": "Engineer by craft.",
+      "subtitle": "Designer by curiosity.",
+      "role": "Software Development Engineer",
+      "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
+      "countryCode": "IND",
+      "paragraphs": [
+        "Over the past three years, I've contributed to enterprise legal-tech platforms, public education systems, and digital healthcare at HyScaler Nettantra Technologies Pvt. Ltd.",
+        "My approach combines architectural discipline with design sensitivity. From building interactive dashboards and custom dynamic form builders to integrating real-time telemetry like VideoSDK and Health Connect, I strive to make software feel swift, intuitive, and resilient."
+      ]
+    },
+    "stats": [
+      {
+        "value": 3,
+        "isCountUp": true,
+        "suffix": "+",
+        "padZero": true,
+        "duration": 1.8,
+        "label": "Years Experience"
+      },
+      {
+        "value": "Web",
+        "isCountUp": false,
+        "label": "Frontend Architecture"
+      },
+      {
+        "value": "Mobile",
+        "isCountUp": false,
+        "label": "Cross-Platform Apps"
+      },
+      {
+        "value": 100,
+        "isCountUp": true,
+        "suffix": "%",
+        "duration": 2,
+        "label": "Quality & Delivery"
+      }
+    ],
+    "pillarsHeading": {
+      "eyebrow": "WHAT I CARE ABOUT",
+      "title": "Performance. Precision. People.",
+      "description": "The technical and human details that make software feel effortless."
+    },
+    "pillars": [
+      {
+        "num": "01",
+        "title": "Frontend Engineering",
+        "tagline": "Architecture & Scalability",
+        "desc": "Architecting modular, type-safe web systems using React 18, Next.js App Router, and modern CSS with strict performance benchmarks."
+      },
+      {
+        "num": "02",
+        "title": "Mobile Applications",
+        "tagline": "Native Fluidity & Real-Time",
+        "desc": "Building native-grade iOS & Android applications in React Native with real-time VideoSDK, Health Connect, and telemetry."
+      },
+      {
+        "num": "03",
+        "title": "State & Architecture",
+        "tagline": "Predictable Data Flow",
+        "desc": "Structuring clean, testable state flows, robust API layers, and reusable component libraries that scale effortlessly."
+      },
+      {
+        "num": "04",
+        "title": "Interaction Ergonomics",
+        "tagline": "Precision & Micro-Interactions",
+        "desc": "Obsessing over smooth frame rates, tactile feedback, responsive ergonomics, and uncompromising accessibility standards."
+      }
+    ]
+  },
+  "sections": {
+    "experience": {
+      "eyebrow": "02 // TRAJECTORY & EXPERIENCE",
+      "title": "Building at scale.",
+      "description": "Proven track record delivering reliable frontend systems and high-impact mobile architectures."
+    },
+    "featuredProjects": {
+      "eyebrow": "03 // SHOWCASE & CREATIONS",
+      "title": "Featured work.",
+      "description": "Interactive applications and mobile architectures built for real-world reliability and impact."
+    },
+    "stackedProjects": {
+      "eyebrow": "SYSTEMS & INFRASTRUCTURE",
+      "title": "Architecture & scale.",
+      "description": "Behind the UI: production-tested distributed systems, dynamic form engines, and real-time pipelines."
+    },
+    "skills": {
+      "eyebrow": "04 // CAPABILITIES & TOOLKIT",
+      "title": "Technical competencies.",
+      "description": "A comprehensive inventory of frameworks, databases, cloud architecture, and development tooling."
+    },
+    "writing": {
+      "eyebrow": "05 // WRITING & PUBLICATIONS",
+      "title": "Technical writing.",
+      "description": "Practical deep-dives into cloud storage pipelines, WebRTC video integrations, and Android telemetry."
+    },
+    "contact": {
+      "eyebrow": "06 // INITIATE COLLABORATION",
+      "title": "Let's build something",
+      "gradientText": "exceptional together.",
+      "description": "Currently open to software engineering opportunities, frontend architecture roles, and high-impact product teams."
+    }
+  },
+  "secondaryProjects": [
+    {
+      "num": "01",
+      "title": "District Education Infrastructure (Drishti)",
+      "category": "Enterprise System & Dynamic Forms",
+      "description": "Frontend architecture powering dynamic survey collection, school infrastructure asset management, and offline-resilient task workflows across statewide administrative modules.",
+      "tech": ["Next.js", "TypeScript", "Tailwind CSS", "Zod", "REST APIs"],
+      "iconName": "Server",
+      "metric": "20% bug reduction • 25% faster feature delivery"
+    },
+    {
+      "num": "02",
+      "title": "Real-Time Telemedicine & Telemetry Client",
+      "category": "WebRTC & Mobile Infrastructure",
+      "description": "Cross-platform mobile application featuring encrypted physician video consultations via VideoSDK, real-time vitals telemetry, and automated cloud recording pipelines to AWS S3.",
+      "tech": ["React Native", "VideoSDK", "AWS S3", "Health Connect", "WebRTC"],
+      "iconName": "Zap",
+      "metric": "20% higher call reliability • Secure AWS S3 recording"
+    },
+    {
+      "num": "03",
+      "title": "Microservices Gateway & Edge Rate Limiter",
+      "category": "Cloud & Distributed Systems",
+      "description": "Scalable API gateway featuring sliding-window rate limiting, token authentication, dynamic reverse-proxy request routing, and resilient distributed error logging.",
+      "tech": ["Node.js", "Express", "Docker", "Redis", "AWS"],
+      "iconName": "ShieldCheck",
+      "metric": "Sliding-window throttling • High-throughput reverse proxy"
+    }
+  ],
   "experience": [
     {
       "title": "Software Development Engineer - I",
