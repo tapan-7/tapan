@@ -37,12 +37,16 @@ export function ParticleText({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
+
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let particles: Particle[] = [];
+    let isInitialized = false;
+
     const mouse = { x: -1000, y: -1000, radius: 45 };
 
     const checkIsLight = () => {
@@ -86,16 +90,52 @@ export function ParticleText({
       }
     };
 
-    const initParticles = () => {
-      const container = containerRef.current;
-      if (!container) return;
+    const getLines = (w: number): string[] => {
+      if (w < 560) {
+        return ["Engineering digital", "products with", "precision."];
+      }
+      return [line1, line2];
+    };
 
+    const initParticles = () => {
       const rect = container.getBoundingClientRect();
+      const parentWidth = container.parentElement?.clientWidth;
+      const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
+
+      const rawWidth = rect.width || parentWidth || windowWidth;
+      const width = Math.max(280, Math.floor(rawWidth));
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-      const width = Math.floor(rect.width);
-      const fontSize = Math.min(Math.max(Math.floor(width / 11), 34), 84);
-      const height = Math.floor(fontSize * 2.5);
+      const lines = getLines(width);
+      const isMobile = lines.length === 3;
+
+      mouse.radius = isMobile ? 55 : 45;
+
+      let fontSize = isMobile
+        ? Math.min(Math.max(Math.floor(width / 9.5), 26), 46)
+        : Math.min(Math.max(Math.floor(width / 11), 34), 84);
+
+      const offscreen = document.createElement("canvas");
+      const offCtx = offscreen.getContext("2d", { willReadFrequently: true });
+      if (!offCtx) return;
+
+      offCtx.font = `900 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+
+      let maxTextWidth = 0;
+      for (let i = 0; i < lines.length; i++) {
+        const measured = offCtx.measureText(lines[i]).width;
+        if (measured > maxTextWidth) maxTextWidth = measured;
+      }
+
+      const availableWidth = width * 0.94;
+      if (maxTextWidth > availableWidth && maxTextWidth > 0) {
+        fontSize = Math.floor(fontSize * (availableWidth / maxTextWidth));
+      }
+
+      const font = `900 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+      const height = isMobile
+        ? Math.floor(fontSize * 3.8)
+        : Math.floor(fontSize * 2.6);
 
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
@@ -104,26 +144,31 @@ export function ParticleText({
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const font = `900 ${fontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
-
-      const offscreen = document.createElement("canvas");
       offscreen.width = width;
       offscreen.height = height;
-      const offCtx = offscreen.getContext("2d", { willReadFrequently: true });
-      if (!offCtx) return;
 
       offCtx.font = font;
       offCtx.textAlign = "center";
       offCtx.textBaseline = "middle";
 
-      const centerY = Math.floor(height / 2);
-      const y1 = Math.floor(centerY - fontSize * 0.55);
-      const y2 = Math.floor(centerY + fontSize * 0.55);
       const centerX = Math.floor(width / 2);
+      const centerY = Math.floor(height / 2);
 
       offCtx.fillStyle = "#ffffff";
-      offCtx.fillText(line1, centerX, y1);
-      offCtx.fillText(line2, centerX, y2);
+
+      if (isMobile) {
+        const y0 = Math.floor(centerY - fontSize * 1.15);
+        const y1 = Math.floor(centerY);
+        const y2 = Math.floor(centerY + fontSize * 1.15);
+        offCtx.fillText(lines[0], centerX, y0);
+        offCtx.fillText(lines[1], centerX, y1);
+        offCtx.fillText(lines[2], centerX, y2);
+      } else {
+        const y0 = Math.floor(centerY - fontSize * 0.58);
+        const y1 = Math.floor(centerY + fontSize * 0.58);
+        offCtx.fillText(lines[0], centerX, y0);
+        offCtx.fillText(lines[1], centerX, y1);
+      }
 
       const imgData = offCtx.getImageData(0, 0, width, height);
       const data = imgData.data;
@@ -132,16 +177,26 @@ export function ParticleText({
       const palettes = getPalettes(isLight);
 
       particles = [];
-      const step = 3;
+      const step = isMobile ? 2.8 : 3;
 
       for (let y = 0; y < height; y += step) {
-        const rowOffset = y * width;
+        const rowOffset = Math.floor(y) * width;
         for (let x = 0; x < width; x += step) {
-          const index = (rowOffset + x) * 4;
+          const index = (rowOffset + Math.floor(x)) * 4;
           const alpha = data[index + 3];
 
           if (alpha > 120) {
-            const lineIndex = y < centerY ? 0 : 1;
+            let lineIndex = 0;
+            if (isMobile) {
+              const th1 = centerY - fontSize * 0.55;
+              const th2 = centerY + fontSize * 0.55;
+              if (y < th1) lineIndex = 0;
+              else if (y > th2) lineIndex = 2;
+              else lineIndex = 1;
+            } else {
+              lineIndex = y < centerY ? 0 : 1;
+            }
+
             const color =
               lineIndex === 0
                 ? palettes.line1[
@@ -152,22 +207,38 @@ export function ParticleText({
                   ];
 
             particles.push({
-              x: x + (Math.random() - 0.5) * 20,
-              y: y + (Math.random() - 0.5) * 20,
+              x: x + (Math.random() - 0.5) * 16,
+              y: y + (Math.random() - 0.5) * 16,
               originX: x,
               originY: y,
               vx: 0,
               vy: 0,
-              size: Math.random() * 1.4 + 1.2,
+              size: Math.random() * 1.3 + 1.1,
               color,
               lineIndex,
             });
           }
         }
       }
+
+      isInitialized = true;
     };
 
     initParticles();
+
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect.width > 0) {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            initParticles();
+          }, 60);
+        }
+      }
+    });
+
+    resizeObserver.observe(container);
 
     const observer = new MutationObserver(() => {
       updateColors(checkIsLight());
@@ -177,12 +248,6 @@ export function ParticleText({
       attributes: true,
       attributeFilter: ["class"],
     });
-
-    const handleResize = () => {
-      initParticles();
-    };
-
-    window.addEventListener("resize", handleResize);
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
@@ -195,8 +260,33 @@ export function ParticleText({
       mouse.y = -1000;
     };
 
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }
+    };
+
+    const handleTouchEnd = () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     canvas.addEventListener("mouseleave", handleMouseLeave);
+    canvas.addEventListener("touchstart", handleTouchStart, { passive: true });
+    canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
+    canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
+    canvas.addEventListener("touchcancel", handleTouchEnd, { passive: true });
 
     let time = 0;
 
@@ -217,13 +307,22 @@ export function ParticleText({
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        const splitX = p.lineIndex === 0 ? currentXLeft : currentXRight;
+
+        let splitX = 0;
+        if (p.lineIndex === 0) {
+          splitX = currentXLeft;
+        } else if (p.lineIndex === 2) {
+          splitX = currentXRight;
+        } else {
+          splitX = currentXRight * 0.5;
+        }
+
         const targetX = p.originX + splitX;
         const targetY = p.originY;
 
         const dx = mouse.x - p.x;
         const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const dist = Math.hypot(dx, dy);
 
         if (dist < mouse.radius) {
           const force = (1 - dist / mouse.radius) * 6;
@@ -256,21 +355,29 @@ export function ParticleText({
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(resizeTimer);
+      resizeObserver.disconnect();
       observer.disconnect();
-      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
+      canvas.removeEventListener("touchstart", handleTouchStart);
+      canvas.removeEventListener("touchmove", handleTouchMove);
+      canvas.removeEventListener("touchend", handleTouchEnd);
+      canvas.removeEventListener("touchcancel", handleTouchEnd);
     };
   }, [line1, line2, xLeft, xRight, opacity, resolvedTheme]);
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-5xl mx-auto my-2">
+    <div
+      ref={containerRef}
+      className="relative w-full max-w-6xl mx-auto my-2 overflow-visible flex items-center justify-center"
+    >
       <h1 className="sr-only">
         {line1} {line2}
       </h1>
       <canvas
         ref={canvasRef}
-        className="block mx-auto pointer-events-auto cursor-default will-change-transform"
+        className="block mx-auto pointer-events-auto cursor-default will-change-transform max-w-full"
       />
     </div>
   );

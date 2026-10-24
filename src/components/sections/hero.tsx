@@ -48,13 +48,13 @@ export function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-20 pb-16 px-6 overflow-hidden"
+      className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-20 pb-16 px-3 sm:px-6 w-full overflow-hidden"
     >
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       <motion.div
         style={{ scale: heroScale }}
-        className="container max-w-5xl mx-auto flex flex-col items-center text-center my-auto"
+        className="w-full max-w-6xl mx-auto flex flex-col items-center text-center my-auto px-1 sm:px-4"
       >
         <ParticleText
           line1="Engineering digital"
