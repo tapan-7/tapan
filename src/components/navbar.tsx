@@ -283,16 +283,15 @@ export default function Navbar() {
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    }
+    if (!isOpen) return;
+    const preventScroll = (e: TouchEvent | WheelEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
     return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
     };
   }, [isOpen]);
 
@@ -329,8 +328,6 @@ export default function Navbar() {
       setIsOpen(false);
       setIsHovering(false);
       setHoveredId(null);
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
 
       setTimeout(() => {
         const target = document.querySelector(href);
@@ -342,8 +339,6 @@ export default function Navbar() {
       setIsOpen(false);
       setIsHovering(false);
       setHoveredId(null);
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
     }
   };
 
