@@ -38,7 +38,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-foreground`}>
+      <body
+        suppressHydrationWarning
+        className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-foreground`}
+      >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <SmoothScrollProvider>
             <Navbar />
