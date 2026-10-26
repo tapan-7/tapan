@@ -14,5 +14,4 @@ export const NAV_LINKS: NavItem[] = [
 
 export const MOBILE_NAV_LINKS: NavItem[] = [
   ...NAV_LINKS,
-  { name: "Resume", href: "/resume" },
 ];

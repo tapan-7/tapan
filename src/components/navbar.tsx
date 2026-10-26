@@ -9,7 +9,6 @@ import {
   useSpring,
   useReducedMotion,
 } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import portfolioData from "@/constant/portfolio-data.json";
 import { NAV_LINKS } from "@/constant/navigation";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
@@ -332,15 +331,6 @@ export default function Navbar() {
                   }}
                   className="pt-6 border-t border-border/40 mt-4 flex flex-wrap items-center justify-center gap-8 px-4"
                 >
-                  <Link
-                    href="/resume"
-                    onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-2 text-sm sm:text-base font-semibold text-foreground hover:text-primary transition-colors group"
-                  >
-                    <span>Resume</span>
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </Link>
-
                   <a
                     href="#contact"
                     onClick={(e) => handleNavigate(e, "#contact")}
