@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedContent } from "@/components/react-bits/animated-content";
 import { CountUp } from "@/components/react-bits/count-up";
 import portfolioData from "@/constant/portfolio-data.json";
 import { SectionHeading, SubHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
+import { ImageParticles } from "@/components/ui/image-particles";
 
 export function About() {
   const { profile, about } = portfolioData;
@@ -32,30 +32,35 @@ export function About() {
           <div className="lg:col-span-5">
             <AnimatedContent distance={30} direction="vertical" delay={0.1}>
               <div className="relative group max-w-md mx-auto lg:max-w-none">
-                <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-muted">
-                  <Image
-                    src={profile.avatar || "/profile.jpeg"}
-                    alt={profile.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 420px"
-                    className="object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-scrim/85 via-scrim/35 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-500" />
-                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+                <ImageParticles
+                  src={profile.avatar || "/profile.jpeg"}
+                  alt={profile.name}
+                  gap={3.5}
+                  particleSize={1.8}
+                  repulsionRadius={70}
+                  repulsionStrength={0.9}
+                  className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-muted border border-border/50 shadow-2xl"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/25 to-transparent opacity-85 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none" />
+                  <div className="absolute top-4 right-4 z-20 pointer-events-none">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase bg-primary/15 text-primary border border-primary/25 backdrop-blur-md">
+                      Interactive • Click for shockwave
+                    </span>
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between z-20 pointer-events-none">
                     <div>
-                      <p className="text-xs font-mono uppercase tracking-widest text-scrim-primary mb-1">
+                      <p className="text-xs font-mono uppercase tracking-widest text-primary mb-1">
                         {about.bio.role || profile.title}
                       </p>
-                      <p className="text-lg font-bold text-scrim-foreground">
+                      <p className="text-lg font-bold text-foreground">
                         {profile.name}
                       </p>
                     </div>
-                    <span className="text-xs font-mono text-scrim-muted">
+                    <span className="text-xs font-mono text-muted-foreground bg-secondary/80 px-2.5 py-0.5 rounded-full border border-border">
                       {about.bio.countryCode}
                     </span>
                   </div>
-                </div>
+                </ImageParticles>
               </div>
             </AnimatedContent>
           </div>

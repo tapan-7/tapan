@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import portfolioData from "@/constant/portfolio-data.json";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { aboutHobbies } from "@/constant/about";
+import { ImageParticles } from "@/components/ui/image-particles";
 
 const AboutPage = () => {
   const { profile, experience, skills } = portfolioData;
@@ -56,15 +56,15 @@ const AboutPage = () => {
           </div>
 
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="relative w-72 h-80 rounded-2xl overflow-hidden border border-border bg-card">
-              <Image
-                src="/profile.jpeg"
-                alt={profile.name}
-                fill
-                sizes="(max-width: 768px) 100vw, 300px"
-                className="object-cover grayscale contrast-105 hover:grayscale-0 transition-all duration-500"
-              />
-            </div>
+            <ImageParticles
+              src="/profile.jpeg"
+              alt={profile.name}
+              gap={3.5}
+              particleSize={1.8}
+              repulsionRadius={65}
+              repulsionStrength={0.9}
+              className="relative w-72 h-80 rounded-2xl overflow-hidden border border-border bg-card shadow-xl"
+            />
           </div>
         </AnimatedSection>
 
