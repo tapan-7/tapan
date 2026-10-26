@@ -134,6 +134,24 @@
   "secondaryProjects": [
     {
       "num": "01",
+      "title": "Enterprise AI Contract Intelligence Platform",
+      "category": "Enterprise AI & Process Intelligence",
+      "description": "Full-stack contract drafting and review engine combining CRM deal data, precedent legal knowledge bases, and real-time LLM token streaming with active session recovery and multi-tier approval workflows.",
+      "tech": [
+        "Next.js",
+        "TypeScript",
+        "NestJS",
+        "Claude Agent SDK",
+        "WebSockets",
+        "BullMQ",
+        "Redis",
+        "PostgreSQL"
+      ],
+      "iconName": "Server",
+      "metric": "Sub-second streaming • 20% bug reduction • Active draft recovery"
+    },
+    {
+      "num": "02",
       "title": "District Education Infrastructure System",
       "category": "Enterprise System & Dynamic Forms",
       "description": "Frontend architecture powering dynamic survey collection, school infrastructure asset management, and offline-resilient task workflows across statewide administrative modules.",
@@ -142,22 +160,19 @@
       "metric": "20% bug reduction • 25% faster feature delivery"
     },
     {
-      "num": "02",
+      "num": "03",
       "title": "Real-Time Telemedicine & Telemetry Client",
       "category": "WebRTC & Mobile Infrastructure",
       "description": "Cross-platform mobile application featuring encrypted physician video consultations via VideoSDK, real-time vitals telemetry, and automated cloud recording pipelines to AWS S3.",
-      "tech": ["React Native", "VideoSDK", "AWS S3", "Health Connect", "WebRTC"],
+      "tech": [
+        "React Native",
+        "VideoSDK",
+        "AWS S3",
+        "Health Connect",
+        "WebRTC"
+      ],
       "iconName": "Zap",
       "metric": "20% higher call reliability • Secure AWS S3 recording"
-    },
-    {
-      "num": "03",
-      "title": "Microservices Gateway & Edge Rate Limiter",
-      "category": "Cloud & Distributed Systems",
-      "description": "Scalable API gateway featuring sliding-window rate limiting, token authentication, dynamic reverse-proxy request routing, and resilient distributed error logging.",
-      "tech": ["Node.js", "Express", "Docker", "Redis", "AWS"],
-      "iconName": "ShieldCheck",
-      "metric": "Sliding-window throttling • High-throughput reverse proxy"
     }
   ],
   "experience": [
@@ -272,7 +287,12 @@
     "Database": ["PostgreSQL", "Prisma ORM", "Mongo DB", "MySQL"],
     "Cloud & DevOps": ["Docker", "AWS S3", "Vercel", "GitHub"],
     "Messaging": ["Redis", "BullMQ"],
-    "Integrations": ["Salesforce API", "Google Drive API", "Claude Agent SDK / LLMs", "VideoSDK"],
+    "Integrations": [
+      "Salesforce API",
+      "Google Drive API",
+      "Claude Agent SDK / LLMs",
+      "VideoSDK"
+    ],
     "Tools": ["Git", "Postman", "VS Code"]
   },
   "projects": [
