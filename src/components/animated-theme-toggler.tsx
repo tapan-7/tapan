@@ -23,6 +23,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
   }, []);
 
   const changeTheme = async () => {
+    buttonRef.current?.blur();
     const nextTheme = theme === "dark" ? "light" : "dark";
 
     if (
@@ -94,7 +95,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
     >
       <LiquidWave />
 
-      <span className="relative z-10 flex items-center justify-center text-foreground group-hover:text-background transition-colors duration-300">
+      <span className="relative z-10 flex items-center justify-center text-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"

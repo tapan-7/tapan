@@ -105,7 +105,7 @@ export function Hero() {
             className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card text-foreground border border-border font-medium text-sm transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
             <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background transition-colors duration-300">
+            <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
               <span>Contact Me</span>
             </span>
           </a>
@@ -116,7 +116,7 @@ export function Hero() {
             className="relative overflow-hidden inline-flex items-center gap-2 px-5 py-3 rounded-full bg-card/40 text-muted-foreground border border-border/70 text-sm font-medium transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
             <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center gap-2 text-muted-foreground group-hover:text-background transition-colors duration-300">
+            <span className="relative z-10 flex items-center gap-2 text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
               <Download className="w-4 h-4" />
               <span>Resume</span>
             </span>
@@ -137,7 +137,7 @@ export function Hero() {
             className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
             <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
               <Github className="w-5 h-5" />
             </span>
           </a>
@@ -149,7 +149,7 @@ export function Hero() {
             className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
             <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
               <Linkedin className="w-5 h-5" />
             </span>
           </a>
@@ -159,7 +159,7 @@ export function Hero() {
             className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
           >
             <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
               <Mail className="w-5 h-5" />
             </span>
           </a>

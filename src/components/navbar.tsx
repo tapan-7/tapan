@@ -377,21 +377,21 @@ export default function Navbar() {
                 <motion.span
                   animate={isOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
                   transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
-                  className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
+                  className="w-5 h-[2px] bg-foreground group-hover:bg-background group-data-[wave-active=true]:bg-background transition-colors duration-300 origin-center block rounded-full"
                 />
                 <motion.span
                   animate={
                     isOpen ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }
                   }
                   transition={{ duration: 0.15 }}
-                  className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
+                  className="w-5 h-[2px] bg-foreground group-hover:bg-background group-data-[wave-active=true]:bg-background transition-colors duration-300 origin-center block rounded-full"
                 />
                 <motion.span
                   animate={
                     isOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }
                   }
                   transition={{ duration: 0.25, ease: [0.65, 0.05, 0, 1] }}
-                  className="w-5 h-[2px] bg-foreground group-hover:bg-background transition-colors duration-300 origin-center block rounded-full"
+                  className="w-5 h-[2px] bg-foreground group-hover:bg-background group-data-[wave-active=true]:bg-background transition-colors duration-300 origin-center block rounded-full"
                 />
               </div>
             </button>

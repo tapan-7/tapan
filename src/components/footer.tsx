@@ -42,7 +42,7 @@ export default function Footer() {
             className="relative overflow-hidden w-8 h-8 rounded-full bg-secondary border border-border/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95 ml-2"
           >
             <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
               <ArrowUp className="w-3.5 h-3.5" />
             </span>
           </button>

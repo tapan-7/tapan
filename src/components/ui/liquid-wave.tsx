@@ -30,6 +30,12 @@ export function LiquidWave({
     const parent = container.parentElement;
     if (!parent) return;
 
+    let touchTimeout: NodeJS.Timeout | null = null;
+
+    const canHover = () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
     const updateDims = () => {
       const rect = parent.getBoundingClientRect();
       setDimensions({ w: rect.width, h: rect.height });
@@ -38,6 +44,7 @@ export function LiquidWave({
     updateDims();
 
     const onMouseEnter = (e: MouseEvent) => {
+      if (!canHover()) return;
       const rect = parent.getBoundingClientRect();
       setDimensions({ w: rect.width, h: rect.height });
       setTouchPos({
@@ -45,9 +52,11 @@ export function LiquidWave({
         y: e.clientY - rect.top,
       });
       setIsHovered(true);
+      parent.setAttribute("data-wave-active", "true");
     };
 
     const onMouseMove = (e: MouseEvent) => {
+      if (!canHover()) return;
       if (!isHovered) {
         const rect = parent.getBoundingClientRect();
         setDimensions({ w: rect.width, h: rect.height });
@@ -56,6 +65,7 @@ export function LiquidWave({
           y: e.clientY - rect.top,
         });
         setIsHovered(true);
+        parent.setAttribute("data-wave-active", "true");
       }
     };
 
@@ -66,9 +76,13 @@ export function LiquidWave({
         y: e.clientY - rect.top,
       });
       setIsHovered(false);
+      parent.removeAttribute("data-wave-active");
     };
 
     const onFocus = () => {
+      try {
+        if (!parent.matches(":focus-visible")) return;
+      } catch {}
       const rect = parent.getBoundingClientRect();
       setDimensions({ w: rect.width, h: rect.height });
       setTouchPos({
@@ -76,14 +90,17 @@ export function LiquidWave({
         y: rect.height / 2,
       });
       setIsHovered(true);
+      parent.setAttribute("data-wave-active", "true");
     };
 
     const onBlur = () => {
       setIsHovered(false);
+      parent.removeAttribute("data-wave-active");
     };
 
     const onTouchStart = (e: TouchEvent) => {
       if (e.touches.length > 0) {
+        if (touchTimeout) clearTimeout(touchTimeout);
         const rect = parent.getBoundingClientRect();
         setDimensions({ w: rect.width, h: rect.height });
         setTouchPos({
@@ -91,11 +108,32 @@ export function LiquidWave({
           y: e.touches[0].clientY - rect.top,
         });
         setIsHovered(true);
+        parent.setAttribute("data-wave-active", "true");
       }
     };
 
     const onTouchEnd = () => {
-      setIsHovered(false);
+      if (touchTimeout) clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        setIsHovered(false);
+        parent.removeAttribute("data-wave-active");
+        if (document.activeElement === parent) {
+          (parent as HTMLElement).blur();
+        }
+      }, 300);
+    };
+
+    const onClick = () => {
+      if (!canHover()) {
+        if (touchTimeout) clearTimeout(touchTimeout);
+        touchTimeout = setTimeout(() => {
+          setIsHovered(false);
+          parent.removeAttribute("data-wave-active");
+          if (document.activeElement === parent) {
+            (parent as HTMLElement).blur();
+          }
+        }, 300);
+      }
     };
 
     parent.addEventListener("mouseenter", onMouseEnter);
@@ -105,8 +143,11 @@ export function LiquidWave({
     parent.addEventListener("blur", onBlur, true);
     parent.addEventListener("touchstart", onTouchStart, { passive: true });
     parent.addEventListener("touchend", onTouchEnd, { passive: true });
+    parent.addEventListener("click", onClick, { passive: true });
 
     return () => {
+      if (touchTimeout) clearTimeout(touchTimeout);
+      parent.removeAttribute("data-wave-active");
       parent.removeEventListener("mouseenter", onMouseEnter);
       parent.removeEventListener("mousemove", onMouseMove);
       parent.removeEventListener("mouseleave", onMouseLeave);
@@ -114,6 +155,7 @@ export function LiquidWave({
       parent.removeEventListener("blur", onBlur, true);
       parent.removeEventListener("touchstart", onTouchStart);
       parent.removeEventListener("touchend", onTouchEnd);
+      parent.removeEventListener("click", onClick);
     };
   }, [isHovered]);
 
