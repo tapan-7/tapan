@@ -22,64 +22,34 @@ export interface SecondaryProject {
 
 export const projects: Project[] = [
   {
-    title: "Memory Match",
+    title: "Chai Pe Gaane",
     description:
-      "A fun card matching game built with Expo and TypeScript. Features clean UI, sound effects, and responsive design for an engaging user experience.",
-    tech: ["Expo", "TypeScript", "React Native", "Sound Effects"],
-    github: "#",
-    link: "https://expo.dev/preview/update?message=feat%3A+Implement+a+visual+refresh+for+the+game+UI%2C+introducing+new+assets%2C+responsive+card+sizing%2C+and+updated+component+layouts.&updateRuntimeVersion=1.0.0&createdAt=2025-12-29T09%3A47%3A50.615Z&slug=exp&projectId=33913963-16e7-49b8-88b8-6748494919ad&group=8cd3cdde-39fd-46a9-8df9-4a3fcc5f5f09",
-    image: "https://placehold.co/1200x800.png",
-    mobileImage: "https://placehold.co/400x800.png",
+      "A retro-themed audio web radio broadcasting classic Odia and Hindi songs from the golden cassette era. Features a persistent floating player, live YouTube audio streaming, and curated nostalgic playlists.",
+    tech: ["JavaScript", "Tailwind CSS", "YouTube API", "Web Audio"],
+    github: "https://github.com/tapan-7/chai-pe-gaane",
+    link: "https://chai-pe-gaane.vercel.app",
+    image: "/projects/chai-pe-gaane.png",
+    mobileImage: "/projects/chai-pe-gaane-mobile.png",
   },
   {
-    title: "BINGEBOX",
+    title: "Interactive 404",
     description:
-      "A movie website where users can browse movies and watch trailers for specific films. Features a clean interface with responsive design.",
-    tech: ["React", "Next.js", "TypeScript", "Movie API"],
-    github: "#",
-    link: "https://bingebox-new.vercel.app/#",
+      "An arcade-inspired playable 404 error experience built with HTML5 canvas physics, responsive keyboard controls, retro pixel typography, and synthesized audio effects.",
+    tech: ["Next.js", "React", "TypeScript", "HTML5 Canvas", "Tailwind CSS"],
+    github: "https://github.com/tapan-7/interactive-404",
+    link: "https://interactive-404.vercel.app/",
+    image: "/projects/interactive-404.png",
+    mobileImage: "/projects/interactive-404-mobile.png",
+  },
+  {
+    title: "BingeBox",
+    description:
+      "A modern movie exploration and streaming interface where users can browse trending titles, watch official trailers, view cast details, and explore curated watchlists.",
+    tech: ["React", "Next.js", "TypeScript", "Movie API", "Tailwind CSS"],
+    github: "https://github.com/tapan-7/bingebox",
+    link: "https://bingebox-new.vercel.app/",
     image: "/projects/bingebox.png",
     mobileImage: "/projects/bingebox-mobile.png",
-  },
-  {
-    title: "E-Commerce Platform",
-    description:
-      "Full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.",
-    tech: ["React", "Node.js", "MongoDB", "Stripe", "JWT"],
-    github: "#",
-    link: "#",
-    image: "https://placehold.co/1200x800.png",
-    mobileImage: "https://placehold.co/400x800.png",
-  },
-  {
-    title: "Task Management System",
-    description:
-      "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
-    github: "#",
-    link: "#",
-    image: "https://placehold.co/1200x800.png",
-    mobileImage: "https://placehold.co/400x800.png",
-  },
-  {
-    title: "Analytics Dashboard",
-    description:
-      "Interactive analytics dashboard with data visualization, real-time metrics, and automated reporting capabilities.",
-    tech: ["React", "Chart.js", "Express.js", "MySQL", "Redis"],
-    github: "#",
-    link: "#",
-    image: "https://placehold.co/1200x800.png",
-    mobileImage: "https://placehold.co/400x800.png",
-  },
-  {
-    title: "API Gateway Service",
-    description:
-      "Microservices API gateway with rate limiting, authentication, and request routing for scalable applications.",
-    tech: ["Node.js", "Express", "Docker", "AWS", "Redis"],
-    github: "#",
-    link: "#",
-    image: "https://placehold.co/1200x800.png",
-    mobileImage: "https://placehold.co/400x800.png",
   },
 ];
 

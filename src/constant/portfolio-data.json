@@ -297,36 +297,28 @@
   },
   "projects": [
     {
+      "title": "Chai Pe Gaane",
+      "description": "A retro-themed audio web radio broadcasting classic Odia and Hindi songs from the golden cassette era. Features a persistent floating player, live YouTube audio streaming, and curated nostalgic playlists.",
+      "tech": ["JavaScript", "Tailwind CSS", "YouTube API", "Web Audio"],
+      "github": "https://github.com/tapan-7/chai-pe-gaane",
+      "live": "https://chai-pe-gaane.vercel.app",
+      "image": "/projects/chai-pe-gaane.png"
+    },
+    {
+      "title": "Interactive 404",
+      "description": "An arcade-inspired playable 404 error experience built with HTML5 canvas physics, responsive keyboard controls, retro pixel typography, and synthesized audio effects.",
+      "tech": ["Next.js", "React", "TypeScript", "HTML5 Canvas", "Tailwind CSS"],
+      "github": "https://github.com/tapan-7/interactive-404",
+      "live": "https://interactive-404.vercel.app/",
+      "image": "/projects/interactive-404.png"
+    },
+    {
       "title": "BingeBox",
-      "description": "A movie website where users can browse movies and watch trailers for specific films. Features a clean interface with responsive design.",
-      "tech": ["React", "Next.js", "TypeScript", "Movie API"],
+      "description": "A modern movie exploration and streaming interface where users can browse trending titles, watch official trailers, view cast details, and explore curated watchlists.",
+      "tech": ["React", "Next.js", "TypeScript", "Movie API", "Tailwind CSS"],
       "github": "https://github.com/tapan-7/bingebox",
-      "live": "https://bingebox-new.vercel.app/#",
+      "live": "https://bingebox-new.vercel.app/",
       "image": "/projects/bingebox.png"
-    },
-    {
-      "title": "Task Management System",
-      "description": "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-      "tech": ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Socket.io"],
-      "github": "#",
-      "live": "#",
-      "image": "https://placehold.co/1200x800.png"
-    },
-    {
-      "title": "Analytics Dashboard",
-      "description": "Interactive analytics dashboard with data visualization, real-time metrics, and automated reporting capabilities.",
-      "tech": ["React", "Chart.js", "Express.js", "MySQL", "Redis"],
-      "github": "#",
-      "live": "#",
-      "image": "https://placehold.co/1200x800.png"
-    },
-    {
-      "title": "API Gateway Service",
-      "description": "Microservices API gateway with rate limiting, authentication, and request routing for scalable applications.",
-      "tech": ["Node.js", "Express", "Docker", "AWS", "Redis"],
-      "github": "#",
-      "live": "#",
-      "image": "https://placehold.co/1200x800.png"
     }
   ],
   "blogs": [
