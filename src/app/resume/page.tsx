@@ -124,6 +124,19 @@ const ResumePage = () => {
                     </li>
                   ))}
                 </ul>
+
+                {"technologies" in job && Array.isArray(job.technologies) && (
+                  <div className="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-border/40">
+                    {job.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 rounded text-[10px] font-mono bg-secondary/80 text-muted-foreground border border-border/40"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>

@@ -134,7 +134,7 @@
   "secondaryProjects": [
     {
       "num": "01",
-      "title": "District Education Infrastructure (Drishti)",
+      "title": "District Education Infrastructure System",
       "category": "Enterprise System & Dynamic Forms",
       "description": "Frontend architecture powering dynamic survey collection, school infrastructure asset management, and offline-resilient task workflows across statewide administrative modules.",
       "tech": ["Next.js", "TypeScript", "Tailwind CSS", "Zod", "REST APIs"],
@@ -168,41 +168,72 @@
       "subCompany": "Nettantra Technologies",
       "banner": "/hyscaler-banner.webp",
       "period": "Jan 2025 – Present",
-      "location": "Bhubaneswar",
-      "description": "Contributed to the development of an enterprise legal-tech platform used for drafting, reviewing, and managing financial services contracts through AI-assisted workflows.",
+      "location": "Bhubaneswar, India",
+      "description": "Engineered frontend architectures and core full-stack workflows for an enterprise AI-driven legal-tech & process intelligence platform, automating complex contract lifecycle management, institutional knowledge governance, and live redline reviews.",
       "achievements": [
-        "Frontend Development: Developed responsive modules using Next.js, React, and TypeScript for contract workflows, knowledge base management, and real-time monitoring dashboards.",
-        "Salesforce Integration: Implemented Salesforce integrations to synchronize deal and contract-related information into internal systems.",
-        "Google Drive Integration: Built document synchronization workflows to fetch, process, and manage files from Google Drive within the organizational knowledge base.",
-        "Scheduled Processing: Implemented Cron-based incremental synchronization jobs to automate enterprise data ingestion and reduce manual operations.",
-        "Real-Time Synchronization: Collaborated on WebSocket-based progress tracking and status synchronization for asynchronous document-processing workflows.",
-        "System Stability: Resolved UI issues, synchronization edge cases, and race conditions, improving platform reliability and user experience."
+        "AI Contract Generation: Architected multi-step contract drafting workflows (MSAs, Order Schedules, SOWs, Amendments) combining CRM deal data, precedent knowledge base contracts, and master templates with active session draft recovery.",
+        "Dynamic UI & Workflow Architecture: Developed modular Next.js and React components for dynamic contract configuration wizards, multi-stage approval workflows, and interactive knowledge base management.",
+        "Real-Time Streaming & WebSockets: Implemented WebSocket-based token streaming for live LLM thinking states and contract drafting updates, providing immediate visual feedback and cutting perceived generation latency.",
+        "Salesforce & Google Drive Synchronization: Built bidirectional data pipelines with OAuth 2.0, multi-folder incremental sync, markdown conversion, and BullMQ/Redis background cron jobs for seamless enterprise document ingestion.",
+        "LLM Observability & Cost Tracking: Developed an analytics and telemetry dashboard tracking LLM sessions, input/output token usage, latency metrics, and real-time USD cost estimation across multiple LLM providers.",
+        "Enterprise Security & Session Reliability: Implemented robust SSO (OIDC) authentication, persistent session management, silent token refresh handling, and Role-Based Access Control (RBAC), resolving synchronization race conditions and reducing platform bugs by ~20%."
+      ],
+      "technologies": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "NestJS",
+        "Claude Agent SDK",
+        "WebSockets",
+        "BullMQ",
+        "Redis",
+        "PostgreSQL",
+        "Salesforce API",
+        "Google Drive API"
       ]
     },
     {
       "title": "Junior Technical Programmer",
       "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
       "period": "Jan 2024 – Dec 2024",
-      "location": "Bhubaneswar",
-      "description": "Developed cross-platform healthcare applications supporting doctor consultations, appointment booking, and patient engagement workflows.",
+      "location": "Bhubaneswar, India",
+      "description": "Developed and maintained mobile healthcare applications for real-time physician video consultations, appointment scheduling, and patient vitals monitoring across Android and iOS.",
       "achievements": [
-        "React Native Development: Built responsive Android and iOS applications using React Native and TypeScript.",
-        "Video Consultation: Integrated third-party Video SDKs for secure doctor-patient communication.",
-        "Notifications: Implemented Firebase push notifications and real-time engagement features.",
-        "API Integration: Integrated mobile applications with backend services and REST APIs for secure and reliable communication."
+        "React Native Mobile Development: Built and deployed responsive Android and iOS healthcare apps using React Native, TypeScript, and native bridge modules.",
+        "Encrypted Video Consultations: Integrated VideoSDK with WebRTC for secure doctor-patient video consultations and automated recording sync to AWS S3, improving call reliability by ~20%.",
+        "Real-Time Telemetry & Vitals: Integrated Android Health Connect and Bluetooth device telemetry for real-time vitals monitoring including blood pressure and heart rate tracking.",
+        "Push Notifications & Engagement: Implemented Firebase Cloud Messaging (FCM) for instant appointment alerts, medication reminders, and background sync."
+      ],
+      "technologies": [
+        "React Native",
+        "TypeScript",
+        "VideoSDK",
+        "WebRTC",
+        "AWS S3",
+        "Health Connect",
+        "Firebase",
+        "REST APIs"
       ]
     },
     {
       "title": "Software Developer Trainee",
       "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
       "period": "Jun 2023 – Dec 2023",
-      "location": "Bhubaneswar",
-      "description": "Completed hands-on training in full-stack web development with a focus on the MERN stack and modern development workflows.",
+      "location": "Bhubaneswar, India",
+      "description": "Completed intensive full-stack engineering training, developing scalable MERN applications, responsive UI libraries, and enterprise database integrations.",
       "achievements": [
-        "MERN Application Development: Developed and maintained application modules using MongoDB, Express.js, React, and Node.js.",
-        "Responsive UI Development: Designed reusable UI components and responsive user interfaces.",
-        "CRUD Operations: Implemented database operations and integrated REST APIs into application workflows.",
-        "Version Control: Worked with Git-based development workflows and collaborative coding practices."
+        "MERN Stack Engineering: Built responsive full-stack modules using React, Node.js, Express, and MongoDB, improving component rendering efficiency and overall UI responsiveness.",
+        "Reusable Component Architecture: Designed modular, accessible UI component libraries and dynamic forms for seamless CRUD operations.",
+        "API Integration & Version Control: Integrated REST APIs, managed complex application state, and adhered to Git-based CI/CD workflows and collaborative code reviews."
+      ],
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "JavaScript",
+        "Tailwind CSS",
+        "REST APIs"
       ]
     }
   ],
@@ -241,7 +272,7 @@
     "Database": ["PostgreSQL", "Prisma ORM", "Mongo DB", "MySQL"],
     "Cloud & DevOps": ["Docker", "AWS S3", "Vercel", "GitHub"],
     "Messaging": ["Redis", "BullMQ"],
-    "Integrations": ["Salesforce API", "Google Drive API", "VideoSDK"],
+    "Integrations": ["Salesforce API", "Google Drive API", "Claude Agent SDK / LLMs", "VideoSDK"],
     "Tools": ["Git", "Postman", "VS Code"]
   },
   "projects": [

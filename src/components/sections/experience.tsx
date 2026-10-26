@@ -78,12 +78,12 @@ export function Experience() {
 
                       <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-muted-foreground">
                         <span className="flex items-center gap-1.5 font-medium text-foreground">
-                          <Briefcase className="w-3.5 h-3.5 text-primary" />
+                          <Briefcase className="w-3.5 h-3.5 text-primary shrink-0" />
                           {job.company}
                         </span>
                         <span className="text-border">•</span>
                         <span className="flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5" />
+                          <MapPin className="w-3.5 h-3.5 shrink-0" />
                           {job.location}
                         </span>
                         <span className="hidden md:inline text-border">•</span>
@@ -127,6 +127,19 @@ export function Experience() {
                           );
                         })}
                       </ul>
+
+                      {"technologies" in job && Array.isArray(job.technologies) && (
+                        <div className="flex flex-wrap gap-1.5 pt-3 max-w-3xl">
+                          {job.technologies.map((tech) => (
+                            <span
+                              key={tech}
+                              className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-muted/60 text-muted-foreground border border-border/50 hover:border-primary/40 hover:text-foreground transition-colors"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </AnimatedContent>
                 </div>
