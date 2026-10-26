@@ -42,7 +42,12 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${montserrat.variable} ${openSans.variable} font-sans bg-background text-foreground`}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
           <SmoothScrollProvider>
             <Navbar />
             <PageWrapper>
