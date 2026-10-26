@@ -14,6 +14,7 @@ interface ImageParticlesProps {
   springStiffness?: number;
   damping?: number;
   shockwaveStrength?: number;
+  fit?: "contain" | "cover";
   children?: React.ReactNode;
 }
 
@@ -49,6 +50,7 @@ export function ImageParticles({
   springStiffness = 0.09,
   damping = 0.84,
   shockwaveStrength = 16,
+  fit = "contain",
   children,
 }: ImageParticlesProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,24 +70,15 @@ export function ImageParticles({
       const offCtx = offscreen.getContext("2d", { willReadFrequently: true });
       if (!offCtx) return;
 
-      const imgAspect = img.naturalWidth / img.naturalHeight;
-      const canvasAspect = width / height;
+      const scale = fit === "cover"
+        ? Math.max(width / img.naturalWidth, height / img.naturalHeight)
+        : Math.min(width / img.naturalWidth, height / img.naturalHeight);
+      const drawWidth = Math.round(img.naturalWidth * scale);
+      const drawHeight = Math.round(img.naturalHeight * scale);
+      const offsetX = Math.round((width - drawWidth) / 2);
+      const offsetY = Math.round((height - drawHeight) / 2);
 
-      let drawWidth = width;
-      let drawHeight = height;
-      let offsetX = 0;
-      let offsetY = 0;
-
-      if (imgAspect > canvasAspect) {
-        drawHeight = height;
-        drawWidth = height * imgAspect;
-        offsetX = (width - drawWidth) / 2;
-      } else {
-        drawWidth = width;
-        drawHeight = width / imgAspect;
-        offsetY = (height - drawHeight) / 2;
-      }
-
+      offCtx.clearRect(0, 0, width, height);
       offCtx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
 
       const imageData = offCtx.getImageData(0, 0, width, height);
@@ -94,7 +87,10 @@ export function ImageParticles({
 
       for (let y = 0; y < height; y += gap) {
         for (let x = 0; x < width; x += gap) {
-          const index = (y * width + x) * 4;
+          const px = Math.floor(x);
+          const py = Math.floor(y);
+          if (px >= width || py >= height) continue;
+          const index = (py * width + px) * 4;
           const a = data[index + 3];
 
           if (a > 30) {
@@ -104,10 +100,10 @@ export function ImageParticles({
             const color = `rgba(${r},${g},${b},${(a / 255).toFixed(2)})`;
 
             newParticles.push({
-              x,
-              y,
-              originX: x,
-              originY: y,
+              x: px,
+              y: py,
+              originX: px,
+              originY: py,
               vx: (Math.random() - 0.5) * 1.5,
               vy: (Math.random() - 0.5) * 1.5,
               size: particleSize,
@@ -120,7 +116,7 @@ export function ImageParticles({
       particlesRef.current = newParticles;
       setIsLoaded(true);
     },
-    [gap, particleSize]
+    [gap, particleSize, fit]
   );
 
   useEffect(() => {
@@ -142,14 +138,14 @@ export function ImageParticles({
       if (width === 0 || height === 0) return;
 
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
 
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        ctx.scale(dpr, dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
       initParticles(width, height, img);
@@ -183,11 +179,10 @@ export function ImageParticles({
     if (!ctx) return;
 
     const render = () => {
-      const rect = canvas.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
-
-      ctx.clearRect(0, 0, width, height);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const mouse = mouseRef.current;
       const particles = particlesRef.current;
@@ -313,7 +308,7 @@ export function ImageParticles({
         src={src}
         alt={alt}
         className={cn(
-          "w-full h-full object-cover transition-opacity duration-700 pointer-events-none absolute inset-0",
+          "w-full h-full object-contain transition-opacity duration-700 pointer-events-none absolute inset-0",
           isLoaded ? "opacity-0" : "opacity-100"
         )}
       />

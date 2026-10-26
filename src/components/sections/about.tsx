@@ -33,34 +33,30 @@ export function About() {
             <AnimatedContent distance={30} direction="vertical" delay={0.1}>
               <div className="relative group max-w-md mx-auto lg:max-w-none">
                 <ImageParticles
-                  src={profile.avatar || "/profile.jpeg"}
+                  src="/profile-outline.png"
                   alt={profile.name}
+                  fit="contain"
                   gap={3.5}
                   particleSize={1.8}
                   repulsionRadius={70}
                   repulsionStrength={0.9}
-                  className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden bg-muted border border-border/50 shadow-2xl"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/25 to-transparent opacity-85 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none" />
-                  <div className="absolute top-4 right-4 z-20 pointer-events-none">
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase bg-primary/15 text-primary border border-primary/25 backdrop-blur-md">
-                      Interactive • Click for shockwave
-                    </span>
+                  className="relative aspect-square w-full max-w-[420px] mx-auto"
+                />
+                <div className="flex items-center justify-between pt-4 px-2">
+                  <div>
+                    <p className="text-xs font-mono uppercase tracking-widest text-primary mb-1">
+                      {about.bio.role || profile.title}
+                    </p>
+                    <p className="text-lg font-bold text-foreground">
+                      {profile.name}
+                    </p>
                   </div>
-                  <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between z-20 pointer-events-none">
-                    <div>
-                      <p className="text-xs font-mono uppercase tracking-widest text-primary mb-1">
-                        {about.bio.role || profile.title}
-                      </p>
-                      <p className="text-lg font-bold text-foreground">
-                        {profile.name}
-                      </p>
-                    </div>
+                  <div className="flex items-center gap-2">
                     <span className="text-xs font-mono text-muted-foreground bg-secondary/80 px-2.5 py-0.5 rounded-full border border-border">
                       {about.bio.countryCode}
                     </span>
                   </div>
-                </ImageParticles>
+                </div>
               </div>
             </AnimatedContent>
           </div>
@@ -102,7 +98,7 @@ export function About() {
                 <div
                   className={cn(
                     "text-4xl sm:text-5xl lg:text-6xl font-black font-mono tracking-tight",
-                    idx === 0 ? "text-primary" : "text-foreground"
+                    idx === 0 ? "text-primary" : "text-foreground",
                   )}
                 >
                   {stat.isCountUp ? (

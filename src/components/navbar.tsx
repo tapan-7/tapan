@@ -54,7 +54,7 @@ function NavPreviewCard({ data }: { data: PreviewData }) {
 function getPreviewData(id: string): PreviewData | null {
   if (id === "about") {
     return {
-      image: portfolioData.profile.avatar || "/profile.jpeg",
+      image: portfolioData.profile.avatar || "/profile-outline.png",
       title: portfolioData.profile.name,
       subtitle: portfolioData.profile.email,
       imageClass: "object-top",

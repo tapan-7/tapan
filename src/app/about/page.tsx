@@ -57,13 +57,14 @@ const AboutPage = () => {
 
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <ImageParticles
-              src="/profile.jpeg"
+              src="/profile-outline.png"
               alt={profile.name}
+              fit="contain"
               gap={3.5}
               particleSize={1.8}
               repulsionRadius={65}
               repulsionStrength={0.9}
-              className="relative w-72 h-80 rounded-2xl overflow-hidden border border-border bg-card shadow-xl"
+              className="relative w-72 sm:w-80 aspect-square"
             />
           </div>
         </AnimatedSection>
