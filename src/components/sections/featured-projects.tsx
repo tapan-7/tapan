@@ -209,7 +209,7 @@ export function FeaturedProjects() {
                               alt={project.title}
                               fill
                               sizes="(max-width: 1200px) 50vw, 600px"
-                              className="object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
+                              className="object-cover object-center group-hover/img:scale-105 transition-transform duration-700"
                             />
                           ) : (
                             <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-secondary/50 to-background p-6 text-center">
