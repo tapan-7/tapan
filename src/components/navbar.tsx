@@ -2,14 +2,11 @@
 
 import React, { useEffect, useState, useId } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   motion,
   AnimatePresence,
   useScroll,
   useSpring,
-  useMotionValue,
-  useTransform,
   useReducedMotion,
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
@@ -17,79 +14,6 @@ import portfolioData from "@/constant/portfolio-data.json";
 import { NAV_LINKS } from "@/constant/navigation";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
 import { LiquidWave } from "@/components/ui/liquid-wave";
-
-interface PreviewData {
-  image: string;
-  title: string;
-  subtitle?: string;
-  imageClass?: string;
-}
-
-function NavPreviewCard({ data }: { data: PreviewData }) {
-  return (
-    <div className="relative w-[300px] sm:w-[340px] h-[380px] sm:h-[420px] rounded-2xl overflow-hidden bg-scrim shadow-2xl select-none flex flex-col justify-end">
-      <Image
-        src={data.image}
-        alt={data.title}
-        fill
-        sizes="340px"
-        className={`object-cover ${data.imageClass || ""}`}
-        priority
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-scrim/85 via-scrim/25 to-transparent" />
-      <div className="relative z-10 p-5 text-scrim-foreground">
-        <h3 className="text-2xl font-bold tracking-tight text-scrim-foreground leading-tight">
-          {data.title}
-        </h3>
-        {data.subtitle && (
-          <p className="text-xs font-mono text-scrim-muted mt-1">
-            {data.subtitle}
-          </p>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function getPreviewData(id: string): PreviewData | null {
-  if (id === "about") {
-    return {
-      image: portfolioData.profile.avatar || "/profile-outline.png",
-      title: portfolioData.profile.name,
-      subtitle: portfolioData.profile.email,
-      imageClass: "object-top",
-    };
-  }
-  if (id === "experience") {
-    const exp = portfolioData.experience[0];
-    return {
-      image: exp.banner || "/hyscaler-banner.webp",
-      title: exp.shortCompany || exp.company,
-      subtitle: exp.subCompany,
-    };
-  }
-  if (id === "projects") {
-    const project = portfolioData.projects[0];
-    return {
-      image: project.image,
-      title: project.title,
-    };
-  }
-  if (id === "writing") {
-    const blog = portfolioData.blogs[0];
-    return {
-      image: blog.image,
-      title: blog.title,
-    };
-  }
-  return null;
-}
-
-function DynamicCardPreview({ hoveredId }: { hoveredId: string }) {
-  const data = getPreviewData(hoveredId);
-  if (!data) return null;
-  return <NavPreviewCard data={data} />;
-}
 
 function NavMenuItem({
   item,
@@ -107,8 +31,8 @@ function NavMenuItem({
   isActive: boolean;
   shouldReduceMotion: boolean | null;
   onNavigate: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
-  onHoverStart: (clientX: number, clientY: number, id: string) => void;
-  onFocusStart: (cx: number, cy: number, id: string) => void;
+  onHoverStart: (id: string) => void;
+  onFocusStart: (id: string) => void;
 }) {
   const [touchPos, setTouchPos] = useState<{ x: number; y: number } | null>(
     null,
@@ -135,7 +59,7 @@ function NavMenuItem({
             x: e.clientX - rect.left,
             y: e.clientY - rect.top,
           });
-          onHoverStart(e.clientX, e.clientY, id);
+          onHoverStart(id);
         }}
         onMouseMove={(e) => {
           if (!touchPos) {
@@ -151,13 +75,11 @@ function NavMenuItem({
         }}
         onFocus={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
           setTouchPos({
             x: rect.width / 2,
             y: rect.height / 2,
           });
-          onFocusStart(cx, cy, id);
+          onFocusStart(id);
         }}
         onBlur={() => {
           setTouchPos(null);
@@ -177,17 +99,18 @@ function NavMenuItem({
           }}
           transition={{
             clipPath: {
-              duration: 0.5,
-              ease: [0.16, 1, 0.3, 1],
+              duration: 0.7,
+              ease: [0.22, 1, 0.36, 1],
             },
             opacity: {
-              duration: isHovered ? 0.05 : 0.25,
+              duration: isHovered ? 0.25 : 0.4,
+              ease: "easeInOut",
             },
           }}
         />
 
         <span
-          className={`relative z-10 text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight transition-colors duration-200 ${
+          className={`relative z-10 text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight transition-colors duration-400 ease-out ${
             isHovered
               ? "text-background"
               : isActive
@@ -205,28 +128,9 @@ function NavMenuItem({
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
-  const [isHovering, setIsHovering] = useState(false);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
   const navDialogId = useId();
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const cursorX = useSpring(mouseX, { stiffness: 320, damping: 28, mass: 0.5 });
-  const cursorY = useSpring(mouseY, { stiffness: 320, damping: 28, mass: 0.5 });
-
-  const cardRotateX = useTransform(mouseY, (val) => {
-    if (typeof window === "undefined") return 0;
-    const center = window.innerHeight / 2;
-    return -((val - center) / center) * 10;
-  });
-  const cardRotateY = useTransform(mouseX, (val) => {
-    if (typeof window === "undefined") return 0;
-    const center = window.innerWidth / 2;
-    return ((val - center) / center) * 12;
-  });
-  const smoothRotateX = useSpring(cardRotateX, { stiffness: 200, damping: 25 });
-  const smoothRotateY = useSpring(cardRotateY, { stiffness: 200, damping: 25 });
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -234,13 +138,6 @@ export default function Navbar() {
     damping: 30,
     restDelta: 0.001,
   });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      mouseX.set(window.innerWidth / 2);
-      mouseY.set(window.innerHeight / 2);
-    }
-  }, [isOpen, mouseX, mouseY]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -295,30 +192,6 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  const handleMouseMove = (
-    clientX: number,
-    clientY: number,
-    targetId?: string,
-  ) => {
-    if (typeof window === "undefined") return;
-    const currentTarget = targetId || hoveredId;
-    if (currentTarget === "skills" || currentTarget === "contact") {
-      return;
-    }
-    const padX = 180;
-    const padY = 220;
-    const clampedX = Math.max(
-      padX,
-      Math.min(window.innerWidth - padX, clientX),
-    );
-    const clampedY = Math.max(
-      padY,
-      Math.min(window.innerHeight - padY, clientY),
-    );
-    mouseX.set(clampedX);
-    mouseY.set(clampedY);
-  };
-
   const handleNavigate = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -326,7 +199,6 @@ export default function Navbar() {
     if (href.startsWith("#")) {
       e.preventDefault();
       setIsOpen(false);
-      setIsHovering(false);
       setHoveredId(null);
 
       setTimeout(() => {
@@ -337,7 +209,6 @@ export default function Navbar() {
       }, 160);
     } else {
       setIsOpen(false);
-      setIsHovering(false);
       setHoveredId(null);
     }
   };
@@ -411,7 +282,6 @@ export default function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Site Navigation"
-            onMouseMove={(e) => handleMouseMove(e.clientX, e.clientY)}
             initial={
               shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -20 }
             }
@@ -423,7 +293,6 @@ export default function Navbar() {
             <div className="w-full mx-auto flex-1 flex flex-col items-center justify-center min-h-0">
               <nav
                 onMouseLeave={() => {
-                  setIsHovering(false);
                   setHoveredId(null);
                 }}
                 className="w-full flex flex-col space-y-1.5 sm:space-y-2 select-none"
@@ -442,50 +311,10 @@ export default function Navbar() {
                       isActive={isActive}
                       shouldReduceMotion={shouldReduceMotion}
                       onNavigate={handleNavigate}
-                      onHoverStart={(clientX, clientY, itemId) => {
-                        handleMouseMove(clientX, clientY, itemId);
-                        if (
-                          itemId !== "skills" &&
-                          itemId !== "contact" &&
-                          !isHovering
-                        ) {
-                          const padX = 180;
-                          const padY = 220;
-                          const clampedX = Math.max(
-                            padX,
-                            Math.min(window.innerWidth - padX, clientX),
-                          );
-                          const clampedY = Math.max(
-                            padY,
-                            Math.min(window.innerHeight - padY, clientY),
-                          );
-                          cursorX.jump(clampedX);
-                          cursorY.jump(clampedY);
-                        }
-                        setIsHovering(true);
+                      onHoverStart={(itemId) => {
                         setHoveredId(itemId);
                       }}
-                      onFocusStart={(cx, cy, itemId) => {
-                        handleMouseMove(cx, cy, itemId);
-                        if (
-                          itemId !== "skills" &&
-                          itemId !== "contact" &&
-                          !isHovering
-                        ) {
-                          const padX = 180;
-                          const padY = 220;
-                          const clampedX = Math.max(
-                            padX,
-                            Math.min(window.innerWidth - padX, cx),
-                          );
-                          const clampedY = Math.max(
-                            padY,
-                            Math.min(window.innerHeight - padY, cy),
-                          );
-                          cursorX.jump(clampedX);
-                          cursorY.jump(clampedY);
-                        }
-                        setIsHovering(true);
+                      onFocusStart={(itemId) => {
                         setHoveredId(itemId);
                       }}
                     />
@@ -553,42 +382,6 @@ export default function Navbar() {
                     </a>
                   ))}
               </div>
-            </div>
-
-            <div className="fixed inset-0 pointer-events-none overflow-hidden z-[80] hidden md:block">
-              <motion.div
-                style={{
-                  position: "absolute",
-                  left: cursorX,
-                  top: cursorY,
-                  rotateX: smoothRotateX,
-                  rotateY: smoothRotateY,
-                  perspective: 1000,
-                }}
-              >
-                <div className="-translate-x-1/2 -translate-y-1/2">
-                  <AnimatePresence mode="wait">
-                    {isHovering &&
-                      hoveredId &&
-                      hoveredId !== "skills" &&
-                      hoveredId !== "contact" && (
-                        <motion.div
-                          key={hoveredId}
-                          initial={{ opacity: 0, scale: 0.85 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.85 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 26,
-                          }}
-                        >
-                          <DynamicCardPreview hoveredId={hoveredId} />
-                        </motion.div>
-                      )}
-                  </AnimatePresence>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
         )}
