@@ -317,9 +317,9 @@ void main() {
     float fresh = heat / max(energy, 0.0001);
     vec3 tint = mix(uSecondary, uColor, fresh);
     float halo = dot(bloom, vec3(0.2126, 0.7152, 0.0722));
-    float density = (1.0 - exp(-((energy * 0.7 + gas * 0.5) * uIntensity + halo * 0.2))) * 0.38;
-    vec3 ink = mix(tint, vec3(1.0), 0.12);
-    density = clamp(density * grain, 0.0, 0.38) * edge;
+    float density = (1.0 - exp(-((energy * 1.0 + gas * 0.7) * uIntensity + halo * 0.3))) * 0.72;
+    vec3 ink = mix(tint, vec3(1.0), 0.06);
+    density = clamp(density * grain, 0.0, 0.72) * edge;
     outColor = vec4(ink * density, density);
   } else {
     vec3 color = 1.0 - exp(-(light + bloom) * grain);
@@ -422,11 +422,11 @@ export function GlowCursor({
   settingsRef.current = {
     color: String(activeColor),
     secondaryColor: String(activeSecondary),
-    intensity: Math.max(0, isLight ? intensity * 0.85 : intensity),
-    trailWidth: clamp(isLight ? trailWidth * 0.9 : trailWidth, 0.5, 40),
-    linger: clamp(isLight ? linger * 0.85 : linger, 0.1, 10),
-    glow: Math.max(0, glow),
-    hotspot: Math.max(0, isLight ? hotspot * 0.4 : hotspot),
+    intensity: Math.max(0, isLight ? intensity * 1.2 : intensity),
+    trailWidth: clamp(isLight ? trailWidth * 1.15 : trailWidth, 0.5, 40),
+    linger: clamp(isLight ? linger * 1.05 : linger, 0.1, 10),
+    glow: Math.max(0, isLight ? glow * 1.1 : glow),
+    hotspot: Math.max(0, isLight ? hotspot * 0.65 : hotspot),
     followSpeed: clamp(followSpeed, 0, 1),
     grain: Math.max(0, grain),
     clickBurst,
