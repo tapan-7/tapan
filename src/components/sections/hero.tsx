@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { ParticleText } from "@/components/react-bits/particle-text";
 import { LiquidWave } from "@/components/ui/liquid-wave";
+import { LightRays } from "@/components/ui/light-rays";
 import portfolioData from "@/constant/portfolio-data.json";
 
 export function Hero() {
@@ -49,13 +50,30 @@ export function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-20 pb-16 px-3 sm:px-6 w-full overflow-hidden"
+      className="relative isolate min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-20 pb-16 px-3 sm:px-6 w-full overflow-hidden"
     >
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <LightRays
+          raysOrigin="top-center"
+          raysSpeed={0.7}
+          lightSpread={0.65}
+          rayLength={3.2}
+          rayDensity={1.2}
+          glow={0.8}
+          haze={0.25}
+          intensity={0.85}
+          followMouse={true}
+          mouseInfluence={0.12}
+          cursorShadow={true}
+          clickPulse={true}
+          className="w-full h-full"
+        />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none" />
+      </div>
 
       <motion.div
         style={{ scale: heroScale }}
-        className="w-full max-w-6xl mx-auto flex flex-col items-center text-center my-auto px-1 sm:px-4"
+        className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center text-center my-auto px-1 sm:px-4"
       >
         <ParticleText
           line1={hero?.headline?.line1 || "Engineering digital"}
