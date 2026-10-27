@@ -198,40 +198,44 @@ export function Skills() {
                 } group-hover/row:[animation-play-state:paused] group-active/row:[animation-play-state:paused]`}
                 style={
                   {
-                    "--marquee-duration": `${row.duration}s`,
-                    animationDuration: `${row.duration}s`,
+                    "--marquee-duration": `${row.duration * 2}s`,
+                    animationDuration: `${row.duration * 2}s`,
                   } as React.CSSProperties
                 }
               >
                 <div className="flex shrink-0 items-center gap-[var(--gap)] pr-[var(--gap)]">
-                  {row.items.map((item, itemIdx) => (
-                    <CloudTile
-                      key={`t1-${rowIdx}-${itemIdx}`}
-                      item={item}
-                      isActive={
-                        item.type === "skill" &&
-                        activeSkill?.name === item.name
-                      }
-                      onHover={handleHover}
-                    />
-                  ))}
+                  {[0, 1, 2].map((repIdx) =>
+                    row.items.map((item, itemIdx) => (
+                      <CloudTile
+                        key={`t1-${rowIdx}-${repIdx}-${itemIdx}`}
+                        item={item}
+                        isActive={
+                          item.type === "skill" &&
+                          activeSkill?.name === item.name
+                        }
+                        onHover={handleHover}
+                      />
+                    ))
+                  )}
                 </div>
                 <div
                   aria-hidden="true"
                   className="flex shrink-0 items-center gap-[var(--gap)] pr-[var(--gap)]"
                 >
-                  {row.items.map((item, itemIdx) => (
-                    <CloudTile
-                      key={`t2-${rowIdx}-${itemIdx}`}
-                      item={item}
-                      isAriaHidden
-                      isActive={
-                        item.type === "skill" &&
-                        activeSkill?.name === item.name
-                      }
-                      onHover={handleHover}
-                    />
-                  ))}
+                  {[0, 1, 2].map((repIdx) =>
+                    row.items.map((item, itemIdx) => (
+                      <CloudTile
+                        key={`t2-${rowIdx}-${repIdx}-${itemIdx}`}
+                        item={item}
+                        isAriaHidden
+                        isActive={
+                          item.type === "skill" &&
+                          activeSkill?.name === item.name
+                        }
+                        onHover={handleHover}
+                      />
+                    ))
+                  )}
                 </div>
               </div>
             </div>
