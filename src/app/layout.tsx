@@ -6,7 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { PageWrapper } from "@/components/page-wrapper";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
+import { GlowCursor } from "@/components/ui/glow-cursor";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 
 const montserrat = Montserrat({
@@ -55,8 +55,8 @@ export default function RootLayout({
               <Footer />
             </PageWrapper>
           </SmoothScrollProvider>
+          <GlowCursor />
         </ThemeProvider>
-        <SmoothCursor />
       </body>
     </html>
   );
