@@ -24,38 +24,37 @@ export default function AppleIcon() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 32 32"
-          width="120"
-          height="120"
+          width="130"
+          height="130"
         >
           <path
-            d="M10 11.5L6.5 16L10 20.5"
+            d="M8 5L1.5 16L8 27"
             fill="none"
             stroke="#a78bfa"
-            strokeWidth="2.4"
+            strokeWidth="3.4"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M16 10V20.5C16 21.5 16.5 22 18 22"
+            d="M16 7V22.5C16 24.5 17.2 25.5 19.5 25.5"
             fill="none"
             stroke="#f8fafc"
-            strokeWidth="2.6"
+            strokeWidth="3.2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
-            d="M13 13.5H19"
+            d="M12 13H20"
             fill="none"
             stroke="#f8fafc"
-            strokeWidth="2.6"
+            strokeWidth="3.2"
             strokeLinecap="round"
-            strokeLinejoin="round"
           />
           <path
-            d="M22 11.5L25.5 16L22 20.5"
+            d="M24 5L30.5 16L24 27"
             fill="none"
             stroke="#a78bfa"
-            strokeWidth="2.4"
+            strokeWidth="3.4"
             strokeLinecap="round"
             strokeLinejoin="round"
           />

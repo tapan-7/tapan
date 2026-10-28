@@ -20,20 +20,20 @@ export function Logo({
 }: LogoProps) {
   const fontSizes = {
     sm: "text-sm gap-1.5",
-    md: "text-base sm:text-lg gap-2",
-    lg: "text-lg sm:text-xl gap-2.5",
+    md: "text-base sm:text-lg gap-1.5",
+    lg: "text-lg sm:text-xl gap-2",
   };
 
   const symbolSizes = {
-    sm: "text-xs sm:text-sm",
-    md: "text-sm sm:text-base",
-    lg: "text-base sm:text-lg",
+    sm: "text-sm",
+    md: "text-base sm:text-lg",
+    lg: "text-lg sm:text-xl",
   };
 
   return (
     <div
       className={cn(
-        "inline-flex items-center select-none group transition-colors",
+        "inline-flex items-center leading-none select-none group transition-colors",
         fontSizes[size],
         className,
       )}
@@ -42,7 +42,7 @@ export function Logo({
       {showSymbol && (
         <span
           className={cn(
-            "inline-flex items-center font-mono font-bold tracking-normal",
+            "inline-flex items-center font-mono font-bold tracking-normal leading-none",
             symbolSizes[size],
           )}
         >
@@ -59,7 +59,7 @@ export function Logo({
       )}
 
       {showName && (
-        <span className="font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary">
+        <span className="font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary leading-none">
           {name}
         </span>
       )}
