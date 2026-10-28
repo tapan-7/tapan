@@ -13,6 +13,7 @@ import portfolioData from "@/constant/portfolio-data.json";
 import { NAV_LINKS } from "@/constant/navigation";
 import { AnimatedThemeToggler } from "./animated-theme-toggler";
 import { LiquidWave } from "@/components/ui/liquid-wave";
+import { Logo } from "@/components/ui/logo";
 
 function NavMenuItem({
   item,
@@ -219,15 +220,10 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="pointer-events-auto text-base sm:text-lg font-semibold tracking-tight text-foreground hover:text-primary transition-colors flex items-center gap-1 group px-4 py-2 rounded-full"
+            aria-label="Home"
+            className="pointer-events-auto flex items-center group px-3 py-1.5 rounded-full"
           >
-            <span className="text-primary font-mono text-sm group-hover:-translate-x-0.5 transition-transform">
-              &lt;
-            </span>
-            <span>{portfolioData.profile.nickname}</span>
-            <span className="text-primary font-mono text-sm group-hover:translate-x-0.5 transition-transform">
-              /&gt;
-            </span>
+            <Logo size="md" showSymbol={false} showName={true} />
           </Link>
 
           <div className="pointer-events-auto flex items-center gap-3">

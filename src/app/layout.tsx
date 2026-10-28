@@ -29,6 +29,13 @@ export const metadata: Metadata = {
       "Frontend-focused SDE building modern web and mobile apps with React, Next.js, and React Native.",
     type: "website",
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: "/apple-icon",
+  },
 };
 
 export default function RootLayout({

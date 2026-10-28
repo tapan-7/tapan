@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowUp } from "lucide-react";
 import { LiquidWave } from "@/components/ui/liquid-wave";
+import { Logo } from "@/components/ui/logo";
 import portfolioData from "@/constant/portfolio-data.json";
 import { NAV_LINKS } from "@/constant/navigation";
 
@@ -17,6 +18,7 @@ export default function Footer() {
     <footer className="py-12 px-6 border-t border-border/40 bg-background text-muted-foreground text-xs font-mono">
       <div className="container max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="flex flex-col sm:flex-row items-center gap-3">
+          <Logo size="sm" showName={false} />
           <span className="font-semibold text-foreground font-sans">{profile.name}</span>
           <span className="hidden sm:inline text-border">•</span>
           <span>{profile.title}</span>
