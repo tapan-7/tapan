@@ -60,9 +60,9 @@ const AboutPage = () => {
               src="/profile-outline.png"
               alt={profile.name}
               fit="contain"
-              gap={3.5}
-              particleSize={1.8}
-              repulsionRadius={65}
+              gap={3}
+              particleSize={1.2}
+              repulsionRadius={70}
               repulsionStrength={0.9}
               className="relative w-72 sm:w-80 aspect-square"
             />

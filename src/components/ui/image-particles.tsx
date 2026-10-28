@@ -85,27 +85,35 @@ export function ImageParticles({
       const data = imageData.data;
       const newParticles: Particle[] = [];
 
-      for (let y = 0; y < height; y += gap) {
-        for (let x = 0; x < width; x += gap) {
-          const px = Math.floor(x);
-          const py = Math.floor(y);
+      const safeGap = Math.max(2, Math.round(gap));
+      for (let y = 0; y < height; y += safeGap) {
+        for (let x = 0; x < width; x += safeGap) {
+          const px = Math.round(x);
+          const py = Math.round(y);
           if (px >= width || py >= height) continue;
           const index = (py * width + px) * 4;
           const a = data[index + 3];
 
-          if (a > 30) {
-            const r = data[index];
-            const g = data[index + 1];
-            const b = data[index + 2];
-            const color = `rgba(${r},${g},${b},${(a / 255).toFixed(2)})`;
+          if (a > 25) {
+            let r = data[index];
+            let g = data[index + 1];
+            let b = data[index + 2];
+            const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+            if (lum < 36) {
+              const boost = 36 - lum;
+              r = Math.min(255, Math.round(r + boost * 0.9 + 18));
+              g = Math.min(255, Math.round(g + boost * 0.9 + 18));
+              b = Math.min(255, Math.round(b + boost * 1.15 + 26));
+            }
+            const color = `rgba(${r},${g},${b},${Math.max(0.75, a / 255).toFixed(2)})`;
 
             newParticles.push({
               x: px,
               y: py,
               originX: px,
               originY: py,
-              vx: (Math.random() - 0.5) * 1.5,
-              vy: (Math.random() - 0.5) * 1.5,
+              vx: 0,
+              vy: 0,
               size: particleSize,
               color,
             });
@@ -239,6 +247,18 @@ export function ImageParticles({
 
         p.x += p.vx;
         p.y += p.vy;
+
+        if (
+          Math.abs(homeDx) < 0.04 &&
+          Math.abs(homeDy) < 0.04 &&
+          Math.abs(p.vx) < 0.04 &&
+          Math.abs(p.vy) < 0.04
+        ) {
+          p.x = p.originX;
+          p.y = p.originY;
+          p.vx = 0;
+          p.vy = 0;
+        }
 
         ctx.fillStyle = p.color;
         ctx.beginPath();

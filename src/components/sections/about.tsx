@@ -36,9 +36,9 @@ export function About() {
                   src="/profile-outline.png"
                   alt={profile.name}
                   fit="contain"
-                  gap={3.5}
-                  particleSize={1.8}
-                  repulsionRadius={70}
+                  gap={3}
+                  particleSize={1.2}
+                  repulsionRadius={75}
                   repulsionStrength={0.9}
                   className="relative aspect-square w-full max-w-[420px] mx-auto"
                 />
