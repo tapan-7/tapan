@@ -37,9 +37,9 @@ export function About() {
                   alt={profile.name}
                   fit="contain"
                   gap={3}
-                  particleSize={1.2}
+                  particleSize={1.5}
                   repulsionRadius={75}
-                  repulsionStrength={0.9}
+                  repulsionStrength={0.95}
                   className="relative aspect-square w-full max-w-[420px] mx-auto"
                 />
                 <div className="flex items-center justify-between pt-4 px-2">
