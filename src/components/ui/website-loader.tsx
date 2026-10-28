@@ -141,7 +141,7 @@ export function WebsiteLoader() {
                     y="56%"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    className="fill-[#090a0f] dark:fill-white font-black text-[175px] sm:text-[195px] md:text-[210px] transition-colors duration-300 drop-shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:drop-shadow-[0_0_24px_rgba(255,255,255,0.2)]"
+                    className="fill-[#090a0f] dark:fill-white font-black text-[175px] sm:text-[195px] md:text-[210px] transition-colors duration-300"
                     style={{
                       fontFamily:
                         "var(--font-montserrat), -apple-system, BlinkMacSystemFont, sans-serif",

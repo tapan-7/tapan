@@ -673,8 +673,8 @@ export function LightRays({
     >
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 block h-full w-full pointer-events-none"
-        style={{ mixBlendMode: isLight ? "normal" : "screen" }}
+        className="absolute inset-0 block h-full w-full pointer-events-none mix-blend-normal dark:mix-blend-screen"
+        suppressHydrationWarning
         aria-hidden="true"
       />
     </div>
