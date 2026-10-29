@@ -12,13 +12,8 @@ type Props = {
 
 export const AnimatedThemeToggler = ({ className }: Props) => {
   const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const isTransitioningRef = useRef(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const changeTheme = async () => {
     buttonRef.current?.blur();
@@ -104,7 +99,7 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       ref={buttonRef}
       onClick={changeTheme}
       className={cn(
-        "relative overflow-hidden w-12 h-12 rounded-full border border-border/80 bg-background/50 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "relative overflow-hidden w-12 h-12 rounded-full border border-border/80 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
     >

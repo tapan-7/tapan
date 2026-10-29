@@ -21,13 +21,13 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Tapan Kumar Swain — Software Development Engineer",
+  title: "Tapan Kumar Swain — SDE 1 | Full-Stack Engineer",
   description:
-    "Portfolio of Tapan Kumar Swain, Software Development Engineer specializing in high-performance web and mobile applications with React, Next.js, and React Native.",
+    "Portfolio of Tapan Kumar Swain, SDE 1 specializing in high-performance full-stack web, backend, and mobile applications with Next.js, React, NestJS, and React Native.",
   openGraph: {
-    title: "Tapan Kumar Swain — Software Development Engineer",
+    title: "Tapan Kumar Swain — SDE 1 | Full-Stack Engineer",
     description:
-      "Frontend-focused SDE building modern web and mobile apps with React, Next.js, and React Native.",
+      "Full-stack SDE 1 building modern web, backend, and mobile apps with Next.js, React, NestJS, and React Native.",
     type: "website",
   },
   icons: {

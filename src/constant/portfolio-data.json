@@ -3,7 +3,7 @@
     "name": "Tapan Kumar Swain",
     "nickname": "tapan",
     "avatar": "/profile.jpeg",
-    "title": "Software Development Engineer",
+    "title": "SDE 1",
     "email": "tapankumarswain353@gmail.com",
     "mobile": "+91-8144639448",
     "website": "https://example.com",
@@ -11,32 +11,32 @@
     "linkedin": "https://linkedin.com/in/tapankumarswain",
     "twitter": "https://twitter.com/tapankumarswain",
     "devto": "https://dev.to/tapan-7",
-    "summary": "Software Development Engineer with 3 years of experience building web and mobile applications using React, React Native, Next.js, and TypeScript. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud-based architectures."
+    "summary": "Full-Stack Software Development Engineer (SDE 1) with 3 years of experience building scalable web, backend, and mobile applications using Next.js, React, NestJS, Node.js, and React Native. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud architectures."
   },
   "hero": {
     "headline": {
       "line1": "Engineering digital",
       "line2": "products with precision."
     },
-    "tagline": "Specializing in high-performance web applications and fluid mobile architectures using React, Next.js, and React Native. Focused on clean frontend systems, UI/UX refinement, and scalable delivery."
+    "tagline": "Specializing in high-performance full-stack web applications and fluid mobile architectures using Next.js, React, NestJS, and React Native. Focused on scalable end-to-end systems, clean architectures, and refined user experiences."
   },
   "about": {
     "heading": {
       "eyebrow": "01 // THE PERSON BEHIND THE CODE",
       "title": "More than just code.",
       "gradientText": "I build digital experiences where engineering meets thoughtful design.",
-      "description": "From frontend architecture to mobile experiences, I enjoy turning complex problems into interfaces that feel simple and intuitive."
+      "description": "From scalable backend architectures to fluid web and mobile experiences, I enjoy turning complex problems into end-to-end solutions that feel simple and intuitive."
     },
     "bio": {
       "nameLabel": "TAPAN KUMAR SWAIN",
       "title": "Engineer by craft.",
       "subtitle": "Designer by curiosity.",
-      "role": "Software Development Engineer",
+      "role": "SDE 1",
       "company": "HyScaler Nettantra Technologies Pvt. Ltd.",
       "countryCode": "IND",
       "paragraphs": [
-        "Over the past three years, I've contributed to enterprise legal-tech platforms, public education systems, and digital healthcare at HyScaler Nettantra Technologies Pvt. Ltd.",
-        "My approach combines architectural discipline with design sensitivity. From building interactive dashboards and custom dynamic form builders to integrating real-time telemetry like VideoSDK and Health Connect, I strive to make software feel swift, intuitive, and resilient."
+        "As an SDE 1 with over three years of experience, I build resilient, end-to-end full-stack systems and cross-platform mobile applications at HyScaler Nettantra Technologies Pvt. Ltd., delivering production solutions across enterprise legal-tech platforms, public education systems, and digital healthcare.",
+        "My approach combines backend architectural discipline with refined frontend craft. From designing scalable REST and WebSocket APIs, event-driven queues with BullMQ and Redis, to crafting responsive Next.js interfaces and integrating real-time telemetry like VideoSDK and Health Connect, I strive to make software fast, reliable, and scalable."
       ]
     },
     "stats": [
@@ -51,7 +51,7 @@
       {
         "value": "Web",
         "isCountUp": false,
-        "label": "Frontend Architecture"
+        "label": "Full-Stack Architecture"
       },
       {
         "value": "Mobile",
@@ -74,9 +74,9 @@
     "pillars": [
       {
         "num": "01",
-        "title": "Frontend Engineering",
-        "tagline": "Architecture & Scalability",
-        "desc": "Architecting modular, type-safe web systems using React 18, Next.js App Router, and modern CSS with strict performance benchmarks."
+        "title": "Full-Stack Engineering",
+        "tagline": "End-to-End Scalability & Performance",
+        "desc": "Architecting modular, type-safe web systems and backend services using Next.js App Router, React, NestJS, and TypeScript with strict performance benchmarks."
       },
       {
         "num": "02",
@@ -86,9 +86,9 @@
       },
       {
         "num": "03",
-        "title": "State & Architecture",
-        "tagline": "Predictable Data Flow",
-        "desc": "Structuring clean, testable state flows, robust API layers, and reusable component libraries that scale effortlessly."
+        "title": "Backend & Distributed Systems",
+        "tagline": "Resilient APIs & Queues",
+        "desc": "Engineering robust REST and WebSocket APIs, BullMQ/Redis asynchronous worker queues, and scalable database schemas."
       },
       {
         "num": "04",
@@ -102,7 +102,7 @@
     "experience": {
       "eyebrow": "02 // TRAJECTORY & EXPERIENCE",
       "title": "Building at scale.",
-      "description": "Proven track record delivering reliable frontend systems and high-impact mobile architectures."
+      "description": "Proven track record delivering reliable full-stack systems and high-impact mobile architectures."
     },
     "featuredProjects": {
       "eyebrow": "03 // SHOWCASE & CREATIONS",
@@ -128,7 +128,7 @@
       "eyebrow": "06 // INITIATE COLLABORATION",
       "title": "Let's build something",
       "gradientText": "exceptional together.",
-      "description": "Currently open to software engineering opportunities, frontend architecture roles, and high-impact product teams."
+      "description": "Currently open to full-stack software engineering opportunities, SDE 1 roles, and high-impact product teams."
     }
   },
   "secondaryProjects": [

@@ -91,8 +91,7 @@ export function Hero() {
           className="space-y-3 mb-8 max-w-2xl"
         >
           <p className="text-lg md:text-xl font-medium text-foreground">
-            I&apos;m <span className="text-primary">{profile.name}</span>, a{" "}
-            {profile.title}.
+            I&apos;m <span className="text-primary">{profile.name}</span>.
           </p>
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
             {hero?.tagline || profile.summary}
