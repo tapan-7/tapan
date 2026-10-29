@@ -87,63 +87,48 @@ export function WebsiteLoader() {
       let yaw = 0;
       let bounce = 0;
 
-      if (raw < 0.50) {
-        const u = raw / 0.50;
+      if (raw < 0.88) {
+        const w = raw / 0.88;
 
-        const theta1 = -1.25 * Math.PI + u * 2.25 * Math.PI;
+        const theta = -1.25 * Math.PI + w * 3.10 * Math.PI;
 
-        const rx1 = 345;
-        const ry1 = 58;
-        const rz1 = 140;
-
-        let entryOffset = 0;
-        if (u < 0.30) {
-          const inP = 1 - u / 0.30;
-          entryOffset = -550 * inP * inP;
+        let entryX = 0;
+        let entryY = 0;
+        if (w < 0.24) {
+          const pIn = (0.24 - w) / 0.24;
+          const inEase = pIn * pIn * pIn;
+          entryX = -650 * inEase;
+          entryY = 100 * inEase;
         }
 
-        x = cx + rx1 * Math.cos(theta1) + entryOffset;
-        y = cy + ry1 * Math.sin(theta1) - 12 * Math.cos(theta1);
-        z = rz1 * Math.sin(theta1);
+        let e = 0;
+        if (w > 0.52) {
+          const k = (w - 0.52) / 0.48;
+          e = k * k * (3 - 2 * k);
+        }
 
-        const vx1 = -rx1 * Math.sin(theta1) + (u < 0.30 ? 550 : 0);
-        const vy1 = ry1 * Math.cos(theta1);
-        const flyRoll = (Math.atan2(vy1, vx1) * 180) / Math.PI * 0.40;
+        const rx = 345 * (1 - e);
+        const ry = 58 * (1 - e);
+        const rz = 135 * (1 - e);
 
-        const flipWave = Math.sin(u * 14) * 22;
+        const midX = cx + (targetX - cx) * e;
+        const midY = cy + (targetY - cy) * e;
+
+        x = midX + rx * Math.cos(theta) + entryX;
+        y = midY + ry * Math.sin(theta) + entryY - (1 - e) * 10 * Math.cos(theta);
+        z = rz * Math.sin(theta);
+
+        const vx = -rx * Math.sin(theta) + (w < 0.24 ? 650 : (targetX - cx) * 0.25);
+        const vy = ry * Math.cos(theta) + (targetY - cy) * 0.25;
+        const tangentRoll = (Math.atan2(vy, vx) * 180) / Math.PI * 0.38;
+
+        const flipWave = Math.sin(w * 10 * Math.PI) * 18 * (1 - e);
         pitch = 14 + flipWave;
-        roll = flyRoll + Math.sin(u * 10) * 8;
-        yaw = -Math.sin(theta1) * 0.45;
-      } else if (raw < 0.88) {
-        const v = (raw - 0.50) / 0.38;
-        const easeV = v * (2 - v);
-
-        const theta2 = 0.85 * Math.PI + easeV * 1.10 * Math.PI;
-
-        const rx2 = 320 * (1 - easeV * 0.30);
-        const ry2 = 55 * (1 - easeV * 0.40);
-        const rz2 = 120 * (1 - easeV);
-
-        const orbitMidX = cx + (targetX - cx) * Math.pow(easeV, 1.5);
-        const orbitMidY = cy + (targetY - cy) * Math.pow(easeV, 1.5);
-
-        x = orbitMidX + rx2 * Math.cos(theta2) * (1 - easeV);
-        y = orbitMidY + ry2 * Math.sin(theta2) * (1 - easeV) - Math.sin(easeV * Math.PI) * 16;
-        z = rz2 * Math.sin(theta2);
-
-        const vx2 = -rx2 * Math.sin(theta2) + (targetX - cx) * 0.35;
-        const vy2 = ry2 * Math.cos(theta2) + (targetY - cy) * 0.35;
-        const approachRoll = (Math.atan2(vy2, vx2) * 180) / Math.PI * 0.35;
-
-        const damp = Math.pow(1 - easeV, 1.5);
-        const flipWave = Math.sin(v * 12) * 16 * damp;
-
-        pitch = 14 + flipWave;
-        roll = (1 - easeV) * approachRoll + easeV * -12;
-        yaw = Math.sin((1 - easeV) * Math.PI) * 0.3;
+        roll = (1 - e) * tangentRoll + e * -12;
+        yaw = -Math.sin(theta) * 0.45 * (1 - e);
       } else {
-        const w = (raw - 0.88) / 0.12;
-        bounce = Math.sin(w * 2.5 * Math.PI) * Math.exp(-w * 5.2) * 2.5;
+        const tSettle = (raw - 0.88) / 0.12;
+        bounce = Math.sin(tSettle * 2.5 * Math.PI) * Math.exp(-tSettle * 5.2) * 2.5;
 
         x = targetX;
         y = targetY - bounce;
