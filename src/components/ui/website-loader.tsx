@@ -28,6 +28,7 @@ export function WebsiteLoader() {
 
     let targetX = 630;
     let targetY = 104;
+    let measuredTarget = false;
 
     const trail: { x: number; y: number }[] = [];
 
@@ -63,12 +64,13 @@ export function WebsiteLoader() {
         pathRef.current.setAttribute("d", d);
       }
 
-      if (nSpanRef.current && typeof nSpanRef.current.getBBox === "function") {
+      if (!measuredTarget && nSpanRef.current && typeof nSpanRef.current.getBBox === "function") {
         try {
           const bbox = nSpanRef.current.getBBox();
           if (bbox && bbox.width > 0 && bbox.height > 0) {
             targetX = bbox.x + bbox.width * 0.52;
             targetY = bbox.y + bbox.height * 0.20;
+            measuredTarget = true;
           }
         } catch {
           targetX = 630;
@@ -86,46 +88,43 @@ export function WebsiteLoader() {
       let pitch = 14;
       let yaw = 0;
       let bounce = 0;
+      let e = 1;
 
       if (raw < 0.88) {
         const w = raw / 0.88;
 
-        const theta = -1.25 * Math.PI + w * 3.10 * Math.PI;
+        const phi = w * 2.88 * Math.PI;
 
         let entryX = 0;
         let entryY = 0;
-        if (w < 0.24) {
-          const pIn = (0.24 - w) / 0.24;
+        if (w < 0.22) {
+          const pIn = (0.22 - w) / 0.22;
           const inEase = pIn * pIn * pIn;
           entryX = -650 * inEase;
           entryY = 100 * inEase;
         }
 
-        let e = 0;
-        if (w > 0.52) {
-          const k = (w - 0.52) / 0.48;
+        e = 0;
+        if (w > 0.55) {
+          const k = (w - 0.55) / 0.45;
           e = k * k * (3 - 2 * k);
         }
 
-        const rx = 345 * (1 - e);
-        const ry = 58 * (1 - e);
-        const rz = 135 * (1 - e);
+        const rx = 350 * (1 - e);
+        const ry = 55 * (1 - e);
+        const rz = 130 * (1 - e);
 
         const midX = cx + (targetX - cx) * e;
         const midY = cy + (targetY - cy) * e;
 
-        x = midX + rx * Math.cos(theta) + entryX;
-        y = midY + ry * Math.sin(theta) + entryY - (1 - e) * 10 * Math.cos(theta);
-        z = rz * Math.sin(theta);
+        x = midX - rx * Math.cos(phi) + entryX;
+        y = midY - ry * Math.sin(phi) + entryY;
+        z = rz * Math.sin(phi);
 
-        const vx = -rx * Math.sin(theta) + (w < 0.24 ? 650 : (targetX - cx) * 0.25);
-        const vy = ry * Math.cos(theta) + (targetY - cy) * 0.25;
-        const tangentRoll = (Math.atan2(vy, vx) * 180) / Math.PI * 0.38;
-
-        const flipWave = Math.sin(w * 10 * Math.PI) * 18 * (1 - e);
-        pitch = 14 + flipWave;
-        roll = (1 - e) * tangentRoll + e * -12;
-        yaw = -Math.sin(theta) * 0.45 * (1 - e);
+        const bankFlight = Math.sin(phi) * 18;
+        roll = (1 - e) * bankFlight + e * -12;
+        pitch = (1 - e) * (14 + Math.cos(phi) * 12) + e * 14;
+        yaw = Math.sin(phi) * 0.35 * (1 - e);
       } else {
         const tSettle = (raw - 0.88) / 0.12;
         bounce = Math.sin(tSettle * 2.5 * Math.PI) * Math.exp(-tSettle * 5.2) * 2.5;
@@ -148,42 +147,43 @@ export function WebsiteLoader() {
 
       const hatTransform = `translate(${x.toFixed(1)}, ${y.toFixed(1)}) rotate(${roll.toFixed(1)}) scale(${squashX.toFixed(3)}, ${scaleY.toFixed(3)})`;
 
-      if (z < -8) {
+      if (z < 0) {
         if (hatBehindRef.current) {
-          hatBehindRef.current.style.display = "block";
+          hatBehindRef.current.style.opacity = "1";
           hatBehindRef.current.setAttribute("transform", hatTransform);
         }
         if (hatFrontRef.current) {
-          hatFrontRef.current.style.display = "none";
+          hatFrontRef.current.style.opacity = "0";
         }
       } else {
         if (hatBehindRef.current) {
-          hatBehindRef.current.style.display = "none";
+          hatBehindRef.current.style.opacity = "0";
         }
         if (hatFrontRef.current) {
-          hatFrontRef.current.style.display = "block";
+          hatFrontRef.current.style.opacity = "1";
           hatFrontRef.current.setAttribute("transform", hatTransform);
         }
       }
 
       if (shadowRef.current) {
-        if (raw < 0.88) {
-          const sx = x + z * 0.05;
-          const sy = Math.min(220, y + 20 + Math.max(0, 140 - y) * 0.35);
-          const sScale = Math.max(0.4, Math.min(1.05, (1 - (sy - y) * 0.005) * scale3d));
-          const sOpacity = Math.max(0.1, Math.min(0.45, 0.42 - (sy - y) * 0.003));
-          shadowRef.current.setAttribute("transform", `translate(${sx.toFixed(1)}, ${sy.toFixed(1)}) scale(${sScale.toFixed(2)})`);
-          shadowRef.current.style.opacity = sOpacity.toFixed(2);
-        } else {
-          shadowRef.current.setAttribute("transform", `translate(${(targetX + 2).toFixed(1)}, ${(targetY + 4).toFixed(1)}) scale(0.92)`);
-          shadowRef.current.style.opacity = "0.55";
-        }
+        const sx = x + z * 0.05;
+        const groundY = Math.min(220, y + 20 + Math.max(0, 140 - y) * 0.35);
+        const finalShadowY = targetY + 6;
+        const sy = (1 - e) * groundY + e * finalShadowY;
+        const sScale = (1 - e) * Math.max(0.4, Math.min(1.05, (1 - (groundY - y) * 0.005) * scale3d)) + e * 0.90;
+        const sOpacity = (1 - e) * Math.max(0.1, Math.min(0.45, 0.42 - (groundY - y) * 0.003)) + e * 0.50;
+        shadowRef.current.setAttribute(
+          "transform",
+          `translate(${sx.toFixed(1)}, ${sy.toFixed(1)}) scale(${sScale.toFixed(2)})`
+        );
+        shadowRef.current.style.opacity = sOpacity.toFixed(2);
       }
 
       if (contactShadowRef.current) {
-        if (raw >= 0.86) {
-          const cp = Math.min(1, (raw - 0.86) / 0.04);
-          contactShadowRef.current.style.opacity = (cp * 0.85).toFixed(2);
+        if (raw >= 0.84) {
+          const cp = Math.min(1, (raw - 0.84) / 0.06);
+          const cpEase = cp * cp * (3 - 2 * cp);
+          contactShadowRef.current.style.opacity = (cpEase * 0.85).toFixed(2);
           contactShadowRef.current.setAttribute(
             "transform",
             `translate(${targetX.toFixed(1)}, ${(targetY + 1).toFixed(1)}) rotate(${roll.toFixed(1)})`
@@ -194,7 +194,7 @@ export function WebsiteLoader() {
       }
 
       trail.push({ x, y });
-      if (trail.length > 7) trail.shift();
+      if (trail.length > 8) trail.shift();
 
       if (trailPathRef.current) {
         if (raw < 0.86 && trail.length > 1) {
@@ -203,7 +203,8 @@ export function WebsiteLoader() {
             d += ` L ${trail[i].x.toFixed(1)} ${trail[i].y.toFixed(1)}`;
           }
           trailPathRef.current.setAttribute("d", d);
-          const trailOpacity = raw < 0.70 ? 0.75 : Math.max(0, ((0.86 - raw) / 0.16) * 0.75);
+          const trailFade = raw < 0.68 ? 1 : Math.max(0, 1 - (raw - 0.68) / 0.18);
+          const trailOpacity = 0.75 * trailFade;
           trailPathRef.current.style.opacity = trailOpacity.toFixed(2);
           trailPathRef.current.setAttribute("stroke-width", `${Math.max(2, 3.2 * scale3d).toFixed(1)}`);
         } else {
@@ -451,7 +452,7 @@ export function WebsiteLoader() {
                   />
                 </g>
 
-                <g ref={hatBehindRef} style={{ display: "none" }}>
+                <g ref={hatBehindRef} opacity="0" pointerEvents="none">
                   <use href="#luffy-straw-hat-artwork" />
                 </g>
 
@@ -506,7 +507,7 @@ export function WebsiteLoader() {
                   />
                 </g>
 
-                <g ref={hatFrontRef} style={{ display: "none" }}>
+                <g ref={hatFrontRef} opacity="0" pointerEvents="none">
                   <use href="#luffy-straw-hat-artwork" />
                 </g>
 
