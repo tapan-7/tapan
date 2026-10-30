@@ -36,16 +36,16 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
     isTransitioningRef.current = true;
 
     try {
-      const { top, left, width, height } =
-        buttonRef.current.getBoundingClientRect();
-      const x = left + width / 2;
-      const y = top + height / 2;
-      const right = window.innerWidth - left;
-      const bottom = window.innerHeight - top;
-      const maxRadius = Math.hypot(
-        Math.max(left, right),
-        Math.max(top, bottom),
-      );
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      const maxRadius =
+        Math.ceil(
+          Math.hypot(
+            Math.max(x, window.innerWidth - x),
+            Math.max(y, window.innerHeight - y),
+          ),
+        ) + 20;
 
       const doc = document as Document & {
         startViewTransition: (callback: () => void) => {
@@ -81,8 +81,8 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
           ],
         },
         {
-          duration: 450,
-          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+          duration: 750,
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
           pseudoElement: "::view-transition-new(root)",
           fill: "forwards",
         },
