@@ -50,7 +50,7 @@ export function Contact() {
               className="relative overflow-hidden inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-sm transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
             >
               <LiquidWave color="foreground" />
-              <span className="relative z-10 flex items-center gap-2.5 text-primary-foreground group-hover:text-background transition-colors duration-300">
+              <span className="relative z-10 flex items-center gap-2.5 text-primary-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                 <Mail className="w-4 h-4" />
                 <span>{profile.email}</span>
               </span>
@@ -63,16 +63,16 @@ export function Contact() {
               className="relative overflow-hidden inline-flex items-center gap-2 px-5 py-4 rounded-full bg-secondary border border-border/70 text-foreground text-sm font-mono transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
               <LiquidWave color="foreground" />
-              <span className="relative z-10 flex items-center gap-2 group-hover:text-background transition-colors duration-300">
+              <span className="relative z-10 flex items-center gap-2 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                 {copied ? (
                   <>
-                    <Check className="w-4 h-4 text-primary group-hover:text-background transition-colors duration-300" />
-                    <span className="text-xs text-primary group-hover:text-background transition-colors duration-300">Copied</span>
+                    <Check className="w-4 h-4 text-primary group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300" />
+                    <span className="text-xs text-primary group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">Copied</span>
                   </>
                 ) : (
                   <>
-                    <Copy className="w-4 h-4 text-muted-foreground group-hover:text-background transition-colors duration-300" />
-                    <span className="text-xs text-muted-foreground group-hover:text-background transition-colors duration-300">Copy</span>
+                    <Copy className="w-4 h-4 text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300" />
+                    <span className="text-xs text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">Copy</span>
                   </>
                 )}
               </span>
@@ -84,7 +84,7 @@ export function Contact() {
               className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card text-foreground border border-border/70 font-medium text-sm transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
             >
               <LiquidWave color="foreground" />
-              <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background transition-colors duration-300">
+              <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                 <Download className="w-4 h-4" />
                 <span>Resume</span>
               </span>

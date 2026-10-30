@@ -84,6 +84,30 @@ function NavMenuItem({
         onBlur={() => {
           setTouchPos(null);
         }}
+        onTouchStart={(e) => {
+          if (e.touches.length > 0) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            setTouchPos({
+              x: e.touches[0].clientX - rect.left,
+              y: e.touches[0].clientY - rect.top,
+            });
+            onHoverStart(id);
+          }
+        }}
+        onTouchMove={(e) => {
+          if (e.touches.length > 0) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            setTouchPos({
+              x: e.touches[0].clientX - rect.left,
+              y: e.touches[0].clientY - rect.top,
+            });
+          }
+        }}
+        onTouchEnd={() => {
+          setTimeout(() => {
+            setTouchPos(null);
+          }, 350);
+        }}
         className="group relative flex items-center justify-center w-full px-6 py-3.5 sm:py-5 text-center overflow-hidden select-none"
       >
         <motion.span

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -56,6 +57,9 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
       const isDark = nextTheme === "dark";
 
       const transition = doc.startViewTransition(() => {
+        flushSync(() => {
+          setTheme(nextTheme);
+        });
         if (isDark) {
           document.documentElement.classList.remove("light");
           document.documentElement.classList.add("dark");
@@ -65,7 +69,6 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
           document.documentElement.classList.add("light");
           document.documentElement.style.colorScheme = "light";
         }
-        setTheme(nextTheme);
       });
 
       await transition.ready;
@@ -78,13 +81,15 @@ export const AnimatedThemeToggler = ({ className }: Props) => {
           ],
         },
         {
-          duration: 500,
-          easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+          duration: 450,
+          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
           pseudoElement: "::view-transition-new(root)",
+          fill: "forwards",
         },
       );
 
       await animation.finished;
+      await transition.finished;
     } catch {
       setTheme(nextTheme);
     } finally {

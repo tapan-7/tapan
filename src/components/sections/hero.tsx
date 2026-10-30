@@ -110,7 +110,7 @@ export function Hero() {
             className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
           >
             <LiquidWave color="primary" />
-            <span className="relative z-10 flex items-center gap-2 text-background group-hover:text-primary-foreground transition-colors duration-300">
+            <span className="relative z-10 flex items-center gap-2 text-background group-hover:text-primary-foreground group-data-[wave-active=true]:text-primary-foreground transition-colors duration-300">
               <span>Explore Projects</span>
               <ArrowDown className="w-4 h-4" />
             </span>

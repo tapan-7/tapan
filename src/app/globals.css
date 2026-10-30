@@ -284,4 +284,28 @@ html.lenis body {
 
 ::view-transition-new(root) {
   z-index: 9999;
+  will-change: clip-path;
 }
+
+.group[data-wave-active="true"] .group-data-\[wave-active\=true\]\:text-background,
+.group[data-wave-active="true"] .group-hover\:text-background {
+  color: hsl(var(--background)) !important;
+}
+
+.group[data-wave-active="true"] .group-data-\[wave-active\=true\]\:bg-background,
+.group[data-wave-active="true"] .group-hover\:bg-background {
+  background-color: hsl(var(--background)) !important;
+}
+
+.group[data-wave-active="true"] .group-data-\[wave-active\=true\]\:text-primary-foreground,
+.group[data-wave-active="true"] .group-hover\:text-primary-foreground {
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+@media (max-width: 768px), (hover: none) {
+  .group:not([data-wave-active="true"]) .group-hover\:text-background {
+    color: inherit !important;
+  }
+}
+
+

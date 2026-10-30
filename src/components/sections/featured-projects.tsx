@@ -160,7 +160,7 @@ export function FeaturedProjects() {
                               aria-label={`GitHub source for ${project.title}`}
                             >
                               <LiquidWave color="foreground" />
-                              <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                              <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                                 <Github className="w-4 h-4" />
                               </span>
                             </a>
@@ -173,7 +173,7 @@ export function FeaturedProjects() {
                               className="relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
                             >
                               <LiquidWave color="foreground" />
-                              <span className="relative z-10 flex items-center gap-1.5 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                              <span className="relative z-10 flex items-center gap-1.5 text-primary-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                                 <span>Live Demo</span>
                                 <ArrowUpRight className="w-3.5 h-3.5" />
                               </span>
@@ -282,7 +282,7 @@ export function FeaturedProjects() {
                       aria-label="GitHub"
                     >
                       <LiquidWave color="foreground" />
-                      <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background transition-colors duration-300">
+                      <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                         <Github className="w-4 h-4" />
                       </span>
                     </a>
@@ -295,7 +295,7 @@ export function FeaturedProjects() {
                       className="relative overflow-hidden inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-primary-foreground font-medium text-xs transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
                     >
                       <LiquidWave color="foreground" />
-                      <span className="relative z-10 flex items-center gap-1 text-primary-foreground group-hover:text-background transition-colors duration-300">
+                      <span className="relative z-10 flex items-center gap-1 text-primary-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
                         <span>Demo</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </span>

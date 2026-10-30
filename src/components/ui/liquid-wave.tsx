@@ -24,6 +24,8 @@ export function LiquidWave({
   const [dimensions, setDimensions] = useState<{ w: number; h: number }>({ w: 48, h: 48 });
   const [isHovered, setIsHovered] = useState(false);
 
+  const isHoveredRef = useRef(false);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -31,10 +33,6 @@ export function LiquidWave({
     if (!parent) return;
 
     let touchTimeout: NodeJS.Timeout | null = null;
-
-    const canHover = () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     const updateDims = () => {
       const rect = parent.getBoundingClientRect();
@@ -44,26 +42,26 @@ export function LiquidWave({
     updateDims();
 
     const onMouseEnter = (e: MouseEvent) => {
-      if (!canHover()) return;
       const rect = parent.getBoundingClientRect();
       setDimensions({ w: rect.width, h: rect.height });
       setTouchPos({
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
       });
+      isHoveredRef.current = true;
       setIsHovered(true);
       parent.setAttribute("data-wave-active", "true");
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      if (!canHover()) return;
-      if (!isHovered) {
+      if (!isHoveredRef.current) {
         const rect = parent.getBoundingClientRect();
         setDimensions({ w: rect.width, h: rect.height });
         setTouchPos({
           x: e.clientX - rect.left,
           y: e.clientY - rect.top,
         });
+        isHoveredRef.current = true;
         setIsHovered(true);
         parent.setAttribute("data-wave-active", "true");
       }
@@ -75,6 +73,7 @@ export function LiquidWave({
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
       });
+      isHoveredRef.current = false;
       setIsHovered(false);
       parent.removeAttribute("data-wave-active");
     };
@@ -89,11 +88,13 @@ export function LiquidWave({
         x: rect.width / 2,
         y: rect.height / 2,
       });
+      isHoveredRef.current = true;
       setIsHovered(true);
       parent.setAttribute("data-wave-active", "true");
     };
 
     const onBlur = () => {
+      isHoveredRef.current = false;
       setIsHovered(false);
       parent.removeAttribute("data-wave-active");
     };
@@ -107,6 +108,7 @@ export function LiquidWave({
           x: e.touches[0].clientX - rect.left,
           y: e.touches[0].clientY - rect.top,
         });
+        isHoveredRef.current = true;
         setIsHovered(true);
         parent.setAttribute("data-wave-active", "true");
       }
@@ -115,25 +117,25 @@ export function LiquidWave({
     const onTouchEnd = () => {
       if (touchTimeout) clearTimeout(touchTimeout);
       touchTimeout = setTimeout(() => {
+        isHoveredRef.current = false;
         setIsHovered(false);
         parent.removeAttribute("data-wave-active");
         if (document.activeElement === parent) {
           (parent as HTMLElement).blur();
         }
-      }, 300);
+      }, 550);
     };
 
     const onClick = () => {
-      if (!canHover()) {
-        if (touchTimeout) clearTimeout(touchTimeout);
-        touchTimeout = setTimeout(() => {
-          setIsHovered(false);
-          parent.removeAttribute("data-wave-active");
-          if (document.activeElement === parent) {
-            (parent as HTMLElement).blur();
-          }
-        }, 300);
-      }
+      if (touchTimeout) clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        isHoveredRef.current = false;
+        setIsHovered(false);
+        parent.removeAttribute("data-wave-active");
+        if (document.activeElement === parent) {
+          (parent as HTMLElement).blur();
+        }
+      }, 550);
     };
 
     parent.addEventListener("mouseenter", onMouseEnter);
@@ -157,7 +159,7 @@ export function LiquidWave({
       parent.removeEventListener("touchend", onTouchEnd);
       parent.removeEventListener("click", onClick);
     };
-  }, [isHovered]);
+  }, []);
 
   const originX = touchPos ? touchPos.x : dimensions.w / 2;
   const originY = touchPos ? touchPos.y : dimensions.h / 2;
@@ -231,15 +233,15 @@ export function LiquidWave({
         }}
         transition={{
           scale: {
-            duration: isHovered ? 1.25 : 0.35,
+            duration: isHovered ? 0.7 : 0.35,
             ease: [0.2, 0.9, 0.3, 1],
           },
           rotate: {
-            duration: isHovered ? 1.4 : 0.35,
+            duration: isHovered ? 0.8 : 0.35,
             ease: "easeOut",
           },
           borderRadius: {
-            duration: 1.25,
+            duration: 0.7,
             ease: "easeInOut",
           },
           opacity: {
@@ -273,18 +275,18 @@ export function LiquidWave({
         }}
         transition={{
           scale: {
-            duration: isHovered ? 1.12 : 0.35,
-            delay: isHovered ? 0.06 : 0,
+            duration: isHovered ? 0.65 : 0.35,
+            delay: isHovered ? 0.03 : 0,
             ease: [0.2, 0.9, 0.3, 1],
           },
           rotate: {
-            duration: isHovered ? 1.3 : 0.35,
-            delay: isHovered ? 0.06 : 0,
+            duration: isHovered ? 0.75 : 0.35,
+            delay: isHovered ? 0.03 : 0,
             ease: "easeOut",
           },
           borderRadius: {
-            duration: 1.12,
-            delay: isHovered ? 0.06 : 0,
+            duration: 0.65,
+            delay: isHovered ? 0.03 : 0,
             ease: "easeInOut",
           },
           opacity: {
@@ -318,18 +320,18 @@ export function LiquidWave({
         }}
         transition={{
           scale: {
-            duration: isHovered ? 0.98 : 0.35,
-            delay: isHovered ? 0.12 : 0,
+            duration: isHovered ? 0.58 : 0.35,
+            delay: isHovered ? 0.06 : 0,
             ease: [0.2, 0.9, 0.3, 1],
           },
           rotate: {
-            duration: isHovered ? 1.2 : 0.35,
-            delay: isHovered ? 0.12 : 0,
+            duration: isHovered ? 0.7 : 0.35,
+            delay: isHovered ? 0.06 : 0,
             ease: "easeOut",
           },
           borderRadius: {
-            duration: 0.98,
-            delay: isHovered ? 0.12 : 0,
+            duration: 0.58,
+            delay: isHovered ? 0.06 : 0,
             ease: "easeInOut",
           },
           opacity: {
