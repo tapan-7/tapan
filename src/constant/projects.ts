@@ -51,16 +51,6 @@ export const projects: Project[] = [
     image: "/projects/interactive-404.png",
     mobileImage: "/projects/interactive-404-mobile.png",
   },
-  {
-    title: "BingeBox",
-    description:
-      "A modern movie exploration and streaming interface where users can browse trending titles, watch official trailers, view cast details, and explore curated watchlists.",
-    tech: ["React", "Next.js", "TypeScript", "Movie API", "Tailwind CSS"],
-    github: "https://github.com/tapan-7/bingebox",
-    link: "https://bingebox-new.vercel.app/",
-    image: "/projects/bingebox.png",
-    mobileImage: "/projects/bingebox-mobile.png",
-  },
 ];
 
 import portfolioData from "@/constant/portfolio-data.json";

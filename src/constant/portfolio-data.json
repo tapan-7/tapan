@@ -325,14 +325,6 @@
       "github": "https://github.com/tapan-7/interactive-404",
       "live": "https://interactive-404.vercel.app/",
       "image": "/projects/interactive-404.png"
-    },
-    {
-      "title": "BingeBox",
-      "description": "A modern movie exploration and streaming interface where users can browse trending titles, watch official trailers, view cast details, and explore curated watchlists.",
-      "tech": ["React", "Next.js", "TypeScript", "Movie API", "Tailwind CSS"],
-      "github": "https://github.com/tapan-7/bingebox",
-      "live": "https://bingebox-new.vercel.app/",
-      "image": "/projects/bingebox.png"
     }
   ],
   "blogs": [
