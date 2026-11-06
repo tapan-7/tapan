@@ -22,6 +22,16 @@ export interface SecondaryProject {
 
 export const projects: Project[] = [
   {
+    title: "Inversion",
+    description:
+      "A 2D atmospheric pixel-art puzzle-platformer across two intertwined dimensions. Built with custom arcade physics, dimension-shifting mechanics, responsive controls, and procedural audio synthesis.",
+    tech: ["Next.js", "React", "TypeScript", "Phaser 3", "Tailwind CSS"],
+    github: "https://github.com/tapan-7/inversion",
+    link: "https://inversion-sand.vercel.app/",
+    image: "/projects/inversion.png",
+    mobileImage: "/projects/inversion-mobile.png",
+  },
+  {
     title: "Chai Pe Gaane",
     description:
       "A retro-themed audio web radio broadcasting classic Odia and Hindi songs from the golden cassette era. Features a persistent floating player, live YouTube audio streaming, and curated nostalgic playlists.",

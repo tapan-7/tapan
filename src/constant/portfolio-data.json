@@ -297,6 +297,14 @@
   },
   "projects": [
     {
+      "title": "Inversion",
+      "description": "A 2D atmospheric pixel-art puzzle-platformer across two intertwined dimensions. Built with custom arcade physics, dimension-shifting mechanics, responsive controls, and procedural audio synthesis.",
+      "tech": ["Next.js", "React", "TypeScript", "Phaser 3", "Tailwind CSS"],
+      "github": "https://github.com/tapan-7/inversion",
+      "live": "https://inversion-sand.vercel.app/",
+      "image": "/projects/inversion.png"
+    },
+    {
       "title": "Chai Pe Gaane",
       "description": "A retro-themed audio web radio broadcasting classic Odia and Hindi songs from the golden cassette era. Features a persistent floating player, live YouTube audio streaming, and curated nostalgic playlists.",
       "tech": ["JavaScript", "Tailwind CSS", "YouTube API", "Web Audio"],
@@ -307,7 +315,13 @@
     {
       "title": "Interactive 404",
       "description": "An arcade-inspired playable 404 error experience built with HTML5 canvas physics, responsive keyboard controls, retro pixel typography, and synthesized audio effects.",
-      "tech": ["Next.js", "React", "TypeScript", "HTML5 Canvas", "Tailwind CSS"],
+      "tech": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "HTML5 Canvas",
+        "Tailwind CSS"
+      ],
       "github": "https://github.com/tapan-7/interactive-404",
       "live": "https://interactive-404.vercel.app/",
       "image": "/projects/interactive-404.png"
