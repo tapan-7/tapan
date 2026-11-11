@@ -339,26 +339,6 @@ export default function Navbar() {
                     />
                   );
                 })}
-
-                <motion.div
-                  initial={
-                    shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 15 }
-                  }
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.35,
-                    delay: shouldReduceMotion ? 0 : 0.04 * NAV_LINKS.length,
-                  }}
-                  className="pt-6 border-t border-border/40 mt-4 flex flex-wrap items-center justify-center gap-8 px-4"
-                >
-                  <a
-                    href="#contact"
-                    onClick={(e) => handleNavigate(e, "#contact")}
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-primary hover:underline"
-                  >
-                    <span>Direct Contact &rarr;</span>
-                  </a>
-                </motion.div>
               </nav>
             </div>
 

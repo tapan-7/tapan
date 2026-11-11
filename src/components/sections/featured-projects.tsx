@@ -108,7 +108,9 @@ export function FeaturedProjects() {
                 <SectionHeading
                   eyebrow={portfolioData.sections.featuredProjects.eyebrow}
                   title={portfolioData.sections.featuredProjects.title}
-                  description={portfolioData.sections.featuredProjects.description}
+                  description={
+                    portfolioData.sections.featuredProjects.description
+                  }
                 />
               </div>
             </div>
@@ -136,7 +138,7 @@ export function FeaturedProjects() {
                   return (
                     <div
                       key={project.title}
-                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 relative overflow-hidden group/card hover:border-primary/50 transition-colors duration-300"
+                      className="w-[70vw] max-w-[880px] h-[54vh] min-h-[390px] max-h-[480px] rounded-3xl bg-card border border-border/70 p-6 sm:p-8 flex flex-col justify-between shrink-0 relative overflow-hidden group/card transition-colors duration-300"
                     >
                       <div className="absolute top-0 right-0 w-80 h-80 bg-accent/10 rounded-full blur-[100px] pointer-events-none -z-0" />
 
@@ -156,7 +158,7 @@ export function FeaturedProjects() {
                               href={project.github}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="relative overflow-hidden p-2 rounded-full bg-secondary border border-border flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
+                              className="relative overflow-hidden p-2 rounded-full bg-secondary border border-border flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30"
                               aria-label={`GitHub source for ${project.title}`}
                             >
                               <LiquidWave color="foreground" />
@@ -170,7 +172,7 @@ export function FeaturedProjects() {
                               href={project.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
+                              className="relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs transition-all duration-300 group cursor-pointer "
                             >
                               <LiquidWave color="foreground" />
                               <span className="relative z-10 flex items-center gap-1.5 text-primary-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">

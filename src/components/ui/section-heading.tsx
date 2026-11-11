@@ -38,32 +38,20 @@ export function SectionHeading({
       className={cn(
         "flex flex-col",
         isCenter ? "items-center text-center" : "items-start text-left",
-        className
+        className,
       )}
     >
       {eyebrow && (
         <AnimatedContent distance={15} direction="vertical" delay={0.05}>
-          {badge ? (
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary border border-border/70 text-xs font-mono text-primary mb-6">
-              {eyebrowIcon ?? (
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              )}
-              <span>{eyebrow}</span>
-            </div>
-          ) : (
-            <div
-              className={cn(
-                "flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary",
-                isCompact ? "mb-2" : "mb-4",
-                isCenter ? "justify-center" : "justify-start"
-              )}
-            >
-              {eyebrowIcon ?? (
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              )}
-              <span>{eyebrow}</span>
-            </div>
-          )}
+          <div
+            className={cn(
+              "flex items-center gap-3 text-xs font-mono uppercase tracking-[0.25em] text-primary",
+              isCompact ? "mb-2" : "mb-4",
+              isCenter ? "justify-center" : "justify-start",
+            )}
+          >
+            <span>{eyebrow}</span>
+          </div>
         </AnimatedContent>
       )}
 
@@ -73,7 +61,7 @@ export function SectionHeading({
           isCompact
             ? "text-2xl sm:text-3xl md:text-4xl leading-tight"
             : "text-3xl sm:text-5xl md:text-6xl font-extrabold leading-[1.08]",
-          gradientText ? "mb-2" : ""
+          gradientText ? "mb-2" : "",
         )}
       >
         <BlurText text={title} animateBy="words" delay={0.06} />
@@ -92,7 +80,7 @@ export function SectionHeading({
               isCompact
                 ? "text-xs sm:text-sm max-w-lg mt-1"
                 : "text-base sm:text-lg max-w-2xl mt-4",
-              isCenter ? "mx-auto" : ""
+              isCenter ? "mx-auto" : "",
             )}
           >
             {description}
@@ -129,7 +117,7 @@ export function SubHeading({
       className={cn(
         "flex flex-col",
         isCenter ? "items-center text-center" : "items-start text-left",
-        className
+        className,
       )}
     >
       {eyebrow && (
@@ -137,7 +125,7 @@ export function SubHeading({
           <div
             className={cn(
               "flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-primary mb-2.5",
-              isCenter ? "justify-center" : "justify-start"
+              isCenter ? "justify-center" : "justify-start",
             )}
           >
             {eyebrowIcon}
@@ -155,7 +143,7 @@ export function SubHeading({
           <p
             className={cn(
               "text-sm sm:text-base text-muted-foreground font-light leading-relaxed max-w-lg mt-3",
-              isCenter ? "mx-auto" : ""
+              isCenter ? "mx-auto" : "",
             )}
           >
             {description}

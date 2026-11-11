@@ -23,20 +23,16 @@ export function StackedProjects() {
 
         <div className="space-y-10 relative">
           {secondaryProjects.map((item, index) => {
-            const Icon = item.icon;
             const stickyTop = 110 + index * 28;
 
             return (
               <div
                 key={item.title}
                 style={{ top: `${stickyTop}px` }}
-                className="sticky rounded-3xl bg-card border border-border/80 p-8 sm:p-10 transition-all duration-300 hover:border-primary/50 group"
+                className="sticky rounded-3xl bg-card border border-border/80 p-8 sm:p-10 transition-all duration-300 group"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 border-b border-border/60 pb-5">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-secondary border border-border flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                      <Icon className="w-5 h-5" />
-                    </div>
                     <div>
                       <h4 className="text-xl sm:text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
                         {item.title}
