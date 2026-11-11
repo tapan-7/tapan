@@ -415,9 +415,9 @@ export function GlowCursor({
     (resolvedTheme === "light" ? "light" : "dark")) as "dark" | "light";
   const isLight = activeTheme === "light";
   const activeColor =
-    color ?? (isLight ? "#8b5cf6" : "#e0e7ff");
+    color ?? (isLight ? "#d97706" : "#ffffff");
   const activeSecondary =
-    secondaryColor ?? (isLight ? "#c084fc" : "#c7d2fe");
+    secondaryColor ?? (isLight ? "#b45309" : "#e2e8f0");
 
   settingsRef.current = {
     color: String(activeColor),
