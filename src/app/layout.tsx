@@ -9,6 +9,7 @@ import Footer from "@/components/footer";
 import { GlowCursor } from "@/components/ui/glow-cursor";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import { WebsiteLoader } from "@/components/ui/website-loader";
+import { SeasonalEffects } from "@/components/ui/seasonal-effects";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <SeasonalEffects />
           <WebsiteLoader />
           <SmoothScrollProvider>
             <Navbar />
