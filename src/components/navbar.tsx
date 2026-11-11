@@ -247,7 +247,7 @@ export default function Navbar() {
             aria-label="Home"
             className="pointer-events-auto flex items-center group px-3 py-1.5 rounded-full"
           >
-            <Logo size="md" showSymbol={false} showName={true} />
+            <Logo size="lg" showSymbol={true} showName={false} />
           </Link>
 
           <div className="pointer-events-auto flex items-center gap-3">
