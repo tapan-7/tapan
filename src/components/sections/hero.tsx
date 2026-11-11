@@ -1,39 +1,59 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import React, { useRef, useState } from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import {
-  ArrowDown,
   ArrowUpRight,
   Download,
   Github,
   Linkedin,
   Mail,
+  Twitter,
 } from "lucide-react";
-import { ParticleText } from "@/components/react-bits/particle-text";
-import { LiquidWave } from "@/components/ui/liquid-wave";
-import { LightRays } from "@/components/ui/light-rays";
 import portfolioData from "@/constant/portfolio-data.json";
+import { LiquidWave } from "@/components/ui/liquid-wave";
 
 export function Hero() {
   const { profile, hero } = portfolioData;
-  const containerRef = useRef<HTMLElement>(null);
+  const portraitRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  const socialLinks = [
+    { name: "GitHub", href: profile.github, icon: Github },
+    { name: "LinkedIn", href: profile.linkedin, icon: Linkedin },
+    ...(profile.twitter
+      ? [{ name: "Twitter", href: profile.twitter, icon: Twitter }]
+      : []),
+    { name: "Email", href: `mailto:${profile.email}`, icon: Mail },
+    ...(profile.devto
+      ? [{ name: "DEV", href: profile.devto, label: "DEV" }]
+      : []),
+  ];
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 200,
-    damping: 30,
-    restDelta: 0.001,
-  });
+  const updateCursorPosition = (clientX: number, clientY: number) => {
+    if (!portraitRef.current) return;
+    const rect = portraitRef.current.getBoundingClientRect();
+    setCursorPos({
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+    });
+  };
 
-  const xLeft = useTransform(smoothProgress, [0, 1], [0, -75]);
-  const xRight = useTransform(smoothProgress, [0, 1], [0, 75]);
-  const heroOpacity = useTransform(smoothProgress, [0, 0.75], [1, 0.25]);
-  const heroScale = useTransform(smoothProgress, [0, 0.8], [1, 0.94]);
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    updateCursorPosition(e.clientX, e.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 0) return;
+    updateCursorPosition(e.touches[0].clientX, e.touches[0].clientY);
+    setIsHovered(true);
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => setIsHovered(false), 600);
+  };
 
   const handleScrollTo = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -49,149 +69,242 @@ export function Hero() {
   return (
     <section
       id="hero"
-      ref={containerRef}
-      className="relative isolate min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-20 pb-16 px-3 sm:px-6 w-full overflow-hidden"
+      className="relative isolate min-h-screen min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden pt-20 sm:pt-24 pb-6 sm:pb-8 md:pb-10"
     >
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        <LightRays
-          raysOrigin="top-center"
-          raysSpeed={0.7}
-          lightSpread={0.65}
-          rayLength={3.2}
-          rayDensity={1.2}
-          glow={0.8}
-          haze={0.25}
-          intensity={0.85}
-          followMouse={true}
-          mouseInfluence={0.12}
-          cursorShadow={true}
-          clickPulse={true}
-          className="w-full h-full"
-        />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-accent/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="flex md:hidden flex-col items-center justify-between w-full h-[calc(100dvh-5.5rem)] min-h-[580px] px-4 pt-2 pb-6 z-20 pointer-events-auto">
+        <div className="flex flex-col items-center text-center">
+          <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
+            {hero?.subRole || "Software Engineer"}
+          </p>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">
+            {hero?.role || "Full-Stack Developer"}
+          </h2>
+          {hero?.techStack && (
+            <p className="text-[11px] font-mono text-muted-foreground mt-1">
+              {hero?.techStack}
+            </p>
+          )}
+        </div>
+
+        <div className="relative w-full flex-1 flex items-center justify-center my-3 max-h-[380px]">
+          <h1 className="absolute inset-0 flex items-center justify-center text-[23vw] font-black uppercase tracking-[0.08em] leading-none text-foreground/90 select-none z-10 pointer-events-none">
+            {hero?.name || "TAPAN"}
+          </h1>
+
+          <motion.div
+            initial={{ y: "40%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="relative z-20 flex items-end justify-center h-full w-full max-h-[340px]"
+          >
+            <Image
+              src="/profile-outline.png"
+              alt={profile.name}
+              width={800}
+              height={800}
+              priority
+              className="h-full w-auto max-h-[340px] aspect-square object-contain object-bottom filter grayscale contrast-[1.08] pointer-events-none"
+            />
+          </motion.div>
+        </div>
+
+        <div className="flex flex-col items-center gap-3.5 w-full">
+          <div className="flex items-center gap-2.5">
+            <a
+              href={hero?.cta?.projectsHref || "#projects"}
+              onClick={(e) =>
+                handleScrollTo(e, hero?.cta?.projectsHref || "#projects")
+              }
+              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-foreground text-background text-xs font-semibold shadow-md active:scale-95 transition-all"
+            >
+              <span>{hero?.cta?.projects || "View Projects"}</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
+            <a
+              href={hero?.cta?.resumeHref || "/resume.pdf"}
+              download
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-foreground text-xs font-medium active:scale-95 transition-all"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>{hero?.cta?.resume || "Resume"}</span>
+            </a>
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            {socialLinks.map((item) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  item.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                aria-label={item.name}
+                whileTap={{ scale: 0.92 }}
+                className="group relative overflow-hidden flex items-center justify-center w-9 h-9 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-muted-foreground active:scale-95 transition-all"
+              >
+                <LiquidWave />
+                <span className="relative z-10 flex items-center justify-center">
+                  {item.icon ? (
+                    <item.icon className="w-4 h-4" />
+                  ) : (
+                    <span className="text-[10px] font-mono font-bold">
+                      {item.label}
+                    </span>
+                  )}
+                </span>
+              </motion.a>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <motion.div
-        style={{ scale: heroScale }}
-        className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center text-center my-auto px-1 sm:px-4"
-      >
-        <ParticleText
-          line1={hero?.headline?.line1 || "Engineering digital"}
-          line2={hero?.headline?.line2 || "products with precision."}
-          xLeft={xLeft}
-          xRight={xRight}
-          opacity={heroOpacity}
-        />
+      <div className="hidden md:flex absolute inset-0 items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-10 flex items-center justify-center select-none pointer-events-none px-4">
+          <h1 className="text-[14vw] xl:text-[15vw] font-black uppercase tracking-[0.14em] leading-none whitespace-nowrap font-header text-center select-none text-foreground transition-colors duration-300">
+            {hero?.name || "TAPAN"}
+          </h1>
+        </div>
 
-        <motion.div
-          style={{ opacity: heroOpacity }}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
-          className="space-y-3 mb-8 max-w-2xl"
+        <div
+          ref={portraitRef}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onMouseMove={handleMouseMove}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-auto flex items-end justify-center h-full w-auto cursor-pointer"
         >
-          <p className="text-lg md:text-xl font-medium text-foreground">
-            I&apos;m <span className="text-primary">{profile.name}</span>.
-          </p>
-          <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-            {hero?.tagline || profile.summary}
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 1.1,
+              ease: [0.16, 1, 0.3, 1],
+              delay: 0.1,
+            }}
+            className="relative h-full flex items-end justify-center select-none"
+          >
+            <Image
+              src="/profile-outline.png"
+              alt={profile.name}
+              width={800}
+              height={800}
+              priority
+              className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.08] select-none pointer-events-none"
+            />
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          className="flex flex-wrap items-center justify-center gap-3.5 mb-10"
-        >
-          <a
-            href="#projects"
-            onClick={(e) => handleScrollTo(e, "#projects")}
-            className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-medium text-sm transition-all duration-300 group cursor-pointer hover:scale-105 active:scale-95"
-          >
-            <LiquidWave color="primary" />
-            <span className="relative z-10 flex items-center gap-2 text-background group-hover:text-primary-foreground group-data-[wave-active=true]:text-primary-foreground transition-colors duration-300">
-              <span>Explore Projects</span>
-              <ArrowDown className="w-4 h-4" />
-            </span>
-          </a>
+            <div
+              className="absolute inset-0 pointer-events-none transition-opacity duration-200"
+              style={{
+                opacity: isHovered ? 1 : 0,
+                WebkitMaskImage: `radial-gradient(circle 140px at ${cursorPos.x}px ${cursorPos.y}px, black 30%, transparent 100%)`,
+                maskImage: `radial-gradient(circle 140px at ${cursorPos.x}px ${cursorPos.y}px, black 30%, transparent 100%)`,
+              }}
+            >
+              <Image
+                src="/profile-outline.png"
+                alt={profile.name}
+                width={800}
+                height={800}
+                priority
+                className="h-full w-auto object-contain object-bottom select-none pointer-events-none"
+              />
+            </div>
 
-          <a
-            href="#contact"
-            onClick={(e) => handleScrollTo(e, "#contact")}
-            className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card text-foreground border border-border font-medium text-sm transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
-          >
-            <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
-              <span>Contact Me</span>
-            </span>
-          </a>
+            {isHovered && (
+              <div
+                className="absolute pointer-events-none rounded-full blur-[40px] transition-opacity duration-300"
+                style={{
+                  left: cursorPos.x - 90,
+                  top: cursorPos.y - 90,
+                  width: 180,
+                  height: 180,
+                  background:
+                    "radial-gradient(circle, rgba(168,85,247,0.45) 0%, rgba(249,115,22,0.25) 50%, transparent 70%)",
+                  mixBlendMode: "screen",
+                }}
+              />
+            )}
+          </motion.div>
+        </div>
+      </div>
 
-          <a
-            href="/resume.pdf"
-            download
-            className="relative overflow-hidden inline-flex items-center gap-2 px-5 py-3 rounded-full bg-card/40 text-muted-foreground border border-border/70 text-sm font-medium transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
-          >
-            <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center gap-2 text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
-              <Download className="w-4 h-4" />
-              <span>Resume</span>
-            </span>
-          </a>
-        </motion.div>
+      <div className="hidden md:flex relative z-30 w-full mt-auto pb-6 sm:pb-8 md:pb-10 pointer-events-none">
+        <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 flex items-end justify-between pointer-events-auto">
+          <div className="flex flex-col gap-3 text-muted-foreground">
+            {socialLinks.map((item) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={
+                  item.href.startsWith("mailto:")
+                    ? undefined
+                    : "noopener noreferrer"
+                }
+                aria-label={item.name}
+                whileHover={{ scale: 1.12, y: -2 }}
+                whileTap={{ scale: 0.94 }}
+                className="group relative overflow-hidden flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-border/80 text-muted-foreground transition-all duration-300 cursor-pointer"
+              >
+                <LiquidWave />
+                <span className="relative z-10 flex items-center justify-center group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
+                  {item.icon ? (
+                    <item.icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:scale-110" />
+                  ) : (
+                    <span className="text-[10px] font-mono font-bold transition-transform duration-200 group-hover:scale-110">
+                      {item.label}
+                    </span>
+                  )}
+                </span>
+              </motion.a>
+            ))}
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="flex items-center gap-5 text-muted-foreground"
-        >
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub profile"
-            className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
-          >
-            <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
-              <Github className="w-5 h-5" />
-            </span>
-          </a>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn profile"
-            className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
-          >
-            <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
-              <Linkedin className="w-5 h-5" />
-            </span>
-          </a>
-          <a
-            href={`mailto:${profile.email}`}
-            aria-label="Send Email"
-            className="relative overflow-hidden p-2.5 rounded-full border border-border/70 bg-card/60 flex items-center justify-center transition-all duration-300 group cursor-pointer hover:border-foreground/30 hover:scale-105 active:scale-95"
-          >
-            <LiquidWave color="foreground" />
-            <span className="relative z-10 flex items-center justify-center text-muted-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
-              <Mail className="w-5 h-5" />
-            </span>
-          </a>
-          <span className="w-px h-4 bg-border" />
-          <a
-            href="https://dev.to/tapan-7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-mono tracking-wider hover:text-primary flex items-center gap-1 transition-colors"
-          >
-            <span>DEV.TO</span>
-            <ArrowUpRight className="w-3 h-3" />
-          </a>
-        </motion.div>
-      </motion.div>
+          <div className="flex flex-col items-end text-right">
+            <div className="space-y-0.5 sm:space-y-1">
+              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-foreground leading-[1.08]">
+                {hero?.role}
+              </p>
+              {hero?.subRole && (
+                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight text-foreground/80 leading-[1.08]">
+                  {hero?.subRole}
+                </p>
+              )}
+            </div>
+
+            {hero?.techStack && (
+              <p className="text-xs sm:text-sm font-mono text-muted-foreground mt-3 sm:mt-4 hidden sm:block">
+                {hero?.techStack}
+              </p>
+            )}
+
+            <div className="flex items-center gap-2.5 mt-4 sm:mt-5">
+              <a
+                href={hero?.cta?.projectsHref || "#projects"}
+                onClick={(e) =>
+                  handleScrollTo(e, hero?.cta?.projectsHref || "#projects")
+                }
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs sm:text-sm font-medium hover:scale-105 active:scale-95 transition-all duration-200 shadow-md group cursor-pointer"
+              >
+                <span>{hero?.cta?.projects || "View Projects"}</span>
+                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+              <a
+                href={hero?.cta?.resumeHref || "/resume.pdf"}
+                download
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border/80 bg-card/80 text-muted-foreground hover:text-foreground hover:border-foreground/30 text-xs sm:text-sm font-medium hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">
+                  {hero?.cta?.resume || "Resume"}
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

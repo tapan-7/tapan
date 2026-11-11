@@ -6,19 +6,33 @@
 
 @utility container {
   margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
   padding-inline: 1.5rem;
 
   @media (width >= 640px) {
-    max-width: none;
     padding-inline: 2rem;
   }
+}
 
-  @media (width >= 1280px) {
-    max-width: 1200px;
+@layer base {
+  section:not(#hero) {
+    padding-block: 5rem;
+    padding-inline: 1.5rem;
+    position: relative;
+    overflow-x: clip;
   }
 
-  @media (width >= 1536px) {
-    max-width: 1320px;
+  @media (width >= 640px) {
+    section:not(#hero) {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (width >= 768px) {
+    section:not(#hero) {
+      padding-block: 7rem;
+    }
   }
 }
 

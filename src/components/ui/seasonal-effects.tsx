@@ -19,5 +19,5 @@ export function SeasonalEffects() {
 
   const isDark = (resolvedTheme || theme) === "dark";
 
-  return isDark ? <Snowfall /> : <FallingLeaves />;
+  return isDark ? <Snowfall snowflakeCount={100} /> : <FallingLeaves />;
 }

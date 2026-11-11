@@ -9,16 +9,25 @@
     "website": "https://example.com",
     "github": "https://github.com/tapan-7",
     "linkedin": "https://linkedin.com/in/tapankumarswain",
-    "twitter": "https://twitter.com/tapankumarswain",
     "devto": "https://dev.to/tapan-7",
     "summary": "Full-Stack Software Development Engineer (SDE 1) with 3 years of experience building scalable web, backend, and mobile applications using Next.js, React, NestJS, Node.js, and React Native. Experienced in enterprise product development involving AI-assisted workflows, third-party integrations, real-time systems, and cloud architectures."
   },
   "hero": {
     "headline": {
-      "line1": "Engineering digital",
-      "line2": "products with precision."
+      "line1": "TAPAN",
+      "line2": "Full-Stack Developer"
     },
-    "tagline": "Specializing in high-performance full-stack web applications and fluid mobile architectures using Next.js, React, NestJS, and React Native. Focused on scalable end-to-end systems, clean architectures, and refined user experiences."
+    "name": "TAPAN",
+    "role": "Full-Stack Developer",
+    "subRole": "Software Engineer",
+    "techStack": "React • Next.js • React Native • NestJS",
+    "tagline": "I build thoughtful web and mobile experiences, from polished user interfaces to the systems that power them.",
+    "cta": {
+      "projects": "View Projects",
+      "projectsHref": "#projects",
+      "resume": "Resume",
+      "resumeHref": "/resume.pdf"
+    }
   },
   "about": {
     "heading": {
