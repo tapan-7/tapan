@@ -91,7 +91,7 @@ export function Hero() {
       onMouseLeave={handleDesktopMouseLeave}
       className="relative isolate min-h-screen min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden pt-20 sm:pt-24 pb-6 sm:pb-8 md:pb-10"
     >
-      <div className="flex md:hidden flex-col items-center justify-between w-full h-[calc(100dvh-5.5rem)] min-h-[580px] px-4 pt-2 pb-6 z-20 pointer-events-auto">
+      <div className="flex md:hidden flex-col items-center w-full px-4 pt-1 sm:pt-3 z-30 pointer-events-auto">
         <div className="flex flex-col items-center text-center">
           <p className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary mb-1">
             {hero?.subRole || "Software Engineer"}
@@ -106,85 +106,85 @@ export function Hero() {
           )}
         </div>
 
-        <div className="relative w-full flex-1 flex items-center justify-center my-3 max-h-[380px]">
-          <h1 className="absolute inset-0 flex items-center justify-center text-[23vw] font-black uppercase tracking-[0.08em] leading-none text-foreground/90 select-none z-10 pointer-events-none">
-            {hero?.name || "TAPAN"}
-          </h1>
-
-          <motion.div
-            initial={{ y: "40%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-20 flex items-end justify-center h-full w-full max-h-[340px]"
+        <div className="flex items-center gap-2.5 mt-3.5">
+          <a
+            href={hero?.cta?.projectsHref || "#projects"}
+            onClick={(e) =>
+              handleScrollTo(e, hero?.cta?.projectsHref || "#projects")
+            }
+            className="group relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs font-semibold shadow-md cursor-pointer"
           >
-            <Image
-              src="/profile-outline.png"
-              alt={profile.name}
-              width={800}
-              height={800}
-              priority
-              className="h-full w-auto max-h-[340px] aspect-square object-contain object-bottom filter grayscale contrast-[1.08] pointer-events-none"
-            />
-          </motion.div>
+            <LiquidWave color="primary" />
+            <span className="relative z-10 flex items-center gap-1.5 group-hover:text-primary-foreground group-data-[wave-active=true]:text-primary-foreground transition-colors duration-200">
+              <span>{hero?.cta?.projects || "View Projects"}</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </span>
+          </a>
+          <a
+            href={hero?.cta?.resumeHref || "/resume.pdf"}
+            download
+            className="group relative overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-foreground text-xs font-medium cursor-pointer"
+          >
+            <LiquidWave />
+            <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
+              <Download className="w-3.5 h-3.5" />
+              <span>{hero?.cta?.resume || "Resume"}</span>
+            </span>
+          </a>
         </div>
 
-        <div className="flex flex-col items-center gap-3.5 w-full">
-          <div className="flex items-center gap-2.5">
-            <a
-              href={hero?.cta?.projectsHref || "#projects"}
-              onClick={(e) =>
-                handleScrollTo(e, hero?.cta?.projectsHref || "#projects")
+        <div className="flex items-center gap-2.5 mt-3">
+          {socialLinks.map((item) => (
+            <motion.a
+              key={item.name}
+              href={item.href}
+              target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={
+                item.href.startsWith("mailto:")
+                  ? undefined
+                  : "noopener noreferrer"
               }
-              className="group relative overflow-hidden inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-foreground text-background text-xs font-semibold shadow-md"
+              aria-label={item.name}
+              whileTap={{ scale: 0.92 }}
+              className="group relative overflow-hidden flex items-center justify-center w-8 h-8 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-muted-foreground active:scale-95 transition-all"
             >
               <LiquidWave />
-              <span className="relative z-10 flex items-center gap-1.5 group-hover:text-primary-foreground group-data-[wave-active=true]:text-primary-foreground transition-colors duration-200">
-                <span>{hero?.cta?.projects || "View Projects"}</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+              <span className="relative z-10 flex items-center justify-center">
+                {item.icon ? (
+                  <item.icon className="w-3.5 h-3.5" />
+                ) : (
+                  <span className="text-[9px] font-mono font-bold">
+                    {item.label}
+                  </span>
+                )}
               </span>
-            </a>
-            <a
-              href={hero?.cta?.resumeHref || "/resume.pdf"}
-              download
-              className="group relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-foreground text-xs font-medium"
-            >
-              <LiquidWave />
-              <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
-                <Download className="w-3.5 h-3.5" />
-                <span>{hero?.cta?.resume || "Resume"}</span>
-              </span>
-            </a>
-          </div>
-
-          <div className="flex items-center gap-2.5">
-            {socialLinks.map((item) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                target={item.href.startsWith("mailto:") ? undefined : "_blank"}
-                rel={
-                  item.href.startsWith("mailto:")
-                    ? undefined
-                    : "noopener noreferrer"
-                }
-                aria-label={item.name}
-                whileTap={{ scale: 0.92 }}
-                className="group relative overflow-hidden flex items-center justify-center w-9 h-9 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-muted-foreground active:scale-95 transition-all"
-              >
-                <LiquidWave />
-                <span className="relative z-10 flex items-center justify-center">
-                  {item.icon ? (
-                    <item.icon className="w-4 h-4" />
-                  ) : (
-                    <span className="text-[10px] font-mono font-bold">
-                      {item.label}
-                    </span>
-                  )}
-                </span>
-              </motion.a>
-            ))}
-          </div>
+            </motion.a>
+          ))}
         </div>
+      </div>
+
+      <div className="flex md:hidden absolute inset-0 items-center justify-center z-10 pointer-events-none select-none overflow-hidden">
+        <h1 className="text-[25vw] font-black uppercase tracking-[0.08em] leading-none text-foreground/80 font-header text-center whitespace-nowrap">
+          {hero?.name || "TAPAN"}
+        </h1>
+      </div>
+
+      <div className="flex md:hidden absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none items-end justify-center w-full h-[52vh] max-h-[480px]">
+        <motion.div
+          initial={{ y: "25%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative h-full flex items-end justify-center select-none"
+        >
+          <Image
+            src="/profile-outline.png"
+            alt={profile.name}
+            width={800}
+            height={800}
+            priority
+            className="h-full w-auto aspect-square object-contain object-bottom filter grayscale contrast-[1.08] select-none pointer-events-none"
+          />
+        </motion.div>
       </div>
 
       <div
