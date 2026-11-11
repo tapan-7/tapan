@@ -135,18 +135,24 @@ export function Hero() {
               onClick={(e) =>
                 handleScrollTo(e, hero?.cta?.projectsHref || "#projects")
               }
-              className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-foreground text-background text-xs font-semibold shadow-md active:scale-95 transition-all"
+              className="group relative overflow-hidden inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-foreground text-background text-xs font-semibold shadow-md"
             >
-              <span>{hero?.cta?.projects || "View Projects"}</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <LiquidWave />
+              <span className="relative z-10 flex items-center gap-1.5 group-hover:text-primary-foreground group-data-[wave-active=true]:text-primary-foreground transition-colors duration-200">
+                <span>{hero?.cta?.projects || "View Projects"}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </span>
             </a>
             <a
               href={hero?.cta?.resumeHref || "/resume.pdf"}
               download
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-foreground text-xs font-medium active:scale-95 transition-all"
+              className="group relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-foreground text-xs font-medium"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>{hero?.cta?.resume || "Resume"}</span>
+              <LiquidWave />
+              <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
+                <Download className="w-3.5 h-3.5" />
+                <span>{hero?.cta?.resume || "Resume"}</span>
+              </span>
             </a>
           </div>
 
@@ -267,7 +273,6 @@ export function Hero() {
                     : "noopener noreferrer"
                 }
                 aria-label={item.name}
-                whileHover={{ scale: 1.12, y: -2 }}
                 whileTap={{ scale: 0.94 }}
                 className="group relative overflow-hidden flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border border-border/80 text-muted-foreground transition-all duration-300 cursor-pointer"
               >
@@ -309,19 +314,25 @@ export function Hero() {
                 onClick={(e) =>
                   handleScrollTo(e, hero?.cta?.projectsHref || "#projects")
                 }
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background text-xs sm:text-sm font-medium hover:scale-105 active:scale-95 transition-all duration-200 shadow-md group cursor-pointer"
+                className="group relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-white text-xs sm:text-sm font-semibold shadow-md cursor-pointer"
               >
-                <span>{hero?.cta?.projects || "View Projects"}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <LiquidWave />
+                <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-primary-foreground transition-colors duration-200">
+                  <span>{hero?.cta?.projects || "View Projects"}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </span>
               </a>
               <a
                 href={hero?.cta?.resumeHref || "/resume.pdf"}
                 download
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border/80 bg-card/80 text-muted-foreground hover:text-foreground hover:border-foreground/30 text-xs sm:text-sm font-medium hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+                className="group relative overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border/80 bg-card/80 text-foreground text-xs sm:text-sm font-medium cursor-pointer"
               >
-                <Download className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">
-                  {hero?.cta?.resume || "Resume"}
+                <LiquidWave />
+                <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
+                  <Download className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">
+                    {hero?.cta?.resume || "Resume"}
+                  </span>
                 </span>
               </a>
             </div>
