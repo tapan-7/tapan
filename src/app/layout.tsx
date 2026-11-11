@@ -21,7 +21,7 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Tapan Kumar Swain — SDE 1 | Full-Stack Engineer",
+  title: "Portfolio | Tapan Kumar Swain",
   description:
     "Portfolio of Tapan Kumar Swain, SDE 1 specializing in high-performance full-stack web, backend, and mobile applications with Next.js, React, NestJS, and React Native.",
   openGraph: {
