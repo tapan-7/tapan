@@ -16,9 +16,50 @@ import { LiquidWave } from "@/components/ui/liquid-wave";
 
 export function Hero() {
   const { profile, hero } = portfolioData;
+  const desktopAreaRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isTextHovered, setIsTextHovered] = useState(false);
+  const [textCursorPos, setTextCursorPos] = useState({ x: 0, y: 0 });
+
+  const handleDesktopMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
+
+    if (textRef.current) {
+      const textRect = textRef.current.getBoundingClientRect();
+      setTextCursorPos({
+        x: e.clientX - textRect.left,
+        y: e.clientY - textRect.top,
+      });
+      setIsTextHovered(true);
+    }
+
+    if (portraitRef.current) {
+      const pRect = portraitRef.current.getBoundingClientRect();
+      const inPortrait =
+        e.clientX >= pRect.left &&
+        e.clientX <= pRect.right &&
+        e.clientY >= pRect.top &&
+        e.clientY <= pRect.bottom;
+
+      if (inPortrait) {
+        setIsHovered(true);
+        setCursorPos({
+          x: e.clientX - pRect.left,
+          y: e.clientY - pRect.top,
+        });
+      } else {
+        setIsHovered(false);
+      }
+    }
+  };
+
+  const handleDesktopMouseLeave = () => {
+    setIsHovered(false);
+    setIsTextHovered(false);
+  };
 
   const socialLinks = [
     { name: "GitHub", href: profile.github, icon: Github },
@@ -31,29 +72,6 @@ export function Hero() {
       ? [{ name: "DEV", href: profile.devto, label: "DEV" }]
       : []),
   ];
-
-  const updateCursorPosition = (clientX: number, clientY: number) => {
-    if (!portraitRef.current) return;
-    const rect = portraitRef.current.getBoundingClientRect();
-    setCursorPos({
-      x: clientX - rect.left,
-      y: clientY - rect.top,
-    });
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    updateCursorPosition(e.clientX, e.clientY);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length === 0) return;
-    updateCursorPosition(e.touches[0].clientX, e.touches[0].clientY);
-    setIsHovered(true);
-  };
-
-  const handleTouchEnd = () => {
-    setTimeout(() => setIsHovered(false), 600);
-  };
 
   const handleScrollTo = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -69,6 +87,8 @@ export function Hero() {
   return (
     <section
       id="hero"
+      onMouseMove={handleDesktopMouseMove}
+      onMouseLeave={handleDesktopMouseLeave}
       className="relative isolate min-h-screen min-h-[100dvh] w-full flex flex-col justify-between overflow-hidden pt-20 sm:pt-24 pb-6 sm:pb-8 md:pb-10"
     >
       <div className="flex md:hidden flex-col items-center justify-between w-full h-[calc(100dvh-5.5rem)] min-h-[580px] px-4 pt-2 pb-6 z-20 pointer-events-auto">
@@ -161,19 +181,37 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="hidden md:flex absolute inset-0 items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-10 flex items-center justify-center select-none pointer-events-none px-4">
+      <div
+        ref={desktopAreaRef}
+        onMouseMove={handleDesktopMouseMove}
+        onMouseLeave={handleDesktopMouseLeave}
+        className="hidden md:flex absolute inset-0 items-center justify-center overflow-hidden pointer-events-auto cursor-default"
+      >
+        <div
+          ref={textRef}
+          className="absolute inset-0 z-10 flex items-center justify-center select-none pointer-events-none px-4 overflow-hidden"
+        >
           <h1 className="text-[14vw] xl:text-[15vw] font-black uppercase tracking-[0.14em] leading-none whitespace-nowrap font-header text-center select-none text-foreground transition-colors duration-300">
             {hero?.name || "TAPAN"}
           </h1>
+
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300"
+            style={{
+              opacity: isTextHovered ? 1 : 0,
+              WebkitMaskImage: `radial-gradient(circle 200px at ${textCursorPos.x}px ${textCursorPos.y}px, black 35%, transparent 100%)`,
+              maskImage: `radial-gradient(circle 200px at ${textCursorPos.x}px ${textCursorPos.y}px, black 35%, transparent 100%)`,
+            }}
+          >
+            <h1 className="text-[14vw] xl:text-[15vw] font-black uppercase tracking-[0.14em] leading-none whitespace-nowrap font-header text-center select-none text-primary drop-shadow-[0_0_50px_hsl(var(--primary)/0.5)]">
+              {hero?.name || "TAPAN"}
+            </h1>
+          </div>
         </div>
 
         <div
           ref={portraitRef}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onMouseMove={handleMouseMove}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-auto flex items-end justify-center h-full w-auto cursor-pointer"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex items-end justify-center h-full w-auto select-none"
         >
           <motion.div
             initial={{ y: "100%", opacity: 0 }}
@@ -198,8 +236,8 @@ export function Hero() {
               className="absolute inset-0 pointer-events-none transition-opacity duration-200"
               style={{
                 opacity: isHovered ? 1 : 0,
-                WebkitMaskImage: `radial-gradient(circle 140px at ${cursorPos.x}px ${cursorPos.y}px, black 30%, transparent 100%)`,
-                maskImage: `radial-gradient(circle 140px at ${cursorPos.x}px ${cursorPos.y}px, black 30%, transparent 100%)`,
+                WebkitMaskImage: `radial-gradient(circle 200px at ${cursorPos.x}px ${cursorPos.y}px, black 35%, transparent 100%)`,
+                maskImage: `radial-gradient(circle 200px at ${cursorPos.x}px ${cursorPos.y}px, black 35%, transparent 100%)`,
               }}
             >
               <Image
@@ -211,28 +249,13 @@ export function Hero() {
                 className="h-full w-auto object-contain object-bottom select-none pointer-events-none"
               />
             </div>
-
-            {isHovered && (
-              <div
-                className="absolute pointer-events-none rounded-full blur-[40px] transition-opacity duration-300"
-                style={{
-                  left: cursorPos.x - 90,
-                  top: cursorPos.y - 90,
-                  width: 180,
-                  height: 180,
-                  background:
-                    "radial-gradient(circle, rgba(168,85,247,0.45) 0%, rgba(249,115,22,0.25) 50%, transparent 70%)",
-                  mixBlendMode: "screen",
-                }}
-              />
-            )}
           </motion.div>
         </div>
       </div>
 
       <div className="hidden md:flex relative z-30 w-full mt-auto pb-6 sm:pb-8 md:pb-10 pointer-events-none">
-        <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 flex items-end justify-between pointer-events-auto">
-          <div className="flex flex-col gap-3 text-muted-foreground">
+        <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 flex items-end justify-between pointer-events-none">
+          <div className="flex flex-col gap-3 text-muted-foreground pointer-events-auto">
             {socialLinks.map((item) => (
               <motion.a
                 key={item.name}
@@ -262,7 +285,7 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-col items-end text-right">
+          <div className="flex flex-col items-end text-right pointer-events-auto">
             <div className="space-y-0.5 sm:space-y-1">
               <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-foreground leading-[1.08]">
                 {hero?.role}
