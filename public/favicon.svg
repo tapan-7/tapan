@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <defs>
     <linearGradient id="bracketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#c084fc" />
-      <stop offset="100%" stop-color="#8b5cf6" />
+      <stop offset="0%" stop-color="#FF8C5A" />
+      <stop offset="100%" stop-color="#FF5416" />
     </linearGradient>
   </defs>
   <style>
@@ -10,11 +10,10 @@
     .glyph { stroke: #ffffff; }
     @media (prefers-color-scheme: light) {
       .glyph { stroke: #09090b; }
-      .bracket { stroke: #7c3aed; }
+      .bracket { stroke: #E8501A; }
     }
   </style>
 
-  <!-- Contrast drop-shadow for light tab backgrounds -->
   <g opacity="0.5">
     <path d="M8 5L1.5 16L8 27" fill="none" stroke="#000000" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M16 7V22.5C16 24.5 17.2 25.5 19.5 25.5" fill="none" stroke="#000000" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" />
@@ -22,13 +21,8 @@
     <path d="M24 5L30.5 16L24 27" fill="none" stroke="#000000" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" />
   </g>
 
-  <!-- Left Bracket < -->
   <path class="bracket" d="M8 5L1.5 16L8 27" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
-  
-  <!-- Lowercase t: balanced size with comfortable breathing room -->
   <path class="glyph" d="M16 7V22.5C16 24.5 17.2 25.5 19.5 25.5" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
   <path class="glyph" d="M12 13H20" fill="none" stroke-width="3.2" stroke-linecap="round" />
-  
-  <!-- Right Bracket > -->
   <path class="bracket" d="M24 5L30.5 16L24 27" fill="none" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" />
 </svg>

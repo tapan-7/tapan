@@ -317,7 +317,7 @@ export function Hero() {
                 className="group relative overflow-hidden inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-white text-xs sm:text-sm font-semibold shadow-md cursor-pointer"
               >
                 <LiquidWave />
-                <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-primary-foreground transition-colors duration-200">
+                <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
                   <span>{hero?.cta?.projects || "View Projects"}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </span>

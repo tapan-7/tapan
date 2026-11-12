@@ -30,7 +30,7 @@ export default function AppleIcon() {
           <path
             d="M8 5L1.5 16L8 27"
             fill="none"
-            stroke="#a78bfa"
+            stroke="#FF6B35"
             strokeWidth="3.4"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -53,7 +53,7 @@ export default function AppleIcon() {
           <path
             d="M24 5L30.5 16L24 27"
             fill="none"
-            stroke="#a78bfa"
+            stroke="#FF6B35"
             strokeWidth="3.4"
             strokeLinecap="round"
             strokeLinejoin="round"
