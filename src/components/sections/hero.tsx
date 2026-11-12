@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Download,
+  FileText,
   Github,
   Linkedin,
   Mail,
@@ -122,12 +123,13 @@ export function Hero() {
           </a>
           <a
             href={hero?.cta?.resumeHref || "/resume.pdf"}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border/80 bg-card/90 backdrop-blur-md text-foreground text-xs font-medium cursor-pointer"
           >
             <LiquidWave />
             <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
-              <Download className="w-3.5 h-3.5" />
+              <FileText className="w-3.5 h-3.5" />
               <span>{hero?.cta?.resume || "Resume"}</span>
             </span>
           </a>
@@ -324,12 +326,13 @@ export function Hero() {
               </a>
               <a
                 href={hero?.cta?.resumeHref || "/resume.pdf"}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative overflow-hidden inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border/80 bg-card/80 text-foreground text-xs sm:text-sm font-medium cursor-pointer"
               >
                 <LiquidWave />
                 <span className="relative z-10 flex items-center gap-1.5 group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-200">
-                  <Download className="w-3.5 h-3.5" />
+                  <FileText className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">
                     {hero?.cta?.resume || "Resume"}
                   </span>

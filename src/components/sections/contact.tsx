@@ -5,7 +5,7 @@ import {
   ArrowUpRight,
   Check,
   Copy,
-  Download,
+  FileText,
   Github,
   Linkedin,
   Mail,
@@ -84,12 +84,13 @@ export function Contact() {
 
             <a
               href="/resume.pdf"
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-4 rounded-full bg-card text-foreground border border-border/70 font-medium text-sm transition-all duration-300 group cursor-pointer hover:border-foreground"
             >
               <LiquidWave color="foreground" />
               <span className="relative z-10 flex items-center gap-2 text-foreground group-hover:text-background group-data-[wave-active=true]:text-background transition-colors duration-300">
-                <Download className="w-4 h-4" />
+                <FileText className="w-4 h-4" />
                 <span>Resume</span>
               </span>
             </a>
