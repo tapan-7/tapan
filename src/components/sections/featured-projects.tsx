@@ -307,12 +307,12 @@ export function FeaturedProjects() {
               </div>
 
               <div className="h-44 rounded-xl bg-background border border-border overflow-hidden relative">
-                {project.image.startsWith("/") ? (
+                {(project.mobileImage || project.image).startsWith("/") ? (
                   <Image
-                    src={project.image}
+                    src={project.mobileImage || project.image}
                     alt={project.title}
                     fill
-                    sizes="90vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
                 ) : (

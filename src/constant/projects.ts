@@ -28,8 +28,8 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "TypeScript", "Phaser 3", "Tailwind CSS"],
     github: "https://github.com/tapan-7/inversion",
     link: "https://inversion-sand.vercel.app/",
-    image: "/projects/inversion.png",
-    mobileImage: "/projects/inversion-mobile.png",
+    image: "/projects/inversion.webp",
+    mobileImage: "/projects/inversion-mobile.webp",
   },
   {
     title: "Chai Pe Gaane",
@@ -38,8 +38,8 @@ export const projects: Project[] = [
     tech: ["JavaScript", "Tailwind CSS", "YouTube API", "Web Audio"],
     github: "https://github.com/tapan-7/chai-pe-gaane",
     link: "https://chai-pe-gaane.vercel.app",
-    image: "/projects/chai-pe-gaane.png",
-    mobileImage: "/projects/chai-pe-gaane-mobile.png",
+    image: "/projects/chai-pe-gaane.webp",
+    mobileImage: "/projects/chai-pe-gaane-mobile.webp",
   },
   {
     title: "Interactive 404",
@@ -48,8 +48,8 @@ export const projects: Project[] = [
     tech: ["Next.js", "React", "TypeScript", "HTML5 Canvas", "Tailwind CSS"],
     github: "https://github.com/tapan-7/interactive-404",
     link: "https://interactive-404.vercel.app/",
-    image: "/projects/interactive-404.png",
-    mobileImage: "/projects/interactive-404-mobile.png",
+    image: "/projects/interactive-404.webp",
+    mobileImage: "/projects/interactive-404-mobile.webp",
   },
 ];
 

@@ -14,11 +14,13 @@ import { SeasonalEffects } from "@/components/ui/seasonal-effects";
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
+  display: "swap",
 });
 
 const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-open-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

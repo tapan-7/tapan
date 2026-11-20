@@ -179,7 +179,7 @@ export function Hero() {
           className="relative h-full flex items-end justify-center select-none"
         >
           <Image
-            src="/profile-outline.png"
+            src="/profile-outline.webp"
             alt={profile.name}
             width={800}
             height={800}
@@ -232,7 +232,7 @@ export function Hero() {
             className="relative h-full flex items-end justify-center select-none"
           >
             <Image
-              src="/profile-outline.png"
+              src="/profile-outline.webp"
               alt={profile.name}
               width={800}
               height={800}
@@ -249,7 +249,7 @@ export function Hero() {
               }}
             >
               <Image
-                src="/profile-outline.png"
+                src="/profile-outline.webp"
                 alt={profile.name}
                 width={800}
                 height={800}

@@ -33,7 +33,7 @@ export function About() {
             <AnimatedContent distance={30} direction="vertical" delay={0.1}>
               <div className="relative group max-w-md mx-auto lg:max-w-none">
                 <ImageParticles
-                  src="/profile-outline.png"
+                  src="/profile-outline.webp"
                   alt={profile.name}
                   fit="contain"
                   gap={3}

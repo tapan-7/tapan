@@ -2,7 +2,7 @@
   "profile": {
     "name": "Tapan Kumar Swain",
     "nickname": "tapan",
-    "avatar": "/profile.jpeg",
+    "avatar": "/profile.webp",
     "title": "SDE 1",
     "email": "tapankumarswain353@gmail.com",
     "mobile": "+91-8144639448",
@@ -312,7 +312,7 @@
       "tech": ["Next.js", "React", "TypeScript", "Phaser 3", "Tailwind CSS"],
       "github": "https://github.com/tapan-7/inversion",
       "live": "https://inversion-sand.vercel.app/",
-      "image": "/projects/inversion.png"
+      "image": "/projects/inversion.webp"
     },
     {
       "title": "Chai Pe Gaane",
@@ -320,7 +320,7 @@
       "tech": ["JavaScript", "Tailwind CSS", "YouTube API", "Web Audio"],
       "github": "https://github.com/tapan-7/chai-pe-gaane",
       "live": "https://chai-pe-gaane.vercel.app",
-      "image": "/projects/chai-pe-gaane.png"
+      "image": "/projects/chai-pe-gaane.webp"
     },
     {
       "title": "Interactive 404",
@@ -334,7 +334,7 @@
       ],
       "github": "https://github.com/tapan-7/interactive-404",
       "live": "https://interactive-404.vercel.app/",
-      "image": "/projects/interactive-404.png"
+      "image": "/projects/interactive-404.webp"
     }
   ],
   "blogs": [
