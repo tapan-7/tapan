@@ -32,6 +32,20 @@ export function WebsiteLoader() {
 
     const trail: { x: number; y: number }[] = [];
 
+    if (nSpanRef.current && typeof nSpanRef.current.getBBox === "function") {
+      try {
+        const bbox = nSpanRef.current.getBBox();
+        if (bbox && bbox.width > 0 && bbox.height > 0) {
+          targetX = bbox.x + bbox.width * 0.52;
+          targetY = bbox.y + bbox.height * 0.20;
+          measuredTarget = true;
+        }
+      } catch {
+        targetX = 630;
+        targetY = 104;
+      }
+    }
+
     const animate = (now: number) => {
       const elapsed = now - startTime;
       const raw = Math.min(1, elapsed / duration);
@@ -62,20 +76,6 @@ export function WebsiteLoader() {
         }
         d += ` L ${width} ${height + 40} Z`;
         pathRef.current.setAttribute("d", d);
-      }
-
-      if (!measuredTarget && nSpanRef.current && typeof nSpanRef.current.getBBox === "function") {
-        try {
-          const bbox = nSpanRef.current.getBBox();
-          if (bbox && bbox.width > 0 && bbox.height > 0) {
-            targetX = bbox.x + bbox.width * 0.52;
-            targetY = bbox.y + bbox.height * 0.20;
-            measuredTarget = true;
-          }
-        } catch {
-          targetX = 630;
-          targetY = 104;
-        }
       }
 
       const cx = 400;

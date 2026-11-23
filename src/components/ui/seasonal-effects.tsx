@@ -7,10 +7,12 @@ import { FallingLeaves } from "@/components/ui/falling-leaves";
 
 export function SeasonalEffects() {
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { resolvedTheme, theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
+    setIsMobile(window.innerWidth < 768);
   }, []);
 
   if (!mounted) {
@@ -19,5 +21,9 @@ export function SeasonalEffects() {
 
   const isDark = (resolvedTheme || theme) === "dark";
 
-  return isDark ? <Snowfall snowflakeCount={100} /> : <FallingLeaves />;
+  return isDark ? (
+    <Snowfall snowflakeCount={isMobile ? 25 : 85} />
+  ) : (
+    <FallingLeaves />
+  );
 }

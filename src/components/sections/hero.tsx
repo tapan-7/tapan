@@ -184,6 +184,7 @@ export function Hero() {
             width={800}
             height={800}
             priority
+            sizes="(max-width: 768px) 80vw, 450px"
             className="h-full w-auto aspect-square object-contain object-bottom filter grayscale contrast-[1.08] select-none pointer-events-none"
           />
         </motion.div>
@@ -237,6 +238,7 @@ export function Hero() {
               width={800}
               height={800}
               priority
+              sizes="(max-width: 1200px) 45vw, 420px"
               className="h-full w-auto object-contain object-bottom filter grayscale contrast-[1.08] select-none pointer-events-none"
             />
 
@@ -254,6 +256,7 @@ export function Hero() {
                 width={800}
                 height={800}
                 priority
+                sizes="(max-width: 1200px) 45vw, 420px"
                 className="h-full w-auto object-contain object-bottom select-none pointer-events-none"
               />
             </div>
