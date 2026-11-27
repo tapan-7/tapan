@@ -42,6 +42,23 @@ export const projects: Project[] = [
     mobileImage: "/projects/chai-pe-gaane-mobile.webp",
   },
   {
+    title: "SpeedType",
+    description:
+      "A clean, distraction-free typing speed and accuracy practice platform with real-time WPM telemetry, multiple test modes, an interactive virtual keyboard, and customizable themes.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Zustand",
+      "Recharts",
+      "Tailwind CSS",
+    ],
+    github: "https://github.com/tapan-7/SpeedType",
+    link: "https://speedtypepro.vercel.app/",
+    image: "/projects/speedtype.webp",
+    mobileImage: "/projects/speedtype-mobile.webp",
+  },
+  {
     title: "Interactive 404",
     description:
       "An arcade-inspired playable 404 error experience built with HTML5 canvas physics, responsive keyboard controls, retro pixel typography, and synthesized audio effects.",
